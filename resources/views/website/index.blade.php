@@ -2,5 +2,7 @@
 @section('title', 'Inicio')
 
 @section('content')
-  <dev-component></dev-component>
+<landing-component></landing-component>
+<footer-component></footer-component>
+<login-component></login-component>
 @endsection

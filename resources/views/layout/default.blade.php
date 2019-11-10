@@ -9,19 +9,14 @@
     <title>{{env("APP_NAME")}} - @yield('title')</title>
     @stack('head')
     <link rel="stylesheet" href="{!! url('assets/css/app.css') !!}">
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <div id="app">
     @yield('content')
 </div>
-<!--Footer-->
-<footer>
-    <!--Copyright-->
 
-    <!--/.Copyright-->
-</footer>
-<!--/.Footer-->
 <script src="{!! url('assets/js/app.js') !!}"></script>
 @stack('scripts')
 <script>
