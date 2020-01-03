@@ -1,5 +1,5 @@
 @extends('layout.default')
-@section('title', 'Inicio')
+@section('title',  __('manager.home'))
 
 @section('content')
 <landing-component></landing-component>
