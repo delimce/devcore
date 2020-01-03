@@ -56,7 +56,13 @@
                 <span class="has-text-centered is-block">Los mejores especialistas para tu vehiculo</span>
               </h2>
               <h1 class="title">
-                <span class="is-size-2 has-text-centered is-block">¿Buscas un Taller de confianza?</span>
+                <div class="is-size-3 has-text-centered is-block">
+                  <vue-typer
+                    text="¿Buscas un Taller de confianza?"
+                    pre-type-delay="1600"
+                    :repeat="0"
+                  ></vue-typer>
+                </div>
               </h1>
             </div>
           </div>
@@ -208,6 +214,8 @@
 </template>
 
 <script>
+import { VueTyper } from "vue-typer";
+
 export default {
   mounted() {
     // Get all "navbar-burger" elements
@@ -236,6 +244,10 @@ export default {
       let button = this.$refs["login-button"];
       console.log(button);
     }
+  },
+
+  components: {
+    VueTyper
   }
 };
 </script>
@@ -311,7 +323,11 @@ export default {
   border: 2px floralwhite solid;
   text-align: right;
   color: aliceblue;
-  background-color:darkgreen
+  background-color: darkgreen;
+}
+
+.vue-typer /deep/ .typed{
+color:rgb(255,255,255);
 }
 
 .section2 {
