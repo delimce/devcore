@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="my-token" content="null">
+    <meta http-equiv="Content-Language" content="en,es">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>{{env("APP_NAME")}} - @yield('title')</title>
     @stack('head')
@@ -15,6 +15,7 @@
 
 <div id="app">
     @yield('content')
+    <footer-component></footer-component>
 </div>
 
 <script src="{!! url('assets/js/app.js') !!}"></script>
