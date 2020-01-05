@@ -1,6 +1,6 @@
 [![An old rock in the desert](https://www.delimce.com/images/github_dev_logo.png "go to develemento")](http://delimce.com)
 # devCore
-Lumen+vue core to support full stack PHP &amp; Javascript development
+Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 
 ## Components:
 ### Frontend:
@@ -9,4 +9,4 @@ Lumen+vue core to support full stack PHP &amp; Javascript development
 * Bulma CSS framework
 
 ### Backend:
-* Laravel/Lumen 6.0
+* Laravel/Lumen 6.0 LTS

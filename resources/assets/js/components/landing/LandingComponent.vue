@@ -42,12 +42,11 @@
           <div class="columns">
             <div class="column">
               <div class="left-container">
-                <span
-                  class="left-container-item"
-                >Forme parte de la red de talleres más importante de España con tan sólo darse de alta.</span>
+                <span class="left-container-item">
+                  Forme parte de la red de talleres más importante de España con tan sólo darse de alta.</span>
                 <span class="left-container-item"></span>
                 <br />
-                <a class="button is-rounded button-signup">Registrese gratis</a>
+                <a class="button is-rounded button-signup">Regístrese gratis</a>
               </div>
             </div>
 
@@ -162,7 +161,7 @@
 
         <div class="hero-body">
           <div class="container">
-            <div class="columns is-centered is-mobile">
+            <div class="columns is-centered">
               <div class="column is-narrow">
                 <div class="package">
                   <i class="fas fa-user-friends fa-3x"></i>
@@ -193,7 +192,7 @@
               </div>
             </div>
 
-            <div class="columns is-centered is-mobile">
+            <div class="columns is-centered">
               <div class="column is-narrow">
                 <div class="package">
                   <i class="fas fa-wrench fa-3x"></i>
@@ -283,12 +282,9 @@ export default {
   color: aliceblue;
   max-width: 300px;
   margin: 10px;
+  padding-bottom: 14px;
   display: block;
   float: left;
-}
-
-.package span {
-  text-align-last: left;
 }
 
 .left-container {
