@@ -11,4 +11,9 @@ class LandingController extends BaseController
     {
         return view('website.index');
     }
+
+    public function signUp()
+    {
+        return view('website.signup');
+    }
 }

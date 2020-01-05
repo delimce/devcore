@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'home' => 'inicio'
+    'signUp' => 'Registro en Manager',
+    'garage.data' => 'Datos del taller',
 ];

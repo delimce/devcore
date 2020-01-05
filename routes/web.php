@@ -16,3 +16,5 @@ $router->get('/', function () {
 });
 
 $router->get('/home', ['as' => 'landing', 'uses' => 'Web\LandingController@home']);
+$router->get('/signUp', ['as' => 'signUp', 'uses' => 'Web\LandingController@signUp']);
+
