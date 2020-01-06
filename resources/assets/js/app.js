@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-window.api_url = process.env.APP_URL;
+window.api_url = process.env.MIX_APP_URL;
 
 window.Vue = require('vue');
 

@@ -5,9 +5,9 @@
         <div class="columns m-t-10">
           <div class="column">
             <nav class="has-text-grey-light">
-              <a href="#home" class="has-text-primary">Home</a> &bullet;
-              <a href="#info1" class="has-text-primary">Nuestros servicios</a> &bullet;
-              <a href="#info2" class="has-text-primary">Garafy Manager</a> &bullet;
+              <a :href="home" class="has-text-primary">Home</a> &bullet;
+              <a :href="servicesUrl" class="has-text-primary">Nuestros servicios</a> &bullet;
+              <a :href="managerUrl" class="has-text-primary">Garafy Manager</a> &bullet;
               <a href="#" class="has-text-primary">Contáctenos</a> &bullet;
             </nav>
           </div>
@@ -40,7 +40,10 @@ export default {
   mounted() {},
   data() {
     return {
-      currentYear: ""
+      currentYear: "",
+      home: api_url,
+      servicesUrl: api_url+'/#services',
+      managerUrl: api_url+'/#manager',
     };
   },
   methods: {

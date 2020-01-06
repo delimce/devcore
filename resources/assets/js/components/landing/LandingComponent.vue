@@ -22,10 +22,10 @@
             </div>
             <div class="navbar-menu" id="navbarTopMain">
               <div class="navbar-end">
-                <a href="#info1" class="navbar-item has-text-weight-semibold">
+                <a href="#services" class="navbar-item has-text-weight-semibold">
                   <span>Servicios</span>
                 </a>
-                <a href="#info2" class="navbar-item has-text-weight-semibold">
+                <a href="#manager" class="navbar-item has-text-weight-semibold">
                   <span>Manager</span>
                 </a>
                 <a href="#" class="navbar-item has-text-weight-semibold">
@@ -71,7 +71,7 @@
     <!--navbar -->
 
     <!--content1 -->
-    <section id="info1" class="hero is-medium has-text-centered">
+    <section id="services" class="hero is-medium has-text-centered">
       <div class="hero-body back-green">
         <div class="container">
           <h2 class="subtitle">Bienvenido a Garafy.es</h2>
@@ -152,7 +152,7 @@
     <!--content -->
 
     <!--content2 -->
-    <section id="info2" class="hero is-medium section2">
+    <section id="manager" class="hero is-medium section2">
       <div class="hero-body has-text-centered">
         <h1 class="subtitle-landing">Garafy Manager</h1>
         <div>
