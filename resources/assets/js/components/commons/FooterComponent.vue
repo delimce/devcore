@@ -14,16 +14,18 @@
         </div>
         <div class="center-text">
           <button class="facebook-button button is-medium">
-             <i class="fab fa-facebook-f"></i> 
+            <i class="fab fa-facebook-f"></i>
           </button>
           <button class="twitter-button button is-medium">
-             <i class="fab fa-twitter"></i> 
+            <i class="fab fa-twitter"></i>
           </button>
-          <button class="google-button button is-medium">
-            <i class="fab fa-google-plus-g"></i> 
+          <button class="instagram-button button is-medium">
+            <a href="https://www.instagram.com/garafy_es/" target="blank">
+              <i class="fab fa-instagram"></i>
+            </a>
           </button>
           <button class="linkedin-button button is-medium">
-             <i class="fab fa-linkedin-in"></i> 
+            <i class="fab fa-linkedin-in"></i>
           </button>
         </div>
         <div class="b-t m-t-30 p-t-30 has-text-grey-light is-size-9">
@@ -42,8 +44,8 @@ export default {
     return {
       currentYear: "",
       home: api_url,
-      servicesUrl: api_url+'/#services',
-      managerUrl: api_url+'/#manager',
+      servicesUrl: api_url + "/#services",
+      managerUrl: api_url + "/#manager"
     };
   },
   methods: {
@@ -80,15 +82,20 @@ export default {
   color: #ffffff;
 }
 
-.google-button {
+.instagram-button {
   color: #fff;
   background-color: #e9544f;
   width: 50px;
 }
 
-.google-button:hover {
-  border-color: #bdbdbd;
+.instagram-button:hover {
+  border-color: #000;
   color: #ffffff;
+}
+
+a{
+  text-decoration: none;
+  color: #fff !important;
 }
 
 .linkedin-button {
