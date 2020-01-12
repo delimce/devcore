@@ -6,7 +6,9 @@
         <nav class="navbar is-transparent is-spaced" role="navigation" aria-label="main navigation">
           <div class="container">
             <div class="navbar-brand">
-              <a class="navbar-item is-size-1" href="#">Garafy.es</a>
+              <figure class="image g-logo">
+                <img src="../../../img/common/logo01.png" />
+              </figure>
 
               <a
                 role="button"
@@ -42,8 +44,9 @@
           <div class="columns">
             <div class="column">
               <div class="left-container">
-                <span class="left-container-item">
-                  Forme parte de la red de talleres más importante de España con tan sólo darse de alta.</span>
+                <span
+                  class="left-container-item"
+                >Forme parte de la comunidad de talleres más importante de España con tan sólo darse de alta.</span>
                 <span class="left-container-item"></span>
                 <br />
                 <a class="button is-rounded button-signup">Regístrese gratis</a>
@@ -57,7 +60,7 @@
               <h1 class="title">
                 <div class="is-size-3 has-text-centered is-block">
                   <vue-typer
-                    text="¿Buscas un Taller de confianza?"
+                    text="¿Que esperas para anunciar tu taller en internet?"
                     pre-type-delay="1600"
                     :repeat="0"
                   ></vue-typer>
@@ -120,7 +123,7 @@
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >todos los segmentos de vehiculos y su mantenimiento, con sólo agendar una cita con los especialistas.</h4>
+                      >Todos los segmentos de vehiculos y su mantenimiento, con sólo agendar una cita con los especialistas.</h4>
                     </div>
                   </div>
                 </div>
@@ -135,7 +138,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">regístrate gratis</a>
+                        <a class="has-text-dark" href="#">Regístrate gratis</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
@@ -261,6 +264,11 @@ export default {
   background-size: cover;
 }
 
+.g-logo {
+  padding: 12px 0 0 45px;
+  max-width: 300px;
+}
+
 .back-green {
   background-color: gainsboro;
 }
@@ -322,8 +330,8 @@ export default {
   background-color: darkgreen;
 }
 
-.vue-typer /deep/ .typed{
-color:rgb(255,255,255);
+.vue-typer /deep/ .typed {
+  color: rgb(255, 255, 255);
 }
 
 .section2 {
