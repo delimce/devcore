@@ -6,6 +6,7 @@
 window.api_url = process.env.MIX_APP_URL;
 
 window.Vue = require('vue');
+window.axios = require('axios');
 
 /**
  * Vuelidate
@@ -13,6 +14,7 @@ window.Vue = require('vue');
  */
 import Vuelidate from 'vuelidate'
 window.Vue.use(Vuelidate)
+
 
 /**
  * The following block of code may be used to automatically register your

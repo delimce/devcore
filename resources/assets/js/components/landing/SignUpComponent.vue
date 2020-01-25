@@ -40,7 +40,10 @@
                     <i class="fas fa-user"></i>
                   </span>
                 </div>
-                <p v-if="$v.user.name.$dirty && !$v.user.name.required" class="help is-danger">debes colocar un valor</p>
+                <p
+                  v-if="$v.user.name.$dirty && !$v.user.name.required"
+                  class="help is-danger"
+                >debes colocar un valor</p>
               </div>
 
               <div class="field">
@@ -68,7 +71,7 @@
                 <label class="label">{{label_password}}</label>
                 <div class="control has-icons-left has-icons-right">
                   <input
-                   @input="$v.user.password.$touch()"
+                    @input="$v.user.password.$touch()"
                     class="input"
                     type="password"
                     v-model="user.password"
@@ -78,8 +81,14 @@
                     <i class="fas fa-key"></i>
                   </span>
                 </div>
-                <p v-if="$v.user.password.$dirty && !$v.user.password.required" class="help is-danger">debes colocar un valor</p>
-                <p v-if="$v.user.password.$dirty && !$v.user.password.minLength" class="help is-danger">el passord debe ser mayor a 5 caracteres</p>
+                <p
+                  v-if="$v.user.password.$dirty && !$v.user.password.required"
+                  class="help is-danger"
+                >debes colocar un valor</p>
+                <p
+                  v-if="$v.user.password.$dirty && !$v.user.password.minLength"
+                  class="help is-danger"
+                >el passord debe ser mayor a 5 caracteres</p>
               </div>
 
               <div class="field">
@@ -178,10 +187,19 @@ export default {
       if (this.$v.$invalid) {
         return;
       }
-
-      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+      this.doSignUp();
     },
-    doSignUp() {}
+    doSignUp() {
+      axios
+        .post(api_url + "/api/manager/signup")
+        .then(response => {
+          this.info = response.data.bpi;
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true;
+        });
+    }
   }
 };
 </script>

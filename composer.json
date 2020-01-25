@@ -1,7 +1,13 @@
 {
     "name": "develemento/dev-core",
-    "description": "develemento core",
-    "keywords": ["framework", "laravel", "lumen", "vuejs"],
+    "description": "develemento core for development",
+    "keywords": [
+        "framework",
+        "laravel",
+        "lumen",
+        "vuejs",
+        "vulma"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
