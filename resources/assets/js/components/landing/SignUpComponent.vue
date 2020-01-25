@@ -25,67 +25,108 @@
 
         <div class="column has-text-centered">
           <div class="signup-form">
-            <div class="field">
-              <label class="label">{{signup_name}}</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Text input" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-user"></i>
-                </span>
+            <form @submit.prevent="handleSubmit">
+              <div class="field">
+                <label class="label">{{label_name}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    class="input"
+                    v-model="user.name"
+                    @input="$v.user.name.$touch()"
+                    type="text"
+                    placeholder="Text input"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+                <p v-if="$v.user.name.$dirty && !$v.user.name.required" class="help is-danger">debes colocar un valor</p>
               </div>
-            </div>
 
-            <div class="field">
-              <label class="label">{{signup_email}}</label>
-              <div class="control has-icons-left has-icons-right">
-                <input
-                  class="input is-danger"
-                  type="email"
-                  placeholder="Email input"
-                  value="hello@"
-                />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
+              <div class="field">
+                <label class="label">{{label_email}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    @input="$v.user.email.$touch()"
+                    class="input is-danger"
+                    type="email"
+                    v-model="user.email"
+                    placeholder="Email input"
+                    value="hello@"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <p
+                  v-if="$v.user.email.$dirty && !$v.user.email.required || !$v.user.email.email"
+                  class="help is-danger"
+                >This email is invalid</p>
               </div>
-              <p class="help is-danger">This email is invalid</p>
-            </div>
 
-            <div class="field">
-              <label class="label">{{signup_password}}</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Text input" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-key"></i>
-                </span>
+              <div class="field">
+                <label class="label">{{label_password}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                   @input="$v.user.password.$touch()"
+                    class="input"
+                    type="password"
+                    v-model="user.password"
+                    placeholder="Text input"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                </div>
+                <p v-if="$v.user.password.$dirty && !$v.user.password.required" class="help is-danger">debes colocar un valor</p>
+                <p v-if="$v.user.password.$dirty && !$v.user.password.minLength" class="help is-danger">el passord debe ser mayor a 5 caracteres</p>
               </div>
-            </div>
 
-            <div class="field">
-              <label class="label">{{signup_repassword}}</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Text input" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-key"></i>
-                </span>
+              <div class="field">
+                <label class="label">{{label_repassword}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    class="input"
+                    type="password"
+                    v-model="user.confirmPassword"
+                    placeholder="Text input"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                </div>
+                <p
+                  v-if="!$v.user.password.$invalid && !$v.user.confirmPassword.required"
+                  class="help is-danger"
+                >debes colocar un valor</p>
+                <p
+                  v-if="$v.user.confirmPassword.required && !$v.user.confirmPassword.sameAsPassword"
+                  class="help is-danger"
+                >el password no coincide</p>
               </div>
-            </div>
 
-            <div class="field">
-              <div class="control">
-                <label class="checkbox">
-                  <input type="checkbox" />
-                  {{signup_terms1}}
-                  <a href="#">{{signup_terms2}}</a>
-                </label>
+              <div class="field">
+                <div class="control">
+                  <label class="checkbox">
+                    <input type="checkbox" v-model="user.terms" @change="$v.user.terms.$touch()" />
+                    {{label_terms1}}
+                    <a href="#">{{label_terms2}}</a>
+                  </label>
+                </div>
+                <p
+                  v-if="submitted && !$v.user.terms.sameAs"
+                  class="help is-danger"
+                >debes aceptar los terminos y condiciones</p>
               </div>
-            </div>
 
-            <div class="field is-grouped">
-              <div class="control">
-                <button class="button is-link">Submit</button>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button type="submit" class="button is-link">Submit</button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -94,22 +135,52 @@
 </template>
 
 <script>
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+
 export default {
   data() {
     return {
       title: "¡Regístrate ahora!",
       description:
         "Comience hoy de manera gratuita a administrar sus citas de taller con nosotros, en garafy manager, es Gratis!!",
-      signup_name: "Nombre",
-      signup_email: "Email",
-      signup_password: "Password",
-      signup_repassword: "Repetir password",
-      signup_terms1: "Estoy deacuerdo con los",
-      signup_terms2: "terms and conditions"
+      label_name: "Nombre",
+      label_email: "Email",
+      label_password: "Password",
+      label_repassword: "Repetir password",
+      label_terms1: "Estoy deacuerdo con los",
+      label_terms2: "terms and conditions",
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        terms: false
+      },
+      submitted: false
     };
   },
 
+  validations: {
+    user: {
+      name: { required },
+      email: { required, email },
+      password: { required, minLength: minLength(6) },
+      confirmPassword: { required, sameAsPassword: sameAs("password") },
+      terms: { sameAs: sameAs(() => true) }
+    }
+  },
+
   methods: {
+    handleSubmit(e) {
+      this.submitted = true;
+      // stop here if form is invalid
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+
+      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+    },
     doSignUp() {}
   }
 };

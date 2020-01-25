@@ -8,6 +8,13 @@ window.api_url = process.env.MIX_APP_URL;
 window.Vue = require('vue');
 
 /**
+ * Vuelidate
+ * method to validate app forms
+ */
+import Vuelidate from 'vuelidate'
+window.Vue.use(Vuelidate)
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
