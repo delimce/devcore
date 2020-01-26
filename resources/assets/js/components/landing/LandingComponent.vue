@@ -80,7 +80,7 @@
           <h2 class="subtitle">Bienvenido a Garafy Manager</h2>
           <h1
             class="title"
-          >Pretendemos ser el primer portal de referencia en España en conectar conductores con talleres previamente validados.</h1>
+          >Algunos gerentes como tu ya estan utilizando esta herramienta.</h1>
           <br />
           <div class="columns is-centered">
             <div class="column is-10">
@@ -96,11 +96,10 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Software y servicios para talleres</a>
+                        <a class="has-text-dark" href="#">Berto Cea - Eurotyre Neumáticos Pajaro</a>
                       </h3>
                       <h4 class="subtitle is-size-6">
-                        Nuestra web-app también aporta valor a los talleres generando trafico, fidelizando
-                        clientes, optimizando gestión y procesos.
+                        "Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""
                       </h4>
                     </div>
                   </div>
@@ -119,11 +118,11 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Ofertas y precios</a>
+                        <a class="has-text-dark" href="#">Óscar Yusta - Montes Motor</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >Todos los segmentos de vehiculos y su mantenimiento, con sólo agendar una cita con los especialistas.</h4>
+                      >“El software nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanentemente durante todo el día.”</h4>
                     </div>
                   </div>
                 </div>
@@ -138,11 +137,11 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Regístrate gratis</a>
+                        <a class="has-text-dark" href="#">Florencio Garcia - BestDrive Neumáticos La Verdad</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >Administre la información de su taller, mediante nuestros serivcios SAAS en la nube, pregunte por nuestros servicios VIP</h4>
+                      >“La utilizo para todo, al final cómo tengo varios restaurantes me sirve para tener un poco el pulso cogido de los servicios y de cómo están yendo.”</h4>
                     </div>
                   </div>
                 </div>
@@ -159,7 +158,7 @@
       <div class="hero-body has-text-centered">
         <h1 class="subtitle-landing">Garafy Manager</h1>
         <div>
-          <h1 class="title has-text-white">Los mejores especialistas para tu vehiculo</h1>
+          <h1 class="title has-text-white">Nos ocupamos de las necesidades reales de tu taller</h1>
         </div>
 
         <div class="hero-body">
