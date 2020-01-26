@@ -90,13 +90,13 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img src="../../../img/landing/small01.jpg" alt="Productos y servicios" />
+                          <img src="../../../img/testimonial/fake001.jpg" alt="Productos y servicios" />
                         </figure>
                       </div>
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Berto Cea - Eurotyre Neumáticos Pajaro</a>
+                        <a class="has-text-dark" href="#">Pepito Garcia - Eurotyre Neumáticos Pajaro</a>
                       </h3>
                       <h4 class="subtitle is-size-6">
                         "Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""
@@ -110,7 +110,7 @@
                       <div class="card-image">
                         <figure class="image is-16by9">
                           <img
-                            src="../../../img/landing/small02.jpg"
+                            src="../../../img/testimonial/fake002.jpg"
                             alt="Rental Rates in Simi Valley and Rental Prices"
                           />
                         </figure>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Óscar Yusta - Montes Motor</a>
+                        <a class="has-text-dark" href="#">Juana Montes - Montes Motor</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
@@ -131,13 +131,13 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img src="../../../img/landing/small03.jpg" alt="Rental Rates in Detroit" />
+                          <img src="../../../img/testimonial/fake003.jpg" alt="Rental Rates in Detroit" />
                         </figure>
                       </div>
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Florencio Garcia - BestDrive Neumáticos La Verdad</a>
+                        <a class="has-text-dark" href="#">Carlos Ramirez - BestDrive Neumáticos La Verdad</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
