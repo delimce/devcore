@@ -46,7 +46,7 @@
               <div class="left-container">
                 <span
                   class="left-container-item"
-                >Forme parte de la comunidad de talleres más importante de España con tan sólo darse de alta.</span>
+                >Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta.</span>
                 <span class="left-container-item"></span>
                 <br />
                 <a class="button is-rounded button-signup">Regístrese gratis</a>
@@ -55,7 +55,7 @@
 
             <div class="column is-two-thirds">
               <h2 class="has-text-whitet">
-                <span class="has-text-centered is-block">Los mejores especialistas para tu vehiculo</span>
+                <span class="has-text-centered is-block">Digitaliza tu taller y multiplica tu rentabilidad</span>
               </h2>
               <h1 class="title">
                 <div class="is-size-3 has-text-centered is-block">
@@ -77,10 +77,10 @@
     <section id="services" class="hero is-medium has-text-centered">
       <div class="hero-body back-green">
         <div class="container">
-          <h2 class="subtitle">Bienvenido a Garafy.es</h2>
+          <h2 class="subtitle">Bienvenido a Garafy Manager</h2>
           <h1
             class="title"
-          >Pretendemos ser el primer marketplace de referencia en España en conectar conductores con talleres previamente validados.</h1>
+          >Pretendemos ser el primer portal de referencia en España en conectar conductores con talleres previamente validados.</h1>
           <br />
           <div class="columns is-centered">
             <div class="column is-10">
@@ -99,8 +99,8 @@
                         <a class="has-text-dark" href="#">Software y servicios para talleres</a>
                       </h3>
                       <h4 class="subtitle is-size-6">
-                        Nuestra web app también aporta valor a los talleres generándoles trafico, fidelizando
-                        clientes y optimizando su gestión y procesos.
+                        Nuestra web-app también aporta valor a los talleres generando trafico, fidelizando
+                        clientes, optimizando gestión y procesos.
                       </h4>
                     </div>
                   </div>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Ofertas y Precios</a>
+                        <a class="has-text-dark" href="#">Ofertas y precios</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
@@ -172,7 +172,7 @@
                   <hr />
                   <div
                     class="has-text-left"
-                  >Te damos las herramientas para aumentar tu visibilidad en Internet y captar nuevos clientes que, de otra forma, seguramente no podrían llegar a conocer tu taller.</div>
+                  >Te damos las herramientas para aumentar tu visibilidad en internet y captar nuevos clientes que, de otra forma, seguramente no podrían llegar a conocerte.</div>
                 </div>
 
                 <div class="package">
@@ -181,7 +181,7 @@
                   <hr />
                   <div
                     class="has-text-left"
-                  >Tendrás disponible Garafy Manager en cualquier momento y lugar, ya no tienes que esperar a llegar a tu taller para ver tu programa de gestión, ya que, estará todo conectado.</div>
+                  >Tendrás disponible Garafy Manager en cualquier momento y lugar, ya no tienes que esperar a llegar a tu taller para ver tu programa de gestión, ya que, podras estar siempre conectado.</div>
                 </div>
 
                 <div class="package">
