@@ -12,9 +12,9 @@
 */
 
 $router->get('/', function () {
-    return redirect()->route('landing');
+    return redirect()->route('landingManager');
 });
 
-$router->get('/home', ['as' => 'landing', 'uses' => 'Web\LandingController@home']);
+$router->get('/manager', ['as' => 'landingManager', 'uses' => 'Web\LandingController@home']);
 $router->get('/signUp', ['as' => 'signUp', 'uses' => 'Web\LandingController@signUp']);
 
