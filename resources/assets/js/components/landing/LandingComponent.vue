@@ -96,7 +96,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Pepito Garcia - Eurotyre Neumáticos Pajaro</a>
+                        <a class="has-text-dark" href="#">Pepito Garcia - Taller A</a>
                       </h3>
                       <h4 class="subtitle is-size-6">
                         "Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""
@@ -118,7 +118,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Juana Montes - Montes Motor</a>
+                        <a class="has-text-dark" href="#">Juana Montes - Taller B</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
@@ -137,7 +137,7 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Carlos Ramirez - BestDrive Neumáticos La Verdad</a>
+                        <a class="has-text-dark" href="#">Carlos Ramirez - Taller C</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
