@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
 
-
-
     /**
      * checkEmail
      * @param  mixed $email
@@ -26,7 +24,11 @@ class UserService
     {
 
         $password = Hash::make($user['password']);
-        User::create(['name' => $user['name'], 'email' => $user['email'], 'password' => $password]);
+        User::create(
+            ['name' => $user['name'],
+             'email' => $user['email'],
+             'tlf' => $user['tlf'],
+             'password' => $password]);
         
         ///email to sending
 

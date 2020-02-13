@@ -6,9 +6,9 @@
         <nav class="navbar is-transparent is-spaced" role="navigation" aria-label="main navigation">
           <div class="container">
             <div class="navbar-brand">
-               <figure class="image g-logo">
-                    <img  src = "../../../img/common/logo01.png">
-                </figure>
+              <figure class="image g-logo">
+                <img src="../../../img/common/logo01.png" />
+              </figure>
 
               <a
                 role="button"
@@ -44,18 +44,20 @@
           <div class="columns">
             <div class="column">
               <div class="left-container">
-                <span
-                  class="left-container-item"
-                >Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta.</span>
+                <span class="left-container-item">{{wellcomeText}}</span>
                 <span class="left-container-item"></span>
                 <br />
-                <a class="button is-rounded button-signup">Regístrese gratis</a>
+                <a
+                :href="registerUrl"
+                  class="button is-rounded button-signup"
+                >{{registerText}}</a>
               </div>
             </div>
-
             <div class="column is-two-thirds">
               <h2 class="has-text-whitet">
-                <span class="has-text-centered is-block">Digitaliza tu taller y multiplica tu rentabilidad</span>
+                <span
+                  class="has-text-centered is-block"
+                >Digitaliza tu taller y multiplica tu rentabilidad</span>
               </h2>
               <h1 class="title">
                 <div class="is-size-3 has-text-centered is-block">
@@ -78,9 +80,7 @@
       <div class="hero-body back-green">
         <div class="container">
           <h2 class="subtitle">Bienvenido a Garafy Manager</h2>
-          <h1
-            class="title"
-          >Algunos gerentes como tu ya estan utilizando esta herramienta.</h1>
+          <h1 class="title">Algunos gerentes como tu ya estan utilizando esta herramienta.</h1>
           <br />
           <div class="columns is-centered">
             <div class="column is-10">
@@ -90,7 +90,10 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img src="../../../img/testimonial/fake001.jpg" alt="Productos y servicios" />
+                          <img
+                            src="../../../img/testimonial/fake001.jpg"
+                            alt="Productos y servicios"
+                          />
                         </figure>
                       </div>
                     </div>
@@ -98,9 +101,9 @@
                       <h3 class="title is-size-6">
                         <a class="has-text-dark" href="#">Pepito Garcia - Taller A</a>
                       </h3>
-                      <h4 class="subtitle is-size-6">
-                        "Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""
-                      </h4>
+                      <h4
+                        class="subtitle is-size-6"
+                      >"Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""</h4>
                     </div>
                   </div>
                 </div>
@@ -131,7 +134,10 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img src="../../../img/testimonial/fake003.jpg" alt="Rental Rates in Detroit" />
+                          <img
+                            src="../../../img/testimonial/fake003.jpg"
+                            alt="Rental Rates in Detroit"
+                          />
                         </figure>
                       </div>
                     </div>
@@ -238,6 +244,15 @@ export default {
         });
       });
     }
+  },
+
+  data() {
+    return {
+      registerUrl: api_url + "/signUp",
+      registerText: "Regístrese gratis",
+      wellcomeText:
+        "Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta."
+    };
   },
 
   methods: {

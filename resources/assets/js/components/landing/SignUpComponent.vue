@@ -34,7 +34,7 @@
                     v-model="user.name"
                     @input="$v.user.name.$touch()"
                     type="text"
-                    placeholder="Text input"
+                    placeholder="nombre y apellido"
                   />
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
@@ -54,7 +54,7 @@
                     class="input is-danger"
                     type="email"
                     v-model="user.email"
-                    placeholder="Email input"
+                    placeholder="Email"
                     value="hello@"
                   />
                   <span class="icon is-small is-left">
@@ -64,7 +64,31 @@
                 <p
                   v-if="$v.user.email.$dirty && !$v.user.email.required || !$v.user.email.email"
                   class="help is-danger"
-                >This email is invalid</p>
+                >El email es incorrecto</p>
+              </div>
+
+              <div class="field">
+                <label class="label">{{label_tlf}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    @input="$v.user.tlf.$touch()"
+                    class="input"
+                    type="text"
+                    v-model="user.tlf"
+                    placeholder="telefono"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-phone"></i>
+                  </span>
+                </div>
+                <p
+                  v-if="$v.user.tlf.$dirty && !$v.user.tlf.required"
+                  class="help is-danger"
+                >debes colocar un valor</p>
+                <p
+                  v-if="$v.user.tlf.$dirty && !$v.user.tlf.minLength && !$v.user.tlf.numeric "
+                  class="help is-danger"
+                >el tlf debe ser númerico mayor a 5 dígitos númericos</p>
               </div>
 
               <div class="field">
@@ -75,7 +99,7 @@
                     class="input"
                     type="password"
                     v-model="user.password"
-                    placeholder="Text input"
+                    placeholder="contraseña"
                   />
                   <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
@@ -100,7 +124,7 @@
                     class="input"
                     type="password"
                     v-model="user.confirmPassword"
-                    placeholder="Text input"
+                    placeholder="contraseña"
                   />
                   <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
@@ -129,10 +153,11 @@
                   class="help is-danger"
                 >debes aceptar los terminos y condiciones</p>
               </div>
-
+              <p class="help is-danger" v-if="errors">{{submitError}}</p>
+              <br />
               <div class="field is-grouped">
                 <div class="control">
-                  <button type="submit" class="button is-link">Submit</button>
+                  <button type="submit" class="button is-link">{{label_button}}</button>
                 </div>
               </div>
             </form>
@@ -144,7 +169,13 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import {
+  required,
+  numeric,
+  email,
+  minLength,
+  sameAs
+} from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -154,24 +185,31 @@ export default {
         "Comience hoy de manera gratuita a administrar sus citas de taller con nosotros, en garafy manager, es Gratis!!",
       label_name: "Nombre",
       label_email: "Email",
+      label_tlf: "Telefono",
       label_password: "Password",
+      label_submit: "Reg]istrarme",
       label_repassword: "Repetir password",
       label_terms1: "Estoy deacuerdo con los",
-      label_terms2: "terms and conditions",
+      label_terms2: "terminos y condiciones",
+      label_button: "Registrarme",
       user: {
         name: "",
         email: "",
+        tlf: "",
         password: "",
         confirmPassword: "",
         terms: false
       },
-      submitted: false
+      submitted: false,
+      errors: false,
+      submitError: ""
     };
   },
 
   validations: {
     user: {
       name: { required },
+      tlf: { required, numeric },
       email: { required, email },
       password: { required, minLength: minLength(6) },
       confirmPassword: { required, sameAsPassword: sameAs("password") },
@@ -191,13 +229,13 @@ export default {
     },
     doSignUp() {
       axios
-        .post(api_url + "/api/manager/signup")
+        .post(api_url + "/api/manager/signup", this.user)
         .then(response => {
           this.info = response.data.bpi;
         })
         .catch(error => {
-          console.log(error)
-          this.errored = true;
+          this.errors = true;
+          this.submitError = error.response.data.message;
         });
     }
   }

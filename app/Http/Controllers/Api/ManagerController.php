@@ -49,6 +49,7 @@ class ManagerController extends BaseController
         $validator = Validator::make($req->all(), [
             'name' => 'required|max:200',
             'password' => 'required|min:6',
+            'tlf' => 'required|integer',
             'email' => 'required|email',
         ]);
 
@@ -60,6 +61,7 @@ class ManagerController extends BaseController
         $newUser = [
             'name' => $req->name,
             'email' => $req->email,
+            'tlf' => $req->tlf,
             'password' => $req->password,
         ];
 
