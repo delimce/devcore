@@ -14,7 +14,9 @@ window.axios = require('axios');
  */
 import Vuelidate from 'vuelidate'
 window.Vue.use(Vuelidate)
-
+/** modals */
+import VModal from 'vue-js-modal'
+window.Vue.use(VModal,{dynamic: true})
 
 /**
  * The following block of code may be used to automatically register your

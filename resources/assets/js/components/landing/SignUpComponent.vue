@@ -84,7 +84,7 @@
                 <p
                   v-if="$v.user.tlf.$dirty && !$v.user.tlf.required"
                   class="help is-danger"
-                >debes colocar un valor</p>
+                >debes colocar un telefono</p>
                 <p
                   v-if="$v.user.tlf.$dirty && !$v.user.tlf.minLength && !$v.user.tlf.numeric "
                   class="help is-danger"
@@ -145,8 +145,13 @@
                   <label class="checkbox">
                     <input type="checkbox" v-model="user.terms" @change="$v.user.terms.$touch()" />
                     {{label_terms1}}
-                    <a href="#">{{label_terms2}}</a>
+                    <a
+                      class="terms-link"
+                      href="#"
+                      @click="showTerms()"
+                    >{{label_terms2}}</a>
                   </label>
+                  <modals-container />
                 </div>
                 <p
                   v-if="submitted && !$v.user.terms.sameAs"
@@ -169,6 +174,8 @@
 </template>
 
 <script>
+import TermsModal from "../commons/TermsComponent";
+
 import {
   required,
   numeric,
@@ -190,7 +197,7 @@ export default {
       label_submit: "Reg]istrarme",
       label_repassword: "Repetir password",
       label_terms1: "Estoy deacuerdo con los",
-      label_terms2: "terminos y condiciones",
+      label_terms2: "Terminos y condiciones",
       label_button: "Registrarme",
       user: {
         name: "",
@@ -218,6 +225,13 @@ export default {
   },
 
   methods: {
+    showTerms() {
+      this.$modal.show(
+        TermsModal,
+        {},
+        { scrollable: true, height: "auto", width: "68%" }
+      );
+    },
     handleSubmit(e) {
       this.submitted = true;
       // stop here if form is invalid
@@ -288,5 +302,10 @@ export default {
 
 .signup-form label {
   color: aliceblue;
+}
+
+.terms-link {
+  font-weight: bold;
+  text-decoration-line: underline;
 }
 </style>
