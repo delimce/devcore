@@ -8,7 +8,7 @@
               <a :href="home" class="has-text-primary">Home</a> &bullet;
               <a :href="servicesUrl" class="has-text-primary">Nuestros servicios</a> &bullet;
               <a :href="managerUrl" class="has-text-primary">Garafy Manager</a> &bullet;
-              <a href="#" class="has-text-primary">Contáctenos</a> &bullet;
+              <a href="#" class="has-text-primary">Contáctenos</a>
             </nav>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .facebook-button {
   color: #fff;
   background-color: #3a589a;
@@ -95,7 +95,7 @@ export default {
 
 a{
   text-decoration: none;
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .linkedin-button {

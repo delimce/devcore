@@ -7,7 +7,7 @@
           <div class="container">
             <div class="navbar-brand">
               <figure class="image g-logo">
-                <img src="../../../img/common/logo01.png" />
+                <img :src="imagePath + 'common/logo01.png'" />
               </figure>
 
               <a
@@ -30,9 +30,10 @@
                 <a href="#manager" class="navbar-item has-text-weight-semibold">
                   <span>Manager</span>
                 </a>
-                <a href="#" class="navbar-item has-text-weight-semibold">
+                <a  @click="showLogin()" class="navbar-item has-text-weight-semibold">
                   <span>Login</span>
                 </a>
+                <modals-container />
               </div>
             </div>
           </div>
@@ -47,10 +48,7 @@
                 <span class="left-container-item">{{wellcomeText}}</span>
                 <span class="left-container-item"></span>
                 <br />
-                <a
-                :href="registerUrl"
-                  class="button is-rounded button-signup"
-                >{{registerText}}</a>
+                <a :href="registerUrl" class="button is-rounded button-signup">{{registerText}}</a>
               </div>
             </div>
             <div class="column is-two-thirds">
@@ -63,9 +61,7 @@
                 <div class="is-size-3 has-text-centered is-block">
                   <vue-typer
                     text="¿Que esperas para anunciar tu taller en internet?"
-                    pre-type-delay="1600"
-                    :repeat="0"
-                  ></vue-typer>
+                    :pre-type-delay=1600 :repeat="0"></vue-typer>
                 </div>
               </h1>
             </div>
@@ -90,10 +86,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img
-                            src="../../../img/testimonial/fake001.jpg"
-                            alt="Productos y servicios"
-                          />
+                          <img :src="imagePath + 'testimonial/fake001.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -112,10 +105,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img
-                            src="../../../img/testimonial/fake002.jpg"
-                            alt="Rental Rates in Simi Valley and Rental Prices"
-                          />
+                          <img :src="imagePath + 'testimonial/fake002.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -134,10 +124,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img
-                            src="../../../img/testimonial/fake003.jpg"
-                            alt="Rental Rates in Detroit"
-                          />
+                          <img :src="imagePath + 'testimonial/fake003.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -222,6 +209,7 @@
 
 <script>
 import { VueTyper } from "vue-typer";
+import Login from "./LoginComponent";
 
 export default {
   mounted() {
@@ -248,6 +236,7 @@ export default {
 
   data() {
     return {
+      imagePath: imgPublicPath,
       registerUrl: api_url + "/signUp",
       registerText: "Regístrese gratis",
       wellcomeText:
@@ -257,8 +246,11 @@ export default {
 
   methods: {
     showLogin() {
-      let button = this.$refs["login-button"];
-      console.log(button);
+      this.$modal.show(
+        Login,
+        {},
+        { scrollable: false, height: "auto", width: "45%" }
+      );
     }
   },
 
@@ -270,8 +262,8 @@ export default {
 
 <style scoped>
 .hero.is-info {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../../../img/landing/back01.jpg") no-repeat center center fixed;
+  background: linear-gradient(rgba(21, 22, 20, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../../img/landing/back03.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -350,7 +342,7 @@ export default {
 
 .section2 {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5)),
-    url("../../../img/landing/back02.jpg") no-repeat center center fixed;
+    url("../../../../img/landing/back02.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

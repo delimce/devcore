@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 window.api_url = process.env.MIX_APP_URL;
+window.imgPublicPath = window.api_url+'/assets/img/';
 
 window.Vue = require('vue');
 window.axios = require('axios');

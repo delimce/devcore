@@ -1,30 +1,36 @@
 <template>
   <div>
-    <section id="home" class="hero is-info is-small back-topbar">
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-menu">
-          <!-- text-->
-
-          <span class="login">
-            <i class="fas fa-user fa-3x"></i>
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="../">
+            <img :src="imagePath + 'common/logo01.png'" />
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
           </span>
         </div>
-      </nav>
-    </section>
-
-    <section>
-      <div class="columns is-desktop">
-        <div class="column has-text-centered colum-info">
-          <div class="information">
-            <span>
-              <h1>{{title}}</h1>
-              <span class="signup-desc">{{description}}</span>
-            </span>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="#" class="navbar-item is-active">Registro</a>
+            <a  @click="showLogin()" class="navbar-item">Login</a>
           </div>
         </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
 
-        <div class="column has-text-centered">
-          <div class="signup-form">
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+        <div class="columns is-8 is-variable is-centered">
+          <div class="column is-half has-text-left">
+            <h1 class="title is-1">{{title}}</h1>
+            <p class="is-size-4">{{description}}</p>
+          </div>
+          <div class="column is-one-third has-text-left">
             <form @submit.prevent="handleSubmit">
               <div class="field">
                 <label class="label">{{label_name}}</label>
@@ -174,8 +180,8 @@
 </template>
 
 <script>
-import TermsModal from "../commons/TermsComponent";
-
+import TermsModal from "../../commons/TermsComponent";
+import Login from "./LoginComponent";
 import {
   required,
   numeric,
@@ -209,7 +215,8 @@ export default {
       },
       submitted: false,
       errors: false,
-      submitError: ""
+      submitError: "",
+      imagePath:imgPublicPath
     };
   },
 
@@ -225,6 +232,13 @@ export default {
   },
 
   methods: {
+    showLogin() {
+      this.$modal.show(
+        Login,
+        {},
+        { scrollable: false, height: "auto", width: "45%" }
+      );
+    },
     showTerms() {
       this.$modal.show(
         TermsModal,
@@ -257,29 +271,21 @@ export default {
 </script>
 
 <style scoped>
-.columns {
-  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5)),
-    url("../../../img/landing/signup01.jpg") no-repeat;
-}
-
-.colum-info {
-  height: 650px;
-}
-
-.back-topbar {
-  background-color: dimgrey;
-}
-
-.login {
-  font-size: 7px;
-  float: right;
+.hero.is-fullheight {
+  background: linear-gradient(rgba(46, 46, 46, 0.514), rgba(138, 137, 137, 0.5)),
+    url("../../../../img/landing/back01.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .information {
   color: aliceblue;
-  margin-top: 46px;
+  margin-top: 16px;
   padding: 18px;
 }
+
 .information h1 {
   font-size: 34px;
   font-weight: bolder;

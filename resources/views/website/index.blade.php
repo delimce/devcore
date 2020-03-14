@@ -3,5 +3,4 @@
 
 @section('content')
 <landing-component></landing-component>
-<login-component></login-component>
 @endsection

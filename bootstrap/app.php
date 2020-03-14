@@ -22,7 +22,6 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-
 $app->withEloquent();
 
 /*
@@ -57,6 +56,8 @@ $app->singleton(
 |
 */
 
+$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
+
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
@@ -76,7 +77,8 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
