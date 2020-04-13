@@ -15,14 +15,13 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
           <div class="navbar-end">
-            <a href="#" class="navbar-item is-active">Registro</a>
+            <a :href="homeUrl" class="navbar-item is-active">Home</a>
             <a  @click="showLogin()" class="navbar-item">Login</a>
           </div>
         </div>
       </div>
     </nav>
     <!-- END NAV -->
-
     <section class="hero is-fullheight">
       <div class="hero-body">
         <div class="columns is-8 is-variable is-centered">
@@ -180,7 +179,7 @@
 </template>
 
 <script>
-import TermsModal from "../../commons/TermsComponent";
+import TermsModal from "../commons/TermsComponent";
 import Login from "./LoginComponent";
 import {
   required,
@@ -216,7 +215,8 @@ export default {
       submitted: false,
       errors: false,
       submitError: "",
-      imagePath:imgPublicPath
+      imagePath:imgPublicPath,
+      homeUrl: api_url + "/manager",
     };
   },
 

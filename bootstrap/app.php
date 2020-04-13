@@ -56,7 +56,7 @@ $app->singleton(
 |
 */
 
-$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
+//$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
 
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
