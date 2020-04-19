@@ -15,6 +15,6 @@ $router->get('/', function () {
     return redirect()->route('landingManager');
 });
 
-$router->get('/manager', ['as' => 'landingManager', 'uses' => 'Web\LandingController@home']);
-$router->get('/signUp', ['as' => 'signUp', 'uses' => 'Web\LandingController@signUp']);
+$router->get('/manager', ['as' => 'landingManager', 'uses' => 'Web\LandingController@managerHome']);
+$router->get('/manager/signUp', ['as' => 'signUp', 'uses' => 'Web\LandingController@managerSignUp']);
 

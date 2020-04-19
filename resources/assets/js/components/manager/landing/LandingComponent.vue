@@ -237,7 +237,7 @@ export default {
   data() {
     return {
       imagePath: imgPublicPath,
-      registerUrl: api_url + "/signUp",
+      registerUrl: api_url + "/manager/signUp",
       registerText: "Regístrese gratis",
       wellcomeText:
         "Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta."

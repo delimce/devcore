@@ -7,13 +7,13 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 class LandingController extends BaseController
 {
     
-    public function home()
+    public function managerHome()
     {
-        return view('website.index');
+        return view('website.manager');
     }
 
-    public function signUp()
+    public function managerSignUp()
     {
-        return view('website.signup');
+        return view('website.msignup');
     }
 }
