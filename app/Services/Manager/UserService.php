@@ -3,6 +3,7 @@
 namespace App\Services\Manager;
 
 use App\Models\Manager\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -19,20 +20,28 @@ class UserService
         return ($exits > 0);
     }
 
-
+    /**
+     * @return bool|array
+     */
     public function addUser(array $user)
     {
 
         $password = Hash::make($user['password']);
-        User::create(
-            ['name' => $user['name'],
-             'email' => $user['email'],
-             'tlf' => $user['tlf'],
-             'password' => $password]);
-        
+        try {
+            User::create(
+                [
+                    'name' => $user['name'],
+                    'lastname' => $user['lastname'],
+                    'email' => $user['email'],
+                    'phone' => $user['phone'],
+                    'password' => $password
+                ]
+            );
+        } catch (QueryException $ex) {
+            return false;
+        }
+
         ///email to sending
-
         return __('manager.created');
-
     }
 }

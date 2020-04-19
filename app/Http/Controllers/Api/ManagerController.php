@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Services\Manager\UserService;
 use Illuminate\Http\Request;
-use Laravel\Lumen\Routing\Controller as BaseController;
 
 use Validator;
 
-class ManagerController extends BaseController
+class ManagerController extends ApiController
 {
     protected $manager;
 
@@ -32,10 +31,11 @@ class ManagerController extends BaseController
     public function checkEmail($email)
     {
         if (empty($email)) {
-            return response()->json(['status' => 'error', 'message' => "param email not found"], 400);
+            $data = ["message" => "param email not found"];
+            return $this->errorResponse($data);
         }
 
-        return response()->json(['status' => 'ok', 'data' =>  $this->manager->checkEmail($email)]);
+        return $this->okResponse($this->manager->checkEmail($email));
     }
 
 
@@ -47,24 +47,34 @@ class ManagerController extends BaseController
     public function signUp(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'name' => 'required|max:200',
+            'name' => 'required|max:120',
+            'lastname' => 'required|max:100',
             'password' => 'required|min:6',
-            'tlf' => 'required|integer',
+            'phone' => 'required|integer',
             'email' => 'required|email',
         ]);
 
         if ($validator->fails()) {
             $error = $validator->errors()->first();
-            return response()->json(['status' => 'error', 'message' => $error], 400);
+            $data = ["message" => $error];
+            return $this->errorResponse($data);
         }
 
         $newUser = [
             'name' => $req->name,
+            'lastname' => $req->lastname,
             'email' => $req->email,
-            'tlf' => $req->tlf,
+            'phone' => $req->phone,
             'password' => $req->password,
         ];
 
-        return response()->json(['status' => 'ok', 'message' => $this->manager->addUser($newUser)]);
+        $result = $this->manager->addUser($newUser);
+        if (!$result) {
+            $data = ['message' => __('errors.signup')];
+            return $this->errorResponse($data);
+        }
+
+        $data = ['message' => $result];
+        return $this->okResponse($data);
     }
 }
