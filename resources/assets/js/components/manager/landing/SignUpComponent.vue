@@ -1,31 +1,12 @@
 <template>
   <div>
-    <!-- START NAV -->
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="../">
-            <img :src="imagePath + 'common/logo01.png'" />
-          </a>
-          <span class="navbar-burger burger" data-target="navbarMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenu" class="navbar-menu">
-          <div class="navbar-end">
-            <a :href="homeUrl" class="navbar-item is-active">Home</a>
-            <a  @click="showLogin()" class="navbar-item">Login</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!-- END NAV -->
     <section class="hero is-fullheight">
       <div class="hero-body">
         <div class="columns is-8 is-variable is-centered">
           <div class="column is-half has-text-left">
+            <a href="../">
+              <img :src="imagePath + 'common/logo01.png'" class="info-img" />
+            </a>
             <h1 class="title is-1">{{title}}</h1>
             <p class="is-size-4">{{description}}</p>
           </div>
@@ -38,8 +19,9 @@
                     class="input"
                     v-model="user.name"
                     @input="$v.user.name.$touch()"
+                    @focus="errors=false"
                     type="text"
-                    placeholder="nombre y apellido"
+                    placeholder="nombre"
                   />
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
@@ -52,10 +34,32 @@
               </div>
 
               <div class="field">
+                <label class="label">{{label_lastname}}</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    class="input"
+                    v-model="user.lastname"
+                    @input="$v.user.lastname.$touch()"
+                    @focus="errors=false"
+                    type="text"
+                    placeholder="apellido"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+                <p
+                  v-if="$v.user.lastname.$dirty && !$v.user.lastname.required"
+                  class="help is-danger"
+                >debes colocar un valor</p>
+              </div>
+
+              <div class="field">
                 <label class="label">{{label_email}}</label>
                 <div class="control has-icons-left has-icons-right">
                   <input
                     @input="$v.user.email.$touch()"
+                    @focus="errors=false"
                     class="input is-danger"
                     type="email"
                     v-model="user.email"
@@ -73,13 +77,14 @@
               </div>
 
               <div class="field">
-                <label class="label">{{label_tlf}}</label>
+                <label class="label">{{label_phone}}</label>
                 <div class="control has-icons-left has-icons-right">
                   <input
-                    @input="$v.user.tlf.$touch()"
+                    @input="$v.user.phone.$touch()"
+                    @focus="errors=false"
                     class="input"
                     type="text"
-                    v-model="user.tlf"
+                    v-model="user.phone"
                     placeholder="telefono"
                   />
                   <span class="icon is-small is-left">
@@ -87,11 +92,11 @@
                   </span>
                 </div>
                 <p
-                  v-if="$v.user.tlf.$dirty && !$v.user.tlf.required"
+                  v-if="$v.user.phone.$dirty && !$v.user.phone.required"
                   class="help is-danger"
                 >debes colocar un telefono</p>
                 <p
-                  v-if="$v.user.tlf.$dirty && !$v.user.tlf.minLength && !$v.user.tlf.numeric "
+                  v-if="$v.user.phone.$dirty && !$v.user.phone.minLength && !$v.user.phone.numeric "
                   class="help is-danger"
                 >el tlf debe ser númerico mayor a 5 dígitos númericos</p>
               </div>
@@ -101,6 +106,7 @@
                 <div class="control has-icons-left has-icons-right">
                   <input
                     @input="$v.user.password.$touch()"
+                    @focus="errors=false"
                     class="input"
                     type="password"
                     v-model="user.password"
@@ -169,6 +175,12 @@
                 <div class="control">
                   <button type="submit" class="button is-link">{{label_button}}</button>
                 </div>
+
+                <div class="control mini">
+                  Si ya tienes una cuenta
+                  <br />puedes hacer
+                  <a @click="showLogin()">Login</a>
+                </div>
               </div>
             </form>
           </div>
@@ -196,8 +208,9 @@ export default {
       description:
         "Comience hoy de manera gratuita a administrar sus citas de taller con nosotros, en garafy manager, es Gratis!!",
       label_name: "Nombre",
+      label_lastname: "Apellido",
       label_email: "Email",
-      label_tlf: "Telefono",
+      label_phone: "Teléfono",
       label_password: "Password",
       label_submit: "Reg]istrarme",
       label_repassword: "Repetir password",
@@ -206,8 +219,9 @@ export default {
       label_button: "Registrarme",
       user: {
         name: "",
+        lastname: "",
         email: "",
-        tlf: "",
+        phone: "",
         password: "",
         confirmPassword: "",
         terms: false
@@ -215,15 +229,16 @@ export default {
       submitted: false,
       errors: false,
       submitError: "",
-      imagePath:imgPublicPath,
-      homeUrl: api_url + "/manager",
+      imagePath: imgPublicPath,
+      homeUrl: api_url + "/manager"
     };
   },
 
   validations: {
     user: {
       name: { required },
-      tlf: { required, numeric },
+      lastname: { required },
+      phone: { required, numeric },
       email: { required, email },
       password: { required, minLength: minLength(6) },
       confirmPassword: { required, sameAsPassword: sameAs("password") },
@@ -248,6 +263,7 @@ export default {
     },
     handleSubmit(e) {
       this.submitted = true;
+      this.errors = false;
       // stop here if form is invalid
       this.$v.$touch();
       if (this.$v.$invalid) {
@@ -262,8 +278,10 @@ export default {
           this.info = response.data.bpi;
         })
         .catch(error => {
+          let data = error.response.data.info;
           this.errors = true;
-          this.submitError = error.response.data.message;
+          this.$v.error = true;
+          this.submitError = data.message;
         });
     }
   }
@@ -272,27 +290,24 @@ export default {
 
 <style scoped>
 .hero.is-fullheight {
-  background: linear-gradient(rgba(46, 46, 46, 0.514), rgba(138, 137, 137, 0.5)),
-    url("../../../../img/landing/back01.jpg") no-repeat center center fixed;
+  background: url("../../../../img/landing/back05.jpg") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-.information {
-  color: aliceblue;
-  margin-top: 16px;
-  padding: 18px;
+.mini {
+  font-size: 12px;
 }
 
-.information h1 {
-  font-size: 34px;
-  font-weight: bolder;
+.info-img {
+  width: 260px;
 }
-.signup-desc {
-  font-size: 14px;
-  display: inline;
+
+input {
+  border: gray 0.1rem solid;
 }
 
 /**form's styles */

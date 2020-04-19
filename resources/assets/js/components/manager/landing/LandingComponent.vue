@@ -263,7 +263,7 @@ export default {
 <style scoped>
 .hero.is-info {
   background: linear-gradient(rgba(21, 22, 20, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../../../../img/landing/back03.jpg") no-repeat center center fixed;
+    url("../../../../img/landing/back01.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
