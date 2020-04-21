@@ -4,7 +4,7 @@ namespace App\Models\Manager;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Manager extends Model
 {
 
     /**
@@ -18,7 +18,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'lastname', 'email', 'password', 'phone',
+        'name', 'lastname', 'email', 'password', 'phone', 'token'
     ];
 
     /**
@@ -28,4 +28,13 @@ class User extends Model
     protected $hidden = [
         'password',
     ];
+
+
+    /**
+     * @return string
+     */
+    public function fullName()
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
 }

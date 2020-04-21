@@ -173,7 +173,7 @@
 </template>
 
 <script>
-import TermsModal from "../commons/TermsComponent";
+import TermsModal from "../../commons/TermsComponent";
 import Login from "./LoginComponent";
 import {
   required,

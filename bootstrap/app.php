@@ -24,6 +24,9 @@ $app = new Laravel\Lumen\Application(
 $app->withFacades();
 $app->withEloquent();
 
+$app->configure('logging');
+$app->configure('mail');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -78,9 +81,21 @@ $app->singleton(
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Register Aliases
+|--------------------------------------------------------------------------
+|
+*/
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+
 
 /*
 |--------------------------------------------------------------------------

@@ -12,7 +12,8 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "illuminate/notifications": "^6.15",
+        "illuminate/mail": "^6.0",
+        "laravel/helpers": "^1.2",
         "laravel/lumen-framework": "^6.0"
     },
     "require-dev": {

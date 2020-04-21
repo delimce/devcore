@@ -15,6 +15,12 @@ $router->get('/', function () {
     return redirect()->route('landingManager');
 });
 
-$router->get('/manager', ['as' => 'landingManager', 'uses' => 'Web\LandingController@managerHome']);
-$router->get('/manager/signUp', ['as' => 'signUp', 'uses' => 'Web\LandingController@managerSignUp']);
 
+$router->group(
+    ['prefix' => 'manager', 'namespace' => 'Web'],
+    function () use ($router) {
+        $router->get('/', ['as' => 'landingManager', 'uses' => 'LandingController@managerHome']);
+        $router->get('/signUp', ['as' => 'signUp', 'uses' => 'LandingController@managerSignUp']);
+        $router->get('/activate/{token}', 'LandingController@managerActivate');
+    }
+);

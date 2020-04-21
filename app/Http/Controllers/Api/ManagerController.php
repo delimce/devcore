@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\Manager\UserService;
+use App\Services\ManagerService;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -11,7 +11,7 @@ class ManagerController extends ApiController
 {
     protected $manager;
 
-    public function __construct(UserService $user)
+    public function __construct(ManagerService $user)
     {
         $this->manager = $user;
     }
