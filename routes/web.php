@@ -22,5 +22,6 @@ $router->group(
         $router->get('/', ['as' => 'landingManager', 'uses' => 'LandingController@managerHome']);
         $router->get('/signUp', ['as' => 'signUp', 'uses' => 'LandingController@managerSignUp']);
         $router->get('/activate/{token}', 'LandingController@managerActivate');
+        $router->get('/activated', ['as' => 'activated', 'uses' => 'LandingController@managerActivated']);
     }
 );

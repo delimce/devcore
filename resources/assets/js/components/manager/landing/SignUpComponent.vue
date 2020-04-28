@@ -25,6 +25,21 @@
 
 <script>
 export default {
+  props: {
+    newUser: {
+      type: String,
+      default: ""
+    },
+    activated: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  mounted() {
+    this.onActivated();
+  },
+
   data() {
     return {
       title: "¡Regístrate ahora!",
@@ -44,6 +59,11 @@ export default {
           "¿Ya casi esta!, te hemos enviado un correo a la direccion:" +
           data.email +
           " para que, termines el proceso de registro y válides tu cuenta.";
+      }
+    },
+    onActivated: function() {
+      if (this.activated) {
+        this.registered = true;
       }
     }
   }

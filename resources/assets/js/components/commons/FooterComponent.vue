@@ -6,7 +6,7 @@
           <div class="column">
             <nav class="has-text-grey-light">
               <a :href="home" class="has-text-primary">Home</a> &bullet;
-              <a :href="servicesUrl" class="has-text-primary">Nuestros servicios</a> &bullet;
+              <a :href="servicesUrl" class="has-text-primary">Testimonios</a> &bullet;
               <a :href="managerUrl" class="has-text-primary">Garafy Manager</a> &bullet;
               <a href="#" class="has-text-primary">Contáctenos</a>
             </nav>

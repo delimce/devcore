@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Services\ManagerService;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
 class LandingController extends BaseController
 {
@@ -26,11 +27,16 @@ class LandingController extends BaseController
 
     public function managerActivate($token)
     {
-        $result = $this->manager->activateUser($token);
+        $code = trim($token);
+        $result = $this->manager->activateUser($code);
         if ($result) {
-            return view('website.mactivate');
+            return redirect()->route('activated', ['username' => $result->fullname()]);
         }
-
         return response(view('errors.403'), 403);
+    }
+
+    public function managerActivated(Request $req)
+    {
+        return view('website.mactivated', ['username' => $req->username]);
     }
 }
