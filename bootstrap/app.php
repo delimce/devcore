@@ -26,6 +26,7 @@ $app->withEloquent();
 
 $app->configure('logging');
 $app->configure('mail');
+$app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
