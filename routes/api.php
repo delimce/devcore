@@ -18,6 +18,7 @@ $router->group(
             $router->get('/', ['uses' =>  'ManagerController@index']);
             $router->get('check/{email}', ['uses' =>  'ManagerController@checkEmail']);
             $router->post('signup', ['uses' =>  'ManagerController@signUp']);
+            $router->post('login', ['uses' =>  'ManagerController@doLogin']);
         });
     }
 );

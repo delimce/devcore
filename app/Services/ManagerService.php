@@ -35,6 +35,40 @@ class ManagerService
         });
     }
 
+
+    /**
+     * do login
+     * @param array
+     * @return array
+     */
+    public function login(array $credentials)
+    {
+        $result = ["ok" => false, "message" => "", "token" => ""];
+        $user = Manager::whereEmail($credentials['email'])->first();
+        if (is_null($user)) {
+            $result["message"] = __('errors.login.email');
+            return $result;
+        }
+
+        if (!$user->verified) {
+            $result["message"] = __('errors.login.disable');
+            return $result;
+        }
+
+        if (!Hash::check($credentials['password'], $user->password)) {
+            $result["message"] = __('errors.login.password');
+            return $result;
+        }
+
+        ///user logged
+        $result["ok"] = true;
+        $result["token"] = static::newUserToken();
+        $user->token = $result["token"];
+        $user->save();
+        return $result;
+    }
+
+
     /**
      * @return bool|array
      */

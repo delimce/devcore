@@ -38,11 +38,37 @@ class ManagerController extends ApiController
         return $this->okResponse($this->manager->checkEmail($email));
     }
 
-
     /**
-     * signUp
+     * login
      * @param  Request $req
      * @return void
+     */
+    public function doLogin(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $credentials = ["email" => $req->email, "password" => $req->password];
+        $logged = $this->manager->login($credentials);
+
+        if (!$logged["ok"]) {
+            $data = ["message" => $logged["message"]];
+            return $this->errorResponse($data);
+        }
+
+        return $this->okResponse($logged);
+    }
+
+
+    /**
+   
      */
     public function signUp(Request $req)
     {
@@ -52,12 +78,11 @@ class ManagerController extends ApiController
             'password' => 'required|min:6',
             'phone' => 'required|integer',
             'email' => 'required|email',
-        ]);
+        ],$this->getDefaultMessages());
 
-        if ($validator->fails()) {
-            $error = $validator->errors()->first();
-            $data = ["message" => $error];
-            return $this->errorResponse($data);
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
         }
 
         $newUser = [

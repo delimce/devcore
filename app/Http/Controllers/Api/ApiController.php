@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ApiController extends BaseController
@@ -26,5 +26,30 @@ class ApiController extends BaseController
     protected function errorResponse(array $data, int $code = 400)
     {
         return response()->json(['status' => static::STATUS_ERROR, "info" => $data], $code);
+    }
+
+
+
+    /**
+     * @param ValidationValidator $validator
+     * @return array|bool
+     */
+    protected function hasValidationErrors(ValidationValidator $validator)
+    {
+        if ($validator->fails()) {
+            $error = $validator->errors()->first();
+            return  ["message" => $error];
+        }
+
+        return false;
+    }
+
+    protected function getDefaultMessages(){
+        return [
+            'required' => __('errors.validate.require'),
+            'email' => __('errors.validate.invalid'),
+            'min' => __('errors.validate.min'),
+            'max' => __('errors.validate.max'),
+        ];
     }
 }
