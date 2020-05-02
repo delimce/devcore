@@ -2,7 +2,7 @@
 <html lang="es">
 <body>
 <div style="padding: 14px ">
-    <img src="{!! url("assets/img/logo01.png") !!}">
+    <img style="width: 90px" src="{!! url("assets/img/common/logo01.png") !!}">
 </div>
 <div>
     @yield('content')

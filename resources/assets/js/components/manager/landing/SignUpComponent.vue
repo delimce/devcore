@@ -56,7 +56,7 @@ export default {
         this.registered = true;
         this.title = "Gracias por registrarte";
         this.description =
-          "¿Ya casi esta!, te hemos enviado un correo a la direccion:" +
+          "¿Ya casi está!, te hemos enviado un correo a la dirección:" +
           data.email +
           " para que, termines el proceso de registro y válides tu cuenta.";
       }
@@ -64,6 +64,8 @@ export default {
     onActivated: function() {
       if (this.activated) {
         this.registered = true;
+        (this.title = "Registro completado, tu cuenta ha sido activada"),
+          (this.description = "Bienvenido a la familia garafy " + this.newUser);
       }
     }
   }

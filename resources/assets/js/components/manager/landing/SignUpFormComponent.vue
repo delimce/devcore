@@ -4,6 +4,7 @@
       <label class="label">{{label_name}}</label>
       <div class="control has-icons-left has-icons-right">
         <input
+          name="name"
           class="input"
           v-model="user.name"
           @input="$v.user.name.$touch()"
@@ -25,6 +26,7 @@
       <label class="label">{{label_lastname}}</label>
       <div class="control has-icons-left has-icons-right">
         <input
+          name="lastname"
           class="input"
           v-model="user.lastname"
           @input="$v.user.lastname.$touch()"
@@ -46,6 +48,7 @@
       <label class="label">{{label_email}}</label>
       <div class="control has-icons-left has-icons-right">
         <input
+          name="email"
           @input="$v.user.email.$touch()"
           @focus="errors=false"
           class="input"
@@ -67,6 +70,7 @@
       <label class="label">{{label_phone}}</label>
       <div class="control has-icons-left has-icons-right">
         <input
+          name="phone"
           @input="$v.user.phone.$touch()"
           @focus="errors=false"
           class="input"
@@ -92,6 +96,7 @@
       <label class="label">{{label_password}}</label>
       <div class="control has-icons-left has-icons-right">
         <input
+          name="password"
           @input="$v.user.password.$touch()"
           @focus="errors=false"
           class="input"
@@ -205,9 +210,9 @@ export default {
         confirmPassword: "",
         terms: false
       },
-      register:{
-          success:false,
-          email:""
+      register: {
+        success: false,
+        email: ""
       },
       submitted: false,
       errors: false,
@@ -258,7 +263,7 @@ export default {
         .then(response => {
           this.register.success = true;
           this.register.email = this.user.email;
-          this.$emit('to-register', this.register);
+          this.$emit("to-register", this.register);
           this.$v.$reset();
         })
         .catch(error => {
