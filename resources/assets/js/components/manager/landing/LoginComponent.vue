@@ -11,7 +11,12 @@
             <div class="field">
               <label class="label">{{labe_email}}</label>
               <p class="control has-icons-left has-icons-right">
-                <input class="input is-focused" type="email" placeholder="Email" v-model="credentials.email"/>
+                <input
+                  class="input is-focused"
+                  type="email"
+                  placeholder="Email"
+                  v-model="credentials.email"
+                />
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
@@ -20,12 +25,17 @@
             <div class="field">
               <label class="label">{{label_pass}}</label>
               <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password"  v-model="credentials.password" />
+                <input
+                  class="input"
+                  type="password"
+                  placeholder="Password"
+                  v-model="credentials.password"
+                />
                 <span class="icon is-small is-left">
                   <i class="fas fa-lock"></i>
                 </span>
               </p>
-               <p class="help">{{labe_remember}}</p>
+              <p class="help">{{labe_remember}}</p>
             </div>
             <div class="control columns">
               <div class="column">
@@ -63,12 +73,18 @@ export default {
       axios
         .post(api_url + "/api/manager/login", this.credentials)
         .then(response => {
-           this.error_message = ""
+          let token = response.data.info.token;
+          this.error_message = "";
+          this.dataPersist(token);
         })
         .catch(error => {
           let data = error.response.data.info;
           this.error_message = data.message;
         });
+    },
+    dataPersist(token) {
+      sessionStorage.userToken = token;
+      sessionStorage.updated = new Date().getTime();
     }
   }
 };
@@ -83,7 +99,7 @@ export default {
   text-align: right;
 }
 
-.error-text{
+.error-text {
   color: red;
   margin-top: 6px;
 }

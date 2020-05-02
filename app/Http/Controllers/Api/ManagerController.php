@@ -46,7 +46,7 @@ class ManagerController extends ApiController
     {
         $validator = Validator::make($req->all(), [
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);

@@ -4,10 +4,29 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 window.api_url = process.env.MIX_APP_URL;
-window.imgPublicPath = window.api_url+'/assets/img/';
+window.imgPublicPath = window.api_url + '/assets/img/';
 
 window.Vue = require('vue');
 window.axios = require('axios');
+
+/**
+ * Axios interceptors for http requests& responses
+ */
+axios.interceptors.request.use(
+    function (config) {
+        return config;
+    }, function (error) {
+        return Promise.reject(error);
+    }
+);
+
+axios.interceptors.response.use(
+    function (response) {
+        return response;
+    }, function (error) {
+        return Promise.reject(error);
+    }
+);
 
 /**
  * Vuelidate
@@ -17,7 +36,7 @@ import Vuelidate from 'vuelidate'
 window.Vue.use(Vuelidate)
 /** modals */
 import VModal from 'vue-js-modal'
-window.Vue.use(VModal,{dynamic: true})
+window.Vue.use(VModal, { dynamic: true })
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,8 +46,8 @@ window.Vue.use(VModal,{dynamic: true})
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
- const files = require.context('./', true, /\.vue$/i);
- files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+const files = require.context('./', true, /\.vue$/i);
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
