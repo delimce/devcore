@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Manager\Manager;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ManagerService
@@ -88,6 +89,7 @@ class ManagerService
                 ]
             );
         } catch (QueryException $ex) {
+            Log::error($ex);
             return false;
         }
 

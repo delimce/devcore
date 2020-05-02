@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
 
