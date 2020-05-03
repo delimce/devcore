@@ -167,8 +167,8 @@
       <div class="control">
         <button type="submit" class="button is-link">{{label_button}}</button>
       </div>
-
-      <div class="control mini">
+      <pre-loader v-show="preloading"></pre-loader>
+      <div v-show="!preloading" class="control mini">
         Si ya tienes una cuenta
         <br />puedes hacer
         <a @click="showLogin()">Login</a>
@@ -191,6 +191,7 @@ import {
 export default {
   data() {
     return {
+      preloading: false,
       label_name: "Nombre",
       label_lastname: "Apellido",
       label_email: "Email",
@@ -258,15 +259,18 @@ export default {
       this.doSignUp();
     },
     doSignUp() {
+       this.preloading = true;
       axios
         .post(api_url + "/api/manager/signup", this.user)
         .then(response => {
+           this.preloading = false;
           this.register.success = true;
           this.register.email = this.user.email;
           this.$emit("to-register", this.register);
           this.$v.$reset();
         })
         .catch(error => {
+           this.preloading = false;
           let data = error.response.data.info;
           this.errors = true;
           this.$v.error = true;

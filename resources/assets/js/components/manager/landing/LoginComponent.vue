@@ -5,7 +5,7 @@
         <form v-on:submit.prevent="doLogin">
           <div class="notification is-light">
             <div class="image-container">
-              <img :src="imagePath + 'common/logo01.png'" class="info-img" />
+              <img :src="this.$imagePath + 'common/logo01.png'" class="info-img" />
               <br />Manager
             </div>
             <div class="field">
@@ -41,7 +41,10 @@
               <div class="column">
                 <button type="submit" @click="doLogin()" class="button is-link">{{label_button}}</button>
               </div>
-              <div class="column is-two-thirds error-text">{{error_message}}</div>
+              <div class="column is-two-thirds error-text">
+                {{error_message}}
+                <pre-loader v-show="preloading"></pre-loader>
+              </div>
             </div>
             <br />
           </div>
@@ -56,7 +59,7 @@ export default {
   name: "Login",
   data() {
     return {
-      imagePath: imgPublicPath,
+      preloading: false,
       label_pass: "Contraseña",
       labe_email: "Email",
       labe_remember: "¿Has olvidado tu contraseña?",
@@ -70,14 +73,17 @@ export default {
   },
   methods: {
     doLogin() {
+      this.preloading = true;
       axios
         .post(api_url + "/api/manager/login", this.credentials)
         .then(response => {
+          this.preloading = false;
           let token = response.data.info.token;
           this.error_message = "";
           this.dataPersist(token);
         })
         .catch(error => {
+          this.preloading = false;
           let data = error.response.data.info;
           this.error_message = data.message;
         });

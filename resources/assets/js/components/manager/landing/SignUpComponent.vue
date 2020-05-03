@@ -5,7 +5,7 @@
         <div class="columns is-8 is-variable is-centered">
           <div class="column is-half has-text-left">
             <a href="../">
-              <img :src="imagePath + 'common/logo01.png'" class="info-img" />
+              <img :src="this.$imagePath + 'common/logo01.png'" class="info-img" />
             </a>
             <h1 class="title is-1">{{title}}</h1>
             <p class="is-size-4">{{description}}</p>
@@ -46,7 +46,6 @@ export default {
       description:
         "Comience hoy de manera gratuita a administrar sus citas de taller con nosotros, en garafy manager, es Gratis!!",
       registered: false,
-      imagePath: imgPublicPath,
       homeUrl: api_url + "/manager"
     };
   },

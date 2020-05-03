@@ -7,7 +7,7 @@
           <div class="container">
             <div class="navbar-brand">
               <figure class="image g-logo">
-                <img :src="imagePath + 'common/logo01.png'" />
+                <img :src="this.$imagePath + 'common/logo01.png'" />
               </figure>
 
               <a
@@ -86,7 +86,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="imagePath + 'testimonial/fake001.jpg'" />
+                          <img :src="this.$imagePath + 'testimonial/fake001.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="imagePath + 'testimonial/fake002.jpg'" />
+                          <img :src="this.$imagePath + 'testimonial/fake002.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -124,7 +124,7 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="imagePath + 'testimonial/fake003.jpg'" />
+                          <img :src="this.$imagePath + 'testimonial/fake003.jpg'" />
                         </figure>
                       </div>
                     </div>
@@ -236,7 +236,6 @@ export default {
 
   data() {
     return {
-      imagePath: imgPublicPath,
       registerUrl: api_url + "/manager/signUp",
       registerText: "Regístrese gratis",
       wellcomeText:

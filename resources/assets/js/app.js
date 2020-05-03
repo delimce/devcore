@@ -10,6 +10,11 @@ window.Vue = require('vue');
 window.axios = require('axios');
 
 /**
+ * GLOBAL VARIABLES
+ */
+Vue.prototype.$imagePath = window.api_url + '/assets/img/';
+
+/**
  * Axios interceptors for http requests& responses
  */
 axios.interceptors.request.use(
@@ -37,6 +42,11 @@ window.Vue.use(Vuelidate)
 /** modals */
 import VModal from 'vue-js-modal'
 window.Vue.use(VModal, { dynamic: true })
+/** spinner */
+import Preloader from 'vue-spinner/src/BeatLoader.vue'
+window.Vue.component('PreLoader', Preloader);
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -58,5 +68,5 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });
