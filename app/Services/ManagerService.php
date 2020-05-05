@@ -101,6 +101,19 @@ class ManagerService
 
 
     /**
+     * valid token of verified user
+     * @param string $token
+     * @return bool
+     */
+    public static function isTokenvalid($token)
+    {
+        $user = Manager::whereToken($token)->whereVerified(1)->first();
+        return !is_null($user);
+
+    }
+
+
+    /**
      * @param  string $token
      * @return Manager|bool
      */
