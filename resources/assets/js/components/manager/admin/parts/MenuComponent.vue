@@ -3,42 +3,54 @@
     <p class="menu-label is-hidden-touch">General</p>
     <ul class="menu-list">
       <li>
-        <a class="is-active" href="index.html">
+        <router-link to="/home">
           <span class="icon">
             <i class="fa fa-home"></i>
-          </span> Dashboard
-        </a>
+          </span>
+          {{label_home}}
+        </router-link>
       </li>
       <li>
-        <a class href="forms.html">
+        <router-link to="/profile">
           <span class="icon">
-            <i class="fa fa-edit"></i>
-          </span> Forms
-        </a>
+            <i class="fa fa-user"></i>
+          </span>
+          {{label_profile}}
+        </router-link>
       </li>
       <li>
         <a class href="elements.html">
           <span class="icon">
-            <i class="fa fa-desktop"></i>
-          </span> UI Elements
+            <i class="fa fa-car"></i>
+          </span>
+          {{label_garage}}
         </a>
       </li>
       <li>
         <a class href="datatables.html">
           <span class="icon">
-            <i class="fa fa-table"></i>
-          </span> Datatables
+            <i class="fas fa-wrench"></i>
+          </span>
+          {{label_config}}
         </a>
       </li>
     </ul>
 
-    <p class="menu-label is-hidden-touch">Sample Pages</p>
+    <p class="menu-label is-hidden-touch">options</p>
     <ul class="menu-list">
       <li>
         <a class href="login.html">
           <span class="icon">
-            <i class="fa fa-lock"></i>
-          </span> Login
+            <i class="fas fa-headset"></i>
+          </span> {{label_support}}
+        </a>
+      </li>
+
+      <li>
+        <a class href="login.html">
+          <span class="icon">
+            <i class="far fa-times-circle"></i>
+          </span> {{label_logout}}
         </a>
       </li>
     </ul>
@@ -46,7 +58,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "MenuAdmin",
+  data() {
+    return {
+      preloading: false,
+      label_home: "Home",
+      label_profile: "Perfil",
+      label_garage: "Mi Garage",
+      label_config: "Ajustes",
+      label_support: "Soporte",
+      label_logout: "Cerrar sesión",
+    };
+  }
+};
 </script>
 
 <style scoped>

@@ -14,6 +14,7 @@
 
     <div class="column is-10" id="page-content">
        <header-component></header-component>
+       <router-view></router-view>
     </div>
 </div>
 
