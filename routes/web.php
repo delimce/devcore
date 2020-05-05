@@ -15,7 +15,11 @@ $router->get('/', function () {
     return redirect()->route('landingManager');
 });
 
+$router->get('/admin', function () {
+    return redirect()->route('admin');
+});
 
+// landing manager
 $router->group(
     ['prefix' => 'manager', 'namespace' => 'Web'],
     function () use ($router) {
@@ -23,5 +27,12 @@ $router->group(
         $router->get('/signUp', ['as' => 'signUp', 'uses' => 'LandingController@managerSignUp']);
         $router->get('/activate/{token}', 'LandingController@managerActivate');
         $router->get('/activated', ['as' => 'activated', 'uses' => 'LandingController@managerActivated']);
+        // admin manager
+        $router->group(
+            ['prefix' => 'admin'],
+            function () use ($router) {
+                $router->get('/', ['as' => 'admin', 'uses' => 'ManagerController@index']);
+            }
+        );
     }
 );

@@ -2,7 +2,7 @@
 
 return [
     'signUp' => 'Registro en Manager',
-    'garage.data' => 'Datos del taller',
+    'admin' => 'Administración',
     'created' => 'Usuario creado con éxito',
     //emails
     'email.registered.title' => '¡Bienvenido a Garafy!',

@@ -5,7 +5,7 @@
         <form v-on:submit.prevent="doLogin">
           <div class="notification is-light">
             <div class="image-container">
-              <img :src="this.$imagePath + 'common/logo01.png'" class="info-img" />
+              <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
               <br />Manager
             </div>
             <div class="field">
@@ -97,9 +97,6 @@ export default {
 </script>
 
 <style scoped>
-.info-img {
-  width: 90px;
-}
 
 .image-container {
   text-align: right;
