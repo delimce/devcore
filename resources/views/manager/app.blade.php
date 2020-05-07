@@ -2,7 +2,6 @@
 @section('title',  __('manager.admin'))
 
 @section('content')
-
  <!-- START NAV -->
  <navbar-component></navbar-component>
  <!-- END NAV -->

@@ -19,38 +19,40 @@
         </router-link>
       </li>
       <li>
-        <a class href="elements.html">
+        <router-link to="/garage">
           <span class="icon">
             <i class="fa fa-car"></i>
           </span>
           {{label_garage}}
-        </a>
+        </router-link>
       </li>
       <li>
-        <a class href="datatables.html">
+        <router-link to="/config">
           <span class="icon">
             <i class="fas fa-wrench"></i>
           </span>
           {{label_config}}
-        </a>
+        </router-link>
       </li>
     </ul>
 
     <p class="menu-label is-hidden-touch">options</p>
     <ul class="menu-list">
       <li>
-        <a class href="login.html">
+        <router-link to="/support">
           <span class="icon">
             <i class="fas fa-headset"></i>
-          </span> {{label_support}}
-        </a>
+          </span>
+          {{label_support}}
+        </router-link>
       </li>
 
       <li>
         <a class href="login.html">
           <span class="icon">
             <i class="far fa-times-circle"></i>
-          </span> {{label_logout}}
+          </span>
+          {{label_logout}}
         </a>
       </li>
     </ul>
@@ -68,7 +70,7 @@ export default {
       label_garage: "Mi Garage",
       label_config: "Ajustes",
       label_support: "Soporte",
-      label_logout: "Cerrar sesión",
+      label_logout: "Cerrar sesión"
     };
   }
 };

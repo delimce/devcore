@@ -51,6 +51,7 @@ import { routes } from './routes';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+    base: '/manager/', 
     mode: 'history',
     routes
 });

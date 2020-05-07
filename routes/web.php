@@ -28,11 +28,6 @@ $router->group(
         $router->get('/activate/{token}', 'LandingController@managerActivate');
         $router->get('/activated', ['as' => 'activated', 'uses' => 'LandingController@managerActivated']);
         // admin manager
-        $router->group(
-            ['prefix' => 'admin'],
-            function () use ($router) {
-                $router->get('/', ['as' => 'admin', 'uses' => 'ManagerController@index']);
-            }
-        );
+        $router->get('/home', ['as' => 'admin', 'uses' => 'ManagerController@index']);
     }
 );
