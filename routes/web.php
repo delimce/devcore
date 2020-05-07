@@ -15,9 +15,6 @@ $router->get('/', function () {
     return redirect()->route('landingManager');
 });
 
-$router->get('/admin', function () {
-    return redirect()->route('admin');
-});
 
 // landing manager
 $router->group(
@@ -27,7 +24,8 @@ $router->group(
         $router->get('/signUp', ['as' => 'signUp', 'uses' => 'LandingController@managerSignUp']);
         $router->get('/activate/{token}', 'LandingController@managerActivate');
         $router->get('/activated', ['as' => 'activated', 'uses' => 'LandingController@managerActivated']);
-        // admin manager
-        $router->get('/home', ['as' => 'admin', 'uses' => 'ManagerController@index']);
     }
 );
+
+// admin manager
+$router->get('/admin/{any:.*}', ['as' => 'admin', 'uses' => 'Web\ManagerController@index']);
