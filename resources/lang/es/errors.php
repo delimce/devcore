@@ -10,5 +10,6 @@ return [
     'login.disable' => 'Usuario no activado',
     'login.password' => 'Error en contraseña',
     '404' => 'Página no encontrada',
+    '401' => 'Acceso no permitido',
     '403' => 'Página no disponible',
 ];

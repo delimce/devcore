@@ -137,6 +137,21 @@ class ManagerService
 
 
     /**
+     * @param $token
+     * @return mixed|bool
+     */
+    public function getUserByToken(string $token)
+    {
+        $user = Manager::whereToken($token)->whereVerified(1)->first();
+        if (!is_null($user)) {
+            return $user;
+        }
+        return false;
+
+    }
+
+
+    /**
      * generates manager token
      * @return string
      */

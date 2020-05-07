@@ -39,4 +39,15 @@ class ManagerApiTest extends TestCase
             "info" => ["message"]
         ]);
     }
+
+    public function testManagerGetUserByToken()
+    {
+        $token = env('TDD_TOKEN', '');
+        $this->get(static::API_URI . "auth", ["Authorization" => $token]);
+        $this->seeStatusCode(200);
+
+        $token = '';
+        $this->get(static::API_URI . "auth", ["Authorization" => $token]);
+        $this->seeStatusCode(401);
+    }
 }

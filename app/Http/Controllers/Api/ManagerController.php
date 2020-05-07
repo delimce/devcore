@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
 
@@ -77,7 +78,7 @@ class ManagerController extends ApiController
             'password' => 'required|min:6',
             'phone' => 'required|integer',
             'email' => 'required|email',
-        ],$this->getDefaultMessages());
+        ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
         if ($validate) {
@@ -99,6 +100,18 @@ class ManagerController extends ApiController
         }
 
         $data = ['message' => $result];
+        return $this->okResponse($data);
+    }
+
+
+    /**
+     * 
+     */
+    public function main(Request $req)
+    {
+        $token = $req->header('Authorization');
+        $user = $this->manager->getUserByToken($token);
+        $data = ['user' => $user];
         return $this->okResponse($data);
     }
 }

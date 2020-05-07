@@ -19,6 +19,16 @@ $router->group(
             $router->get('check/{email}', ['uses' =>  'ManagerController@checkEmail']);
             $router->post('signup', ['uses' =>  'ManagerController@signUp']);
             $router->post('login', ['uses' =>  'ManagerController@doLogin']);
+
+            //auth admin
+            $router->group(
+                ['middleware' => ['api'],'prefix' => 'auth'],
+                function () use ($router) {
+                    $router->get('/', ['uses' =>  'ManagerController@main']);
+                }
+            );
         });
     }
 );
+
+
