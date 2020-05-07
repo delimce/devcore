@@ -35,18 +35,12 @@
               </span>
             </a>
           </div>
-          <div class="navbar-item">
-            <a class="button is-white" onclick="Auth.logout()">
-              <span class="icon">
-                <i class="fa fa-lg fa-power-off"></i>
-              </span>
-            </a>
-          </div>
+  
           <div class="navbar-item has-dropdown">
             <a class="navbar-link">
               <figure class="image avatar is-32x32">
-                <img class="is-rounded" src="images/user1.png" />
-              </figure>&nbsp; Hi, nafplann
+                <img class="is-rounded" :src="this.$imagePath + 'common/user.png'"/>
+              </figure>&nbsp; {{hello}}, nafplann
             </a>
             <div class="navbar-dropdown is-right">
               <a class="navbar-item">Overview</a>
@@ -67,10 +61,17 @@ export default {
   name: "Navbar",
   data() {
     return {
-      preloading: false
+      preloading: false,
+      hello:"Hola"
     };
   },
-  methods: {}
+  methods: {
+    validateSession()
+    {
+    
+
+    }
+  }
 };
 </script>
 

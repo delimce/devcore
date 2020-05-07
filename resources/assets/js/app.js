@@ -4,7 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 window.api_url = process.env.MIX_APP_URL;
-window.imgPublicPath = window.api_url + '/assets/img/';
 
 window.Vue = require('vue');
 window.axios = require('axios');
@@ -17,8 +16,14 @@ Vue.prototype.$imagePath = window.api_url + '/assets/img/';
 /**
  * Axios interceptors for http requests& responses
  */
+import { getUserToken } from './functions';
+
 axios.interceptors.request.use(
     function (config) {
+        let token = getUserToken()
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = token
+        }
         return config;
     }, function (error) {
         return Promise.reject(error);
@@ -51,7 +56,7 @@ import { routes } from './routes';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-    base: '/admin/', 
+    base: '/admin/',
     mode: 'history',
     routes
 });

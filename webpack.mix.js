@@ -15,5 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/assets/js')
     .sass('resources/assets/sass/app.scss', 'public/assets/css').options({
     processCssUrls: false
 });
+mix.scripts([
+    'resources/assets/js/functions.js'
+  ], 'public/assets/js/functions.js');
 
 mix.copyDirectory('resources/assets/img', 'public/assets/img', false);

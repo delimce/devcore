@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { saveUserToken } from "../../../functions";
 export default {
   name: "Login",
   data() {
@@ -80,24 +81,19 @@ export default {
           this.preloading = false;
           let token = response.data.info.token;
           this.error_message = "";
-          this.dataPersist(token);
+          saveUserToken(token);
         })
         .catch(error => {
           this.preloading = false;
           let data = error.response.data.info;
           this.error_message = data.message;
         });
-    },
-    dataPersist(token) {
-      sessionStorage.userToken = token;
-      sessionStorage.updated = new Date().getTime();
     }
   }
 };
 </script>
 
 <style scoped>
-
 .image-container {
   text-align: right;
 }
