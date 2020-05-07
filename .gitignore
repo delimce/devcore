@@ -8,3 +8,4 @@
 composer-lock.json
 package-lock.json
 .env
+.phpunit.result.cache
