@@ -71,6 +71,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .hero.is-fullheight {
   background: url("../../../../img/landing/back05.jpg") no-repeat center center
