@@ -6,7 +6,13 @@
 window.api_url = process.env.MIX_APP_URL;
 
 window.Vue = require('vue');
-window.axios = require('axios');
+let axiosInstance = require('axios');
+window._ = require('lodash');
+
+window.axios = axiosInstance.create({
+    baseURL: api_url + "/api",
+    timeout: 5000,
+});
 
 /**
  * GLOBAL VARIABLES
@@ -19,23 +25,11 @@ Vue.prototype.$imagePath = window.api_url + '/assets/img/';
 import { getUserToken } from './functions';
 
 axios.interceptors.request.use(
-    function (config) {
-        let token = getUserToken()
-        if (token) {
-            axios.defaults.headers.common["Authorization"] = token
-        }
+    config => {
+        config.headers.Authorization = getUserToken()
         return config;
-    }, function (error) {
-        return Promise.reject(error);
-    }
-);
-
-axios.interceptors.response.use(
-    function (response) {
-        return response;
-    }, function (error) {
-        return Promise.reject(error);
-    }
+    },
+    error => Promise.reject(error)
 );
 
 /**

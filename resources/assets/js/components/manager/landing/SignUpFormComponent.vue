@@ -261,7 +261,7 @@ export default {
     doSignUp() {
        this.preloading = true;
       axios
-        .post(api_url + "/api/manager/signup", this.user)
+        .post("/manager/signup", this.user)
         .then(response => {
            this.preloading = false;
           this.register.success = true;

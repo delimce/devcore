@@ -1,5 +1,3 @@
-_ = require('lodash');
-
 /**
  * get user token from sessionStorage
  */

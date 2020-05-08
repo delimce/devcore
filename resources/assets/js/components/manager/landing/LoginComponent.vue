@@ -39,7 +39,7 @@
             </div>
             <div class="control columns">
               <div class="column">
-                <button type="submit" @click="doLogin()" class="button is-link">{{label_button}}</button>
+                <button type="submit" class="button is-link">{{label_button}}</button>
               </div>
               <div class="column is-two-thirds error-text">
                 {{error_message}}
@@ -73,10 +73,10 @@ export default {
     };
   },
   methods: {
-    doLogin() {
+    doLogin: _.debounce(function() {
       this.preloading = true;
       axios
-        .post(api_url + "/api/manager/login", this.credentials)
+        .post("/manager/login", this.credentials)
         .then(response => {
           this.preloading = false;
           let token = response.data.info.token;
@@ -89,7 +89,7 @@ export default {
           let data = error.response.data.info;
           this.error_message = data.message;
         });
-    }
+    }, 400)
   }
 };
 </script>

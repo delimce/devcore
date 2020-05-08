@@ -8,9 +8,9 @@
     >
       <div class="navbar-brand column is-2 is-paddingless">
         <a class="navbar-item" href="index.html">
-             <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
+          <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
         </a>
-        
+
         <a
           role="button"
           class="navbar-burger"
@@ -35,12 +35,13 @@
               </span>
             </a>
           </div>
-  
+
           <div class="navbar-item has-dropdown">
             <a class="navbar-link">
               <figure class="image avatar is-32x32">
-                <img class="is-rounded" :src="this.$imagePath + 'common/user.png'"/>
-              </figure>&nbsp; {{hello}}, nafplann
+                <img class="is-rounded" :src="this.$imagePath + 'common/user.png'" />
+              </figure>
+              &nbsp; {{hello}}, {{user.name}}
             </a>
             <div class="navbar-dropdown is-right">
               <a class="navbar-item">Overview</a>
@@ -57,20 +58,35 @@
 </template>
 
 <script>
+import { deleteUserData, redirectToManager } from "../../../../functions";
 export default {
   name: "Navbar",
   data() {
     return {
       preloading: false,
-      hello:"Hola"
+      user: {},
+      hello: "Hola"
     };
   },
   methods: {
-    validateSession()
-    {
-    
+    validateSession() {
+      this.preloading = true;
+       axios
+          .get("/manager/auth/")
+          .then(response => {
+            this.preloading = false;
 
+            this.user = response.data.info.user;
+          })
+          .catch(error => {
+            this.preloading = false;
+            deleteUserData();
+            redirectToManager();
+          });
     }
+  },
+  mounted: function() {
+    this.validateSession()
   }
 };
 </script>
