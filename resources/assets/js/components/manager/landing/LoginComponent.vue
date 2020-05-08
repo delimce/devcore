@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { saveUserToken } from "../../../functions";
+import { saveUserToken, redirectToAdmin } from "../../../functions";
 export default {
   name: "Login",
   data() {
@@ -82,6 +82,7 @@ export default {
           let token = response.data.info.token;
           this.error_message = "";
           saveUserToken(token);
+          redirectToAdmin();
         })
         .catch(error => {
           this.preloading = false;

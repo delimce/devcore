@@ -61,6 +61,7 @@
 
 <script>
 import EventBus from "../../../../bus";
+import { deleteUserData, redirectToManager } from "../../../../functions";
 export default {
   name: "MenuAdmin",
   data() {
@@ -89,7 +90,8 @@ export default {
       EventBus.$emit("change-header-name", this.header);
     },
     doLogout() {
-      console.log("logout");
+      deleteUserData();
+      redirectToManager();
     }
   }
 };
