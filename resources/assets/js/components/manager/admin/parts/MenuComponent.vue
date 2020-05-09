@@ -74,7 +74,7 @@ export default {
       label_home: "Home",
       label_profile: "Perfil",
       desc_profile: "datos personales del responsable de la cuenta",
-      label_garage: "Mi Garage",
+      label_garage: "Mi Taller",
       desc_garage: "Administracion del taller",
       label_config: "Ajustes",
       desc_config: "Ajustes y opciones de la plataforma",

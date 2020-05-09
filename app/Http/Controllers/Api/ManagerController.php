@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Manager\Manager;
 use App\Services\ManagerService;
 use Illuminate\Http\Request;
 
@@ -105,13 +106,44 @@ class ManagerController extends ApiController
 
 
     /**
-     * 
+     * get user data
      */
     public function main(Request $req)
     {
         $token = $req->header('Authorization');
         $user = $this->manager->getUserByToken($token);
         $data = ['user' => $user];
+        return $this->okResponse($data);
+    }
+
+    public function saveMain(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'name' => 'required|max:100',
+            'lastname' => 'required|max:100',
+            'dni' => 'required|min:6',
+            'birthdate' => 'required|date',
+            'phone' => 'required|integer',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $user = Manager::find($req->id);
+        $user->name = $req->name;
+        $user->lastname = $req->lastname;
+        $user->dni = $req->dni;
+        $user->birthdate = $req->birthdate;
+        $user->phone = $req->phone;
+
+        if (!$this->manager->saveUserInfo($user)) {
+            $data = ['message' => __('errors.save')];
+            return $this->errorResponse($data);
+        }
+
+        $data = ['message' => __('commons.save.success')];
         return $this->okResponse($data);
     }
 }

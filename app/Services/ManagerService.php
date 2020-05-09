@@ -109,7 +109,6 @@ class ManagerService
     {
         $user = Manager::whereToken($token)->whereVerified(1)->first();
         return !is_null($user);
-
     }
 
 
@@ -147,7 +146,21 @@ class ManagerService
             return $user;
         }
         return false;
+    }
 
+    
+    /**
+     * @param Manager $info
+     */
+    public function saveUserInfo(Manager $info)
+    {
+        try {
+            $info->save();
+            return true;
+        } catch (QueryException $ex) {
+            Log::error($ex);
+            return false;
+        }
     }
 
 

@@ -50,6 +50,7 @@ class ApiController extends BaseController
             'email' => __('errors.validate.invalid'),
             'min' => __('errors.validate.min'),
             'max' => __('errors.validate.max'),
+            'date' => __('errors.validate.date'),
         ];
     }
 }

@@ -25,6 +25,7 @@ $router->group(
                 ['middleware' => ['api'],'prefix' => 'auth'],
                 function () use ($router) {
                     $router->get('/', ['uses' =>  'ManagerController@main']);
+                    $router->put('/info/save', ['uses' =>  'ManagerController@saveMain']);
                 }
             );
         });
