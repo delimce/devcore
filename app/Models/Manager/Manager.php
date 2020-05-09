@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\Manager;
 
 use Illuminate\Database\Eloquent\Model;
@@ -36,5 +35,10 @@ class Manager extends Model
     public function fullName()
     {
         return $this->name . ' ' . $this->lastname;
+    }
+
+    public function company()
+    {
+        return $this->hasOne('App\Models\Manager\Company','manager_id');
     }
 }

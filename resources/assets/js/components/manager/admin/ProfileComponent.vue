@@ -2,6 +2,7 @@
   <div class="content-body">
     <div class="columns">
       <div class="column">
+        <!-- user dataform -->
         <div class="card">
           <div class="card-content">
             <p class="title is-5">{{label_data}}</p>
@@ -101,26 +102,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <div class="card-content">
-            <p class="title is-5">Colors</p>
-            <div class="field">
-              <label class="label">Name</label>
-              <div class="control">
-                <input class="input is-primary" type="text" placeholder="Primary input" />
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Name</label>
-              <div class="control">
-                <input class="input is-danger" type="text" placeholder="Danger input" />
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <!-- change password -->
         <div class="card">
           <div class="card-content">
             <p class="title is-5">{{label_password_change}}</p>
@@ -186,6 +168,66 @@
           </div>
         </div>
       </div>
+      <!-- company dataform -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <p class="title is-5">{{label_company}}</p>
+
+            <div class="field">
+              <label class="label">{{label_company_name}}</label>
+              <div class="control">
+                <input
+                  class="input is-primary"
+                  v-on:focus="message3=''"
+                  type="text"
+                  placeholder
+                  v-model="user.company.name"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">{{label_company_rif}}</label>
+              <div class="control">
+                <input
+                  class="input is-primary"
+                  v-on:focus="message3=''"
+                  type="text"
+                  placeholder
+                  v-model="user.company.rif"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">{{label_company_phone}}</label>
+              <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-phone"></i>
+                </span>
+                <input
+                  class="input is-primary"
+                  v-on:focus="message3=''"
+                  type="text"
+                  placeholder
+                  v-model="user.company.phone"
+                />
+              </div>
+            </div>
+
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit" @click="saveCompany()" class="button is-link">{{label_save}}</button>
+              </div>
+              <div class="mini">
+                <pre-loader v-show="preloading3"></pre-loader>
+                <div v-show="!preloading3" v-bind:class="[messageType]">{{message3}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -201,6 +243,7 @@ export default {
       preloading3: false,
       message1: "",
       message2: "",
+      message3: "",
       label_data: "Datos personales",
       label_name: "Nombre",
       label_lastname: "Apellido",
@@ -214,6 +257,10 @@ export default {
       label_oldpassword: "Antigua contraseña",
       label_password: "Nueva contraseña",
       label_password2: "Repetir contraseña",
+      label_company: "Datos de la empresa",
+      label_company_name: "Nombre",
+      label_company_rif: "Rif",
+      label_company_phone: "Teléfono",
       user: {
         id: 0,
         name: "",
@@ -225,7 +272,12 @@ export default {
         nif: "",
         oldpassword: "",
         password: "",
-        password_confirmation: ""
+        password_confirmation: "",
+        company: {
+          name: "",
+          rif: "",
+          phone: ""
+        }
       }
     };
   },
@@ -266,6 +318,26 @@ export default {
           this.messageType = "message-error";
           this.preloading2 = false;
           this.message2 = error.response.data.info.message;
+        });
+    },
+    saveCompany() {
+      this.preloading3 = true;
+      axios
+        .put("/manager/auth/company/save", {
+          manager_id: this.user.id,
+          name: this.user.company.name,
+          rif: this.user.company.rif,
+          phone: this.user.company.phone
+        })
+        .then(response => {
+          this.messageType = "message-ok";
+          this.preloading3 = false;
+          this.message3 = response.data.info.message;
+        })
+        .catch(error => {
+          this.messageType = "message-error";
+          this.preloading3 = false;
+          this.message3 = error.response.data.info.message;
         });
     }
   },

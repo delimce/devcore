@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Manager\Company;
 use App\Models\Manager\Manager;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
@@ -143,7 +144,10 @@ class ManagerService
     {
         $user = Manager::whereToken($token)->whereVerified(1)->first();
         if (!is_null($user)) {
-            return $user;
+            $data = $user->toArray();
+            $company = Company::whereManagerId($data["id"])->first();
+            $data["company"] = is_null($company) ? ["name" => "", "rif" => "", "phone" => ""] : $company->toArray();
+            return $data;
         }
         return false;
     }
@@ -183,6 +187,29 @@ class ManagerService
         $result["ok"] = true;
         $result["message"] = __('commons.password.changed');
         return $result;
+    }
+
+    /**
+     * save manager company info
+     * @param array $company
+     */
+    public function saveManagerCompany(array $company)
+    {
+        try {
+            $result = Company::firstOrNew(
+                [
+                    'manager_id' => $company['manager'],
+                ]
+            );
+            $result->name = $company['name'];
+            $result->rif = $company['rif'];
+            $result->phone = $company['phone'];
+            $result->save();
+            return true;
+        } catch (QueryException $ex) {
+            Log::error($ex);
+            return false;
+        }
     }
 
 

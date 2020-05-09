@@ -170,4 +170,39 @@ class ManagerController extends ApiController
         }
         return $this->okResponse($result);
     }
+
+
+    public function saveCompany(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'manager_id' => 'required|integer',
+            'name' => 'required|max:140',
+            'rif' => 'required|min:6',
+            'phone' => 'required|integer',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $company = [
+            "manager"=>$req->manager_id,
+            "name" => $req->name,
+            "rif" => $req->rif,
+            "phone" => $req->phone,
+        ];
+
+        if (!$this->manager->saveManagerCompany($company)) {
+            $data = ['message' => __('errors.save')];
+            return $this->errorResponse($data);
+        }
+
+        $data = ['message' => __('commons.save.success')];
+        return $this->okResponse($data);
+
+
+
+    }
+
 }
