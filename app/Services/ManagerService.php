@@ -148,7 +148,7 @@ class ManagerService
         return false;
     }
 
-    
+
     /**
      * @param Manager $info
      */
@@ -161,6 +161,28 @@ class ManagerService
             Log::error($ex);
             return false;
         }
+    }
+
+    /**
+     * changing manager password
+     * @param string $token
+     * @param string $old
+     * @param string $new
+     * 
+     */
+    public function changePassword(string $token, string $old, string $new)
+    {
+        $result = ["ok" => false, "message" => ""];
+        $user = $this->getUserByToken($token);
+        if (!Hash::check($old, $user->password)) {
+            $result["message"] = __('errors.login.oldpassword');
+            return $result;
+        }
+        $user->password = Hash::make($new);
+        $user->save();
+        $result["ok"] = true;
+        $result["message"] = __('commons.password.changed');
+        return $result;
     }
 
 

@@ -44,13 +44,15 @@ class ApiController extends BaseController
         return false;
     }
 
-    protected function getDefaultMessages(){
+    protected function getDefaultMessages()
+    {
         return [
             'required' => __('errors.validate.require'),
             'email' => __('errors.validate.invalid'),
             'min' => __('errors.validate.min'),
             'max' => __('errors.validate.max'),
             'date' => __('errors.validate.date'),
+            'confirmed' => __('errors.validate.confirmed'),
         ];
     }
 }

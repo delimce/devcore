@@ -146,4 +146,28 @@ class ManagerController extends ApiController
         $data = ['message' => __('commons.save.success')];
         return $this->okResponse($data);
     }
+
+
+    public function changePassword(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'oldpassword' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $token = $req->header('Authorization');
+        $old = $req->oldpassword;
+        $new = $req->password;
+        $result = $this->manager->changePassword($token, $old, $new);
+        if (!$result["ok"]) {
+            $data = ["message" => $result["message"]];
+            return $this->errorResponse($data);
+        }
+        return $this->okResponse($result);
+    }
 }

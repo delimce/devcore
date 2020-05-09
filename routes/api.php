@@ -26,6 +26,7 @@ $router->group(
                 function () use ($router) {
                     $router->get('/', ['uses' =>  'ManagerController@main']);
                     $router->put('/info/save', ['uses' =>  'ManagerController@saveMain']);
+                    $router->put('/password', ['uses' =>  'ManagerController@changePassword']);
                 }
             );
         });
