@@ -18,7 +18,7 @@ class Company extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'rif', 'phone', 'manager_id'
+        'name', 'nif', 'phone', 'manager_id'
     ];
 
     public function manager()

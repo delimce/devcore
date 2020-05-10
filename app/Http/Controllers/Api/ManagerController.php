@@ -177,7 +177,7 @@ class ManagerController extends ApiController
         $validator = Validator::make($req->all(), [
             'manager_id' => 'required|integer',
             'name' => 'required|max:140',
-            'rif' => 'required|min:6',
+            'nif' => 'required|min:6',
             'phone' => 'required|integer',
         ], $this->getDefaultMessages());
 
@@ -187,9 +187,9 @@ class ManagerController extends ApiController
         }
 
         $company = [
-            "manager"=>$req->manager_id,
+            "manager" => $req->manager_id,
             "name" => $req->name,
-            "rif" => $req->rif,
+            "nif" => $req->nif,
             "phone" => $req->phone,
         ];
 
@@ -200,9 +200,5 @@ class ManagerController extends ApiController
 
         $data = ['message' => __('commons.save.success')];
         return $this->okResponse($data);
-
-
-
     }
-
 }

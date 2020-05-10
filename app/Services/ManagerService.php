@@ -146,7 +146,7 @@ class ManagerService
         if (!is_null($user)) {
             $data = $user->toArray();
             $company = Company::whereManagerId($data["id"])->first();
-            $data["company"] = is_null($company) ? ["name" => "", "rif" => "", "phone" => ""] : $company->toArray();
+            $data["company"] = is_null($company) ? ["name" => "", "nif" => "", "phone" => ""] : $company->toArray();
             return $data;
         }
         return false;
@@ -202,7 +202,7 @@ class ManagerService
                 ]
             );
             $result->name = $company['name'];
-            $result->rif = $company['rif'];
+            $result->nif = $company['nif'];
             $result->phone = $company['phone'];
             $result->save();
             return true;

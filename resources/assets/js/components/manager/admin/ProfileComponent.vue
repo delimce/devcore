@@ -188,14 +188,14 @@
             </div>
 
             <div class="field">
-              <label class="label">{{label_company_rif}}</label>
+              <label class="label">{{label_company_nif}}</label>
               <div class="control">
                 <input
                   class="input is-primary"
                   v-on:focus="message3=''"
                   type="text"
                   placeholder
-                  v-model="user.company.rif"
+                  v-model="user.company.nif"
                 />
               </div>
             </div>
@@ -259,7 +259,7 @@ export default {
       label_password2: "Repetir contraseña",
       label_company: "Datos de la empresa",
       label_company_name: "Nombre",
-      label_company_rif: "Rif",
+      label_company_nif: "NIF",
       label_company_phone: "Teléfono",
       user: {
         id: 0,
@@ -275,7 +275,7 @@ export default {
         password_confirmation: "",
         company: {
           name: "",
-          rif: "",
+          nif: "",
           phone: ""
         }
       }
@@ -326,7 +326,7 @@ export default {
         .put("/manager/auth/company/save", {
           manager_id: this.user.id,
           name: this.user.company.name,
-          rif: this.user.company.rif,
+          nif: this.user.company.nif,
           phone: this.user.company.phone
         })
         .then(response => {
