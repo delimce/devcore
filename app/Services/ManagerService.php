@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ManagerService
 {
@@ -177,13 +178,12 @@ class ManagerService
     public function changePassword(string $token, string $old, string $new)
     {
         $result = ["ok" => false, "message" => ""];
-        $user = $this->getUserByToken($token);
-        if (!Hash::check($old, $user->password)) {
+        $data = DB::table('tbl_manager')->whereToken($token)->first();
+        if (!Hash::check($old, $data->password)) {
             $result["message"] = __('errors.login.oldpassword');
             return $result;
         }
-        $user->password = Hash::make($new);
-        $user->save();
+        Manager::whereToken($token)->update(["password" => Hash::make($new)]);
         $result["ok"] = true;
         $result["message"] = __('commons.password.changed');
         return $result;

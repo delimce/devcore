@@ -166,7 +166,7 @@ class ManagerController extends ApiController
         $result = $this->manager->changePassword($token, $old, $new);
         if (!$result["ok"]) {
             $data = ["message" => $result["message"]];
-            return $this->errorResponse($data);
+            return $this->errorResponse($data,401);
         }
         return $this->okResponse($result);
     }
