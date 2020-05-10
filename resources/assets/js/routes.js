@@ -4,6 +4,7 @@ import Profile from './components/manager/admin/ProfileComponent';
 import Support from './components/manager/admin/SupportComponent';
 import Garage from './components/manager/admin/GarageComponent';
 import Config from './components/manager/admin/ConfigComponent';
+import agenda from './components/manager/admin/AppointmentComponent';
 
 export const routes = [
     {
@@ -20,6 +21,11 @@ export const routes = [
         path: '/garage',
         component: Garage,
         name: 'Garage'
+    },
+    {
+        path: '/appointments',
+        component: agenda,
+        name: 'Agenda'
     },
     {
         path: '/config',

@@ -27,6 +27,14 @@
         </router-link>
       </li>
       <li>
+        <router-link to="/appointments" @click.native="updateHeader(label_appointment,desc_appointment)">
+          <span class="icon">
+            <i class="fa fa-calendar"></i>
+          </span>
+          {{label_appointment}}
+        </router-link>
+      </li>
+      <li>
         <router-link to="/config" @click.native="updateHeader(label_config,desc_config)">
           <span class="icon">
             <i class="fas fa-wrench"></i>
@@ -75,9 +83,11 @@ export default {
       label_profile: "Perfil",
       desc_profile: "datos personales del responsable de la cuenta",
       label_garage: "Mi Taller",
-      desc_garage: "Administracion del taller",
+      desc_garage: "Administración del taller",
       label_config: "Ajustes",
       desc_config: "Ajustes y opciones de la plataforma",
+      label_appointment: "Agenda",
+      desc_appointment: "Gestión de las citas del taller",
       label_support: "Soporte",
       desc_support: "Contáctenos en caso de algun inconveniente",
       label_logout: "Cerrar sesión"
