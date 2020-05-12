@@ -7,7 +7,7 @@
       id="app-header"
     >
       <div class="navbar-brand column is-2 is-paddingless">
-        <a class="navbar-item" href="index.html">
+        <a class="navbar-item logo-middle" href="#">
           <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
         </a>
 
@@ -92,4 +92,7 @@ export default {
 </script>
 
 <style scoped>
+.logo-middle{
+  text-align: center;
+}
 </style>

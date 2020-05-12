@@ -30,6 +30,16 @@ $router->group(
                     $router->put('/company/save', ['uses' =>  'ManagerController@saveCompany']);
                 }
             );
+
+            ///garage
+            $router->group(
+                ['middleware' => ['api'],'prefix' => 'garage'],
+                function () use ($router) {
+                    $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
+                }
+            );
+
+
         });
     }
 );
