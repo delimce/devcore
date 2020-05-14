@@ -22,7 +22,7 @@ $router->group(
 
             //auth admin
             $router->group(
-                ['middleware' => ['api'],'prefix' => 'auth'],
+                ['middleware' => ['api'], 'prefix' => 'auth'],
                 function () use ($router) {
                     $router->get('/', ['uses' =>  'ManagerController@main']);
                     $router->put('/info/save', ['uses' =>  'ManagerController@saveMain']);
@@ -33,15 +33,22 @@ $router->group(
 
             ///garage
             $router->group(
-                ['middleware' => ['api'],'prefix' => 'garage'],
+                ['middleware' => ['api'], 'prefix' => 'garage'],
                 function () use ($router) {
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
                 }
             );
-
-
         });
+
+        //localization
+        $router->group(
+            ['prefix' => 'local'],
+            function () use ($router) {
+                $router->get('/states[/{countryId}]', ['uses' =>  'LocalizationController@getStates']);
+                $router->get('/provinces[/{stateId}]', ['uses' =>  'LocalizationController@getProvinces']);
+                $router->get('/municipalities[/{provinceId}]', ['uses' =>  'LocalizationController@getMunicipalities']);
+            }
+        );
     }
+
 );
-
-

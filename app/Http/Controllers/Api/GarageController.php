@@ -16,9 +16,9 @@ class GarageController extends ApiController
         $this->garage = $garage;
     }
 
-    
-    public function getNetworks(){
+
+    public function getNetworks()
+    {
         return $this->okResponse($this->garage->getNetworks());
     }
-
 }
