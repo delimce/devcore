@@ -35,6 +35,8 @@ $router->group(
             $router->group(
                 ['middleware' => ['api'], 'prefix' => 'garage'],
                 function () use ($router) {
+                    $router->post('/', ['uses' =>  'GarageController@saveGarage']);
+                    $router->get('/info', ['uses' =>  'GarageController@getGarageInfo']);
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
                 }
             );

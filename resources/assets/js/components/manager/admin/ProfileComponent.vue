@@ -348,17 +348,5 @@ export default {
 </script>
 
 <style scoped>
-.mini {
-  display: block;
-  margin-top: 8px;
-  font-size: 13px;
-}
-.message-ok {
-  color: green;
-  font-weight: bold;
-}
 
-.message-error {
-  color: red;
-}
 </style>

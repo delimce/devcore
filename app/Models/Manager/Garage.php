@@ -13,6 +13,10 @@ class Garage extends Model
      */
     protected $table = 'tbl_garage';
 
+    protected $fillable = [
+         'manager_id'
+    ];
+
 
     public function network()
     {

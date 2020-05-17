@@ -7,7 +7,7 @@ class LocalizationApiTest extends TestCase
     /** @test 
      * manager index page
      */
-    public function testManagerLocalizationStates()
+    public function testLocalizationStates()
     {
         $response = $this->call('GET', static::API_URI . 'states');
         $this->assertEquals(200, $response->status());
@@ -21,7 +21,7 @@ class LocalizationApiTest extends TestCase
         $this->assertContains($madrid, $content["info"]);
     }
 
-    public function testManagerLocalizationProvinces()
+    public function testLocalizationProvinces()
     {
         $response = $this->call('GET', static::API_URI . 'provinces/13');
         $this->assertEquals(200, $response->status());

@@ -113,6 +113,21 @@ class ManagerService
         return !is_null($user);
     }
 
+    
+    /**
+    * valid token of verified user
+    * @param string $token
+    * @return bool|int
+    */
+    public function getIdFromToken($token)
+    {
+        $user = Manager::whereToken($token)->whereVerified(1)->first();
+        if ($user) {
+            return $user->id;
+        }
+        return false;
+    }
+
 
     /**
      * @param  string $token
