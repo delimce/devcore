@@ -60,7 +60,7 @@
               <h1 class="title">
                 <div class="is-size-3 has-text-centered is-block">
                   <vue-typer
-                    text="¿Que esperas para anunciar tu taller en internet?"
+                    text="¿Qué esperas para anunciar gratis tu taller en internet?"
                     :pre-type-delay=1600 :repeat="0"></vue-typer>
                 </div>
               </h1>
@@ -92,11 +92,11 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Pepito Garcia - Taller A</a>
+                        <a class="has-text-dark" href="#">Andrés García</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >"Si los talleres con más éxito trabajan con Garafy, ¿por qué nosotros no? Necesitábamos un portal en el que mostrarnos al mercado digital y Garafy es la mejor solución.""</h4>
+                      >"Si los talleres con más éxito se anuncian por internet, ¿por qué yo no? Necesitaba un portal en el que mostrarnos al mercado online y Garafy es la mejor solución."</h4>
                     </div>
                   </div>
                 </div>
@@ -111,11 +111,11 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Juana Montes - Taller B</a>
+                        <a class="has-text-dark" href="#">María Montes</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >“El software nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanentemente durante todo el día.”</h4>
+                      >"Garafy nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanente mente durante todo el día."</h4>
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >“La utilizo para todo, al final cómo tengo varios restaurantes me sirve para tener un poco el pulso cogido de los servicios y de cómo están yendo.”</h4>
+                      >“Lo utilizo para todo, tanto para gestionar las citas que me entran a través de la web como las que me reservan directamente o por teléfono.”</h4>
                     </div>
                   </div>
                 </div>

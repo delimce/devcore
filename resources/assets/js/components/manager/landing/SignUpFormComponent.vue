@@ -32,7 +32,7 @@
           @input="$v.user.lastname.$touch()"
           @focus="errors=false"
           type="text"
-          placeholder="apellido"
+          placeholder="apellidos"
         />
         <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
@@ -193,7 +193,7 @@ export default {
     return {
       preloading: false,
       label_name: "Nombre",
-      label_lastname: "Apellido",
+      label_lastname: "Apellidos",
       label_email: "Email",
       label_phone: "Teléfono",
       label_password: "Password",

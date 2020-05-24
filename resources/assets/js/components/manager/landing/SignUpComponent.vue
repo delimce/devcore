@@ -44,7 +44,7 @@ export default {
     return {
       title: "¡Regístrate ahora!",
       description:
-        "Comience hoy de manera gratuita a administrar sus citas de taller con nosotros, en garafy manager, es Gratis!!",
+        "Comienza ya a tener visibilidad en internet y a gestionar tu taller digitalmente y de manera gratuita.!",
       registered: false,
       homeUrl: api_url + "/manager"
     };
