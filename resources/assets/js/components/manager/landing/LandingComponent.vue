@@ -130,11 +130,11 @@
                     </div>
                     <div class="card-content">
                       <h3 class="title is-size-6">
-                        <a class="has-text-dark" href="#">Carlos Ramirez - Taller C</a>
+                        <a class="has-text-dark" href="#">Carlos Ramirez</a>
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >“Lo utilizo para todo, tanto para gestionar las citas que me entran a través de la web como las que me reservan directamente o por teléfono.”</h4>
+                      >"Lo utilizo para todo, tanto para gestionar las citas que me entran a través de la web como las que me reservan directamente o por teléfono."</h4>
                     </div>
                   </div>
                 </div>
