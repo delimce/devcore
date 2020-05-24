@@ -7,6 +7,8 @@ return [
     'validate.max' => 'El campo :attribute es demasiado largo',
     'validate.date' => 'El campo :attribute no es una fecha válida',
     'validate.confirmed' => 'El campo :attribute no coincide con la confirmación',
+    'validate.schedule.ndays' => 'Error en número de horarios de la semana',
+    'validate.schedule.day' => 'Error en horarios del día :day',
     'signup' => 'Error en registro de usuario',
     'save' => 'Error guardando los datos',
     'login.email' => 'Email desconocido',

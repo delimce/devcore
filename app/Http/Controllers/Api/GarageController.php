@@ -23,7 +23,7 @@ class GarageController extends ApiController
 
 
     /**
-     * 
+     * save information
      */
     public function saveGarage(Request $req)
     {
@@ -75,6 +75,10 @@ class GarageController extends ApiController
     }
 
 
+    /**
+     * retrives garage information
+     * @return
+     */
     public function getGarageInfo()
     {
         $userId = $this->manager->getIdFromToken($this->token);
@@ -82,8 +86,50 @@ class GarageController extends ApiController
         return $this->okResponse($info);
     }
 
+    /**
+     * retrives garage networks 
+     */
     public function getNetworks()
     {
         return $this->okResponse($this->garage->getNetworks());
+    }
+
+    /**
+     * retrives garage schedule (monday - sunday)
+     */
+    public function getSchedule()
+    {
+        $userId = $this->manager->getIdFromToken($this->token);
+        $info = $this->garage->getGarageByManagerId($userId);
+        $schedule = [];
+        if ($info) {
+            $schedule = $this->garage->getScheduleById($info->id);
+        }
+        return $this->okResponse($schedule);
+    }
+
+    /**
+     * saving garage schedules
+     */
+    public function saveSchedule(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'garage' => 'required|integer',
+            'schedule' => 'required',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $validSchedule = $this->garage->garageScheduleValidation($req->schedule);
+        if (!$validSchedule["ok"]) {
+            return $this->errorResponse($validSchedule);
+        }
+
+        $this->garage->saveGarageSchedule($req->garage, $req->schedule);
+        $data = ["message" => __('commons.save.success')];
+        return $this->okResponse($data);
     }
 }

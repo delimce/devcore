@@ -36,6 +36,9 @@
     <div v-show="activeTab == 'schedule'">
       <garage-schedule-component></garage-schedule-component>
     </div>
+     <div v-show="activeTab == 'media'">
+      <garage-media-component></garage-media-component>
+    </div>
   </div>
 
 
@@ -47,7 +50,7 @@
 export default {
   data() {
     return {
-      activeTab:"info",
+      activeTab:"schedule",
       label_info: "Datos del Taller",
       label_schedule: "Horarios",
       label_media: "Multimedia",

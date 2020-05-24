@@ -51,13 +51,15 @@
             </div>
 
             <div class="field">
-              <label class="label">{{label_country}}</label>
+              <label class="label">{{label_desc}}</label>
               <div class="control">
-                <div class="select">
-                  <select v-model="garage.country_id">
-                    <option value="204" selected>España</option>
-                  </select>
-                </div>
+                <textarea
+                  class="textarea is-size-18-mobile"
+                  placeholder="breve descripción"
+                  rows="7"
+                  v-model="garage.desc"
+                  v-on:focus="message=''"
+                ></textarea>
               </div>
             </div>
           </div>
@@ -87,6 +89,17 @@
                   placeholder="Local / piso"
                   v-model="garage.address2"
                 />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">{{label_country}}</label>
+              <div class="control">
+                <div class="select">
+                  <select v-model="garage.country_id">
+                    <option value="204" selected>España</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -140,19 +153,6 @@
                 />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label">{{label_desc}}</label>
-          <div class="control">
-            <textarea
-              class="textarea is-size-18-mobile"
-              placeholder="breve descripción"
-              rows="3"
-              v-model="garage.desc"
-              v-on:focus="message=''"
-            ></textarea>
           </div>
         </div>
 

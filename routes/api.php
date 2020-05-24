@@ -38,6 +38,8 @@ $router->group(
                     $router->post('/', ['uses' =>  'GarageController@saveGarage']);
                     $router->get('/info', ['uses' =>  'GarageController@getGarageInfo']);
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
+                    $router->get('/schedule', ['uses' =>  'GarageController@getSchedule']);
+                    $router->post('/schedule', ['uses' =>  'GarageController@saveSchedule']);
                 }
             );
         });
