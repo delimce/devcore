@@ -29,3 +29,6 @@ $router->group(
 
 // admin manager
 $router->get('/admin/{any:.*}', ['as' => 'admin', 'uses' => 'Web\ManagerController@index']);
+
+// media
+$router->get('/storage/media/{folder}/{file}', ['as' => 'media', 'uses' => 'Web\MediaController@serve']);

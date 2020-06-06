@@ -40,6 +40,9 @@ $router->group(
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
                     $router->get('/schedule', ['uses' =>  'GarageController@getSchedule']);
                     $router->post('/schedule', ['uses' =>  'GarageController@saveSchedule']);
+                    $router->post('/media', ['uses' =>  'GarageController@saveMedia']);
+                    $router->get('/media/{garageId}', ['uses' =>  'GarageController@getMedia']);
+                    $router->delete('/media', ['uses' =>  'GarageController@removeMedia']);
                 }
             );
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Services\GarageService;
 use App\Services\ManagerService;
+use App\Services\MediaService;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -12,13 +13,19 @@ class GarageController extends ApiController
 {
     protected $garage;
     protected $manager;
+    protected $media;
     protected $token;
 
-    public function __construct(GarageService $garage, ManagerService $manager, Request $req)
-    {
+    public function __construct(
+        GarageService $garage,
+        ManagerService $manager,
+        MediaService $media,
+        Request $req
+    ) {
         $this->token = $req->header('Authorization');
         $this->garage = $garage;
         $this->manager = $manager;
+        $this->media = $media;
     }
 
 
@@ -131,5 +138,78 @@ class GarageController extends ApiController
         $this->garage->saveGarageSchedule($req->garage, $req->schedule);
         $data = ["message" => __('commons.save.success')];
         return $this->okResponse($data);
+    }
+
+
+    /**
+     * saving garage media
+     */
+    public function saveMedia(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'garage' => 'required|integer',
+            'file' => 'required|file',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        if ($req->file('file') && $req->file('file')->isValid()) {
+
+            $file = $req->file('file');
+
+            $metadata =
+                [
+                    "garage_id" => $req->garage,
+                    "original" => $file->getClientOriginalName(),
+                    "mime" => $file->getMimeType(),
+                    "size" => $file->getSize(),
+                    "extension" =>  $file->getClientOriginalExtension()
+                ];
+
+            $this->media->saveToTempFolder($file, $metadata);
+        }
+    }
+
+
+    /**
+     * get garage media
+     */
+    public function getMedia($garageId)
+    {
+        if (intval($garageId) == 0) {
+            return $this->errorResponse(["message" => "error"], 403);
+        }
+
+        $data = $this->media->getGarageFilesFromMedia($garageId);
+        return $this->okResponse($data);
+    }
+
+
+    /**
+     * delete media file from garage media
+     */
+    public function removeMedia(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'garage' => 'required|integer',
+            'path' => 'required',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $data =
+            [
+                "garage_id" => $req->garage,
+                "path" => $req->path,
+            ];
+
+        $this->media->removeGarageMediaFile($data);
+        return $this->okResponse(["message" => "ok"]);
     }
 }

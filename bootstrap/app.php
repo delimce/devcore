@@ -27,6 +27,7 @@ $app->withEloquent();
 $app->configure('logging');
 $app->configure('mail');
 $app->configure('session');
+$app->configure('filesystems');
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,13 @@ $app->singleton(
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
+);
+
+$app->singleton(
+    Illuminate\Contracts\Filesystem\Factory::class,
+    function ($app) {
+        return new Illuminate\Filesystem\FilesystemManager($app);
+    }
 );
 
 /*
@@ -96,6 +104,7 @@ $app->register(Illuminate\Mail\MailServiceProvider::class);
 $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+$app->alias('Storage', Illuminate\Support\Facades\Storage::class);
 
 
 /*

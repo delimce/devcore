@@ -10,3 +10,4 @@ Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 
 ### Backend:
 * Laravel/Lumen 6.0 LTS
+* PHPUNIT 8.5

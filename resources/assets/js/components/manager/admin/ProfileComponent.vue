@@ -233,6 +233,7 @@
 </template>
 
 <script>
+import EventBus from "../../../bus";
 export default {
   name: "ManagerProfile",
   data() {
@@ -298,6 +299,7 @@ export default {
           this.messageType = "message-ok";
           this.preloading1 = false;
           this.message1 = response.data.info.message;
+          EventBus.$emit("change-manager-name", this.user.name);
         })
         .catch(error => {
           this.messageType = "message-error";
@@ -348,5 +350,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

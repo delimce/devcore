@@ -171,6 +171,7 @@
 </template>
 
 <script>
+import EventBus from "../../../../bus";
 export default {
   data() {
     return {
@@ -191,6 +192,7 @@ export default {
       preloading: false,
       message: "",
       garage: {
+        id: "",
         name: "",
         phone: "",
         desc: "",
@@ -253,22 +255,14 @@ export default {
           this.preloading = false;
           this.message = error.response.data.info.message;
         });
-    },
-    loadGarageInfo() {
-      axios
-        .get("/manager/garage/info")
-        .then(response => {
-          if (response.data.info) {
-            this.garage = response.data.info;
-          }
-        })
-        .catch(error => {});
     }
   },
-  mounted: function() {
-    this.loadGarageInfo();
-    this.loadGarageNetworks();
-    this.loadStates(204);
+  created: function() {
+    EventBus.$on("change-garage-info", garage => {
+      this.garage = garage;
+      this.loadGarageNetworks();
+      this.loadStates(204);
+    });
   }
 };
 </script>

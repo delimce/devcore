@@ -27,7 +27,10 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/appointments" @click.native="updateHeader(label_appointment,desc_appointment)">
+        <router-link
+          to="/appointments"
+          @click.native="updateHeader(label_appointment,desc_appointment)"
+        >
           <span class="icon">
             <i class="fa fa-calendar"></i>
           </span>

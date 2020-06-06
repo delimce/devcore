@@ -9,7 +9,7 @@
               <br />Manager
             </div>
             <div class="field">
-              <label class="label">{{labe_email}}</label>
+              <label class="label">{{label_email}}</label>
               <p class="control has-icons-left has-icons-right">
                 <input
                   class="input is-focused"
@@ -35,7 +35,7 @@
                   <i class="fas fa-lock"></i>
                 </span>
               </p>
-              <p class="help">{{labe_remember}}</p>
+              <p class="help">{{label_remember}}</p>
             </div>
             <div class="control columns">
               <div class="column">
@@ -62,8 +62,8 @@ export default {
     return {
       preloading: false,
       label_pass: "Contraseña",
-      labe_email: "Email",
-      labe_remember: "¿Has olvidado tu contraseña?",
+      label_email: "Email",
+      label_remember: "¿Has olvidado tu contraseña?",
       label_button: "Iniciar sesión",
       error_message: "",
       credentials: {

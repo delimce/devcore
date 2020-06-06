@@ -198,7 +198,7 @@ export default {
       }
     }
   },
-  beforeMount: function() {
+  created: function() {
     this.loadGarageSchedule();
   }
 };

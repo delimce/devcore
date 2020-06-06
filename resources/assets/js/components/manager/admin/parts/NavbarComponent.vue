@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import EventBus from '../../../../bus'
 import { deleteUserData, redirectToManager } from "../../../../functions";
 export default {
   name: "Navbar",
@@ -87,8 +88,15 @@ export default {
   },
   mounted: function() {
     this.validateSession()
+  },
+
+ created: function() {
+    EventBus.$on("change-manager-name", name => {
+      this.user.name = name
+    });
   }
-};
+}
+
 </script>
 
 <style scoped>
