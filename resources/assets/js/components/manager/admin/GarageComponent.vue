@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tabs is-boxed">
+    <section class="tabs is-boxed">
       <ul>
         <li v-bind:class="{ 'is-active': activeTab == 'info' }" @click="activeTab = 'info'">
           <a>
@@ -35,11 +35,14 @@
           </a>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div class="container">
+    <section class="container">
       <div v-show="activeTab == 'info'">
         <garage-info-component></garage-info-component>
+      </div>
+      <div v-show="activeTab == 'services'">
+        <garage-service-component></garage-service-component>
       </div>
       <div v-show="activeTab == 'schedule'">
         <garage-schedule-component></garage-schedule-component>
@@ -47,7 +50,7 @@
       <div v-show="activeTab == 'media'">
         <garage-media-component></garage-media-component>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 

@@ -212,4 +212,12 @@ class GarageController extends ApiController
         $this->media->removeGarageMediaFile($data);
         return $this->okResponse(["message" => "ok"]);
     }
+
+
+    public function getSegments()
+    {
+        $data = $this->garage->getCarSegments();
+        return $this->okResponse(["list" => $data]);
+    }
+
 }

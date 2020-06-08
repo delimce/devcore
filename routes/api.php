@@ -38,11 +38,21 @@ $router->group(
                     $router->post('/', ['uses' =>  'GarageController@saveGarage']);
                     $router->get('/info', ['uses' =>  'GarageController@getGarageInfo']);
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
-                    $router->get('/schedule', ['uses' =>  'GarageController@getSchedule']);
-                    $router->post('/schedule', ['uses' =>  'GarageController@saveSchedule']);
-                    $router->post('/media', ['uses' =>  'GarageController@saveMedia']);
-                    $router->get('/media/{garageId}', ['uses' =>  'GarageController@getMedia']);
-                    $router->delete('/media', ['uses' =>  'GarageController@removeMedia']);
+
+                    $router->group(['prefix' => 'schedule'], function () use ($router) {
+                        $router->get('/', ['uses' =>  'GarageController@getSchedule']);
+                        $router->post('/', ['uses' =>  'GarageController@saveSchedule']);
+                    });
+
+                    $router->group(['prefix' => 'media'], function () use ($router) {
+                        $router->post('/', ['uses' =>  'GarageController@saveMedia']);
+                        $router->get('/{garageId}', ['uses' =>  'GarageController@getMedia']);
+                        $router->delete('/', ['uses' =>  'GarageController@removeMedia']);
+                    });
+
+                    $router->group(['prefix' => 'services'], function () use ($router) {
+                        $router->get('/segments', ['uses' =>  'GarageController@getSegments']);
+                    });
                 }
             );
         });

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-body">
+  <section class="content-body">
     <div class="columns">
       <div class="column">
         <!-- user dataform -->
@@ -229,7 +229,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

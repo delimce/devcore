@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Manager\Garage;
 use App\Models\Manager\Network;
 use App\Models\Manager\Schedule;
+use App\Models\Manager\Segment;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon as Carbon;
@@ -170,4 +171,14 @@ class GarageService
             });
         });
     }
+
+    /**
+     * retrieve car segments
+     * @param array
+     */
+    public function getCarSegments()
+    {
+        return Segment::all();
+    }
+
 }
