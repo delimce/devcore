@@ -11,7 +11,7 @@ class GarageMedia extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_garage_media';
+    protected $table = 'garage_media';
 
     /**
      * The attributes that are mass assignable. & use insert method

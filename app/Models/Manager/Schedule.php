@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    protected $table = 'tbl_garage_schedule';
+    protected $table = 'garage_schedule';
 
     /**
      * The attributes that are mass assignable. & use insert method

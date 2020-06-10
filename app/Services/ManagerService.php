@@ -193,7 +193,7 @@ class ManagerService
     public function changePassword(string $token, string $old, string $new)
     {
         $result = ["ok" => false, "message" => ""];
-        $data = DB::table('tbl_manager')->whereToken($token)->first();
+        $data = DB::table('manager')->whereToken($token)->first();
         if (!Hash::check($old, $data->password)) {
             $result["message"] = __('errors.login.oldpassword');
             return $result;

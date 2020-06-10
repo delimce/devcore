@@ -11,7 +11,7 @@ class Municipality extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_local_municipality';
+    protected $table = 'local_municipality';
 
     public function province()
     {
