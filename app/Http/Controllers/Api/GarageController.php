@@ -159,7 +159,6 @@ class GarageController extends ApiController
         if ($req->file('file') && $req->file('file')->isValid()) {
 
             $file = $req->file('file');
-
             $metadata =
                 [
                     "garage_id" => $req->garage,
@@ -169,8 +168,10 @@ class GarageController extends ApiController
                     "extension" =>  $file->getClientOriginalExtension()
                 ];
 
-            $this->media->saveToTempFolder($file, $metadata);
+            $this->media->saveGarageMedia($file, $metadata);
+            return $this->okResponse(["message" => "uploaded"]);
         }
+        return $this->errorResponse(["message" => "error"], 403);
     }
 
 
