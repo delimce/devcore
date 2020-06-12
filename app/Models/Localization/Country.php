@@ -11,7 +11,7 @@ class Country extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_local_country';
+    protected $table = 'local_country';
 
     public function states()
     {

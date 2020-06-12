@@ -19,9 +19,8 @@ class MediaService
      * @param mixed $file
      * @param array $meta
      */
-    public function saveToTempFolder($file, $meta)
+    public function saveGarageMedia($file, $meta)
     {
-
         $garageFolder = static::TEMP_MEDIA_FOLDER . $meta["garage_id"];
         $storagePath = Storage::disk('media')->put($garageFolder, $file);
         GarageMedia::create([
@@ -43,7 +42,7 @@ class MediaService
     {
         $mediaFiles = GarageMedia::whereGarageId($garageId)->get();
         $data = $mediaFiles->map(function ($item, $key) {
-             return [
+            return [
                 "path" => $item->path,
                 "name" => $item->original,
                 "size" => $item->size,
@@ -76,8 +75,7 @@ class MediaService
      */
     public function getMediaFile($path)
     {
-        if(file_exists(Storage::disk('media')->path($path)))
-        {
+        if (file_exists(Storage::disk('media')->path($path))) {
             $file["path"] = Storage::disk('media')->get($path);
             $file["type"] = Storage::disk('media')->mimeType($path);
             return $file;
@@ -85,6 +83,15 @@ class MediaService
         return false;
     }
 
+    /**
+     * @param int $garageId
+     */
+    public function getFirstMediaFileByGarageId($garageId)
+    {
+
+        $result = GarageMedia::whereGarageId($garageId)->first();
+        return !is_null($result) ? $result : false;
+    }
 
 
     /**

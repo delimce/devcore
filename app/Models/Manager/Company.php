@@ -11,7 +11,7 @@ class Company extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_company';
+    protected $table = 'company';
 
     /**
      * The attributes that are mass assignable. & use insert method

@@ -11,7 +11,7 @@ class Province extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_local_province';
+    protected $table = 'local_province';
 
     public function state()
     {

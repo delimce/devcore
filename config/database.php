@@ -38,7 +38,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => database_path('garafy.db'),
-            'prefix' => '',
+            'prefix' => 'tbl_',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
@@ -53,7 +53,7 @@ return [
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
+            'prefix' => 'tbl_',
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,

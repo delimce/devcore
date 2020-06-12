@@ -11,7 +11,7 @@ class Garage extends Model
      * The table associated with the model.
      * @var string
      */
-    protected $table = 'tbl_garage';
+    protected $table = 'garage';
 
     protected $fillable = [
          'manager_id'
