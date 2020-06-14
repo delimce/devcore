@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Segment extends Model
 {
-    protected $table = 'tbl_segment';
+    protected $table = 'segment';
 
 
     /**

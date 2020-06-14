@@ -25,9 +25,12 @@ class ManagerService
         return ($exits > 0);
     }
 
-
+  
     /**
-     *  @param  Manager $user
+     * signUpNotify
+     *
+     * @param  mixed $user
+     * @return void
      */
     public function signUpNotify(Manager $user)
     {
@@ -72,8 +75,12 @@ class ManagerService
     }
 
 
+     
     /**
-     * @return bool|array
+     * addUser
+     *
+     * @param  mixed $user
+     * @return string|bool
      */
     public function addUser(array $user)
     {
@@ -102,10 +109,13 @@ class ManagerService
     }
 
 
+    
     /**
+     * isTokenvalid
      * valid token of verified user
-     * @param string $token
-     * @return bool
+     *
+     * @param  mixed $token
+     * @return void
      */
     public static function isTokenvalid($token)
     {
@@ -151,10 +161,12 @@ class ManagerService
         return false;
     }
 
-
+    
     /**
-     * @param $token
-     * @return mixed|bool
+     * getUserByToken
+     *
+     * @param  mixed $token
+     * @return array|false
      */
     public function getUserByToken(string $token)
     {
@@ -169,8 +181,12 @@ class ManagerService
     }
 
 
+    
     /**
-     * @param Manager $info
+     * saveUserInfo
+     *
+     * @param  mixed $info
+     * @return bool
      */
     public function saveUserInfo(Manager $info)
     {
@@ -183,12 +199,14 @@ class ManagerService
         }
     }
 
+     
     /**
-     * changing manager password
-     * @param string $token
-     * @param string $old
-     * @param string $new
-     * 
+     * changePassword
+     *
+     * @param  mixed $token
+     * @param  mixed $old
+     * @param  mixed $new
+     * @return void
      */
     public function changePassword(string $token, string $old, string $new)
     {
@@ -204,9 +222,13 @@ class ManagerService
         return $result;
     }
 
+
+        
     /**
-     * save manager company info
-     * @param array $company
+     * saveManagerCompany
+     *
+     * @param  mixed $company
+     * @return bool
      */
     public function saveManagerCompany(array $company)
     {

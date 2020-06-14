@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Services\GarageService;
 use App\Services\ManagerService;
 use App\Services\MediaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -31,6 +32,8 @@ class GarageController extends ApiController
 
     /**
      * save information
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveGarage(Request $req)
     {
@@ -94,7 +97,7 @@ class GarageController extends ApiController
     }
 
     /**
-     * retrives garage networks 
+     * retrives garage networks
      */
     public function getNetworks()
     {
@@ -117,6 +120,8 @@ class GarageController extends ApiController
 
     /**
      * saving garage schedules
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveSchedule(Request $req)
     {
@@ -143,6 +148,8 @@ class GarageController extends ApiController
 
     /**
      * saving garage media
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveMedia(Request $req)
     {
@@ -177,6 +184,8 @@ class GarageController extends ApiController
 
     /**
      * get garage media
+     * @param $garageId
+     * @return JsonResponse
      */
     public function getMedia($garageId)
     {
@@ -191,6 +200,8 @@ class GarageController extends ApiController
 
     /**
      * delete media file from garage media
+     * @param Request $req
+     * @return JsonResponse
      */
     public function removeMedia(Request $req)
     {
