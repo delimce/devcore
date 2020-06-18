@@ -156,5 +156,10 @@ class GarageApiTest extends TestCase
             "HTTP_Authorization" => $this->manager->token,
         ]);
         $this->seeStatusCode(200);
+
+        $this->call("DELETE", static::API_URI . "/media", ["garage" => $garageId, "path" => "notExists"], [], [], [
+            "HTTP_Authorization" => $this->manager->token,
+        ]);
+        $this->seeStatusCode(403);
     }
 }

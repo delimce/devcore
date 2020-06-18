@@ -175,7 +175,10 @@ class GarageController extends ApiController
                     "extension" =>  $file->getClientOriginalExtension()
                 ];
 
-            $this->media->saveGarageMedia($file, $metadata);
+            $result = $this->media->saveGarageMedia($file, $metadata);
+            if (!$result) {
+                return $this->errorResponse(["message" => "upload error"], 403);
+            }
             return $this->okResponse(["message" => "uploaded"]);
         }
         return $this->errorResponse(["message" => "error"], 403);
@@ -215,13 +218,15 @@ class GarageController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $data =
-            [
-                "garage_id" => $req->garage,
-                "path" => $req->path,
-            ];
+        $result =   $this->media->removeGarageMediaFile([
+            "garage_id" => $req->garage,
+            "path" => $req->path,
+        ]);
 
-        $this->media->removeGarageMediaFile($data);
+        if (!$result) {
+            return $this->errorResponse(["message" => "not found"], 403);
+        }
+
         return $this->okResponse(["message" => "ok"]);
     }
 
@@ -231,5 +236,4 @@ class GarageController extends ApiController
         $data = $this->garage->getCarSegments();
         return $this->okResponse(["list" => $data]);
     }
-
 }

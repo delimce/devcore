@@ -81,11 +81,10 @@ class GarageService
     }
 
 
-
     /**
      * check garage schedule to saving
      * @param array $schedule
-
+     * @return array
      */
     public function garageScheduleValidation($schedule)
     {
@@ -96,7 +95,6 @@ class GarageService
             $result["ok"] = false;
             return $result;
         }
-
 
 
         array_walk($schedule, function ($day, $index) use (&$result) {
