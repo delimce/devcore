@@ -36,7 +36,7 @@ class MediaService
                 'mime' => $meta["mime"],
             ]);
         } catch (\Exception $ex) {
-            Log::error("file couldn't be uploaded", $ex->getMessage());
+            Log::error($ex);
             $result = false;
         } finally {
             return $result;

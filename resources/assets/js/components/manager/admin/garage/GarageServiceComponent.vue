@@ -7,15 +7,7 @@
             <div class="field">
               <label class="label">{{label_segment}}</label>
               <div class="control">
-                <div class="select">
-                  <select>
-                    <option
-                      v-for="item in segments"
-                      :key="item.id"
-                      v-bind:value="item.id"
-                    >{{ item.name }}</option>
-                  </select>
-                </div>
+                <simple-select-component :list="segments" v-model="segment"></simple-select-component>
               </div>
             </div>
           </div>
@@ -32,7 +24,8 @@ export default {
     return {
       label_segment: "Segmento Automotor:",
       garage: {},
-      segments: []
+      segments: [],
+      segment:null
     };
   },
   methods: {
