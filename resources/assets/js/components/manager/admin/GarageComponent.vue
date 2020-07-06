@@ -73,6 +73,7 @@ export default {
         .then(response => {
           if (response.data.info) {
             this.garage = response.data.info;
+            this.garage.network_id = String(response.data.info.network_id);
             EventBus.$emit("change-garage-info", this.garage);
           }
         })

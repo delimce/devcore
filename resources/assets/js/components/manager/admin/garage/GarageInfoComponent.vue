@@ -37,16 +37,7 @@
             <div class="field">
               <label class="label">{{label_networks}}</label>
               <div class="control">
-                <div class="select">
-                  <select v-model="garage.network_id">
-                    <option
-                      v-for="item in networks"
-                      :key="item.id"
-                      v-bind:value="item.id"
-                      v-bind:selected="item.id == garage.network_id"
-                    >{{ item.desc }}</option>
-                  </select>
-                </div>
+                <simple-select-component :list="networks" v-model="garage.network_id"></simple-select-component>
               </div>
             </div>
 
