@@ -1,7 +1,7 @@
 <template>
   <div class="select is-info">
     <select  @input="$emit('input', $event.target.value)">
-      <option v-if="select" value>{{select_text}}</option>
+      <option v-if="select" value="">{{select}}</option>
       <option
         v-for="item in list"
         v-bind:selected="item.id==value"
@@ -19,8 +19,8 @@ export default {
       default: []
     },
     select: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: null
     },
     value: {
       type: String,

@@ -162,4 +162,11 @@ class GarageApiTest extends TestCase
         ]);
         $this->seeStatusCode(403);
     }
+
+
+    public function testGarageServiceRequests()
+    {
+
+    }
+    
 }

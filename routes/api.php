@@ -51,7 +51,15 @@ $router->group(
                     });
 
                     $router->group(['prefix' => 'services'], function () use ($router) {
+                        $router->post('/', ['uses' =>  'GarageController@saveService']);
+                        $router->delete('/', ['uses' =>  'GarageController@removeService']);
+                        $router->get('/{garageId}/list', ['uses' =>  'GarageController@getServices']);
+                        $router->get('/id/{serviceId}', ['uses' =>  'GarageController@getServiceById']);
                         $router->get('/segments', ['uses' =>  'GarageController@getSegments']);
+                        $router->get('/types', ['uses' =>  'GarageController@getServicesTypes']);
+                        $router->get('/categories', ['uses' =>  'GarageController@getServicesCategories']);
+                        $router->get('/catalog', ['uses' =>  'GarageController@getServiceCatalog']);
+                        $router->get('/brands', ['uses' =>  'GarageController@getServiceBrands']);
                     });
                 }
             );

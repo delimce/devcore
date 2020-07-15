@@ -23,4 +23,9 @@ class Garage extends Model
         return $this->belongsTo('App\Models\Manager\Network', 'network_id');
     }
 
+    public function services()
+    {
+        return $this->hasMany('App\Models\Manager\GarageService','garage_id');
+    }
+
 }
