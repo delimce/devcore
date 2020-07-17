@@ -65,6 +65,12 @@ class ManagerApiTest extends TestCase
      */
     public function testManagerGetUserByToken()
     {
+
+        // token gen validation 
+        $newToken = $this->managerService->newUserToken();
+        $UUIDv4 = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
+        $this->assertTrue(preg_match($UUIDv4, $newToken)===1);
+
         $token = "badToken";
         $this->get(static::API_URI . "auth", ["Authorization" => $token]);
         $this->seeStatusCode(401);

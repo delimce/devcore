@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Decorators\GarageServiceDecorator;
 use App\Services\GarageService;
 use App\Services\ManagerService;
 use App\Services\MediaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -31,6 +33,8 @@ class GarageController extends ApiController
 
     /**
      * save information
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveGarage(Request $req)
     {
@@ -94,7 +98,7 @@ class GarageController extends ApiController
     }
 
     /**
-     * retrives garage networks 
+     * retrives garage networks
      */
     public function getNetworks()
     {
@@ -117,6 +121,8 @@ class GarageController extends ApiController
 
     /**
      * saving garage schedules
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveSchedule(Request $req)
     {
@@ -143,6 +149,8 @@ class GarageController extends ApiController
 
     /**
      * saving garage media
+     * @param Request $req
+     * @return JsonResponse
      */
     public function saveMedia(Request $req)
     {
@@ -168,7 +176,10 @@ class GarageController extends ApiController
                     "extension" =>  $file->getClientOriginalExtension()
                 ];
 
-            $this->media->saveGarageMedia($file, $metadata);
+            $result = $this->media->saveGarageMedia($file, $metadata);
+            if (!$result) {
+                return $this->errorResponse(["message" => "upload error"], 403);
+            }
             return $this->okResponse(["message" => "uploaded"]);
         }
         return $this->errorResponse(["message" => "error"], 403);
@@ -177,6 +188,8 @@ class GarageController extends ApiController
 
     /**
      * get garage media
+     * @param $garageId
+     * @return JsonResponse
      */
     public function getMedia($garageId)
     {
@@ -191,6 +204,8 @@ class GarageController extends ApiController
 
     /**
      * delete media file from garage media
+     * @param Request $req
+     * @return JsonResponse
      */
     public function removeMedia(Request $req)
     {
@@ -204,13 +219,200 @@ class GarageController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $data =
-            [
-                "garage_id" => $req->garage,
-                "path" => $req->path,
-            ];
+        $result =   $this->media->removeGarageMediaFile([
+            "garage_id" => $req->garage,
+            "path" => $req->path,
+        ]);
 
-        $this->media->removeGarageMediaFile($data);
+        if (!$result) {
+            return $this->errorResponse(["message" => "not found"], 403);
+        }
+
+        return $this->okResponse(["message" => "ok"]);
+    }
+
+
+    /**
+     * getSegments
+     * @return void
+     */
+    public function getSegments(GarageServiceDecorator $decorator)
+    {
+        $data = $decorator->getCarSegments();
+        return $this->okResponse(["list" => $data]);
+    }
+
+
+    /**
+     * getServicesTypes
+     * @return void
+     */
+    public function getServicesTypes(GarageServiceDecorator $decorator)
+    {
+        $data = $decorator->getServiceTypes();
+        return $this->okResponse(["list" => $data]);
+    }
+
+
+    /**
+     * getServicesCategories
+     * @return void
+     */
+    public function getServicesCategories(GarageServiceDecorator $decorator)
+    {
+        $data = $decorator->getServiceCategories();
+        return $this->okResponse(["list" => $data]);
+    }
+
+    /**
+     * getServiceCatalog
+     *
+     * @param  Request $req
+     * @return void
+     */
+    public function getServiceCatalog(Request $req)
+    {
+        $segment = "";
+        $type = "";
+
+        if ($req->has("segment")) {
+            $segment = $req->segment;
+        }
+
+        if ($req->has("type")) {
+            $type = $req->type;
+        }
+
+        $data = $this->garage->getServicesCatalogByQuery($segment, $type);
+        return $this->okResponse(["list" => $data]);
+    }
+
+
+    /**
+     * getServiceBrands
+     *
+     * @param  Request $req
+     * @return void
+     */
+    public function getServiceBrands(Request $req)
+    {
+
+        $type = "";
+        $category = "";
+
+        if ($req->has("type")) {
+            $type = $req->type;
+        }
+
+        if ($req->has("category")) {
+            $category = $req->category;
+        }
+
+        $data = $this->garage->getServiceBrandsByQuery($type, $category);
+        return $this->okResponse(["list" => $data]);
+    }
+
+
+    public function getServices(int $garageId, Request $req, GarageServiceDecorator $decorator)
+    {
+        $params = [];
+
+        if ($req->has("segment")) {
+            $params["segment"] =  $req->segment;
+        }
+
+        if ($req->has("type")) {
+            $params["type"] =  $req->type;
+        }
+
+        if ($req->has("category")) {
+            $params["category"] = $req->category;
+        }
+
+        $results = $decorator->getServiceList($garageId, $params);
+        return $this->okResponse(["list" => $results]);
+    }
+
+    
+    /**
+     * getServiceById
+     *
+     * @param  int $serviceId
+     * @return void
+     */
+    public function getServiceById($serviceId)
+    {
+        if (empty($serviceId)) {
+            return $this->errorResponse(["message" => "wrong service id"]);
+        }
+
+        $result = $this->garage->getGarageServiceById($serviceId);
+
+        if (!$result) {
+            return $this->errorResponse(["message" => "service not found"], 403);
+        }
+
+        return $this->okResponse(["service" => $result]);
+    }
+
+
+    /**
+     * saveService
+     * @param  Request $req
+     * @return void
+     */
+    public function saveService(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'garage_id' => 'required|integer',
+            'service_id' => 'required|integer',
+            'segment' => 'required',
+            'type' => 'required',
+            'price' => 'required|numeric|min:0.1',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $data = [];
+        $data["id"] = ($req->has("id")) ? $req->id : 0;
+        $data["garage_id"] = $req->garage_id;
+        $data["service_id"] = $req->service_id;
+        $data["category"] = $req->category;
+        $data["segment"] = $req->segment;
+        $data["type"] = $req->type;
+        $data["brand"] = $req->brand;
+        $data["model"] = $req->model;
+        $data["price"] = $req->price;
+
+        $result = $this->garage->saveGarageService($data);
+        if (!$result) {
+            return $this->errorResponse(["message" => "error"], 403);
+        }
+
+        return $this->okResponse(["message" => "ok"]);
+    }
+
+
+    /**
+     * deleteService
+     * @param  mixed $req
+     * @return void
+     */
+    public function removeService(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'service_id' => 'required|integer',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $this->garage->deleteGarageService($req->service_id);
         return $this->okResponse(["message" => "ok"]);
     }
 }

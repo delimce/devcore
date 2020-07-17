@@ -49,6 +49,9 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 Vue.use(VueRouter);
 
+import VueConfirmDialog from "vue-confirm-dialog";
+Vue.use(VueConfirmDialog);
+
 const router = new VueRouter({
     base: '/admin/',
     mode: 'history',

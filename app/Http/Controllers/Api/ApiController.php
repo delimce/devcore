@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+use Illuminate\Http\JsonResponse;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ApiController extends BaseController
@@ -12,7 +13,8 @@ class ApiController extends BaseController
     const STATUS_OK = 'ok';
 
     /**
-     *  @param data data payload 
+     * @param data data payload
+     * @return JsonResponse
      */
     protected function okResponse($data)
     {
@@ -20,8 +22,9 @@ class ApiController extends BaseController
     }
 
     /**
-     * @param data data payload 
-     * @param code default 400 client error
+     * @param array $data
+     * @param int $code
+     * @return JsonResponse
      */
     protected function errorResponse(array $data, int $code = 400)
     {

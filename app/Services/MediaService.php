@@ -4,9 +4,7 @@
 namespace App\Services;
 
 use App\Models\Media\GarageMedia;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MediaService
@@ -14,23 +12,35 @@ class MediaService
 
     const TEMP_MEDIA_FOLDER = "garage";
 
+
     /**
+     * saveGarageMedia
      * save file to temp folder /storage/app/media/temp
-     * @param mixed $file
-     * @param array $meta
+     *
+     * @param  mixed $file
+     * @param  mixed $meta
+     * @return bool
      */
     public function saveGarageMedia($file, $meta)
     {
-        $garageFolder = static::TEMP_MEDIA_FOLDER . $meta["garage_id"];
-        $storagePath = Storage::disk('media')->put($garageFolder, $file);
-        GarageMedia::create([
-            'garage_id' => $meta["garage_id"],
-            'original' => $meta["original"],
-            'extension' => $meta["extension"],
-            'path' => $storagePath,
-            'size' => $meta["size"],
-            'mime' => $meta["mime"],
-        ]);
+        $result = true;
+        try {
+            $garageFolder = static::TEMP_MEDIA_FOLDER . $meta["garage_id"];
+            $storagePath = Storage::disk('media')->put($garageFolder, $file);
+            GarageMedia::create([
+                'garage_id' => $meta["garage_id"],
+                'original' => $meta["original"],
+                'extension' => $meta["extension"],
+                'path' => $storagePath,
+                'size' => $meta["size"],
+                'mime' => $meta["mime"],
+            ]);
+        } catch (\Exception $ex) {
+            Log::error($ex);
+            $result = false;
+        } finally {
+            return $result;
+        }
     }
 
 
@@ -54,17 +64,22 @@ class MediaService
     }
 
 
+
     /**
-     * remove media files
-     * @param array $data
+     * removeGarageMediaFile
+     *
+     * @param  mixed $data
+     * @return bool
      */
     public function removeGarageMediaFile($data)
     {
-        DB::transaction(function () use ($data) {
-            $file = GarageMedia::wheregarageId($data['garage_id'])->where('original', $data['path'])->first();
+        $file = GarageMedia::wheregarageId($data['garage_id'])->where('original', $data['path'])->first();
+        if (!is_null($file)) {
             Storage::disk('media')->delete($file->path);
             $file->delete();
-        });
+            return true;
+        }
+        return false;
     }
 
 

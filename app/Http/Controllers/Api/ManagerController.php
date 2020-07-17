@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Manager\Manager;
 use App\Services\ManagerService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 use Validator;
@@ -18,6 +19,9 @@ class ManagerController extends ApiController
     }
 
 
+    /**
+     * @return string
+     */
     public function index()
     {
         return "Manager " . env('APP_NAME');
@@ -26,8 +30,8 @@ class ManagerController extends ApiController
 
     /**
      * checkEmail
-     * @param  string $email
-     * @return void
+     * @param string $email
+     * @return JsonResponse
      */
     public function checkEmail($email)
     {
@@ -41,8 +45,8 @@ class ManagerController extends ApiController
 
     /**
      * login
-     * @param  Request $req
-     * @return void
+     * @param Request $req
+     * @return JsonResponse
      */
     public function doLogin(Request $req)
     {
@@ -69,7 +73,8 @@ class ManagerController extends ApiController
 
 
     /**
-   
+     * @param Request $req
+     * @return JsonResponse
      */
     public function signUp(Request $req)
     {
@@ -107,6 +112,8 @@ class ManagerController extends ApiController
 
     /**
      * get user data
+     * @param Request $req
+     * @return JsonResponse
      */
     public function main(Request $req)
     {
@@ -116,6 +123,10 @@ class ManagerController extends ApiController
         return $this->okResponse($data);
     }
 
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function saveMain(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -148,6 +159,10 @@ class ManagerController extends ApiController
     }
 
 
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function changePassword(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -172,6 +187,10 @@ class ManagerController extends ApiController
     }
 
 
+    /**
+     * @param Request $req
+     * @return JsonResponse
+     */
     public function saveCompany(Request $req)
     {
         $validator = Validator::make($req->all(), [

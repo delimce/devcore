@@ -36,19 +36,20 @@
             </a>
           </div>
 
-          <div class="navbar-item has-dropdown">
+          <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               <figure class="image avatar is-32x32">
                 <img class="is-rounded" :src="this.$imagePath + 'common/user.png'" />
               </figure>
               &nbsp; {{hello}}, {{user.name}}
             </a>
-            <div class="navbar-dropdown is-right">
-              <a class="navbar-item">Overview</a>
-              <a class="navbar-item">Elements</a>
-              <a class="navbar-item">Components</a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">About</a>
+              <a class="navbar-item">Jobs</a>
+              <a class="navbar-item">Contact</a>
               <hr class="navbar-divider" />
-              <div class="navbar-item">Version 0.7.1</div>
+              <a class="navbar-item" @click="doLogout()">{{close}}</a>
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
 </template>
 
 <script>
-import EventBus from '../../../../bus'
+import EventBus from "../../../../bus";
 import { deleteUserData, redirectToManager } from "../../../../functions";
 export default {
   name: "Navbar",
@@ -66,41 +67,45 @@ export default {
     return {
       preloading: false,
       user: {},
-      hello: "Hola"
+      hello: "Hola",
+      close: "Cerrar sesión"
     };
   },
   methods: {
     validateSession() {
       this.preloading = true;
-       axios
-          .get("/manager/auth/")
-          .then(response => {
-            this.preloading = false;
+      axios
+        .get("/manager/auth/")
+        .then(response => {
+          this.preloading = false;
 
-            this.user = response.data.info.user;
-          })
-          .catch(error => {
-            this.preloading = false;
-            deleteUserData();
-            redirectToManager();
-          });
+          this.user = response.data.info.user;
+        })
+        .catch(error => {
+          this.preloading = false;
+          deleteUserData();
+          redirectToManager();
+        });
+    },
+    doLogout() {
+      deleteUserData();
+      redirectToManager();
     }
   },
   mounted: function() {
-    this.validateSession()
+    this.validateSession();
   },
 
- created: function() {
+  created: function() {
     EventBus.$on("change-manager-name", name => {
-      this.user.name = name
+      this.user.name = name;
     });
   }
-}
-
+};
 </script>
 
 <style scoped>
-.logo-middle{
+.logo-middle {
   text-align: center;
 }
 </style>

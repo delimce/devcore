@@ -9,7 +9,13 @@ use App\Models\Localization\State;
 class LocalizationService
 {
 
-
+    
+    /**
+     * getStates
+     *
+     * @param  mixed $countryId
+     * @return void
+     */
     public function getStates($countryId)
     {
         $states = State::whereStatus(1);
@@ -19,7 +25,13 @@ class LocalizationService
         return $states->get();
     }
 
-
+    
+    /**
+     * getProvinces
+     *
+     * @param  mixed $stateId
+     * @return void
+     */
     public function getProvinces($stateId)
     {
         $provinces = Province::whereStatus(1);
@@ -30,6 +42,13 @@ class LocalizationService
     }
 
 
+        
+    /**
+     * getMunicipalities
+     *
+     * @param  mixed $provinceId
+     * @return void
+     */
     public function getMunicipalities($provinceId)
     {
         $municipalities = Municipality::whereStatus(1);

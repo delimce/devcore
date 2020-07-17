@@ -3,7 +3,7 @@
 return [
     'validate.require' => 'El campo :attribute es requerido',
     'validate.invalid' => 'El campo :attribute es inválido',
-    'validate.min' => 'El campo :attribute es demasiado corto',
+    'validate.min' => 'El campo :attribute es demasiado bajo',
     'validate.max' => 'El campo :attribute es demasiado largo',
     'validate.date' => 'El campo :attribute no es una fecha válida',
     'validate.confirmed' => 'El campo :attribute no coincide con la confirmación',
