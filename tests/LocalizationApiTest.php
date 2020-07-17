@@ -17,8 +17,8 @@ class LocalizationApiTest extends TestCase
             "name" => "Madrid, Comunidad de",
             "status" => 1
         ];
-        $content = json_decode($response->getContent(), true);
-        $this->assertContains($madrid, $content["info"]);
+        $content = $this->getArrayByResponse($response);
+        $this->assertContains($madrid, $content);
     }
 
     public function testLocalizationProvinces()
@@ -31,7 +31,7 @@ class LocalizationApiTest extends TestCase
             "name" => "Madrid",
             "status" => 1
         ];
-        $content = json_decode($response->getContent(), true);
-        $this->assertContains($madrid, $content["info"]);
+        $content = $this->getArrayByResponse($response);
+        $this->assertContains($madrid, $content);
     }
 }

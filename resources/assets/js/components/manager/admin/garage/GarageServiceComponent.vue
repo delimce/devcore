@@ -172,7 +172,7 @@ export default {
       axios
         .get("/manager/garage/services/id/" + service.id)
         .then(response => {
-          let service = response.data.info.service;
+          let service = response.data.info;
           this.modalService(service);
         })
         .catch(error => {});

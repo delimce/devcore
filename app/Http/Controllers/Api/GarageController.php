@@ -333,7 +333,7 @@ class GarageController extends ApiController
         return $this->okResponse(["list" => $results]);
     }
 
-    
+
     /**
      * getServiceById
      *
@@ -352,7 +352,7 @@ class GarageController extends ApiController
             return $this->errorResponse(["message" => "service not found"], 403);
         }
 
-        return $this->okResponse(["service" => $result]);
+        return $this->okResponse($result);
     }
 
 
@@ -383,7 +383,7 @@ class GarageController extends ApiController
         $data["category"] = $req->category;
         $data["segment"] = $req->segment;
         $data["type"] = $req->type;
-        $data["brand"] = $req->brand;
+        $data["brand"] = ($req->brand) ? $req->brand : null;
         $data["model"] = $req->model;
         $data["price"] = $req->price;
 
@@ -392,7 +392,7 @@ class GarageController extends ApiController
             return $this->errorResponse(["message" => "error"], 403);
         }
 
-        return $this->okResponse(["message" => "ok"]);
+        return $this->okResponse(["id" => $result]);
     }
 
 

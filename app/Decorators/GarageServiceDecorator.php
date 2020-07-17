@@ -59,8 +59,8 @@ class GarageServiceDecorator
                 "type" => Utilities::getTermTranslated($item->type),
                 "category" => Utilities::getTermTranslated($item->category),
                 "service" => $item->service->desc,
-                "brand"=>$item->brand->name,
-                "price" => $item->price."€",
+                "brand" => ($item->brand) ? $item->brand->name : "",
+                "price" => $item->price . "€",
             ];
         });
     }

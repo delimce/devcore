@@ -207,7 +207,9 @@ export default {
         this.segment = this.gservice.segment;
         this.type = this.gservice.type;
         this.service = String(this.gservice.service.id);
-        this.brand = String(this.gservice.brand.id);
+        if (this.gservice.brand) {
+          this.brand = String(this.gservice.brand.id);
+        }
         this.model = this.gservice.model;
         this.price = this.gservice.price;
         this.category = this.gservice.category;
