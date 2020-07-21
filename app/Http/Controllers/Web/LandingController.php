@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Services\ManagerService;
+use App\Repositories\ManagerRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ class LandingController extends BaseController
 {
     protected $manager;
 
-    public function __construct(ManagerService $user)
+    public function __construct(ManagerRepository $user)
     {
         $this->manager = $user;
     }

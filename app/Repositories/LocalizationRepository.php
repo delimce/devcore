@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Localization\Municipality;
 use App\Models\Localization\Province;
 use App\Models\Localization\State;
 
-class LocalizationService
+class LocalizationRepository
 {
 
-    
+
     /**
      * getStates
      *
@@ -25,7 +25,7 @@ class LocalizationService
         return $states->get();
     }
 
-    
+
     /**
      * getProvinces
      *
@@ -42,7 +42,7 @@ class LocalizationService
     }
 
 
-        
+
     /**
      * getMunicipalities
      *

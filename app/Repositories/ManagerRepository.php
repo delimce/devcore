@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Manager\Company;
 use App\Models\Manager\Manager;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ManagerService
+class ManagerRepository
 {
 
     /**
@@ -118,7 +118,7 @@ class ManagerService
             return false;
         }
 
-        //toEmail 
+        //toEmail
         $this->signUpNotify($person);
 
         return __('manager.created');

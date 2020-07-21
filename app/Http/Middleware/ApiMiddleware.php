@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\ManagerService as manager;
+use App\Repositories\ManagerRepository as manager;
 use Closure;
 
 class ApiMiddleware

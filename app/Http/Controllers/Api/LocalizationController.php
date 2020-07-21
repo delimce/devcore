@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\LocalizationService;
+use App\Repositories\LocalizationRepository;
 
 use Illuminate\Http\JsonResponse;
 use Validator;
@@ -10,7 +10,7 @@ use Validator;
 class LocalizationController extends ApiController
 {
     protected $local;
-    public function __construct(LocalizationService $local)
+    public function __construct(LocalizationRepository $local)
     {
         $this->local = $local;
     }

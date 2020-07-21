@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Manager\Manager;
-use App\Services\ManagerService;
+use App\Repositories\ManagerRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class ManagerController extends ApiController
 {
     protected $manager;
 
-    public function __construct(ManagerService $user)
+    public function __construct(ManagerRepository $user)
     {
         $this->manager = $user;
     }
@@ -89,7 +89,7 @@ class ManagerController extends ApiController
             return $this->errorResponse($data, 403);
         }
 
-        
+
     }
 
 

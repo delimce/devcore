@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Manager\Manager;
-use App\Services\ManagerService;
+use App\Repositories\ManagerRepository;
 
 
 
@@ -11,17 +11,17 @@ class ManagerApiTest extends TestCase
 
     /** @var manager fake  */
     protected $manager;
-    protected $managerService;
+    protected $managerRepository;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
-        $this->managerService = new ManagerService();
+        $this->managerRepository = new ManagerRepository();
     }
 
 
-    /** @test 
+    /** @test
      * manager index page
      */
     public function testManagerIndex()
@@ -30,7 +30,7 @@ class ManagerApiTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
-    /** @test 
+    /** @test
      * simple check email
      */
     public function testManagerCheckEmailSuccess()
@@ -43,7 +43,7 @@ class ManagerApiTest extends TestCase
             ]);
     }
 
-    /** @test 
+    /** @test
      * login attemp failed structure
      */
     public function testManagerLoginFailed()
@@ -61,13 +61,13 @@ class ManagerApiTest extends TestCase
     }
 
     /**
-     *  @test 
+     *  @test
      */
     public function testManagerGetUserByToken()
     {
 
-        // token gen validation 
-        $newToken = $this->managerService->newUserToken();
+        // token gen validation
+        $newToken = $this->managerRepository->newUserToken();
         $UUIDv4 = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
         $this->assertTrue(preg_match($UUIDv4, $newToken)===1);
 
@@ -80,7 +80,7 @@ class ManagerApiTest extends TestCase
     }
 
     /**
-     *  @test 
+     *  @test
      */
     public function testManagerChangePasswordFailed()
     {
@@ -110,7 +110,7 @@ class ManagerApiTest extends TestCase
     }
 
     /**
-     *  @test 
+     *  @test
      * create or update manager company
      */
     public function testManagerSaveCompany()
@@ -124,7 +124,7 @@ class ManagerApiTest extends TestCase
         ], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(400);
 
-        $myManager = $this->managerService->getUserByToken($this->manager->token);
+        $myManager = $this->managerRepository->getUserByToken($this->manager->token);
         $this->put(static::API_URI . "auth/company/save", [
             "manager_id" => $myManager["id"],
             "name" => "New Company",

@@ -2,7 +2,7 @@
 
 namespace App\Decorators;
 
-use App\Services\GarageService;
+use App\Repositories\GarageRepository;
 use App\Utils\Utilities;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -11,7 +11,7 @@ class GarageServiceDecorator
     protected $garageService;
 
 
-    public function __construct(GarageService $garage)
+    public function __construct(GarageRepository $garage)
     {
         $this->garageService = $garage;
     }

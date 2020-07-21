@@ -2,9 +2,9 @@
 
 use App\Models\Manager\Manager;
 use App\Models\Manager\Garage;
-use App\Services\ManagerService;
-use App\Services\GarageService;
-use App\Services\MediaService;
+use App\Repositories\ManagerRepository;
+use App\Repositories\GarageRepository;
+use App\Repositories\MediaRepository;
 
 class GarageApiTest extends TestCase
 {
@@ -14,21 +14,21 @@ class GarageApiTest extends TestCase
     /** @var manager fake  */
     protected $manager;
     protected $garage;
-    protected $managerService;
-    protected $garageService;
-    protected $mediaService;
+    protected $managerRepository;
+    protected $garageRepository;
+    protected $mediaRepository;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
-        $this->managerService = new ManagerService();
-        $this->garageService = new GarageService();
-        $this->mediaService = new MediaService();
+        $this->managerRepository = new ManagerRepository();
+        $this->garageRepository = new GarageRepository();
+        $this->mediaRepository = new MediaRepository();
     }
 
-    /** @test 
+    /** @test
      * garage save
      */
     public function testGarageSaveInfo()
@@ -58,7 +58,7 @@ class GarageApiTest extends TestCase
     }
 
 
-    /** @test 
+    /** @test
      * get garage info
      */
     public function testGarageGetInfo()
@@ -67,7 +67,7 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(200);
     }
 
-    /** @test 
+    /** @test
      *  garage schedules
      */
     public function testGarageSchedule()
@@ -98,7 +98,7 @@ class GarageApiTest extends TestCase
     }
 
 
-    /** @test 
+    /** @test
      *  garage media
      */
     public function testGarageMediaOperations()
@@ -127,7 +127,7 @@ class GarageApiTest extends TestCase
         $result = json_decode($response->getContent(), true);
         $this->assertCount(1, $result["info"]);
 
-        $media = $this->mediaService->getFirstMediaFileByGarageId($garageId);
+        $media = $this->mediaRepository->getFirstMediaFileByGarageId($garageId);
 
         $response = $this->call('GET', 'storage/media/' . $media->path);
         $this->assertEquals(200, $response->status());
@@ -147,7 +147,7 @@ class GarageApiTest extends TestCase
 
 
     /**
-     * @test 
+     * @test
      * testGarageServiceSelects
      *
      * @return void
@@ -183,7 +183,7 @@ class GarageApiTest extends TestCase
 
 
     /**
-     * @test 
+     * @test
      * testGarageServicesOperations
      *
      * @return void
@@ -240,7 +240,7 @@ class GarageApiTest extends TestCase
         $this->call("DELETE", static::API_URI . "/services", ["service_id" => $garageService["id"]], [], [], [
             "HTTP_Authorization" => $this->manager->token,
         ]);
-        $this->seeStatusCode(200);  
+        $this->seeStatusCode(200);
 
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Decorators\GarageServiceDecorator;
-use App\Services\GarageService;
-use App\Services\ManagerService;
-use App\Services\MediaService;
+use App\Repositories\GarageRepository;
+use App\Repositories\ManagerRepository;
+use App\Repositories\MediaRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,9 +19,9 @@ class GarageController extends ApiController
     protected $token;
 
     public function __construct(
-        GarageService $garage,
-        ManagerService $manager,
-        MediaService $media,
+        GarageRepository $garage,
+        ManagerRepository $manager,
+        MediaRepository $media,
         Request $req
     ) {
         $this->token = $req->header('Authorization');

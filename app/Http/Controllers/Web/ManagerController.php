@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Services\GarageService;
-use App\Services\ManagerService;
+use App\Repositories\GarageRepository;
+use App\Repositories\ManagerRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ManagerController extends BaseController
@@ -11,7 +11,7 @@ class ManagerController extends BaseController
     protected $manager;
     protected $garage;
 
-    public function __construct(ManagerService $manager, GarageService $garage)
+    public function __construct(ManagerRepository $manager, GarageRepository $garage)
     {
         $this->manager = $manager;
         $this->garage = $garage;

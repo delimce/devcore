@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Media\GarageMedia;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class MediaService
+class MediaRepository
 {
 
     const TEMP_MEDIA_FOLDER = "garage";
