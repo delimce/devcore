@@ -72,6 +72,27 @@ class ManagerController extends ApiController
     }
 
 
+    public function resetPassword(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'email' => 'required|email'
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        $result = $this->manager->resetPassword($req->email);
+        if (!$result["ok"]) {
+            $data = ["message" => $result["message"]];
+            return $this->errorResponse($data, 403);
+        }
+
+        
+    }
+
+
     /**
      * @param Request $req
      * @return JsonResponse
@@ -181,7 +202,7 @@ class ManagerController extends ApiController
         $result = $this->manager->changePassword($token, $old, $new);
         if (!$result["ok"]) {
             $data = ["message" => $result["message"]];
-            return $this->errorResponse($data,401);
+            return $this->errorResponse($data, 401);
         }
         return $this->okResponse($result);
     }

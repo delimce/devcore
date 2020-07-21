@@ -25,7 +25,7 @@ class ManagerService
         return ($exits > 0);
     }
 
-  
+
     /**
      * signUpNotify
      *
@@ -39,6 +39,22 @@ class ManagerService
             $title = __('manager.email.registered.title');
             $m->to($user->email, $user->fullName())->subject($title);
         });
+    }
+
+
+    /**
+     * resetPassword
+     *
+     * @param  string $email
+     * @return array
+     */
+    public function resetPassword(string $email)
+    {
+        $result = ["ok" => false, "message" => __('errors.login.email')];
+        if ($this->checkEmail($email)) {
+        }
+
+        return $result;
     }
 
 
@@ -75,7 +91,7 @@ class ManagerService
     }
 
 
-     
+
     /**
      * addUser
      *
@@ -109,7 +125,7 @@ class ManagerService
     }
 
 
-    
+
     /**
      * isTokenvalid
      * valid token of verified user
@@ -123,12 +139,12 @@ class ManagerService
         return !is_null($user);
     }
 
-    
+
     /**
-    * valid token of verified user
-    * @param string $token
-    * @return bool|int
-    */
+     * valid token of verified user
+     * @param string $token
+     * @return bool|int
+     */
     public function getIdFromToken($token)
     {
         $user = Manager::whereToken($token)->whereVerified(1)->first();
@@ -161,7 +177,7 @@ class ManagerService
         return false;
     }
 
-    
+
     /**
      * getUserByToken
      *
@@ -181,7 +197,7 @@ class ManagerService
     }
 
 
-    
+
     /**
      * saveUserInfo
      *
@@ -199,7 +215,7 @@ class ManagerService
         }
     }
 
-     
+
     /**
      * changePassword
      *
@@ -223,7 +239,7 @@ class ManagerService
     }
 
 
-        
+
     /**
      * saveManagerCompany
      *

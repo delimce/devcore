@@ -2,7 +2,7 @@
   <div id="loginModal" class="hero is-0-mobile">
     <div class="row is-centered">
       <div class="row">
-        <form v-on:submit.prevent="doLogin">
+        <form v-on:submit.prevent="submitForm">
           <div class="notification is-light">
             <div class="image-container">
               <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
@@ -12,9 +12,10 @@
               <label class="label">{{label_email}}</label>
               <p class="control has-icons-left has-icons-right">
                 <input
-                  class="input is-focused"
+                  class="input"
                   type="email"
                   placeholder="Email"
+                  @focus="message=''"
                   v-model="credentials.email"
                 />
                 <span class="icon is-small is-left">
@@ -22,12 +23,13 @@
                 </span>
               </p>
             </div>
-            <div class="field">
+            <div v-if="loginMode" class="field">
               <label class="label">{{label_pass}}</label>
               <p class="control has-icons-left">
                 <input
                   class="input"
                   type="password"
+                  @focus="message=''"
                   placeholder="Password"
                   v-model="credentials.password"
                 />
@@ -35,14 +37,18 @@
                   <i class="fas fa-lock"></i>
                 </span>
               </p>
-              <p class="help">{{label_remember}}</p>
             </div>
+
+            <div class="field">
+              <a class="reset" @click="switchMode()">{{label_switch}}</a>
+            </div>
+
             <div class="control columns">
               <div class="column">
                 <button type="submit" class="button is-link">{{label_button}}</button>
               </div>
               <div class="column is-two-thirds error-text">
-                {{error_message}}
+                {{message}}
                 <pre-loader v-show="preloading"></pre-loader>
               </div>
             </div>
@@ -60,12 +66,17 @@ export default {
   name: "Login",
   data() {
     return {
+      loginMode: false,
       preloading: false,
       label_pass: "Contraseña",
       label_email: "Email",
+      label_switch: "",
       label_remember: "¿Has olvidado tu contraseña?",
-      label_button: "Iniciar sesión",
-      error_message: "",
+      label_to_login: "¿Quieres Hacer Login?",
+      get_login: "Iniciar sesión",
+      reset_password: "Reiniciar contraseña",
+      label_button: "",
+      message: "",
       credentials: {
         email: "",
         password: ""
@@ -73,23 +84,49 @@ export default {
     };
   },
   methods: {
-    doLogin: _.debounce(function() {
+    submitForm: _.debounce(function() {
       this.preloading = true;
+      if (this.loginMode) {
+        this.doLogin();
+      } else {
+        this.resetPassword();
+      }
+    }, 400),
+    doLogin() {
       axios
         .post("/manager/login", this.credentials)
         .then(response => {
           this.preloading = false;
-          let token = response.data.info.token;
-          this.error_message = "";
-          saveUserToken(token);
-          redirectToAdmin();
         })
         .catch(error => {
           this.preloading = false;
           let data = error.response.data.info;
-          this.error_message = data.message;
+          this.message = data.message;
         });
-    }, 400)
+    },
+    resetPassword() {
+      axios
+        .put("/manager/reset", this.credentials)
+        .then(response => {
+          this.preloading = false;
+        })
+        .catch(error => {
+          this.preloading = false;
+          let data = error.response.data.info;
+          this.message = data.message;
+        });
+    },
+    switchMode() {
+      this.loginMode = this.loginMode ? false : true;
+      this.label_switch = this.loginMode
+        ? this.label_remember
+        : this.label_to_login;
+      this.label_button = this.loginMode ? this.get_login : this.reset_password;
+      this.credentials = {};
+    }
+  },
+  mounted: function() {
+    this.switchMode();
   }
 };
 </script>
@@ -102,6 +139,16 @@ export default {
 .error-text {
   color: red;
   margin-top: 6px;
+}
+
+.reset {
+  float: right;
+  width: auto;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none !important;
 }
 
 .form-container {

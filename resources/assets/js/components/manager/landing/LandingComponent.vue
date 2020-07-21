@@ -248,7 +248,7 @@ export default {
       this.$modal.show(
         Login,
         {},
-        { scrollable: false, height: "auto", width: "45%" }
+        { scrollable: false, height: "auto", width: "30%", minWidth:300 }
       );
     }
   },
