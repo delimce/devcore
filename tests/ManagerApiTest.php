@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Manager\Manager;
-use App\Repositories\ManagerRepository;
 
 
 
@@ -17,7 +16,7 @@ class ManagerApiTest extends TestCase
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
-        $this->managerRepository = new ManagerRepository();
+        $this->managerRepository = $this->app->make('App\Repositories\ManagerRepository');
     }
 
 

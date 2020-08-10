@@ -2,9 +2,6 @@
 
 use App\Models\Manager\Manager;
 use App\Models\Manager\Garage;
-use App\Repositories\ManagerRepository;
-use App\Repositories\GarageRepository;
-use App\Repositories\MediaRepository;
 
 class GarageApiTest extends TestCase
 {
@@ -14,7 +11,6 @@ class GarageApiTest extends TestCase
     /** @var manager fake  */
     protected $manager;
     protected $garage;
-    protected $managerRepository;
     protected $garageRepository;
     protected $mediaRepository;
 
@@ -23,9 +19,8 @@ class GarageApiTest extends TestCase
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
-        $this->managerRepository = new ManagerRepository();
-        $this->garageRepository = new GarageRepository();
-        $this->mediaRepository = new MediaRepository();
+        $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
+        $this->mediaRepository = $this->app->make('App\Repositories\MediaRepository');
     }
 
     /** @test
