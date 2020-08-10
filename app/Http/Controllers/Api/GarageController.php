@@ -8,8 +8,7 @@ use App\Repositories\ManagerRepository;
 use App\Repositories\MediaRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class GarageController extends ApiController
 {

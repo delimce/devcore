@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Repositories\LocalizationRepository;
 
 use Illuminate\Http\JsonResponse;
-use Validator;
 
 class LocalizationController extends ApiController
 {
