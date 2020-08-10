@@ -28,6 +28,7 @@ $app->configure('logging');
 $app->configure('mail');
 $app->configure('session');
 $app->configure('filesystems');
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
