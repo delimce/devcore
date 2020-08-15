@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import EventBus from "../../../../bus";
+import EventBus from "@/bus";
 import money from "v-money";
 export default {
   name: "garageServiceForm",

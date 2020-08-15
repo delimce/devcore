@@ -11,6 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.webpackConfig({
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'images': __dirname + '/resources/assets/img',
+      '@': __dirname + '/resources/assets/js'
+    },
+  },
+});
+
+
 mix.js('resources/assets/js/app.js', 'public/assets/js')
     .sass('resources/assets/sass/app.scss', 'public/assets/css').options({
     processCssUrls: false

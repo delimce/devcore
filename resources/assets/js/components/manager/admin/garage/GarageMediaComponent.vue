@@ -28,10 +28,10 @@
   </div>
 </template>
 <script>
-import EventBus from "../../../../bus";
+import EventBus from "@/bus";
 import vueDropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
-import { getUserToken } from "../../../../functions";
+import { getUserToken } from "@/functions";
 export default {
   data() {
     return {

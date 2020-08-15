@@ -71,8 +71,8 @@
 </template>
 
 <script>
-import EventBus from "../../../../bus";
-import { deleteUserData, redirectToManager } from "../../../../functions";
+import EventBus from "@/bus";
+import { deleteUserData, redirectToManager } from "@/functions";
 export default {
   name: "MenuAdmin",
   data() {

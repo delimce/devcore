@@ -103,7 +103,7 @@
 
 <script>
 import serviceForm from "./GarageServiceFormComponent";
-import EventBus from "../../../../bus";
+import EventBus from "@/bus";
 export default {
   data() {
     return {

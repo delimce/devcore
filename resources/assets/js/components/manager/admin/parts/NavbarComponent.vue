@@ -45,9 +45,7 @@
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">About</a>
-              <a class="navbar-item">Jobs</a>
-              <a class="navbar-item">Contact</a>
+              <a class="navbar-item">{{profile}}</a>
               <hr class="navbar-divider" />
               <a class="navbar-item" @click="doLogout()">{{close}}</a>
             </div>
@@ -59,14 +57,15 @@
 </template>
 
 <script>
-import EventBus from "../../../../bus";
-import { deleteUserData, redirectToManager } from "../../../../functions";
+import EventBus from "@/bus";
+import { deleteUserData, redirectToManager } from "@/functions";
 export default {
   name: "Navbar",
   data() {
     return {
       preloading: false,
       user: {},
+      profile:"Perfil",
       hello: "Hola",
       close: "Cerrar sesión"
     };

@@ -162,7 +162,7 @@
 </template>
 
 <script>
-import EventBus from "../../../../bus";
+import EventBus from "@/bus";
 export default {
   data() {
     return {

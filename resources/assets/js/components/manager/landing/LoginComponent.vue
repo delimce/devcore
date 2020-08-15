@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { saveUserToken, redirectToAdmin } from "../../../functions";
+import { saveUserToken, redirectToAdmin } from "@/functions";
 export default {
   name: "Login",
   data() {
