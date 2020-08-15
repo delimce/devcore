@@ -12,6 +12,13 @@ class Manager extends Model
      */
     protected $table = 'manager';
 
+    protected $appends = ['fullname'];
+
+    public function getFullnameAttribute()
+    {
+        return $this->getAttribute('name') . ' ' . $this->getAttribute('lastname');
+    }
+
     /**
      * The attributes that are mass assignable. & use insert method
      * @var array

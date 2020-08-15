@@ -25,12 +25,24 @@ class LandingController extends BaseController
         return view('website.msignup');
     }
 
+    public function managerReset($token)
+    {
+        $code = trim($token);
+        $user = $this->manager->getUserByToken($code);
+        if ($user) {
+            return view('website.reset', ['token' => $code]);
+        }
+        return response(view('errors.403'), 403);
+    }
+
+
+
     public function managerActivate($token)
     {
         $code = trim($token);
         $result = $this->manager->activateUser($code);
         if ($result) {
-            return redirect()->route('activated', ['username' => $result->fullname()]);
+            return redirect()->route('activated', ['username' => $result->fullname]);
         }
         return response(view('errors.403'), 403);
     }

@@ -5,6 +5,9 @@ return [
     'admin' => 'Administración',
     'created' => 'Usuario creado con éxito',
     //emails
-    'email.registered.title' => '¡Bienvenido a Garafy!',
+    'email.sent.success' => 'Email enviado con éxito',
+    'email.registered.title' => '¡Bienvenido a Garafy manager!',
     'email.registered.content' => ' Estás a un sólo paso de habilitar tu cuenta, ',
+    'email.reset.title' => 'Has solicitado reiniciar tu contraseña',
+    'email.reset.content' => 'Para reiniciar tu contraseña sólo debes acceder al siguiente enlace y actualizarla',
 ];

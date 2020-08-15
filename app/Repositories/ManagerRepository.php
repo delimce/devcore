@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Manager\Company;
 use App\Models\Manager\Manager;
+use App\Services\EmailNotificationService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +14,14 @@ use Illuminate\Support\Str;
 
 class ManagerRepository
 {
+
+    protected $emailService;
+
+
+    public function __construct(EmailNotificationService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
 
     /**
      * checkEmail
@@ -25,36 +34,47 @@ class ManagerRepository
         return ($exits > 0);
     }
 
-
-    /**
-     * signUpNotify
-     *
-     * @param  mixed $user
-     * @return void
-     */
-    public function signUpNotify(Manager $user)
-    {
-
-        Mail::send('emails.registered', ["user" => $user], function ($m) use ($user) {
-            $title = __('manager.email.registered.title');
-            $m->to($user->email, $user->fullName())->subject($title);
-        });
-    }
-
-
     /**
      * resetPassword
      *
      * @param  string $email
      * @return array
      */
-    public function resetPassword(string $email)
+    public function resetPasswordMessage(string $email)
     {
         $result = ["ok" => false, "message" => __('errors.login.email')];
-        if ($this->checkEmail($email)) {
+        $manager = Manager::whereEmail($email)->first();
+        if ($manager) {
+            $data = $manager->toArray();
+            $data["token"] = $this->getTokenById($data["id"]);
+            $result["message"] = __('errors.email.notsent');
+            if ($this->emailService->managerResetPassword($data)) {
+                $result["ok"] = true;
+                $result["message"] = __('manager.email.sent.success');
+            }
         }
-
         return $result;
+    }
+
+
+    
+    /**
+     * changePasswordWithToken
+     * for restore password function
+     * 
+     * @param  string $token
+     * @param  string $password
+     * @return bool
+     */
+    public function changePasswordWithToken($token, $password)
+    {
+        Manager::where('token', $token)
+            ->update([
+                'token' => static::newUserToken(),
+                'password' => Hash::make($password)
+            ]);
+
+        return true;
     }
 
 
@@ -118,9 +138,9 @@ class ManagerRepository
             return false;
         }
 
-        //toEmail
-        $this->signUpNotify($person);
-
+        if (!$this->emailService->managerSignUp($person)) {
+            return false;
+        }
         return __('manager.created');
     }
 
@@ -152,6 +172,19 @@ class ManagerRepository
             return $user->id;
         }
         return false;
+    }
+
+
+
+    /**
+     * getTokenById
+     *
+     * @param  int $userID
+     * @return string
+     */
+    public function getTokenById($userID)
+    {
+        return DB::table('manager')->where('id', $userID)->value('token');
     }
 
 
@@ -219,12 +252,12 @@ class ManagerRepository
     /**
      * changePassword
      *
-     * @param  mixed $token
-     * @param  mixed $old
-     * @param  mixed $new
+     * @param  string $token
+     * @param  string $old
+     * @param  string $new
      * @return void
      */
-    public function changePassword(string $token, string $old, string $new)
+    public function changePassword($token, $old, $new)
     {
         $result = ["ok" => false, "message" => ""];
         $data = DB::table('manager')->whereToken($token)->first();
@@ -232,10 +265,32 @@ class ManagerRepository
             $result["message"] = __('errors.login.oldpassword');
             return $result;
         }
-        Manager::whereToken($token)->update(["password" => Hash::make($new)]);
-        $result["ok"] = true;
-        $result["message"] = __('commons.password.changed');
+
+        if ($this->updatePassword($token, $new)) {
+            $result["ok"] = true;
+            $result["message"] = __('commons.password.changed');
+        }
+
         return $result;
+    }
+
+
+    /**
+     * updatePassword
+     *
+     * @param  string $token
+     * @param  string $password
+     * @return bool
+     */
+    public function updatePassword(string $token, string $password)
+    {
+        try {
+            Manager::whereToken($token)->update(["password" => Hash::make($password)]);
+            return true;
+        } catch (QueryException $ex) {
+            Log::error($ex);
+            return false;
+        }
     }
 
 

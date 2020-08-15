@@ -45,7 +45,8 @@
 
             <div class="control columns">
               <div class="column">
-                <button type="submit" class="button is-link">{{label_button}}</button>
+                <button type="submit" v-if="!reset_sent" class="button is-link">{{label_button}}</button>
+                <button  type="button" class="button is-link" v-else disabled>{{label_button}}</button>
               </div>
               <div class="column is-two-thirds error-text">
                 {{message}}
@@ -76,15 +77,16 @@ export default {
       get_login: "Iniciar sesión",
       reset_password: "Reiniciar contraseña",
       label_button: "",
+      reset_sent:false,
       message: "",
       credentials: {
         email: "",
         password: ""
-      }
+      },
     };
   },
   methods: {
-    submitForm: _.debounce(function() {
+    submitForm: _.debounce(function () {
       this.preloading = true;
       if (this.loginMode) {
         this.doLogin();
@@ -95,10 +97,14 @@ export default {
     doLogin() {
       axios
         .post("/manager/login", this.credentials)
-        .then(response => {
+        .then((response) => {
           this.preloading = false;
+          let token = response.data.info.token;
+          this.error_message = "";
+          saveUserToken(token);
+          redirectToAdmin();
         })
-        .catch(error => {
+        .catch((error) => {
           this.preloading = false;
           let data = error.response.data.info;
           this.message = data.message;
@@ -107,10 +113,14 @@ export default {
     resetPassword() {
       axios
         .put("/manager/reset", this.credentials)
-        .then(response => {
+        .then((response) => {
           this.preloading = false;
+          let data = response.data.info;
+          this.message = data.message;
+          this.reset_sent = true;
+
         })
-        .catch(error => {
+        .catch((error) => {
           this.preloading = false;
           let data = error.response.data.info;
           this.message = data.message;
@@ -123,11 +133,12 @@ export default {
         : this.label_to_login;
       this.label_button = this.loginMode ? this.get_login : this.reset_password;
       this.credentials = {};
-    }
+      this.reset_sent = false;
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.switchMode();
-  }
+  },
 };
 </script>
 

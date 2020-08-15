@@ -19,7 +19,8 @@ $router->group(
             $router->get('check/{email}', ['uses' =>  'ManagerController@checkEmail']);
             $router->post('signup', ['uses' =>  'ManagerController@signUp']);
             $router->post('login', ['uses' =>  'ManagerController@doLogin']);
-            $router->put('reset', ['uses' =>  'ManagerController@resetPassword']);
+            $router->put('reset', ['uses' =>  'ManagerController@resetSendMessage']);
+            $router->put('reset/password', ['uses' =>  'ManagerController@resetPassword']);
 
             //auth admin
             $router->group(

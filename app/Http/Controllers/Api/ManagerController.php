@@ -6,8 +6,7 @@ use App\Models\Manager\Manager;
 use App\Repositories\ManagerRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class ManagerController extends ApiController
 {
@@ -72,10 +71,16 @@ class ManagerController extends ApiController
     }
 
 
-    public function resetPassword(Request $req)
+    /**
+     * resetPassword
+     *
+     * @param  mixed $req
+     * @return void
+     */
+    public function resetSendMessage(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'email' => 'required|email'
+            'email' => 'required|email|exists:App\Models\Manager\Manager,email'
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
@@ -83,13 +88,36 @@ class ManagerController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $result = $this->manager->resetPassword($req->email);
+        $result = $this->manager->resetPasswordMessage($req->email);
         if (!$result["ok"]) {
             $data = ["message" => $result["message"]];
             return $this->errorResponse($data, 403);
         }
+        return $this->okResponse(["message" => $result["message"]]);
+    }
 
 
+    /**
+     * resetPassword
+     *
+     * @param  Request $req
+     * @return void
+     */
+    public function resetPassword(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'token' => 'required|exists:App\Models\Manager\Manager,token',
+            'password' => 'required|confirmed|min:6',
+        ], $this->getDefaultMessages());
+
+        $validate = $this->hasValidationErrors($validator);
+        if ($validate) {
+            return $this->errorResponse($validate);
+        }
+
+        if ($this->manager->changePasswordWithToken($req->token, $req->password)) {
+            return $this->okResponse(["message" => __('commons.password.changed')]);
+        }
     }
 
 
@@ -104,7 +132,7 @@ class ManagerController extends ApiController
             'lastname' => 'required|max:100',
             'password' => 'required|min:6',
             'phone' => 'required|integer',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:manager',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
