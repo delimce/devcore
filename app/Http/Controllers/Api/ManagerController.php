@@ -107,7 +107,7 @@ class ManagerController extends ApiController
     {
         $validator = Validator::make($req->all(), [
             'token' => 'required|exists:App\Models\Manager\Manager,token',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:8',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
@@ -130,7 +130,7 @@ class ManagerController extends ApiController
         $validator = Validator::make($req->all(), [
             'name' => 'required|max:120',
             'lastname' => 'required|max:100',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
             'phone' => 'required|integer',
             'email' => 'required|email|unique:manager',
         ], $this->getDefaultMessages());
@@ -215,8 +215,8 @@ class ManagerController extends ApiController
     public function changePassword(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'oldpassword' => 'required|min:6',
-            'password' => 'required|confirmed|min:6',
+            'oldpassword' => 'required|min:8',
+            'password' => 'required|confirmed|min:8',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
