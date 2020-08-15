@@ -86,16 +86,16 @@ class ManagerApiTest extends TestCase
 
         $this->put(static::API_URI . "auth/password", [
             "oldpassword" => $this->manager->password,
-            "password" => "newOne",
-            "password_confirmation" => "newOne2",
+            "password" => "newOneHere",
+            "password_confirmation" => "newOne2Here",
         ], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(400);
 
 
         $this->put(static::API_URI . "auth/password", [
             "oldpassword" => 'wrongPassword',
-            "password" => "newOne",
-            "password_confirmation" => "newOne",
+            "password" => "newOneHere",
+            "password_confirmation" => "newOneHere",
         ], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(401);
 
