@@ -45,8 +45,7 @@
 
             <div class="control columns">
               <div class="column">
-                <button type="submit" v-if="!reset_sent" class="button is-link">{{label_button}}</button>
-                <button  type="button" class="button is-link" v-else disabled>{{label_button}}</button>
+                <button type="submit" class="button is-link" :disabled="form_sent">{{label_button}}</button>
               </div>
               <div class="column is-two-thirds error-text">
                 {{message}}
@@ -77,11 +76,11 @@ export default {
       get_login: "Iniciar sesión",
       reset_password: "Reiniciar contraseña",
       label_button: "",
-      reset_sent:false,
+      form_sent: false,
       message: "",
       credentials: {
         email: "",
-        password: ""
+        password: "",
       },
     };
   },
@@ -93,12 +92,13 @@ export default {
       } else {
         this.resetPassword();
       }
-    }, 400),
+    }, 200),
     doLogin() {
       axios
         .post("/manager/login", this.credentials)
         .then((response) => {
           this.preloading = false;
+          this.form_sent = true;
           let token = response.data.info.token;
           this.error_message = "";
           saveUserToken(token);
@@ -117,8 +117,7 @@ export default {
           this.preloading = false;
           let data = response.data.info;
           this.message = data.message;
-          this.reset_sent = true;
-
+          this.form_sent = true;
         })
         .catch((error) => {
           this.preloading = false;
@@ -133,7 +132,7 @@ export default {
         : this.label_to_login;
       this.label_button = this.loginMode ? this.get_login : this.reset_password;
       this.credentials = {};
-      this.reset_sent = false;
+      this.form_sent = false;
     },
   },
   mounted: function () {

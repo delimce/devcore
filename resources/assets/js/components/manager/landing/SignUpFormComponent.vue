@@ -228,7 +228,7 @@ export default {
       lastname: { required },
       phone: { required, numeric },
       email: { required, email },
-      password: { required, minLength: minLength(6) },
+      password: { required, minLength: minLength(8) },
       confirmPassword: { required, sameAsPassword: sameAs("password") },
       terms: { sameAs: sameAs(() => true) }
     }
