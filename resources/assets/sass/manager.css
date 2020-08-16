@@ -238,8 +238,7 @@ body {
 }
 
 nav.navbar {
-    border-top: 4px solid #8D68AB;
-    box-shadow: 0 1px 15px 1px rgba(69, 65, 78, .1);
+   height: 100px;
 }
 
 .table-wrapper {
