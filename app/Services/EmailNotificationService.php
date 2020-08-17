@@ -18,7 +18,7 @@ class EmailNotificationService
      */
     public function managerResetPassword($manager)
     {
-        $template = 'emails.reset';
+        $template = 'emails.manager.reset';
         $title = __('commons.password.reset');
         $data = $manager;
         return $this->dispatch($template, $title, $data);
@@ -33,7 +33,7 @@ class EmailNotificationService
      */
     public function managerSignUp($person)
     {
-        $template = 'emails.registered';
+        $template = 'emails.manager.registered';
         $title =  __('manager.email.registered.title');
         $data = $person;
         return $this->dispatch($template, $title, $data);
