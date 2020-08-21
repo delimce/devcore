@@ -48,8 +48,16 @@ class GarageApiTest extends TestCase
         ];
         $dummy2 = array_merge($dummy, $required);
 
-        $this->post(static::API_URI . "/", $dummy2, ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(200);
+        $response = $this->call("POST", static::API_URI . "/", $dummy2, [], [], [
+            "HTTP_Authorization" => $this->manager->token,
+        ]);
+        $this->assertEquals(200, $response->status());
+
+        // get garageId?
+        $garageResponse = $this->getArrayByResponse($response);
+        $this->assertArrayHasKey("garageId",$garageResponse);
+
+
     }
 
 

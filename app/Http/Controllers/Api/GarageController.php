@@ -75,12 +75,13 @@ class GarageController extends ApiController
             $garage["desc"] = $req->desc;
         }
 
-        if (!$this->garage->saveGarage($garage)) {
+        $result = $this->garage->saveGarage($garage);
+        if (!$result) {
             $data = ["message" => "error"];
             return $this->errorResponse($data, 403);
         }
 
-        $data = ["message" => __('commons.save.success')];
+        $data = ["message" => __('commons.save.success'), "garageId" => $result];
         return $this->okResponse($data);
     }
 
@@ -311,7 +312,15 @@ class GarageController extends ApiController
         return $this->okResponse(["list" => $data]);
     }
 
-
+    
+    /**
+     * getServices
+     *
+     * @param  int $garageId
+     * @param  Request $req
+     * @param  GarageServiceDecorator $decorator
+     * @return void
+     */
     public function getServices(int $garageId, Request $req, GarageServiceDecorator $decorator)
     {
         $params = [];

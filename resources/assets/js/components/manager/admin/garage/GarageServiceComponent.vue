@@ -102,11 +102,13 @@
 </template>
 
 <script>
+import _ from "lodash";
 import serviceForm from "./GarageServiceFormComponent";
 import EventBus from "@/bus";
 export default {
   data() {
     return {
+      access: false,
       preloading: false,
       label_segment: "Segmento Automotor:",
       label_type: "Tipo de servicio:",
@@ -120,33 +122,33 @@ export default {
       categories: [],
       segment: null,
       type: null,
-      category: null
+      category: null,
     };
   },
   methods: {
     getSegments() {
       axios
         .get("/manager/garage/services/segments")
-        .then(response => {
+        .then((response) => {
           this.segments = response.data.info.list;
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     getServiceTypes() {
       axios
         .get("/manager/garage/services/types")
-        .then(response => {
+        .then((response) => {
           this.types = response.data.info.list;
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     getServiceCategories() {
       axios
         .get("/manager/garage/services/categories")
-        .then(response => {
+        .then((response) => {
           this.categories = response.data.info.list;
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     getUrlToServiceQuery() {
       let url = "/manager/garage/services/" + this.garage.id + "/list/?";
@@ -160,22 +162,22 @@ export default {
       this.preloading = true;
       axios
         .get(this.getUrlToServiceQuery())
-        .then(response => {
+        .then((response) => {
           this.preloading = false;
           this.services = response.data.info.list;
         })
-        .catch(error => {
+        .catch((error) => {
           this.preloading = false;
         });
     },
     getService(service) {
       axios
         .get("/manager/garage/services/id/" + service.id)
-        .then(response => {
+        .then((response) => {
           let service = response.data.info;
           this.modalService(service);
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     createService() {
       let service = { garage_id: this.garage.id };
@@ -188,7 +190,7 @@ export default {
           gservice: myService,
           segments: this.segments,
           types: this.types,
-          categories: this.categories
+          categories: this.categories,
         },
         { scrollable: false, height: "auto", width: "40%" }
       );
@@ -197,13 +199,13 @@ export default {
       axios
         .delete("/manager/garage/services/", {
           data: {
-            service_id: serviceId
-          }
+            service_id: serviceId,
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.getServices();
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     confirmDeleteService(item) {
       let message =
@@ -218,46 +220,50 @@ export default {
         message: message,
         button: {
           no: "No",
-          yes: "Si"
+          yes: "Si",
         },
         /**
          * Callback Function
          * @param {Boolean} confirm
          */
-        callback: confirm => {
+        callback: (confirm) => {
           if (confirm) {
             this.deleteService(item.id);
           }
-        }
+        },
       });
-    }
+    },
   },
-  created: function() {
-    EventBus.$on("change-garage-info", garage => {
+  created: function () {
+    EventBus.$on("change-garage-info", (garage) => {
       this.garage = garage;
-      this.segment = "CAR";
-      this.getSegments();
-      this.getServiceTypes();
-      this.getServiceCategories();
-      this.getServices();
+      this.access = !_.isUndefined(this.garage.id);
+      if (this.access) {
+        this.getServices();
+      }
     });
+
+    this.segment = "CAR";
+    this.getSegments();
+    this.getServiceTypes();
+    this.getServiceCategories();
   },
-  mounted: function() {
-    EventBus.$on("change-save-service", service => {
+  mounted: function () {
+    EventBus.$on("change-save-service", (service) => {
       this.getServices();
     });
   },
   watch: {
-    segment: function() {
+    segment: function () {
       this.getServices();
     },
-    type: function() {
+    type: function () {
       this.getServices();
     },
-    category: function() {
+    category: function () {
       this.getServices();
-    }
-  }
+    },
+  },
 };
 </script>
 

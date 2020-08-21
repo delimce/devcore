@@ -56,6 +56,7 @@
 
 <script>
 import EventBus from "@/bus";
+import _ from "lodash";
 export default {
   data() {
     return {
@@ -63,26 +64,27 @@ export default {
       label_info: "Datos del Taller",
       label_schedule: "Horarios",
       label_media: "Multimedia",
-      label_services: "Servicios"
+      label_services: "Servicios",
     };
   },
   methods: {
     loadGarageInfo() {
       axios
         .get("/manager/garage/info")
-        .then(response => {
+        .then((response) => {
           if (response.data.info) {
             this.garage = response.data.info;
-            this.garage.network_id = String(response.data.info.network_id);
+            let network = response.data.info.network_id;
+            this.garage.network_id = _.isNull(network) ? null : String(network);
             EventBus.$emit("change-garage-info", this.garage);
           }
         })
-        .catch(error => {});
-    }
+        .catch((error) => {});
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.loadGarageInfo();
-  }
+  },
 };
 </script>
 

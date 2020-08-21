@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card">
+    <div v-if="access" class="card">
       <div class="card-content">
         <table class="table is-striped">
           <thead>
@@ -70,13 +70,21 @@
         </div>
       </div>
     </div>
+    <div v-else class="card no-garage">
+        <div class="card-content">
+          {{label_no_access}}
+        </div>
+    </div>
   </div>
 </template>
 <script>
+import EventBus from "@/bus";
 import _ from "lodash";
 export default {
   data() {
     return {
+      access:false,
+      label_no_access:"Debe guardar primero la información del taller, para poder tener acceso a esta sección.",
       label_day: "Día",
       label_am: "Turno mañana",
       label_pm: "Turno tarde",
@@ -93,46 +101,46 @@ export default {
       messageType: "",
       preloading: false,
       message: "Horarios no guardados aún",
-      garage: false,
+      garage: {},
       schedule: [
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "14:30",
-          pm2: "18:30"
+          pm2: "18:30",
         },
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "14:30",
-          pm2: "18:30"
+          pm2: "18:30",
         },
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "14:30",
-          pm2: "18:30"
+          pm2: "18:30",
         },
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "14:30",
-          pm2: "18:30"
+          pm2: "18:30",
         },
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "14:30",
-          pm2: "18:30"
+          pm2: "18:30",
         },
         {
           am1: "08:00",
           am2: "12:30",
           pm1: "",
-          pm2: ""
+          pm2: "",
         },
-        { am1: "", am2: "", pm1: "", pm2: "" }
-      ]
+        { am1: "", am2: "", pm1: "", pm2: "" },
+      ],
     };
   },
   methods: {
@@ -164,29 +172,28 @@ export default {
     loadGarageSchedule() {
       axios
         .get("/manager/garage/schedule")
-        .then(response => {
-          this.garage = response.data.info.garage;
+        .then((response) => {
           if (response.data.info.schedule.length > 0) {
             this.schedule = response.data.info.schedule;
             this.message = "";
           }
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     saveSchedule() {
       this.preloading = true;
       if (this.garage) {
         axios
           .post("/manager/garage/schedule", {
-            garage: this.garage,
-            schedule: this.schedule
+            garage: this.garage.id,
+            schedule: this.schedule,
           })
-          .then(response => {
+          .then((response) => {
             this.preloading = false;
             this.messageType = "message-ok";
             this.message = response.data.info.message;
           })
-          .catch(error => {
+          .catch((error) => {
             this.preloading = false;
             this.messageType = "message-error";
             this.message = error.response.data.info.message;
@@ -196,11 +203,18 @@ export default {
         this.messageType = "message-error";
         this.message = this.error_info;
       }
-    }
+    },
   },
-  created: function() {
-    this.loadGarageSchedule();
-  }
+
+  mounted: function () {
+    EventBus.$on("change-garage-info", (garage) => {
+      this.garage = garage;
+      this.access = !_.isUndefined(this.garage.id);
+      if (this.access) {
+        this.loadGarageSchedule();
+      }
+    });
+  },
 };
 </script>
 <style scoped>

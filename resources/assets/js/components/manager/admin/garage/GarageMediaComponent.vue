@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card">
+    <div v-if="access" class="card">
       <div class="card-content">
         <div class="field">
           <label class="label">{{label_images}}</label>
@@ -25,9 +25,13 @@
         </div>
       </div>
     </div>
+    <div v-else class="card no-garage">
+      <div class="card-content">{{label_no_access}}</div>
+    </div>
   </div>
 </template>
 <script>
+import _ from "lodash";
 import EventBus from "@/bus";
 import vueDropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
@@ -35,6 +39,9 @@ import { getUserToken } from "@/functions";
 export default {
   data() {
     return {
+      access: false,
+      label_no_access:
+        "Debe guardar primero la información del taller, para poder tener acceso a esta sección.",
       label_images: "Imágenes de taller",
       label_images_save: "Guardar Imágenes",
       instructions: "Agregue las imágenes para su taller",
@@ -54,8 +61,8 @@ export default {
         acceptedFiles: "image/*",
         maxFilesSize: 2,
         maxFiles: 6,
-        headers: { Authorization: getUserToken() }
-      }
+        headers: { Authorization: getUserToken() },
+      },
     };
   },
   methods: {
@@ -67,11 +74,11 @@ export default {
         .delete("/manager/garage/media", {
           data: {
             garage: this.garage.id,
-            path: file.name
-          }
+            path: file.name,
+          },
         })
-        .then(response => {})
-        .catch(error => {
+        .then((response) => {})
+        .catch((error) => {
           this.messageType = "message-error";
           this.message = error.response.data.info.message;
         });
@@ -90,37 +97,40 @@ export default {
     loadFiles() {
       axios
         .get("/manager/garage/media/" + this.garage.id)
-        .then(response => {
+        .then((response) => {
           let files = response.data.info;
-          files.forEach(item => {
+          files.forEach((item) => {
             let file = { size: item.size, name: item.name, type: item.mime };
             let url = item.url;
             this.$refs.myVueDropzone.manuallyAddFile(file, url);
           });
         })
-        .catch(error => {
+        .catch((error) => {
           this.preloading = false;
           this.messageType = "message-error";
           this.message = error.response.data.info.message;
         });
     },
     waitToLoad() {
-      setTimeout(
-        function() {
-          this.loadFiles();
-        }.bind(this),
-        1000
-      );
-    }
+      if (this.access) {
+        setTimeout(
+          function () {
+            this.loadFiles();
+          }.bind(this),
+          1000
+        );
+      }
+    },
   },
   components: {
-    vueDropzone
+    vueDropzone,
   },
-  created: function() {
-    EventBus.$on("change-garage-info", garage => {
+  mounted: function () {
+    EventBus.$on("change-garage-info", (garage) => {
       this.garage = garage;
+      this.access = !_.isUndefined(this.garage.id);
     });
-  }
+  },
 };
 </script>
 

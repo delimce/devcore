@@ -46,7 +46,7 @@
               <div class="control">
                 <textarea
                   class="textarea is-size-18-mobile"
-                  placeholder="breve descripción"
+                  placeholder="Breve descripción"
                   rows="7"
                   v-model="garage.desc"
                   v-on:focus="message=''"
@@ -97,37 +97,22 @@
             <div class="field">
               <label class="label">{{label_state}}</label>
               <div class="control">
-                <div class="select">
-                  <select v-model="garage.state_id" @change="changeState">
-                    <option value v-bind:selected="garage.state_id== ''">{{label_select_state}}</option>
-                    <option
-                      v-for="item in states"
-                      :key="item.id"
-                      v-bind:value="item.id"
-                      v-bind:selected="item.id == garage.state_id"
-                    >{{ item.name }}</option>
-                  </select>
-                </div>
+                <simple-select-component
+                  :list="states"
+                  :select="label_state"
+                  v-model="state"
+                ></simple-select-component>
               </div>
             </div>
 
             <div class="field">
               <label class="label">{{label_province}}</label>
               <div class="control">
-                <div class="select">
-                  <select v-model="garage.province_id">
-                    <option
-                      value
-                      v-bind:selected="garage.province_id== ''"
-                    >{{label_select_province}}</option>
-                    <option
-                      v-for="item in provinces"
-                      :key="item.id"
-                      v-bind:value="item.id"
-                      v-bind:selected="item.id == garage.province_id"
-                    >{{ item.name }}</option>
-                  </select>
-                </div>
+                <simple-select-component
+                  :list="provinces"
+                  :select="label_province"
+                  v-model="province"
+                ></simple-select-component>
               </div>
             </div>
 
@@ -139,6 +124,7 @@
                   style="width: 33%;"
                   v-on:focus="message=''"
                   type="number"
+                  maxlength="6"
                   placeholder
                   v-model="garage.zipcode"
                 />
@@ -163,6 +149,7 @@
 
 <script>
 import EventBus from "@/bus";
+import _ from "lodash";
 export default {
   data() {
     return {
@@ -183,7 +170,7 @@ export default {
       preloading: false,
       message: "",
       garage: {
-        id: "",
+        id: null,
         name: "",
         phone: "",
         desc: "",
@@ -193,67 +180,88 @@ export default {
         country_id: 204,
         state_id: "",
         province_id: "",
-        zipcode: ""
+        zipcode: "",
       },
       networks: [{ id: null, desc: "No pertenezco a ninguna" }],
-      states: {},
-      provinces: {}
+      states: [],
+      provinces: [],
+      state:null,
+      province:null
     };
   },
   methods: {
     loadGarageNetworks() {
       axios
         .get("/manager/garage/networks")
-        .then(response => {
+        .then((response) => {
           this.networks = [].concat(this.networks, response.data.info);
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
     loadStates(countryId) {
       axios
         .get("/local/states/" + countryId)
-        .then(response => {
-          this.states = response.data.info;
+        .then((response) => {
+          this.states = _.map(response.data.info, (item) => {
+            return { id: item.id, desc: item.name };
+          });
+
           if (this.garage.state_id) {
             this.loadProvinces(this.garage.state_id);
           }
         })
-        .catch(error => {});
+        .catch((error) => {});
     },
-    loadProvinces(stateId) {
+   loadProvinces(stateId) {
       axios
         .get("/local/provinces/" + stateId)
-        .then(response => {
-          this.provinces = response.data.info;
+        .then((response) => {
+          this.provinces = _.map(response.data.info, (item) => {
+            return { id: item.id, desc: item.name };
+          });
         })
-        .catch(error => {});
-    },
-    changeState() {
-      this.loadProvinces(this.garage.state_id);
-      this.garage.province_id = "";
+        .catch((error) => {});
     },
     saveGarage() {
       this.preloading = true;
+      this.garage.state_id = this.state;
+      this.garage.province_id = this.province;
+
       axios
         .post("/manager/garage/", this.garage)
-        .then(response => {
+        .then((response) => {
           this.messageType = "message-ok";
           this.preloading = false;
-          this.message = response.data.info.message;
+          let responseData = response.data.info;
+          this.message = responseData.message;
+          this.garage.id = responseData.garageId; // set new garage ID
+          EventBus.$emit("change-garage-info", this.garage);
         })
-        .catch(error => {
+        .catch((error) => {
           this.messageType = "message-error";
           this.preloading = false;
           this.message = error.response.data.info.message;
         });
-    }
+    },
+    getGarageInfo() {
+      EventBus.$on("change-garage-info", (garage) => {
+        this.garage = garage;
+        console.log(garage)
+        this.state = String(garage.state_id);
+        this.province = String(garage.province_id);
+      });
+    },
   },
-  created: function() {
-    EventBus.$on("change-garage-info", garage => {
-      this.garage = garage;
-      this.loadGarageNetworks();
-      this.loadStates(204);
-    });
-  }
+  watch: {
+    state: function () {
+      this.loadProvinces(this.state);
+    },
+  },
+
+  mounted: function () {
+    this.getGarageInfo();
+    this.loadGarageNetworks();
+    this.loadStates(204);
+  },
 };
 </script>
