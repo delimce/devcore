@@ -13,6 +13,19 @@ class GarageService extends Model
      */
     protected $table = 'garage_service';
 
+    /**
+     * The attributes that are mass assignable. & use insert method
+     * @var array
+     */
+    protected $fillable = [
+        'garage_id', 'service_id', 'segment', 'type', 'category', 'brand_id', 'price'
+    ];
+
+
+    protected $casts = [
+        'price' => 'double',
+    ];
+
 
     public function garage()
     {
@@ -28,5 +41,4 @@ class GarageService extends Model
     {
         return $this->belongsTo('App\Models\Manager\Brand', 'brand_id');
     }
-
 }

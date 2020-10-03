@@ -246,7 +246,6 @@ export default {
     getGarageInfo() {
       EventBus.$on("change-garage-info", (garage) => {
         this.garage = garage;
-        console.log(garage)
         this.state = String(garage.state_id);
         this.province = String(garage.province_id);
       });

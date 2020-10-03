@@ -1,0 +1,11 @@
+{
+    "premium": {
+        "code": "PREMIUM"
+    },
+    "quality": {
+        "code": "MEDIUM"
+    },
+    "economic": {
+        "code": "ECONOMIC"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "oil": {
+        "id": "1",
+        "code": "OIL"
+    },
+    "filter": {
+        "id": "2",
+        "code": "FILTER"
+    },
+    "brake": {
+        "id": "3",
+        "code": "BRAKE"
+    },
+    "battery": {
+        "id": "4",
+        "code": "BATTERY"
+    },
+    "tyre": {
+        "id": "5",
+        "code": "TYRE"
+    },
+    "ac": {
+        "id": "6",
+        "code": "AC"
+    },
+    "check": {
+        "id": "7",
+        "code": "CHECK"
+    },
+    "workforce": {
+        "id": "8",
+        "code": "WORKFORCE"
+    }
+}

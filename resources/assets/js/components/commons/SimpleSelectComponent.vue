@@ -1,6 +1,6 @@
 <template>
   <div class="select is-info">
-    <select  @input="$emit('input', $event.target.value)">
+    <select :disabled="disable"  @input="$emit('input', $event.target.value)">
       <option v-if="select" value="">{{select}}</option>
       <option
         v-for="item in list"
@@ -25,6 +25,10 @@ export default {
     value: {
       type: String,
       default: null
+    },
+    disable:{
+      type:Boolean,
+      default:false
     }
   },
   data() {

@@ -3,7 +3,8 @@ use App\Models\Manager\Manager;
 
 class ManagerRepositoryTest extends TestCase
 {
-    protected $garageRepository;
+    protected $manager;
+    protected $managerRepository;
 
     public function setUp(): void
     {

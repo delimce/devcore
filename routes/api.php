@@ -40,6 +40,7 @@ $router->group(
                     $router->post('/', ['uses' =>  'GarageController@saveGarage']);
                     $router->get('/info', ['uses' =>  'GarageController@getGarageInfo']);
                     $router->get('/networks', ['uses' =>  'GarageController@getNetworks']);
+                    $router->get('/segments', ['uses' =>  'GarageController@getSegments']);
 
                     $router->group(['prefix' => 'schedule'], function () use ($router) {
                         $router->get('/', ['uses' =>  'GarageController@getSchedule']);
@@ -53,15 +54,16 @@ $router->group(
                     });
 
                     $router->group(['prefix' => 'services'], function () use ($router) {
-                        $router->post('/', ['uses' =>  'GarageController@saveService']);
-                        $router->delete('/', ['uses' =>  'GarageController@removeService']);
-                        $router->get('/{garageId}/list', ['uses' =>  'GarageController@getServices']);
-                        $router->get('/id/{serviceId}', ['uses' =>  'GarageController@getServiceById']);
-                        $router->get('/segments', ['uses' =>  'GarageController@getSegments']);
-                        $router->get('/types', ['uses' =>  'GarageController@getServicesTypes']);
-                        $router->get('/categories', ['uses' =>  'GarageController@getServicesCategories']);
-                        $router->get('/catalog', ['uses' =>  'GarageController@getServiceCatalog']);
-                        $router->get('/brands', ['uses' =>  'GarageController@getServiceBrands']);
+                        $router->post('/', ['uses' =>  'GarageServiceController@saveService']);
+                        $router->delete('/', ['uses' =>  'GarageServiceController@removeService']);
+                        $router->get('/{garageId}/list', ['uses' =>  'GarageServiceController@getServices']);
+                        $router->get('/id/{serviceId}', ['uses' =>  'GarageServiceController@getServiceById']);
+                        $router->get('/types', ['uses' =>  'GarageServiceController@getServicesTypes']);
+                        $router->get('/categories', ['uses' =>  'GarageServiceController@getServicesCategories']);
+                        $router->get('/catalog', ['uses' =>  'GarageServiceController@getServiceCatalog']);
+                        $router->get('/brands', ['uses' =>  'GarageServiceController@getServiceBrands']);
+                        $router->get('/pool/{garageId}/{segment}', ['uses' =>  'GarageServiceController@getPoolBySegment']);
+                        $router->post('/pool', ['uses' =>  'GarageServiceController@savePoolBySegment']);
                     });
                 }
             );

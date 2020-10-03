@@ -69,7 +69,6 @@ export default {
     saveImages() {},
     removeFile(file) {
       this.message = "";
-      console.log(file);
       axios
         .delete("/manager/garage/media", {
           data: {

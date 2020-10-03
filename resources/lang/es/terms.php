@@ -11,13 +11,13 @@ return [
     "OIL" => "Lubricantes",
     "FILTER" => "Filtros",
     "BRAKE" => "Frenos",
-    "BATERY" => "Baterías",
+    "BATTERY" => "Baterías",
     "TYRE" => "Neumáticos",
     "AC" => "Aire Acondicionado",
     "CHECK" => "Reparaciones",
-    "HAND" => "Mano de obra",
+    "WORKFORCE" => "Mano de obra",
     # categories
     "PREMIUM" => "Premium",
-    "QUALITY" => "Quality",
+    "MEDIUM" => "Medium",
     "ECONOMIC" => "Económica",
 ];

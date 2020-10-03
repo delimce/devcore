@@ -1,0 +1,17 @@
+{
+    "car": {
+        "code": "CAR"
+    },
+    "van": {
+        "code": "VAN"
+    },
+    "suv": {
+        "code": "SUV"
+    },
+    "truck": {
+        "code": "TRUCK"
+    },
+    "bike": {
+        "code": "MOTORCYCLE"
+    }
+}

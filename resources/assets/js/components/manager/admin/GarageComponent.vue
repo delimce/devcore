@@ -56,11 +56,12 @@
 
 <script>
 import EventBus from "@/bus";
+import GarageMixin from "@/components/manager/mixins/GarageMixin.js";
 import _ from "lodash";
 export default {
   data() {
     return {
-      activeTab: "info",
+      activeTab: "services",
       label_info: "Datos del Taller",
       label_schedule: "Horarios",
       label_media: "Multimedia",

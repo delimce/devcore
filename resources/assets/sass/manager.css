@@ -3729,11 +3729,24 @@ print {
   clip: auto;
 }
 
+.checked-service{
+  background-color: gainsboro;
+  font-weight: bold;
+}
+
 .modal-header{
   text-align: center;
   font-weight: bold;
   margin: 8px 0px; 
   line-height: 3em;
   border-bottom: 1px solid #2C2F3D;
+}
+
+.add-item {
+  color: steelblue;
+  padding: 10px;
+  cursor: pointer;
+  width: 150px;
+  margin:auto;
 }
 

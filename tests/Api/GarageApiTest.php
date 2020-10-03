@@ -70,6 +70,12 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(200);
     }
 
+    public function testGarageGetSegments()
+    {
+        $this->get(static::API_URI . "/segments", ["Authorization" => $this->manager->token]);
+        $this->seeStatusCode(200);
+    }
+
     /** @test
      *  garage schedules
      */
@@ -147,103 +153,4 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(403);
     }
 
-
-
-    /**
-     * @test
-     * testGarageServiceSelects
-     *
-     * @return void
-     */
-    public function testGarageServiceSelects()
-    {
-
-        $this->get(static::API_URI . "/services/segments", ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(200);
-
-        $this->get(static::API_URI . "/services/types", ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(200);
-
-        $this->get(static::API_URI . "/services/categories", ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(200);
-
-        $filter = "type=TYRE";
-        $response = $this->call('GET', static::API_URI .  "/services/brands/?" . $filter, [], [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-
-        $this->assertEquals(200, $response->status());
-        $this->assertGreaterThan(2, $this->getCountOfResponseList($response));
-
-        $filter = "segment=CAR&type=TYRE";
-        $response = $this->call('GET', static::API_URI .  "/services/catalog/?" . $filter, [], [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-
-        $this->assertEquals(200, $response->status());
-        $this->assertGreaterThan(2, $this->getCountOfResponseList($response));
-    }
-
-
-    /**
-     * @test
-     * testGarageServicesOperations
-     *
-     * @return void
-     */
-    public function testGarageServicesOperations()
-    {
-        $garageId =  $this->garage->id;
-        $fakeGarageServiceData =  [
-            'garage_id' => $garageId,
-            'segment' => 'CAR',
-            'type' => 'OIL'
-        ];
-
-        // create garage service fails
-        $this->post(static::API_URI . "/services", $fakeGarageServiceData, ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(400);
-
-        $fakeGarageServiceData = array_merge($fakeGarageServiceData, [
-            "service_id" => 1,
-            "price" => 5.5
-        ]);
-
-        // good
-        $response = $this->call("POST", static::API_URI . "/services", $fakeGarageServiceData, [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-        $this->assertEquals(200, $response->status());
-
-        // get garage service just created
-        $garageService = $this->getArrayByResponse($response);
-        $response2 = $this->call('GET', static::API_URI .  "/services/id/" . $garageService["id"], [], [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-
-        $this->assertArrayHasKey("service", $this->getArrayByResponse($response2));
-
-
-        $this->get(static::API_URI . "/services/" . $garageId . "/list", ["Authorization" => $this->manager->token]);
-        $this->seeStatusCode(200);
-
-        // get list of garage services
-        $response3 = $this->call("GET", static::API_URI . "/services/" . $garageId . "/list", [], [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-
-        $this->assertEquals(200, $response3->status());
-        $this->assertEquals(1,$this->getCountOfResponseList($response3));
-
-        //get list
-        $items = $this->getArrayByResponse($response3)["list"];
-        $this->assertArrayHasKey("service",$items[0]);
-
-        // delete garage service
-        $this->call("DELETE", static::API_URI . "/services", ["service_id" => $garageService["id"]], [], [], [
-            "HTTP_Authorization" => $this->manager->token,
-        ]);
-        $this->seeStatusCode(200);
-
-    }
 }
