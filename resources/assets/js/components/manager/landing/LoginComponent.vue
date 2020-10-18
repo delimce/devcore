@@ -5,17 +5,20 @@
         <form v-on:submit.prevent="submitForm">
           <div class="notification is-light">
             <div class="image-container">
-              <img :src="this.$imagePath + 'common/logo01.png'" class="logo-mini" />
+              <img
+                :src="this.$imagePath + 'common/logo01.png'"
+                class="logo-mini"
+              />
               <br />Manager
             </div>
             <div class="field">
-              <label class="label">{{label_email}}</label>
+              <label class="label">{{ label_email }}</label>
               <p class="control has-icons-left has-icons-right">
                 <input
                   class="input"
                   type="email"
                   placeholder="Email"
-                  @focus="message=''"
+                  @focus="message = ''"
                   v-model="credentials.email"
                 />
                 <span class="icon is-small is-left">
@@ -24,12 +27,12 @@
               </p>
             </div>
             <div v-if="loginMode" class="field">
-              <label class="label">{{label_pass}}</label>
+              <label class="label">{{ label_pass }}</label>
               <p class="control has-icons-left">
                 <input
                   class="input"
                   type="password"
-                  @focus="message=''"
+                  @focus="message = ''"
                   placeholder="Password"
                   v-model="credentials.password"
                 />
@@ -40,15 +43,21 @@
             </div>
 
             <div class="field">
-              <a class="reset" @click="switchMode()">{{label_switch}}</a>
+              <a class="reset" @click="switchMode()">{{ label_switch }}</a>
             </div>
 
             <div class="control columns">
               <div class="column">
-                <button type="submit" class="button is-link" :disabled="form_sent">{{label_button}}</button>
+                <button
+                  type="submit"
+                  class="button is-link"
+                  :disabled="form_sent"
+                >
+                  {{ label_button }}
+                </button>
               </div>
               <div class="column is-two-thirds error-text">
-                {{message}}
+                {{ message }}
                 <pre-loader v-show="preloading"></pre-loader>
               </div>
             </div>
@@ -61,9 +70,11 @@
 </template>
 
 <script>
-import { saveUserToken, redirectToAdmin } from "@/functions";
+import landingMixin from "@/components/manager/mixins/LandingMixin";
+import { mapMutations } from "vuex";
 export default {
-  name: "Login",
+  name: "LoginManager",
+  mixins: [landingMixin],
   data() {
     return {
       loginMode: false,
@@ -92,17 +103,18 @@ export default {
       } else {
         this.resetPassword();
       }
-    }, 200),
+    }, 205),
     doLogin() {
       axios
         .post("/manager/login", this.credentials)
         .then((response) => {
           this.preloading = false;
           this.form_sent = true;
-          let token = response.data.info.token;
+          let manager = response.data.info;
+          let token = manager.token;
           this.error_message = "";
-          saveUserToken(token);
-          redirectToAdmin();
+          this.saveToken(token);
+          this.goToAdmin();
         })
         .catch((error) => {
           this.preloading = false;
@@ -135,6 +147,7 @@ export default {
       this.form_sent = false;
     },
   },
+  computed: {},
   mounted: function () {
     this.switchMode();
   },

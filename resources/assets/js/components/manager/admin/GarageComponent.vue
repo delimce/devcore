@@ -61,7 +61,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      activeTab: "services",
+      activeTab: "info",
       label_info: "Datos del Taller",
       label_schedule: "Horarios",
       label_media: "Multimedia",

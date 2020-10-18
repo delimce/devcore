@@ -60,9 +60,7 @@
                 :pool="pool.tyre"
               ></pool-tyre-component>
 
-               <pool-tyre-component
-                :pool="pool.tyre"
-              ></pool-tyre-component>
+              <pool-tyre-component :pool="pool.tyre"></pool-tyre-component>
             </div>
             <div v-else slot="content">{{ label_disable }}</div>
           </BulmaAccordionItem>
@@ -183,7 +181,9 @@ export default {
       brands: [],
       services: [],
       garageServices: [],
-      pool: {},
+      pool: {
+        workforce: [{ price: 0.0 }],
+      },
     };
   },
   methods: {

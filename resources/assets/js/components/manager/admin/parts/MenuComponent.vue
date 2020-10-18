@@ -72,9 +72,10 @@
 
 <script>
 import EventBus from "@/bus";
-import { deleteUserData, redirectToManager } from "@/functions";
+import landingMixin from "@/components/manager/mixins/LandingMixin"
 export default {
   name: "MenuAdmin",
+  mixins:[landingMixin],
   data() {
     return {
       preloading: false,
@@ -101,10 +102,6 @@ export default {
       this.header.title = title;
       this.header.desc = desc;
       EventBus.$emit("change-header-name", this.header);
-    },
-    doLogout() {
-      deleteUserData();
-      redirectToManager();
     }
   }
 };

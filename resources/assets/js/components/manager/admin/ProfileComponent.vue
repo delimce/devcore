@@ -1,17 +1,20 @@
 <template>
   <section class="content-body">
-    <div class="columns">
+    <div v-if="loading">
+      <pre-loader v-show="loading"></pre-loader>
+    </div>
+    <div v-else class="columns">
       <div class="column">
         <!-- user dataform -->
         <div class="card">
           <div class="card-content">
-            <p class="title is-5">{{label_data}}</p>
+            <p class="title is-5">{{ label_data }}</p>
             <div class="field">
-              <label class="label">{{label_name}}</label>
+              <label class="label">{{ label_name }}</label>
               <div class="control">
                 <input
                   class="input is-primary"
-                  v-on:focus="message1=''"
+                  v-on:focus="message1 = ''"
                   type="text"
                   placeholder
                   v-model="user.name"
@@ -19,11 +22,11 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">{{label_lastname}}</label>
+              <label class="label">{{ label_lastname }}</label>
               <div class="control">
                 <input
                   class="input is-primary"
-                  v-on:focus="message1=''"
+                  v-on:focus="message1 = ''"
                   type="text"
                   placeholder
                   v-model="user.lastname"
@@ -31,11 +34,11 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">{{label_dni}}</label>
+              <label class="label">{{ label_dni }}</label>
               <div class="control">
                 <input
                   class="input is-primary"
-                  v-on:focus="message1=''"
+                  v-on:focus="message1 = ''"
                   type="text"
                   placeholder
                   v-model="user.dni"
@@ -43,14 +46,14 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">{{label_birthdate}}</label>
+              <label class="label">{{ label_birthdate }}</label>
               <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
                 <input
                   class="input is-primary"
-                  v-on:focus="message1=''"
+                  v-on:focus="message1 = ''"
                   type="date"
                   placeholder
                   v-model="user.birthdate"
@@ -58,7 +61,7 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">{{label_mail}}</label>
+              <label class="label">{{ label_mail }}</label>
               <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
@@ -73,14 +76,14 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">{{label_phone}}</label>
+              <label class="label">{{ label_phone }}</label>
               <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                   <i class="fa fa-phone"></i>
                 </span>
                 <input
                   class="input is-primary"
-                  v-on:focus="message1=''"
+                  v-on:focus="message1 = ''"
                   type="tel"
                   placeholder
                   v-model="user.phone"
@@ -93,11 +96,15 @@
                   type="submit"
                   @click="saveUserInformation()"
                   class="button is-link"
-                >{{label_save}}</button>
+                >
+                  {{ label_save }}
+                </button>
               </div>
               <div class="mini">
                 <pre-loader v-show="preloading1"></pre-loader>
-                <div v-show="!preloading1" v-bind:class="[messageType]">{{message1}}</div>
+                <div v-show="!preloading1" v-bind:class="[messageType]">
+                  {{ message1 }}
+                </div>
               </div>
             </div>
           </div>
@@ -105,30 +112,30 @@
         <!-- change password -->
         <div class="card">
           <div class="card-content">
-            <p class="title is-5">{{label_password_change}}</p>
+            <p class="title is-5">{{ label_password_change }}</p>
             <div class="field">
-              <label class="label">{{label_oldpassword}}</label>
+              <label class="label">{{ label_oldpassword }}</label>
               <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                   <i class="fa fa-key"></i>
                 </span>
                 <input
                   class="input is-primary"
-                  v-on:focus="message2=''"
+                  v-on:focus="message2 = ''"
                   type="password"
                   placeholder
                   v-model="user.oldpassword"
                 />
               </div>
               <div class="field">
-                <label class="label">{{label_password}}</label>
+                <label class="label">{{ label_password }}</label>
                 <div class="control has-icons-left">
                   <span class="icon is-small is-left">
                     <i class="fa fa-key"></i>
                   </span>
                   <input
                     class="input is-primary"
-                    v-on:focus="message2=''"
+                    v-on:focus="message2 = ''"
                     type="password"
                     placeholder
                     v-model="user.password"
@@ -136,14 +143,14 @@
                 </div>
               </div>
               <div class="field">
-                <label class="label">{{label_password2}}</label>
+                <label class="label">{{ label_password2 }}</label>
                 <div class="control has-icons-left">
                   <span class="icon is-small is-left">
                     <i class="fa fa-key"></i>
                   </span>
                   <input
                     class="input is-primary"
-                    v-on:focus="message2=''"
+                    v-on:focus="message2 = ''"
                     type="password"
                     placeholder
                     v-model="user.password_confirmation"
@@ -157,11 +164,15 @@
                     type="submit"
                     @click="changePassword()"
                     class="button is-link"
-                  >{{label_save}}</button>
+                  >
+                    {{ label_save }}
+                  </button>
                 </div>
                 <div class="mini">
                   <pre-loader v-show="preloading2"></pre-loader>
-                  <div v-show="!preloading2" v-bind:class="[messageType]">{{message2}}</div>
+                  <div v-show="!preloading2" v-bind:class="[messageType]">
+                    {{ message2 }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,14 +183,14 @@
       <div class="column">
         <div class="card">
           <div class="card-content">
-            <p class="title is-5">{{label_company}}</p>
+            <p class="title is-5">{{ label_company }}</p>
 
             <div class="field">
-              <label class="label">{{label_company_name}}</label>
+              <label class="label">{{ label_company_name }}</label>
               <div class="control">
                 <input
                   class="input is-primary"
-                  v-on:focus="message3=''"
+                  v-on:focus="message3 = ''"
                   type="text"
                   placeholder
                   v-model="user.company.name"
@@ -188,11 +199,11 @@
             </div>
 
             <div class="field">
-              <label class="label">{{label_company_nif}}</label>
+              <label class="label">{{ label_company_nif }}</label>
               <div class="control">
                 <input
                   class="input is-primary"
-                  v-on:focus="message3=''"
+                  v-on:focus="message3 = ''"
                   type="text"
                   placeholder
                   v-model="user.company.nif"
@@ -201,14 +212,14 @@
             </div>
 
             <div class="field">
-              <label class="label">{{label_company_phone}}</label>
+              <label class="label">{{ label_company_phone }}</label>
               <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                   <i class="fa fa-phone"></i>
                 </span>
                 <input
                   class="input is-primary"
-                  v-on:focus="message3=''"
+                  v-on:focus="message3 = ''"
                   type="text"
                   placeholder
                   v-model="user.company.phone"
@@ -218,11 +229,19 @@
 
             <div class="field is-grouped">
               <div class="control">
-                <button type="submit" @click="saveCompany()" class="button is-link">{{label_save}}</button>
+                <button
+                  type="submit"
+                  @click="saveCompany()"
+                  class="button is-link"
+                >
+                  {{ label_save }}
+                </button>
               </div>
               <div class="mini">
                 <pre-loader v-show="preloading3"></pre-loader>
-                <div v-show="!preloading3" v-bind:class="[messageType]">{{message3}}</div>
+                <div v-show="!preloading3" v-bind:class="[messageType]">
+                  {{ message3 }}
+                </div>
               </div>
             </div>
           </div>
@@ -233,9 +252,11 @@
 </template>
 
 <script>
-import EventBus from "@/bus";
+import managerMixin from "@/components/manager/mixins/ManagerMixing";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "ManagerProfile",
+  mixins: [managerMixin],
   data() {
     return {
       messageType: "",
@@ -277,31 +298,24 @@ export default {
         company: {
           name: "",
           nif: "",
-          phone: ""
-        }
-      }
+          phone: "",
+        },
+      },
     };
   },
   methods: {
-    loadUserInformation() {
-      axios
-        .get("/manager/auth/")
-        .then(response => {
-          this.user = response.data.info.user;
-        })
-        .catch(error => {});
-    },
+    ...mapMutations(["SET_MANAGER"]),
     saveUserInformation() {
       this.preloading1 = true;
       axios
         .put("/manager/auth/info/save", this.user)
-        .then(response => {
+        .then((response) => {
           this.messageType = "message-ok";
           this.preloading1 = false;
           this.message1 = response.data.info.message;
-          EventBus.$emit("change-manager-name", this.user.name);
+          this.SET_MANAGER(this.user);
         })
-        .catch(error => {
+        .catch((error) => {
           this.messageType = "message-error";
           this.preloading1 = false;
           this.message1 = error.response.data.info.message;
@@ -311,12 +325,12 @@ export default {
       this.preloading2 = true;
       axios
         .put("/manager/auth/password", this.user)
-        .then(response => {
+        .then((response) => {
           this.messageType = "message-ok";
           this.preloading2 = false;
           this.message2 = response.data.info.message;
         })
-        .catch(error => {
+        .catch((error) => {
           this.messageType = "message-error";
           this.preloading2 = false;
           this.message2 = error.response.data.info.message;
@@ -329,23 +343,33 @@ export default {
           manager_id: this.user.id,
           name: this.user.company.name,
           nif: this.user.company.nif,
-          phone: this.user.company.phone
+          phone: this.user.company.phone,
         })
-        .then(response => {
+        .then((response) => {
+          this.SET_MANAGER(this.user);
           this.messageType = "message-ok";
           this.preloading3 = false;
           this.message3 = response.data.info.message;
         })
-        .catch(error => {
+        .catch((error) => {
           this.messageType = "message-error";
           this.preloading3 = false;
           this.message3 = error.response.data.info.message;
         });
+    },
+  },
+  mounted: async function () {
+    this.loading = true;
+    if (!_.isUndefined(this.manager.user.id)) {
+      this.user = this.manager.user;
+      this.loading = false;
+    } else {
+      this.user = await this.getManager();
     }
   },
-  mounted: function() {
-    this.loadUserInformation();
-  }
+  computed: {
+    ...mapState(["manager"]),
+  },
 };
 </script>
 

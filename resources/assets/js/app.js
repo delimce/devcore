@@ -32,6 +32,10 @@ axios.interceptors.request.use(
     error => Promise.reject(error)
 );
 
+/* Vuex Store
+ state control */
+import store from './stores/index'
+
 /**
  * Vuelidate
  * method to validate app forms
@@ -79,5 +83,6 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });

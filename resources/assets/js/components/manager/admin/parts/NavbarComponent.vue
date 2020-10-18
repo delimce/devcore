@@ -39,15 +39,18 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               <figure class="image avatar is-32x32">
-                <img class="is-rounded" :src="this.$imagePath + 'common/user.png'" />
+                <img
+                  class="is-rounded"
+                  :src="this.$imagePath + 'common/user.png'"
+                />
               </figure>
-              &nbsp; {{hello}}, {{user.name}}
+              &nbsp; {{ hello }}, {{ manager.user.name }}
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item">{{profile}}</a>
+              <a class="navbar-item">{{ profile }}</a>
               <hr class="navbar-divider" />
-              <a class="navbar-item" @click="doLogout()">{{close}}</a>
+              <a class="navbar-item" @click="doLogout()">{{ close }}</a>
             </div>
           </div>
         </div>
@@ -58,48 +61,40 @@
 
 <script>
 import EventBus from "@/bus";
-import { deleteUserData, redirectToManager } from "@/functions";
+import { mapState, mapMutations } from "vuex";
+import landingMixin from "@/components/manager/mixins/LandingMixin";
+import managerMixin from "@/components/manager/mixins/ManagerMixing";
 export default {
   name: "Navbar",
+  mixins: [landingMixin, managerMixin],
   data() {
     return {
-      preloading: false,
       user: {},
-      profile:"Perfil",
+      profile: "Perfil",
       hello: "Hola",
-      close: "Cerrar sesión"
+      close: "Cerrar sesión",
     };
   },
   methods: {
-    validateSession() {
-      this.preloading = true;
-      axios
-        .get("/manager/auth/")
-        .then(response => {
-          this.preloading = false;
-
-          this.user = response.data.info.user;
-        })
-        .catch(error => {
-          this.preloading = false;
-          deleteUserData();
-          redirectToManager();
-        });
+    async validateSession() {
+      try {
+        this.user = await this.getManager();
+        this.SET_MANAGER(this.user);
+      } catch (error) {
+        console.log(error);
+      }
     },
-    doLogout() {
-      deleteUserData();
-      redirectToManager();
-    }
+    ...mapMutations(["SET_MANAGER"]),
   },
-  mounted: function() {
+  created: function () {
     this.validateSession();
   },
-
-  created: function() {
-    EventBus.$on("change-manager-name", name => {
-      this.user.name = name;
-    });
-  }
+  computed: {
+    ...mapState(["manager"]),
+  },
+  beforeDestroy() {
+    this.$store.replaceState({});
+  },
 };
 </script>
 
