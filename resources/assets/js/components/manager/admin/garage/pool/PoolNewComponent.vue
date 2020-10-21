@@ -16,17 +16,13 @@
           <div v-show="categories" class="column is-3">
             <simple-select-component
               :list="categories"
-              v-model="newPool.category"
+              v-model="categorySelected"
               select="Categoria"
             ></simple-select-component>
           </div>
           <div v-show="brands" class="column is-3">
             <simple-select-component
-              :list="
-                brands.filter((item) => {
-                  return item.category == newPool.category;
-                })
-              "
+              :list="brandFiltered"
               v-model="newPool.brand"
               select="Marca"
             ></simple-select-component>
@@ -88,12 +84,14 @@ export default {
     },
     segment: {
       type: String,
-      default: "null",
+      default: null,
     },
   },
   mixins: [GarageMixin],
   data() {
     return {
+      categorySelected: null,
+      brandFiltered: [],
       newTyreError: false,
       label_new_title: "Añadir nuevo Product/servicio",
       label_save: "Guardar",
@@ -106,6 +104,19 @@ export default {
     };
   },
   methods: {
+    poolNameList() {
+      let list = this.pool
+        .filter((el) => {
+          return el.segment == this.segment;
+        })
+        .map((el) => {
+          return {
+            id: el.id,
+            desc: el.name,
+          };
+        });
+      return _.uniqBy(list, "id");
+    },
     showNew() {
       this.newPool = this.setNewPool();
       this.message = "";
@@ -122,11 +133,14 @@ export default {
         price: 0.0,
         segment: this.segment,
       };
+      this.categorySelected = null;
+      this.brandFiltered = [];
     },
     saveNew() {
       this.newPool.name = this.getPoolById(this.newPool.id).name;
       if (this.isValidate()) {
         let temp = this.newPool;
+        temp.category = this.categorySelected;
         this.pool.push(temp); //add new pool
         this.showNew();
         this.newPool = this.setNewPool();
@@ -151,8 +165,16 @@ export default {
       return true;
     },
   },
+  watch: {
+    categorySelected() {
+      this.brandFiltered = this.brands.filter((item) => {
+        return item.category == this.categorySelected;
+      });
+    },
+  },
   created: function () {
     this.label_new = this.label_add;
+    this.brandFiltered = this.categories ? null : this.brands;
   },
 };
 </script>

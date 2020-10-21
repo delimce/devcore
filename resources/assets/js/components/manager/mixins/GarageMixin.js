@@ -61,15 +61,6 @@ const GarageMixin = {
             return this.pool.find(el => {
                 return el.id == id
             })
-        },
-        poolNameList() {
-            let list = this.pool.map(el => {
-                return {
-                    "id": el.id,
-                    "desc": el.name
-                }
-            })
-            return _.uniqBy(list, 'id');
         }
     }
 }

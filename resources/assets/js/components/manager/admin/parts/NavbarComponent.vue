@@ -81,7 +81,7 @@ export default {
         this.user = await this.getManager();
         this.SET_MANAGER(this.user);
       } catch (error) {
-        console.log(error);
+        this.doLogout();
       }
     },
     ...mapMutations(["SET_MANAGER"]),

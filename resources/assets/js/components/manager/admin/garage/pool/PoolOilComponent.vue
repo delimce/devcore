@@ -7,10 +7,12 @@
       <div class="column is-3">Precio</div>
     </div>
 
-    <div class="columns" 
-    :class="{ 'checked-service': service.select }"
-     v-for="service in pool
-     " :key="service.id">
+    <div
+      class="columns"
+      :class="{ 'checked-service': service.select }"
+      v-for="(service, i) in pool"
+      :key="i"
+    >
       <div class="column is-1">
         <input
           @change="resetPrice(service)"
@@ -20,16 +22,16 @@
       </div>
       <div class="column is-3">{{ service.name }}</div>
       <div class="column is-3">
-         <simple-select-component
+        <simple-select-component
           :list="brands"
           select="Seleccione"
-          v-model="service.brand"   
+          v-model="service.brand"
           :disable="!service.select"
         ></simple-select-component>
       </div>
       <div class="column is-2">
         <money
-         :disabled="!service.select"
+          :disabled="!service.select"
           v-model="service.price"
           v-bind="money"
           style="width: 60%"
@@ -38,11 +40,7 @@
       </div>
     </div>
 
-     <pool-new-component
-      :pool="pool"
-      :brands="brands"
-      :segment="segment"
-    ></pool-new-component>
+    <pool-new-component :pool="pool" :brands="brands"></pool-new-component>
   </div>
 </template>
 
@@ -51,7 +49,7 @@ import money from "v-money";
 import categoriesEnum from "@/enums/categories.json";
 import GarageMixin from "@/components/manager/mixins/GarageMixin.js";
 export default {
-  name: "poolBatteryComponent",
+  name: "poolOilComponent",
   props: ["services", "brands", "pool", "segment"],
   mixins: [GarageMixin],
   data() {

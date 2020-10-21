@@ -24,7 +24,6 @@
 
         <BulmaAccordion
           :dropdown="false"
-          :initialOpenItem="1"
           :slide="{
             duration: '.1s',
             timerFunc: 'ease',
