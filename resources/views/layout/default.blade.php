@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Language" content="en,es">
-    <meta name="description" content="Garafy.es encuentra tu taller en línea las 24 horas del dia">
+    <meta name="description" content="Garafy.es Encuentra tu taller en línea las 24 horas del dia">
     <meta name="keywords" content="taller,cita,españa,repuestos,motor,coches,reparación">
-    <meta name="language" content="en-EN">
+    <meta name="language" content="es-ES">
     <meta name="author" content="garafy">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
     <title>{{env("APP_NAME")}} - @yield('title')</title>
