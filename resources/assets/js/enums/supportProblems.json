@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "code": "001",
+        "desc": "Duda de funcionamiento"
+    },
+    {
+        "id": 2,
+        "code": "002",
+        "desc": "Error del sistema"
+    },
+    {
+        "id": 3,
+        "code": "003",
+        "desc": "Comentarios o sugerencias"
+    },
+    {
+        "id": 4,
+        "code": "004",
+        "desc": "Otro"
+    }
+]

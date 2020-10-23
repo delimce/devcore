@@ -93,7 +93,7 @@ export default {
       label_appointment: "Agenda",
       desc_appointment: "Gestión de las citas del taller",
       label_support: "Soporte",
-      desc_support: "Contáctenos en caso de algun inconveniente",
+      desc_support: "Contáctenos en caso de inconvenientes",
       label_logout: "Cerrar sesión"
     };
   },
