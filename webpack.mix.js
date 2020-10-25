@@ -31,3 +31,7 @@ mix.scripts([
   ], 'public/assets/js/functions.js');
 
 mix.copyDirectory('resources/assets/img', 'public/assets/img', false);
+
+if (mix.inProduction()) {
+  mix.version();
+}
