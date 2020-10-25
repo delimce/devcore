@@ -168,7 +168,7 @@ export default {
       messageType: "",
       preloading: false,
       message: "",
-      label_segment: "Segmento Automotor:",
+      label_segment: "Segmento de vehículo:",
       label_work: "Mano de obra",
       label_tyre: "Neumáticos",
       label_disable:

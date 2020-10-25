@@ -153,7 +153,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      label_name: "Nombre",
+      label_name: "Nombre del taller",
       label_phone: "Teléfono",
       label_desc: "Resumen (opcional)",
       label_networks: "Red de talleres",
