@@ -4,11 +4,11 @@
       <div class="container has-text-centered">
         <div class="columns m-t-10">
           <div class="column">
-            <nav class="has-text-grey-light">
-              <a :href="home" class="has-text-primary">Home</a> &bullet;
-              <a :href="servicesUrl" class="has-text-primary">Testimonios</a> &bullet;
-              <a :href="managerUrl" class="has-text-primary">Garafy Manager</a> &bullet;
-              <a href="#" class="has-text-primary">Contáctenos</a>
+            <nav class="has-text-grey-light text-black">
+              <a :href="home" class="black">Home</a> &bullet;
+              <a :href="servicesUrl" class="black">Testimonios</a> &bullet;
+              <a :href="managerUrl" class="black">Garafy Manager</a> &bullet;
+              <a href="#" class="black">Contáctenos</a>
             </nav>
           </div>
         </div>
@@ -25,7 +25,9 @@
             </a>
           </button>
           <button class="linkedin-button button is-medium">
-            <i class="fab fa-linkedin-in"></i>
+            <a href="https://www.linkedin.com/company/garafy/about/" target="blank">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
           </button>
         </div>
         <div class="b-t m-t-30 p-t-30 has-text-grey-light is-size-9">
@@ -95,6 +97,10 @@ export default {
 
 a{
   text-decoration: none;
+  color: #fff;
+}
+
+.black{
   color: #000 !important;
 }
 

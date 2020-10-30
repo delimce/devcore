@@ -80,8 +80,11 @@ class ManagerApiTest extends TestCase
 
     /**
      *  @test
+     * testManagerChangePassword
+     *
+     * @return void
      */
-    public function testManagerChangePasswordFailed()
+    public function testManagerChangePassword()
     {
 
         $this->put(static::API_URI . "auth/password", [
