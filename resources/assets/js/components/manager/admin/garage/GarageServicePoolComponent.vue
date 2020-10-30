@@ -38,8 +38,7 @@
                   <money
                     v-model="pool.workforce[0].price"
                     v-bind="money"
-                    style="width: 65%"
-                    class="input is-primary is-size-14-mobile"
+                    class="input is-primary price-mini"
                   ></money>
                 </div>
               </div>

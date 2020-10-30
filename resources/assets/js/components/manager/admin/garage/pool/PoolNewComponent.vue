@@ -1,45 +1,44 @@
 <template>
   <div>
     <!-- create new service -->
-
-    <div v-show="createNew" class="rows">
+    <div class="rows" v-show="createNew">
       <div class="row is-full">
         <p class="title">{{ label_new_title }}</p>
-        <div class="columns">
-          <div class="column is-3">
+
+        <div class="field has-addons">
+          <div class="control">
             <simple-select-component
               v-model="newPool.id"
               :list="poolNameList()"
               select="Producto"
             ></simple-select-component>
           </div>
-          <div v-show="categories" class="column is-3">
+
+          <div v-show="categories" class="control">
             <simple-select-component
               :list="categories"
               v-model="categorySelected"
               select="Categoria"
             ></simple-select-component>
           </div>
-          <div v-show="brands" class="column is-3">
+
+          <div v-show="brands" class="control max-select">
             <simple-select-component
               :list="brandFiltered"
               v-model="newPool.brand"
               select="Marca"
             ></simple-select-component>
           </div>
-          <div class="column is-3">
+
+          <div class="control">
             <money
               v-model="newPool.price"
               v-bind="money"
-              style="width: 60%"
-              class="input is-primary is-size-14-mobile"
+              class="input is-primary save-new"
             >
             </money>
           </div>
-        </div>
-      </div>
-      <div class="row is-full">
-        <div class="field is-grouped">
+
           <div class="control">
             <button
               :disabled="!(Number(newPool.id) > 0 && newPool.price > 0)"
@@ -49,6 +48,10 @@
               {{ label_save }}
             </button>
           </div>
+        </div>
+      </div>
+      <div class="row is-full">
+        <div class="field is-grouped">
           <div class="mini">
             <div v-bind:class="[messageType]">
               {{ message }}
@@ -67,6 +70,7 @@
 <script>
 import money from "v-money";
 import GarageMixin from "@/components/manager/mixins/GarageMixin.js";
+import EventBus from "@/bus";
 export default {
   name: "poolNewComponent",
   props: {
@@ -92,7 +96,6 @@ export default {
     return {
       categorySelected: null,
       brandFiltered: [],
-      newTyreError: false,
       label_new_title: "Añadir nuevo Product/servicio",
       label_save: "Guardar",
       label_add: "[Añadir nuevo +]",
@@ -164,6 +167,12 @@ export default {
       }
       return true;
     },
+    hidePanel() {
+      this.setNewPool();
+      this.message = "";
+      this.createNew = false;
+      this.label_new = this.label_add;
+    },
   },
   watch: {
     categorySelected() {
@@ -175,6 +184,11 @@ export default {
   created: function () {
     this.label_new = this.label_add;
     this.brandFiltered = this.categories ? null : this.brands;
+  },
+  mounted: function () {
+    EventBus.$on("hide-pool-new-service", () => {
+      this.hidePanel();
+    });
   },
 };
 </script>
@@ -190,5 +204,14 @@ export default {
 .row .title {
   font-size: 15px;
   font-weight: bold;
+}
+
+.save-new{
+  max-width: 100px;
+}
+
+.max-select{
+  max-width: 200px;
+  overflow: auto;
 }
 </style>

@@ -21,8 +21,8 @@
           :disabled="!service.select"
           v-model="service.price"
           v-bind="money"
-          style="width: 60%"
-          class="input is-primary is-size-14-mobile"
+          style="width: 65%"
+          class="input is-primary price-mini"
         ></money>
       </div>
       <div class="column is-4">

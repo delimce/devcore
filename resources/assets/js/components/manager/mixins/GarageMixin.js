@@ -1,4 +1,5 @@
 import typesEnum from "@/enums/serviceTypes.json";
+import EventBus from "@/bus";
 const GarageMixin = {
     data() {
         return {
@@ -61,6 +62,9 @@ const GarageMixin = {
             return this.pool.find(el => {
                 return el.id == id
             })
+        },
+        setHideNewService(){
+            EventBus.$emit("hide-pool-new-service", true);
         }
     }
 }

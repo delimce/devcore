@@ -115,7 +115,7 @@
                       </h3>
                       <h4
                         class="subtitle is-size-6"
-                      >"Garafy nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanente mente durante todo el día."</h4>
+                      >"Garafy nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanentemente durante todo el día."</h4>
                     </div>
                   </div>
                 </div>

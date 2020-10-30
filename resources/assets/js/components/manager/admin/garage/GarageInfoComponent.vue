@@ -120,7 +120,7 @@
               <label class="label">{{label_zip}}</label>
               <div class="control">
                 <input
-                  class="input is-primary is-size-14-mobile"
+                  class="input is-primary price-mini"
                   style="width: 33%;"
                   v-on:focus="message=''"
                   type="number"

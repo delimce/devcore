@@ -22,7 +22,7 @@
                 v-model="pool.workforce"
                 v-bind="money"
                 style="width: 20%;"
-                class="input is-primary is-size-14-mobile"
+                class="input is-primary price-mini"
               ></money>
             </div>
           </div>
@@ -41,7 +41,7 @@
                 v-model="pool.workforce"
                 v-bind="money"
                 style="width: 20%;"
-                class="input is-primary is-size-14-mobile"
+                class="input is-primary price-mini"
               ></money>
             </div>
           </div>
@@ -60,7 +60,7 @@
                 v-model="pool.workforce"
                 v-bind="money"
                 style="width: 20%;"
-                class="input is-primary is-size-14-mobile"
+                class="input is-primary price-mini"
               ></money>
             </div>
           </div>

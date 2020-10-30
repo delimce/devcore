@@ -3750,3 +3750,7 @@ print {
   margin:auto;
 }
 
+.price-mini{
+  min-width: 90px;
+}
+
