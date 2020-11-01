@@ -1,7 +1,7 @@
 <template>
   <section class="content-body">
-    <div v-if="loading">
-      <pre-loader v-show="loading"></pre-loader>
+    <div v-if="preloading">
+      <pre-loader v-show="preloading"></pre-loader>
     </div>
     <div v-else class="columns">
       <div class="column">
@@ -252,14 +252,13 @@
 </template>
 
 <script>
-import managerMixin from "@/components/manager/mixins/ManagerMixing";
+import managerMixin from "@/components/manager/mixins/ManagerMixin";
 import { mapMutations, mapState } from "vuex";
 export default {
   name: "ManagerProfile",
   mixins: [managerMixin],
   data() {
     return {
-      messageType: "",
       preloading1: false,
       preloading2: false,
       preloading3: false,
@@ -359,12 +358,13 @@ export default {
     },
   },
   mounted: async function () {
-    this.loading = true;
+    this.preloading = true;
     if (!_.isUndefined(this.manager.user.id)) {
       this.user = this.manager.user;
-      this.loading = false;
+      this.preloading = false;
     } else {
       this.user = await this.getManager();
+      this.preloading = false;
     }
   },
   computed: {

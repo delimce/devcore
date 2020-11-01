@@ -80,8 +80,11 @@ class ManagerApiTest extends TestCase
 
     /**
      *  @test
+     * testManagerChangePassword
+     *
+     * @return void
      */
-    public function testManagerChangePasswordFailed()
+    public function testManagerChangePassword()
     {
 
         $this->put(static::API_URI . "auth/password", [
@@ -131,5 +134,15 @@ class ManagerApiTest extends TestCase
             "phone" => "6889874456",
         ], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(200);
+    }
+
+    public function testSupportRequests()
+    {
+        $this->post(static::API_URI . "support/request", ["garage" => null, "type" => 0, "description"=>""], ["Authorization" => $this->manager->token]);
+        $this->seeStatusCode(400);
+
+        $this->post(static::API_URI . "support/request", ["garage" => null, "type" => 1, "description"=>"some description"], ["Authorization" => $this->manager->token]);
+        $this->seeStatusCode(200);
+
     }
 }

@@ -120,7 +120,7 @@
               <label class="label">{{label_zip}}</label>
               <div class="control">
                 <input
-                  class="input is-primary is-size-14-mobile"
+                  class="input is-primary price-mini"
                   style="width: 33%;"
                   v-on:focus="message=''"
                   type="number"
@@ -153,7 +153,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      label_name: "Nombre",
+      label_name: "Nombre del taller",
       label_phone: "Teléfono",
       label_desc: "Resumen (opcional)",
       label_networks: "Red de talleres",

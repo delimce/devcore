@@ -1,7 +1,12 @@
+import supportEnum from "@/enums/supportProblems.json";
 const ManagerMixin = {
     data() {
         return {
-            loading: true,
+            preloading: false,
+            messageType:"",
+            message:"",
+            label_save:"Guardar",
+            supportTypes: supportEnum,
         }
     },
     methods: {

@@ -49,7 +49,7 @@
               <label class="label">{{label_model}}</label>
               <div class="control">
                 <input
-                  class="input is-primary is-size-14-mobile"
+                  class="input is-primary price-mini"
                   style="width: 80%;"
                   type="text"
                   placeholder
@@ -69,7 +69,7 @@
                   v-model="price"
                   v-bind="money"
                   style="width: 35%;"
-                  class="input is-primary is-size-14-mobile"
+                  class="input is-primary price-mini"
                 ></money>
               </div>
             </div>

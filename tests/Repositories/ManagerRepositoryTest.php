@@ -16,6 +16,19 @@ class ManagerRepositoryTest extends TestCase
     
     /**
      * @test
+     * testGetManagerById
+     *
+     * @return void
+     */
+    public function testGetManagerById()
+    {
+        $managerId =  $this->manager->id;
+        $managerData = $this->managerRepository->getById($managerId);
+        $this->assertNotNull($managerData);
+    }
+    
+    /**
+     * @test
      * testGetTokenById
      *
      * @return void

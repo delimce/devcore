@@ -34,6 +34,21 @@ class GarageRepositoryTest extends TestCase
     }
 
 
+        
+    /**
+     * @test
+     * testGetGarageById
+     *
+     * @return void
+     */
+    public function testGetGarageById()
+    {
+        $id = $this->garage->id;
+        $garage = $this->garageRepository->getById($id);
+        $this->assertNotNull($garage);
+    }
+
+
     /**
      * @test
      * testGetGaragePoolBySegment

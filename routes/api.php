@@ -22,6 +22,10 @@ $router->group(
             $router->put('reset', ['uses' =>  'ManagerController@resetSendMessage']);
             $router->put('reset/password', ['uses' =>  'ManagerController@resetPassword']);
 
+            $router->group(['prefix' => 'support'], function () use ($router) {
+                $router->post('/request', ['uses' =>  'SupportController@saveRequest']);
+            });
+
             //auth admin
             $router->group(
                 ['middleware' => ['api'], 'prefix' => 'auth'],

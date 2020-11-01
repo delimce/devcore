@@ -63,7 +63,7 @@
 import EventBus from "@/bus";
 import { mapState, mapMutations } from "vuex";
 import landingMixin from "@/components/manager/mixins/LandingMixin";
-import managerMixin from "@/components/manager/mixins/ManagerMixing";
+import managerMixin from "@/components/manager/mixins/ManagerMixin";
 export default {
   name: "Navbar",
   mixins: [landingMixin, managerMixin],

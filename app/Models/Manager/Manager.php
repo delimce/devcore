@@ -48,4 +48,10 @@ class Manager extends Model
     {
         return $this->hasOne('App\Models\Manager\Company','manager_id');
     }
+
+
+    public function supportRequests()
+    {
+        return $this->hasMany('App\Models\Manager\Support','manager_id');
+    }
 }

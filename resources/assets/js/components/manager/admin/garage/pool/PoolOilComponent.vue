@@ -10,6 +10,7 @@
     <div
       class="columns"
       :class="{ 'checked-service': service.select }"
+      @click="setHideNewService()"
       v-for="(service, i) in pool"
       :key="i"
     >
@@ -35,7 +36,7 @@
           v-model="service.price"
           v-bind="money"
           style="width: 60%"
-          class="input is-primary is-size-14-mobile"
+          class="input is-primary price-mini"
         ></money>
       </div>
     </div>

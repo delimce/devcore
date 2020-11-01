@@ -28,4 +28,9 @@ class Garage extends Model
         return $this->hasMany('App\Models\Manager\GarageService','garage_id');
     }
 
+    public function supportRequests()
+    {
+        return $this->hasMany('App\Models\Manager\Support','garage_id');
+    }
+
 }

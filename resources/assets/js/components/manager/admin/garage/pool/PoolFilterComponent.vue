@@ -35,7 +35,7 @@
           v-model="service.price"
           v-bind="money"
           style="width: 60%"
-          class="input is-primary is-size-14-mobile"
+          class="input is-primary price-mini"
         ></money>
       </div>
     </div>

@@ -17,12 +17,25 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon as Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GarageRepository
 {
     const TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC"];
+
+
+        
+    /**
+     * getById
+     *
+     * @param  int $garageId
+     * @return Collection
+     */
+    public function getById(int $garageId)
+    {
+        $garage = Garage::find($garageId);
+        return $garage;
+    }
 
     /**
      * @return mixed
@@ -222,7 +235,7 @@ class GarageRepository
         if ($segment && !$type) {
             $query->where('segment', $segment)->orWhereNull('segment');
         } else {
-            $query->where('type', $type)->where(function ($query) use ($segment) {
+            $query->where('type', $type)->where('status',1)->where(function ($query) use ($segment) {
                 $query->where('segment', $segment)->orWhereNull('segment');
             });
         }

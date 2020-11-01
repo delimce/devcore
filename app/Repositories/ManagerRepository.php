@@ -8,7 +8,6 @@ use App\Services\EmailNotificationService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -21,6 +20,19 @@ class ManagerRepository
     public function __construct(EmailNotificationService $emailService)
     {
         $this->emailService = $emailService;
+    }
+
+    
+    /**
+     * getById
+     *
+     * @param  int  $managerId
+     * @return Collection
+     */
+    public function getById(int $managerId)
+    {
+        $manager = Manager::find($managerId);
+        return $manager;
     }
 
     /**
