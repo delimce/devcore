@@ -222,7 +222,7 @@ class GarageRepository
         if ($segment && !$type) {
             $query->where('segment', $segment)->orWhereNull('segment');
         } else {
-            $query->where('type', $type)->where(function ($query) use ($segment) {
+            $query->where('type', $type)->where('status',1)->where(function ($query) use ($segment) {
                 $query->where('segment', $segment)->orWhereNull('segment');
             });
         }
