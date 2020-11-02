@@ -120,13 +120,11 @@ class ManagerRepository
         $user->token = $result["token"];
         $user->save();
 
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+        $agent = $_SERVER['HTTP_USER_AGENT'] ?? 'unit tests';
+
         # saving log
-        $user->access()->create(
-            [
-                "ip" => $_SERVER['REMOTE_ADDR'],
-                "agent" => $_SERVER['HTTP_USER_AGENT']
-            ]
-        );
+        $user->access()->create(["ip" => $ip, "agent" => $agent]);
 
         return $result;
     }

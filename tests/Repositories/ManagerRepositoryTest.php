@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Manager\Manager;
 
 class ManagerRepositoryTest extends TestCase
@@ -13,7 +14,7 @@ class ManagerRepositoryTest extends TestCase
         $this->managerRepository = $this->app->make('App\Repositories\ManagerRepository');
     }
 
-    
+
     /**
      * @test
      * testGetManagerById
@@ -26,7 +27,7 @@ class ManagerRepositoryTest extends TestCase
         $managerData = $this->managerRepository->getById($managerId);
         $this->assertNotNull($managerData);
     }
-    
+
     /**
      * @test
      * testGetTokenById
@@ -37,9 +38,27 @@ class ManagerRepositoryTest extends TestCase
     {
         $managerId =  $this->manager->id;
         $token = $this->managerRepository->getTokenById($managerId);
-        $this->assertEquals($token,$this->manager->token);
+        $this->assertEquals($token, $this->manager->token);
     }
-        
+
+
+
+    /**
+     * @test
+     * testLogin
+     *
+     * @return void
+     */
+    public function testLogin()
+    {
+        $credential["email"] = $this->manager->email;
+        $credential["password"] = 'customPassword';
+        $user = $this->managerRepository->login($credential);
+        $manager = $this->managerRepository->getUserByToken($user['token']);
+        $myUser = $this->managerRepository->getById($manager["id"]);
+        $this->assertTrue($myUser->access()->count() > 0);
+    }
+
     /**
      * @test
      * testChangePassword
@@ -52,20 +71,18 @@ class ManagerRepositoryTest extends TestCase
         $token = $this->manager->token;
         $newPassword = 'someNewPassword';
 
-        $result = $this->managerRepository->updatePassword($token,$newPassword);
+        $result = $this->managerRepository->updatePassword($token, $newPassword);
         $this->assertTrue($result);
 
         $newPassword2 = 'someNewPassword2';
 
-        $result = $this->managerRepository->changePassword($token,$newPassword,$newPassword);
+        $result = $this->managerRepository->changePassword($token, $newPassword, $newPassword);
         $this->assertTrue($result["ok"]);
 
         $newPassword3 = 'someNewPassword3';
 
-        $this->managerRepository->changePasswordWithToken($token,$newPassword3);
+        $this->managerRepository->changePasswordWithToken($token, $newPassword3);
         $newToken = $this->managerRepository->getTokenById($id);
-        $this->assertNotEquals($token,$newToken);
-
+        $this->assertNotEquals($token, $newToken);
     }
-
 }
