@@ -52,13 +52,13 @@
               </div>
             </div>
             <div class="column is-two-thirds">
-              <h2 class="has-text-whitet">
+              <h2 class="has-text-white">
                 <span
-                  class="has-text-centered is-block"
+                  class="has-text-centered is-size-4 is-block"
                 >Digitaliza tu taller y multiplica tu rentabilidad</span>
               </h2>
               <h1 class="title">
-                <div class="is-size-3 has-text-centered is-block">
+                <div class="is-size-4 has-text-centered is-block">
                   <vue-typer
                     text="¿Qué esperas para anunciar gratis tu taller en internet?"
                     :pre-type-delay=1600 :repeat="0"></vue-typer>
