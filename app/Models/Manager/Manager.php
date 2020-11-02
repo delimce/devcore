@@ -54,4 +54,10 @@ class Manager extends Model
     {
         return $this->hasMany('App\Models\Manager\Support','manager_id');
     }
+
+    
+    public function access()
+    {
+        return $this->hasMany('App\Models\Manager\ManagerAccess','manager_id');
+    }
 }

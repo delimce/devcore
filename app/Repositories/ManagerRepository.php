@@ -22,7 +22,7 @@ class ManagerRepository
         $this->emailService = $emailService;
     }
 
-    
+
     /**
      * getById
      *
@@ -69,7 +69,7 @@ class ManagerRepository
     }
 
 
-    
+
     /**
      * changePasswordWithToken
      * for restore password function
@@ -114,11 +114,20 @@ class ManagerRepository
             return $result;
         }
 
-        ///user logged
+        # user logged
         $result["ok"] = true;
         $result["token"] = static::newUserToken();
         $user->token = $result["token"];
         $user->save();
+
+        # saving log
+        $user->access()->create(
+            [
+                "ip" => $_SERVER['REMOTE_ADDR'],
+                "agent" => $_SERVER['HTTP_USER_AGENT']
+            ]
+        );
+
         return $result;
     }
 
