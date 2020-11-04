@@ -23,6 +23,6 @@ class Company extends Model
 
     public function manager()
     {
-        return $this->belongsTo('App\Models\Manager\Manager', 'manager_id');
+        return $this->belongsTo(Manager::class, 'manager_id');
     }
 }

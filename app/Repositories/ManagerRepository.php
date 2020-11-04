@@ -234,16 +234,19 @@ class ManagerRepository
      * getUserByToken
      *
      * @param  mixed $token
-     * @return array|false
+     * @return Collection|false
      */
     public function getUserByToken(string $token)
     {
-        $user = Manager::whereToken($token)->whereVerified(1)->first();
-        if (!is_null($user)) {
-            $data = $user->toArray();
-            $company = Company::whereManagerId($data["id"])->first();
-            $data["company"] = is_null($company) ? ["name" => "", "nif" => "", "phone" => ""] : $company->toArray();
-            return $data;
+        $user = Manager::with('company')->firstWhere(["token" => $token, "verified" => 1]);
+        if ($user) {
+            if (!$user->company) {
+                # set default company
+                $newUser = collect($user);
+                $newUser->put("company", ["name" => "", "nif" => "", "phone" => ""]);
+                return $newUser;
+            }
+            return $user;
         }
         return false;
     }

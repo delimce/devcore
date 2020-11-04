@@ -41,6 +41,15 @@ class ManagerRepositoryTest extends TestCase
         $this->assertEquals($token, $this->manager->token);
     }
 
+    public function testGetManagerByToken()
+    {
+        $manager = $this->managerRepository->getUserByToken("badToken");
+        $this->assertFalse($manager);
+        $manager = $this->managerRepository->getUserByToken($this->manager->token);
+        $this->assertArrayHasKey("id",$manager->toArray());
+
+    }
+
 
 
     /**
@@ -55,8 +64,10 @@ class ManagerRepositoryTest extends TestCase
         $credential["password"] = 'customPassword';
         $user = $this->managerRepository->login($credential);
         $manager = $this->managerRepository->getUserByToken($user['token']);
-        $myUser = $this->managerRepository->getById($manager["id"]);
-        $this->assertTrue($myUser->access()->count() > 0);
+        $user = $this->managerRepository->getById($manager->get("id"));
+        # manager has access
+        $this->assertTrue($user->access()->count() > 0);
+      
     }
 
     /**

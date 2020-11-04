@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Manager;
 
 use Illuminate\Database\Eloquent\Model;
@@ -46,18 +47,18 @@ class Manager extends Model
 
     public function company()
     {
-        return $this->hasOne('App\Models\Manager\Company','manager_id');
+        return $this->hasOne(Company::class, 'manager_id');
     }
 
 
     public function supportRequests()
     {
-        return $this->hasMany('App\Models\Manager\Support','manager_id');
+        return $this->hasMany(Support::class, 'manager_id');
     }
 
-    
+
     public function access()
     {
-        return $this->hasMany('App\Models\Manager\ManagerAccess','manager_id');
+        return $this->hasMany(ManagerAccess::class, 'manager_id');
     }
 }

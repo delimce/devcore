@@ -128,7 +128,7 @@ class ManagerApiTest extends TestCase
 
         $myManager = $this->managerRepository->getUserByToken($this->manager->token);
         $this->put(static::API_URI . "auth/company/save", [
-            "manager_id" => $myManager["id"],
+            "manager_id" => $myManager->get("id"),
             "name" => "New Company",
             "nif" => "14514211",
             "phone" => "6889874456",
