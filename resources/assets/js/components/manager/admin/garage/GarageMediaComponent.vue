@@ -3,7 +3,7 @@
     <div v-if="access" class="card">
       <div class="card-content">
         <div class="field">
-          <label class="label">{{label_images}}</label>
+          <label class="label">{{ label_images }}</label>
         </div>
 
         <vue-dropzone
@@ -20,19 +20,22 @@
         <div class="field is-grouped">
           <div class="mini">
             <pre-loader v-show="preloading"></pre-loader>
-            <div v-show="!preloading" v-bind:class="[messageType]">{{message}}</div>
+            <div v-show="!preloading" v-bind:class="[messageType]">
+              {{ message }}
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div v-else class="card no-garage">
-      <div class="card-content">{{label_no_access}}</div>
+      <div class="card-content">{{ label_no_access }}</div>
     </div>
   </div>
 </template>
 <script>
 import _ from "lodash";
 import EventBus from "@/bus";
+import GarageMixin from "@/components/manager/mixins/GarageMixin.js";
 import vueDropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import { getUserToken } from "@/functions";
@@ -45,9 +48,6 @@ export default {
       label_images: "Imágenes de taller",
       label_images_save: "Guardar Imágenes",
       instructions: "Agregue las imágenes para su taller",
-      messageType: "",
-      preloading: false,
-      message: "",
       garage: {},
       label_save: "Guardar",
       id: "myDropzone",
@@ -57,6 +57,7 @@ export default {
         url: api_url + "/api/manager/garage/media",
         thumbnailWidth: 222,
         addRemoveLinks: true,
+        dictRemoveFileConfirmation: "¿Desea eliminar esta imagen?",
         dictDefaultMessage: "Agregue las imágenes para su taller",
         acceptedFiles: "image/*",
         maxFilesSize: 2,
@@ -65,6 +66,7 @@ export default {
       },
     };
   },
+  mixins: [GarageMixin],
   methods: {
     saveImages() {},
     removeFile(file) {
