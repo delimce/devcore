@@ -269,10 +269,6 @@ export default {
   background-size: cover;
 }
 
-.g-logo {
-  padding: 12px 0 0 45px;
-  max-width: 300px;
-}
 
 .back-green {
   background-color: gainsboro;

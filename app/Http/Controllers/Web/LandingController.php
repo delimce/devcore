@@ -15,6 +15,11 @@ class LandingController extends BaseController
         $this->manager = $user;
     }
 
+    public function index()
+    {
+        return view('website.index');
+    }
+
     public function managerHome()
     {
         return view('website.manager');

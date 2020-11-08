@@ -11,12 +11,11 @@
 |
 */
 
-$router->get('/', function () {
-    return redirect()->route('landingManager');
-});
+# website landing
+$router->get('/', 'Web\LandingController@index');
 
 
-// landing manager
+# landing manager
 $router->group(
     ['prefix' => 'manager', 'namespace' => 'Web'],
     function () use ($router) {
@@ -28,8 +27,8 @@ $router->group(
     }
 );
 
-// admin manager
+# admin manager
 $router->get('/admin/{any:.*}', ['as' => 'admin', 'uses' => 'Web\ManagerController@index']);
 
-// media
+# media
 $router->get('/storage/media/{folder}/{file}', ['as' => 'media', 'uses' => 'Web\MediaController@serve']);

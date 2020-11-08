@@ -47,7 +47,7 @@ export default {
       currentYear: "",
       home: api_url,
       servicesUrl: api_url + "/#services",
-      managerUrl: api_url + "/#manager"
+      managerUrl: api_url + "/manager"
     };
   },
   methods: {

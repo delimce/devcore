@@ -2,6 +2,7 @@
 
 return [
     'home' => 'inicio',
+    'manager' => 'manager',
     'go' => 'Vamos',
     'hello' => 'Hola',
     'save.success' => 'Datos actualizados',
