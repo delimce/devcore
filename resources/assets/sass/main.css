@@ -127,6 +127,11 @@
       width: 94px;
   }
 
+  .garafy {
+    color: rgb(80, 122, 38);
+    font-weight: bolder;
+  }
+
   .mini {
     display: block;
     margin-top: 8px;

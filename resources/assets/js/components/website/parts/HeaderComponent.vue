@@ -16,14 +16,14 @@
           <div class="navbar-end">
             <!-- navbar items -->
             <div class="navbar-end is-mobile">
-              <a href="#services" class="navbar-item has-text-weight-semibold">
+              <a href="/#garafy" class="navbar-item has-text-weight-semibold">
                 <span>¿Que es Garafy?</span>
               </a>
               <a href="/manager" class="navbar-item has-text-weight-semibold">
                 <span>Garafy Manager</span>
               </a>
               <a class="navbar-item has-text-weight-semibold">
-                <span>Partners</span>
+                <span>Inicia sesión</span>
               </a>
             </div>
           </div>
@@ -41,7 +41,6 @@ export default {
     return {
       loginMode: false,
       preloading: false,
-      label_welcome: "¿Buscas un taller de confianza?",
     };
   },
 };
