@@ -1,0 +1,24 @@
+name: garafy_workflow
+on:
+  push:
+     branches: [ master ]
+
+jobs:
+  job_one:
+      name: Deploy
+      runs-on: ubuntu-latest
+      steps:
+      - name: testing vultr develemento conection
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DEVSERVER_IP}}
+          username: ${{secrets.DEVSERVER_USER}}
+          key:  ${{secrets.DEVSERVER_SECRET}}
+          port: 22
+          script: |
+            cd /var/www/html/devcore/
+            git checkout .
+            git pull origin master
+            git status
+
+
