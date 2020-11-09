@@ -19,6 +19,8 @@ jobs:
             cd /var/www/html/devcore/
             git checkout .
             git pull origin master
-            git status
+            composer install
+            npm run prod
+            php artisan cache:clear
 
 
