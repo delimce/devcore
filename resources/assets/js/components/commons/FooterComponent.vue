@@ -57,6 +57,11 @@ export default {
   },
   beforeMount() {
     this.getCurrentYear();
+  },
+  watch:{
+    api_url(){
+      this.api_url
+    }
   }
 };
 </script>
