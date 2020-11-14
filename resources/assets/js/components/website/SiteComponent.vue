@@ -10,6 +10,10 @@
         </div>
       </div>
     </section>
+    <!-- search results -->
+    <section id="results">
+      <search-results-component></search-results-component>
+    </section>
     <!-- what is garafy -->
     <section id="garafy">
       <div class="hero is-light">
@@ -73,9 +77,5 @@ export default {
 
 .info {
   margin: 12px 0 10px;
-}
-
-p {
-  line-height: 30px;
 }
 </style>

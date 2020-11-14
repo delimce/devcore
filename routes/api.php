@@ -77,6 +77,7 @@ $router->group(
         $router->group(
             ['prefix' => 'local'],
             function () use ($router) {
+                $router->get('/cities/country[/{countryId}]', ['uses' =>  'LocalizationController@getCitiesByCountryId']);
                 $router->get('/states[/{countryId}]', ['uses' =>  'LocalizationController@getStates']);
                 $router->get('/provinces[/{stateId}]', ['uses' =>  'LocalizationController@getProvinces']);
                 $router->get('/municipalities[/{provinceId}]', ['uses' =>  'LocalizationController@getMunicipalities']);

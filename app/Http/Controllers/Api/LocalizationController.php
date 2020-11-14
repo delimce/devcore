@@ -41,4 +41,13 @@ class LocalizationController extends ApiController
     {
         return $this->okResponse($this->local->getMunicipalities($provinceId));
     }
+
+    /**
+     * @param bool $countryId
+     * @return JsonResponse
+     */
+    public function getCitiesByCountryId($countryId)
+    {
+        return $this->okResponse($this->local->getCitiesByCountry($countryId));
+    }
 }
