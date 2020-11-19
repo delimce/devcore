@@ -73,6 +73,14 @@ $router->group(
             );
         });
 
+        //website garage routes
+        $router->group(
+            ['prefix' => 'garage'],
+            function () use ($router) {
+                $router->get('/search', ['uses' =>  'GarageFrontController@mainSearch']);
+            }
+        );
+
         //localization
         $router->group(
             ['prefix' => 'local'],

@@ -34,7 +34,6 @@ class GarageRepositoryTest extends TestCase
     }
 
 
-        
     /**
      * @test
      * testGetGarageById
@@ -65,7 +64,6 @@ class GarageRepositoryTest extends TestCase
             $index = strtolower($type);
             $this->assertArrayHasKey($index, $result);
         }
-
     }
 
 
@@ -102,7 +100,23 @@ class GarageRepositoryTest extends TestCase
             ];
         $this->garageRepository->saveGaragePool($garageId, $segment, $fakePool);
         $services = $this->garageRepository->getServiceList($garageId);
-        $this->assertCount(2,$services);
+        $this->assertCount(2, $services);
+    }
 
+
+    /**
+     * @test
+     * testGarageMainSearch
+     *
+     * @return void
+     */
+    public function testGarageMainSearch()
+    {
+        $filters["text"] = "";
+        $filters["city"] = 23;
+        $filters["zip"] = "";
+        $result =  $this->garageRepository->search($filters);
+        print_r($result);
+        $this->assertCount(0, $result->toArray());
     }
 }

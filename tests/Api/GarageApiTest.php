@@ -7,6 +7,7 @@ class GarageApiTest extends TestCase
 {
 
     const API_URI = "api/manager/garage";
+    const API_URI_GARAGE = "api/garage";
 
     /** @var manager fake  */
     protected $manager;
@@ -55,9 +56,7 @@ class GarageApiTest extends TestCase
 
         // get garageId?
         $garageResponse = $this->getArrayByResponse($response);
-        $this->assertArrayHasKey("garageId",$garageResponse);
-
-
+        $this->assertArrayHasKey("garageId", $garageResponse);
     }
 
 
@@ -153,4 +152,27 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(403);
     }
 
+
+    /**
+     * GARAGE FRONT METHODS
+     */
+
+    public function testGarageSearch()
+    {
+        $filters = [
+            "text" => "",
+            "city" => "",
+            "zip" => "",
+        ];
+
+        $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
+        $this->seeStatusCode(403);
+
+        $filters["text"] = "testing";
+
+        $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
+        $this->seeStatusCode(200);
+
+
+    }
 }

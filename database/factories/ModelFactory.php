@@ -48,6 +48,7 @@ $factory->define(App\Models\Manager\Garage::class, function ($faker) use ($facto
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'desc' => $faker->paragraph,
+        'enable' => 1,
         'country_id' => 204, //spain
         'state_id' => 0,
         'province_id' => 0,

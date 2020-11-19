@@ -24,7 +24,7 @@ class GarageRepository
     const TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC"];
 
 
-        
+
     /**
      * getById
      *
@@ -235,7 +235,7 @@ class GarageRepository
         if ($segment && !$type) {
             $query->where('segment', $segment)->orWhereNull('segment');
         } else {
-            $query->where('type', $type)->where('status',1)->where(function ($query) use ($segment) {
+            $query->where('type', $type)->where('status', 1)->where(function ($query) use ($segment) {
                 $query->where('segment', $segment)->orWhereNull('segment');
             });
         }
@@ -513,5 +513,27 @@ class GarageRepository
             'category' => "$category",
             'price' => $price,
         ]);
+    }
+
+    
+    /**
+     * search
+     *
+     * @param  mixed[] $filters
+     * @return void
+     */
+    public function search($filters)
+    {
+        # code...
+        $garages = Garage::with("services")
+            ->where("enable",1)
+            ->when($filters['city'], function ($q) use ($filters) {
+                return $q->where('province_id', $filters['city']);
+            })
+            ->when($filters['zip'], function ($q) use ($filters) {
+                return $q->where('zipcode', $filters['city']);
+            })->get();
+
+        return $garages;    
     }
 }
