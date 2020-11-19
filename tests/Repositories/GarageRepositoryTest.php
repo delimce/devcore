@@ -116,7 +116,6 @@ class GarageRepositoryTest extends TestCase
         $filters["city"] = 23;
         $filters["zip"] = "";
         $result =  $this->garageRepository->search($filters);
-        print_r($result);
         $this->assertCount(0, $result->toArray());
     }
 }
