@@ -21,6 +21,7 @@ jobs:
             git pull origin master
             composer install
             php artisan cache:clear
+            npm install
             npm run prod
 
 
