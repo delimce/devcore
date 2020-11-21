@@ -21,5 +21,5 @@ return [
     '404' => 'Página no encontrada',
     '401' => 'Acceso no permitido',
     '403' => 'Página no disponible',
-    'search.nofilters' => 'Debe seleccionar un filtro para esta busqueda'
+    'search.nofilters' => 'Debe incluir un filtro para esta busqueda'
 ];

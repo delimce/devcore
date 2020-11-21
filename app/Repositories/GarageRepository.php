@@ -515,7 +515,7 @@ class GarageRepository
         ]);
     }
 
-    
+
     /**
      * search
      *
@@ -524,16 +524,17 @@ class GarageRepository
      */
     public function search($filters)
     {
-        # code...
-        $garages = Garage::with("services")
-            ->where("enable",1)
+        $garages = Garage::where("enable", 1)
             ->when($filters['city'], function ($q) use ($filters) {
                 return $q->where('province_id', $filters['city']);
             })
             ->when($filters['zip'], function ($q) use ($filters) {
-                return $q->where('zipcode', $filters['city']);
-            })->get();
+                return $q->where('zipcode', $filters['zip']);
+            })
+            ->with("services:garage_id,segment,type")
+            ->with("media:garage_id,mime,path")
+            ->get(['id', 'name', 'desc']);
 
-        return $garages;    
+        return $garages;
     }
 }

@@ -30,7 +30,7 @@
       </div>
       <div class="control">
         <button
-          :disabled="!buttonEnable()"
+          :disabled="!buttonEnable"
           @click="doSearch()"
           class="button is-rounded button-signup"
         >
@@ -74,12 +74,14 @@ export default {
       EventBus.$emit("user-garage-search", this.filters);
       gotoSection("results");
     },
-    buttonEnable() {
-      return this.filters.text.length > 3 || this.filters.city != null;
-    },
   },
   created() {
     this.loadStatesByCountry();
+  },
+  computed: {
+    buttonEnable() {
+      return this.filters.text.length > 3 || this.filters.city != null;
+    },
   },
 };
 </script>

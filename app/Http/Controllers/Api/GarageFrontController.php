@@ -42,6 +42,6 @@ class GarageFrontController extends ApiController
 
 
         $result = $this->garage->search($filters);
-        return $this->okResponse(["list"=>$result]);
+        return $this->okResponse(["list" => $result]);
     }
 }
