@@ -12,6 +12,7 @@ use App\Models\Manager\Segment;
 use App\Models\Manager\Service;
 use App\Models\Manager\ServiceCategory;
 use App\Models\Manager\ServiceType;
+use App\Services\StringsHandlerService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon as Carbon;
@@ -71,6 +72,7 @@ class GarageRepository
                 ]
             );
             $result->name = $garage['name'];
+            $result->url = StringsHandlerService::slugify($garage['name']);
             $result->phone = $garage['phone'];
             $result->address = $garage['address'];
             $result->network_id = (!empty($garage['network_id'])) ? $garage['network_id'] : null;
