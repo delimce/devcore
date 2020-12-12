@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Repositories\GarageRepository;
 use App\Repositories\ManagerRepository;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -19,6 +20,23 @@ class LandingController extends BaseController
     {
         return view('website.index');
     }
+
+
+    public function garageDetail(
+        GarageRepository $garageRepository,
+        $province,
+        $url
+    ) {
+        $garage = $garageRepository->getByUrl($url);
+        if (!$garage) {
+            return response(view('errors.404'), 404);
+        }
+        return view('website.garage', ['id' => $garage->id, "name" => $garage->name]);
+    }
+
+    /**
+     * MANAGER ROUTES
+     */
 
     public function managerHome()
     {

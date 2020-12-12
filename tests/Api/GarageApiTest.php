@@ -156,7 +156,13 @@ class GarageApiTest extends TestCase
     /**
      * GARAGE FRONT METHODS
      */
-
+    
+    /**
+     * @test
+     * testGarageSearch
+     *
+     * @return void
+     */
     public function testGarageSearch()
     {
         $filters = [
@@ -172,7 +178,20 @@ class GarageApiTest extends TestCase
 
         $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
         $this->seeStatusCode(200);
+    }
 
 
+    
+    /**
+     * @test
+     * testGetGarageById
+     *
+     * @return void
+     */
+    public function testGetGarageById()
+    {
+        $this->call("GET", static::API_URI_GARAGE . "/details/1", [], [], []);
+        $this->seeStatusCode(200);
+        
     }
 }

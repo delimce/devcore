@@ -47,6 +47,64 @@ class GarageRepositoryTest extends TestCase
         $this->assertNotNull($garage);
     }
 
+    
+    /**
+     * @test
+     * testGetGarageDetailsById
+     *
+     * @return void
+     */
+    public function testGetGarageDetailsById()
+    {
+        $id = $this->garage->id;
+        $garage = $this->garageRepository->getDetailsById($id);
+        $this->assertNotNull($garage);
+    }
+
+    
+    /**
+     * @test
+     * testGetgarageByUrl
+     *
+     * @return void
+     */
+    public function testGetgarageByUrl()
+    {
+        $url = $this->garage->url;
+        $province = null;
+        $garage = $this->garageRepository->getByUrl($url);
+        $this->assertEquals($url,$garage->url);
+
+        $garage = $this->garageRepository->getByUrl('not-exist');
+        $this->assertNull($garage);
+    }
+
+
+    
+    /**
+     * @test
+     * testGarageSave
+     *
+     * @return void
+     */
+    public function testGarageSave()
+    {
+        $newGarage = [];
+        $newGarage["manager"] = $this->manager->id;
+        $newGarage["name"] = $this->garage->name;
+        $newGarage["phone"] = $this->garage->phone;
+        $newGarage["address"] = $this->garage->address;
+        $newGarage["desc"] = $this->garage->desc;
+        $newGarage["country_id"] = $this->garage->country_id;
+        $newGarage["state_id"] = $this->garage->state_id;
+        $newGarage["province_id"] = $this->garage->province_id;
+        $newGarage["zipcode"] = $this->garage->zipcode;
+        
+        $garageId = $this->garageRepository->saveGarage($newGarage);
+        $this->assertTrue($garageId>0);
+    
+    }
+
 
     /**
      * @test
@@ -120,6 +178,7 @@ class GarageRepositoryTest extends TestCase
         foreach ($result as $item) {
             $this->assertTrue($item->state->id == 13);
             $this->assertTrue($item->province->id == 28);
+            $this->assertTrue($item->province->url == "madrid");
         }
     }
 }

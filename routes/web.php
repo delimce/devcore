@@ -14,6 +14,9 @@
 # website landing
 $router->get('/', 'Web\LandingController@index');
 
+# website garage's detail
+$router->get('/garages/{province}/{url}', 'Web\LandingController@garageDetail');
+
 
 # landing manager
 $router->group(

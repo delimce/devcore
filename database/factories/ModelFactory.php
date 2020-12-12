@@ -11,6 +11,7 @@
 |
 */
 
+use App\Services\StringsHandlerService;
 use Illuminate\Support\Facades\Hash;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
@@ -45,6 +46,7 @@ $factory->define(App\Models\Manager\Garage::class, function ($faker) use ($facto
     return [
         'manager_id' => $factory->create(App\Models\Manager\Manager::class)->id,
         'name' => $faker->company,
+        'url' => StringsHandlerService::slugify($faker->company),
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'desc' => $faker->paragraph,

@@ -26,6 +26,11 @@ class Garage extends Model
         return $this->hasMany(GarageMedia::class, 'garage_id');
     }
 
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'garage_id');
+    }
+
     public function network()
     {
         return $this->belongsTo(Network::class, 'network_id');

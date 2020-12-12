@@ -12,6 +12,7 @@
                   class="input is-primary"
                   v-on:focus="message1=''"
                   type="text"
+                  maxlength="150"
                   placeholder
                   v-model="garage.name"
                 />

@@ -12,6 +12,7 @@ use App\Models\Manager\Segment;
 use App\Models\Manager\Service;
 use App\Models\Manager\ServiceCategory;
 use App\Models\Manager\ServiceType;
+use App\Services\StringsHandlerService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon as Carbon;
@@ -34,6 +35,43 @@ class GarageRepository
     public function getById(int $garageId)
     {
         $garage = Garage::find($garageId);
+        return $garage;
+    }
+
+
+    /**
+     * getByUrl
+     *
+     * @param  string $url
+     * @return Collection
+     */
+    public function getByUrl($url)
+    {
+        $garage = Garage::where([
+            "url" => $url,
+            "enable" => 1
+        ])->first();
+        return $garage;
+    }
+
+
+    /**
+     * getDetailsById
+     *
+     * @param  int $garageId
+     * @return Collection
+     */
+    public function getDetailsById(int $garageId)
+    {
+        $garage = Garage::with([
+            "province:id,name",
+            "state:id,name",
+            "network:id,desc",
+            "schedules",
+            "services:garage_id,segment,type,category,price",
+            "media:garage_id,mime,path"
+        ])->find($garageId);
+
         return $garage;
     }
 
@@ -71,6 +109,7 @@ class GarageRepository
                 ]
             );
             $result->name = $garage['name'];
+            $result->url = StringsHandlerService::slugify($garage['name']);
             $result->phone = $garage['phone'];
             $result->address = $garage['address'];
             $result->network_id = (!empty($garage['network_id'])) ? $garage['network_id'] : null;
@@ -531,6 +570,13 @@ class GarageRepository
             })
             ->when($filters['zip'], function ($q) use ($filters) {
                 return $q->where('zipcode', $filters['zip']);
+            })
+            ->when($filters['text'], function ($q) use ($filters) {
+                $q->where(function ($query) use ($filters) {
+                    return
+                        $query->where('name', "LIKE", "%{$filters['text']}%")
+                        ->orWhere('desc', "LIKE", "%{$filters['text']}%");
+                });
             })
             ->with([
                 "province:id,name:url",

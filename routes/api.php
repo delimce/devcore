@@ -78,6 +78,7 @@ $router->group(
             ['prefix' => 'garage'],
             function () use ($router) {
                 $router->get('/search', ['uses' =>  'GarageFrontController@mainSearch']);
+                $router->get('/details/{id}', ['uses' =>  'GarageFrontController@getById']);
             }
         );
 

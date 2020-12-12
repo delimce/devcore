@@ -11,7 +11,7 @@
 <script>
 import EventBus from "@/bus";
 export default {
-  name: "moduleHeader",
+  name: "HeaderAdminComponent",
   data() {
     return {
       title: "Home",

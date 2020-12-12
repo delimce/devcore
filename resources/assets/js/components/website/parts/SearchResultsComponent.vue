@@ -4,7 +4,7 @@
     <div class="columns is-multiline" v-if="hadResults">
       <div v-for="item in results" :key="item.id" class="column is-one-third">
         <div class="box result">
-          <article class="media">
+          <article @click="goToDetail(item)" class="media">
             <div class="media-left">
               <figure class="image is-128x128">
                 <img :src="getMainImage(item.media)" />
@@ -49,6 +49,7 @@ export default {
       results: [],
       message: "",
       mediaPath: "storage/media/",
+      baseDetailPath: "garages/",
       nofoundImage: "https://bulma.io/images/placeholders/128x128.png",
       label_noresult: "No hay resultados para esta busqueda",
     };
@@ -56,7 +57,8 @@ export default {
   methods: {
     getSearch() {
       const payload = {
-        city: this.filters.city.code,
+        text: this.filters.text,
+        city: this.filters.city ? this.filters.city.code : "",
         zip: this.filters.zip,
       };
 
@@ -75,7 +77,7 @@ export default {
           this.message = data.message;
         });
     },
-    resetSearch() {
+    resetSearchResults() {
       this.isOnSearch = true;
       this.loading = true;
       this.message = "";
@@ -89,6 +91,13 @@ export default {
         ? this.nofoundImage
         : String(this.mediaPath + main.path);
     },
+    goToDetail(item) {
+      const url = String(
+        this.baseDetailPath + item.province.url + "/" + item.url
+      );
+      window.open(url, "_blank");
+      return false;
+    },
   },
   computed: {
     hadResults() {
@@ -97,7 +106,7 @@ export default {
   },
   mounted: function () {
     EventBus.$on("user-garage-search", (filters) => {
-      this.resetSearch();
+      this.resetSearchResults();
       this.filters = filters;
       setTimeout(
         function () {
@@ -111,7 +120,7 @@ export default {
 </script>
 <style scoped>
 .results-container {
-  min-height: 600px;
+  min-height: 500px;
   padding: 20px 20px 0 20px;
   margin-top: 22px !important;
   display: block;

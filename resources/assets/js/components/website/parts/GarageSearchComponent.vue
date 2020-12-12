@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       label_search_placeholder:
-        "Nombre del taller, producto, nombre del servicio...",
+        "Nombre del taller",
       label_cities: "Ciudades en España",
       label_button: "Buscar talleres",
       label_zip: "Cod. postal",

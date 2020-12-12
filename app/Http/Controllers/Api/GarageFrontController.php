@@ -44,4 +44,22 @@ class GarageFrontController extends ApiController
         $result = $this->garage->search($filters);
         return $this->okResponse(["list" => $result]);
     }
+
+
+    /**
+     * getById
+     *
+     * @param  int $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        $garage = $this->garage->getDetailsById($id);
+        if (!$garage) {
+            return  $this->errorResponse([
+                "message" => __('errors.404')
+            ], 404);
+        }
+        return $this->okResponse($garage);
+    }
 }
