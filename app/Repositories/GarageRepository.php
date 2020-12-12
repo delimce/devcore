@@ -80,6 +80,7 @@ class GarageRepository
             $result->state_id = $garage['state_id'];
             $result->province_id = $garage['province_id'];
             $result->zipcode = $garage['zipcode'];
+            $result->enable = 1; # @todo: temporaly to make garage be able to search 
             $result->save();
             return $result->id;
         } catch (QueryException $ex) {
@@ -531,9 +532,13 @@ class GarageRepository
             ->when($filters['zip'], function ($q) use ($filters) {
                 return $q->where('zipcode', $filters['zip']);
             })
-            ->with("services:garage_id,segment,type")
-            ->with("media:garage_id,mime,path")
-            ->get(['id', 'name', 'desc']);
+            ->with([
+                "province:id,name",
+                "state:id,name",
+                "services:garage_id,segment,type",
+                "media:garage_id,mime,path"
+            ])
+            ->get(['id', 'name', 'desc', 'state_id', 'province_id']);
 
         return $garages;
     }

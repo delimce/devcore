@@ -3,9 +3,31 @@
     <pre-loader v-show="loading"> </pre-loader>
     <div class="columns is-multiline" v-if="hadResults">
       <div v-for="item in results" :key="item.id" class="column is-one-third">
-        <div class="box">
-          <span>{{ item.name }}</span>
-          <span>{{ item.desc }}</span>
+        <div class="box result">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-128x128">
+                <img :src="getMainImage(item.media)" />
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <span class="title">{{ item.name }}</span>
+                  <br />
+                  <span class="desc">{{ item.desc }}</span>
+                </p>
+              </div>
+              <nav class="level is-mobile">
+                <div class="level-left">
+                  <span class="level-item location">
+                    <i class="fas fa-map-marker-alt"></i>&nbsp;
+                    {{ item.province.name || "" }}, {{ item.state.name || "" }}
+                  </span>
+                </div>
+              </nav>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -26,11 +48,13 @@ export default {
       filters: {},
       results: [],
       message: "",
+      mediaPath: "storage/media/",
+      nofoundImage: "https://bulma.io/images/placeholders/128x128.png",
       label_noresult: "No hay resultados para esta busqueda",
     };
   },
   methods: {
-    async getSearch() {
+    getSearch() {
       const payload = {
         city: this.filters.city.code,
         zip: this.filters.zip,
@@ -56,6 +80,14 @@ export default {
       this.loading = true;
       this.message = "";
       this.results = [];
+    },
+    getMainImage(images) {
+      const main = images.find((el) => {
+        return el.mime.includes("image/");
+      });
+      return _.isUndefined(main)
+        ? this.nofoundImage
+        : String(this.mediaPath + main.path);
     },
   },
   computed: {
@@ -86,8 +118,28 @@ export default {
   margin: auto;
   text-align: center;
 }
-.results {
+.result {
+  min-height: 200px;
+  border: 1px solid green;
+  display: block;
+  cursor: pointer;
 }
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.location {
+  font-size: 15px !important;
+  text-align: right;
+}
+
+.desc {
+  display: block;
+  min-height: 70px;
+}
+
 .no-results {
   padding: 20px;
   font-weight: bold;

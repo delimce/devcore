@@ -50,8 +50,8 @@ $factory->define(App\Models\Manager\Garage::class, function ($faker) use ($facto
         'desc' => $faker->paragraph,
         'enable' => 1,
         'country_id' => 204, //spain
-        'state_id' => 0,
-        'province_id' => 0,
+        'state_id' => 13, # Madrid, Comunidad de
+        'province_id' => 28, # Madrid
         'zipcode' => 28027
     ];
 });

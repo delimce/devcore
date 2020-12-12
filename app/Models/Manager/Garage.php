@@ -2,6 +2,8 @@
 
 namespace App\Models\Manager;
 
+use App\Models\Localization\Province;
+use App\Models\Localization\State;
 use App\Models\Media\GarageMedia;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,5 +39,15 @@ class Garage extends Model
     public function supportRequests()
     {
         return $this->hasMany(Support::class, 'garage_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
     }
 }

@@ -113,9 +113,13 @@ class GarageRepositoryTest extends TestCase
     public function testGarageMainSearch()
     {
         $filters["text"] = "";
-        $filters["city"] = 23;
-        $filters["zip"] = "";
+        $filters["city"] = 28;
+        $filters["zip"] = 28027;
         $result =  $this->garageRepository->search($filters);
-        $this->assertCount(0, $result->toArray());
+        $this->assertTrue($result->count() > 0);
+        foreach ($result as $item) {
+            $this->assertTrue($item->state->id == 13);
+            $this->assertTrue($item->province->id == 28);
+        }
     }
 }
