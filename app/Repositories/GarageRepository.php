@@ -533,12 +533,12 @@ class GarageRepository
                 return $q->where('zipcode', $filters['zip']);
             })
             ->with([
-                "province:id,name",
+                "province:id,name:url",
                 "state:id,name",
                 "services:garage_id,segment,type",
                 "media:garage_id,mime,path"
             ])
-            ->get(['id', 'name', 'desc', 'state_id', 'province_id']);
+            ->get();
 
         return $garages;
     }
