@@ -106,6 +106,32 @@ class GarageRepositoryTest extends TestCase
     }
 
 
+    
+    /**
+     * @test
+     * testGarageSave
+     *
+     * @return void
+     */
+    public function testGarageSave()
+    {
+        $newGarage = [];
+        $newGarage["manager"] = $this->manager->id;
+        $newGarage["name"] = $this->garage->name;
+        $newGarage["phone"] = $this->garage->phone;
+        $newGarage["address"] = $this->garage->address;
+        $newGarage["desc"] = $this->garage->desc;
+        $newGarage["country_id"] = $this->garage->country_id;
+        $newGarage["state_id"] = $this->garage->state_id;
+        $newGarage["province_id"] = $this->garage->province_id;
+        $newGarage["zipcode"] = $this->garage->zipcode;
+        
+        $garageId = $this->garageRepository->saveGarage($newGarage);
+        $this->assertTrue($garageId>0);
+    
+    }
+
+
     /**
      * @test
      * testGetGaragePoolBySegment
