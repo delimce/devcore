@@ -1,7 +1,49 @@
 <template>
   <div class="container">
     <div class="columns is-multiline">
-      <div class="column is-three-fifths">is-one-quarter</div>
+      <div class="column is-three-fifths">
+        <div class="box">
+          <div class="gallery"></div>
+          <section class="tabs is-boxed">
+            <ul>
+              <li
+                v-bind:class="{ 'is-active': activeTab == 'info' }"
+                @click="activeTab = 'info'"
+              >
+                <a>
+                  <span class="icon is-small">
+                    <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                  </span>
+                  <span>{{ label_info }}</span>
+                </a>
+              </li>
+              <li
+                v-bind:class="{ 'is-active': activeTab == 'services' }"
+                @click="activeTab = 'services'"
+              >
+                <a>
+                  <span class="icon is-small">
+                    <i class="fas fa-tools"></i>
+                  </span>
+                  <span>{{ label_services }}</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="container">
+            <div v-show="activeTab == 'info'">
+              <garage-detail-info-component
+                :garage="garage"
+              ></garage-detail-info-component>
+            </div>
+            <div v-show="activeTab == 'services'">
+              <garage-detail-services-component
+                :garage="garage"
+              ></garage-detail-services-component>
+            </div>
+          </section>
+        </div>
+      </div>
       <div class="column is-two-fifths">
         <div class="box">
           <span class="title">{{ garage.name }}</span>
@@ -28,6 +70,7 @@ export default {
   props: ["id"],
   data() {
     return {
+      activeTab: "info",
       label_booking: "¡Reserva ahora!",
       garage: {
         province: {},
@@ -79,6 +122,4 @@ export default {
 .booking {
   margin: 20px 0 10px;
 }
-
-
 </style>
