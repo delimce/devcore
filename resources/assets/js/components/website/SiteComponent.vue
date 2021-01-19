@@ -6,7 +6,7 @@
         <div class="container">
           <header-component></header-component>
           <h1 class="search-title">{{ label_welcome }}</h1>
-          <garage-search-component></garage-search-component>
+          <search-main-component></search-main-component>
         </div>
       </div>
     </section>

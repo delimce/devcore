@@ -7,7 +7,7 @@
           <article @click="goToDetail(item)" class="media">
             <div class="media-left">
               <figure class="image is-128x128">
-                <img :src="getMainImage(item.media)" />
+                <img :src="getMainImage(item.media)" @error="setAltImg" />
               </figure>
             </div>
             <div class="media-content">
@@ -48,9 +48,6 @@ export default {
       filters: {},
       results: [],
       message: "",
-      mediaPath: "storage/media/",
-      baseDetailPath: "garages/",
-      nofoundImage: "https://bulma.io/images/placeholders/128x128.png",
       label_noresult: "No hay resultados para esta busqueda",
     };
   },

@@ -68,7 +68,7 @@ class GarageRepository
             "state:id,name",
             "network:id,desc",
             "schedules",
-            "services:garage_id,segment,category,price,service_id",
+            "services:id,garage_id,segment,category,price,service_id",
             "services.service:id,type,name",
             "media:garage_id,mime,path"
         ])->find($garageId);

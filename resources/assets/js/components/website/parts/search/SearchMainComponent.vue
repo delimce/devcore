@@ -45,7 +45,7 @@ import EventBus from "@/bus";
 import vSelect from "vue-select";
 import { gotoSection } from "@/functions";
 export default {
-  name: "GarageSearchComponent",
+  name: "SearchMainComponent",
   components: { vSelect },
   data() {
     return {

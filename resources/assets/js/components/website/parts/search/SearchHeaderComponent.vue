@@ -10,7 +10,7 @@
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
 export default {
-  name: "GarageSearchComponent",
+  name: "SearchHeaderComponent",
   mixins: [WebsiteMixin],
   data() {
     return {};

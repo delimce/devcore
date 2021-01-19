@@ -1,14 +1,9 @@
 <template>
   <div>
-    <h2>
-      {{ garage.desc }}
-    </h2>
-
-    <hr />
     <div class="title">{{ label_schedules }}</div>
 
     <div
-      v-for="schedule in garage.schedules"
+      v-for="schedule in schedulesData"
       :key="schedule.id"
       v-show="isWorkingDay(schedule)"
       class="columns"
@@ -25,14 +20,16 @@
 </template>
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
+import GarageDetailImageComponent from "./DetailImageComponent.vue";
 export default {
-  name: "GarageDetailInfoComponent",
-  props: ["garage"],
+  components: { GarageDetailImageComponent },
+  name: "DetailSchedulesComponent",
+  props: ["schedules"],
   mixins: [WebsiteMixin],
   data() {
     return {
       label_schedules: "Horarios",
-      label_info: "Información",
+      schedulesData:[]
     };
   },
   methods: {
@@ -42,8 +39,13 @@ export default {
     isWorkingDay(sc) {
       return !(!sc.am1 && !sc.am2 && !sc.pm1 && !sc.pm2);
     },
+    loadData() {
+      this.schedulesData = this.schedules;
+    },
   },
-  computed: {},
+  mounted() {
+    this.waitToLoad();
+  },
 };
 </script>
 <style scoped>

@@ -32,14 +32,14 @@
           </section>
           <section class="container">
             <div v-show="activeTab == 'info'">
-              <garage-detail-info-component
+              <detail-info-component
                 :garage="garage"
-              ></garage-detail-info-component>
+              ></detail-info-component>
             </div>
             <div v-show="activeTab == 'services'">
-              <garage-detail-services-component
+              <detail-services-component
                 :garage="garage"
-              ></garage-detail-services-component>
+              ></detail-services-component>
             </div>
           </section>
         </div>

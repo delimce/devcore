@@ -175,6 +175,7 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(403);
 
         $filters["text"] = "testing";
+        $filters["city"] = 28;
 
         $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
         $this->seeStatusCode(200);
