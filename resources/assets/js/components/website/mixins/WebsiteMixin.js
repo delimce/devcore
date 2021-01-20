@@ -17,14 +17,15 @@ const WebsiteMixin = {
                 { id: "MOTORCYCLE", label: "Moto" }
             ],
             types: [
-                { id: "TYRE", label: "Neumáticos" },
-                { id: "OIL", label: "Lubricantes" },
-                { id: "FILTER", label: "Filtros" },
-                { id: "BRAKES", label: "Frenos" },
-                { id: "BATTERY", label: "Baterias" },
-                { id: "CHECK", label: "Mantenimiento" },
-                { id: "AC", label: "A/C" },
-                { id: "WORKFORCE", label: "Mano/Obra" },
+                { id: "WORKFORCE", label: "Mano/Obra", order: 1 },
+                { id: "TYRE", label: "Neumáticos", order: 2 },
+                { id: "OIL", label: "Lubricantes", order: 4 },
+                { id: "FILTER", label: "Filtros", order: 3 },
+                { id: "BRAKES", label: "Frenos", order: 5 },
+                { id: "BATTERY", label: "Baterias", order: 6 },
+                { id: "CHECK", label: "Mantenimiento", order: 7 },
+                { id: "AC", label: "A/C", order: 8 },
+
             ]
         }
     },

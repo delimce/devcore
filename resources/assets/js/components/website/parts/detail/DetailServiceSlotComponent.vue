@@ -38,13 +38,14 @@ export default {
       });
     },
     currentTypes() {
-      return this.types.filter((el) => {
+      let types = this.types.filter((el) => {
         return this.serviceList
           .map((el2) => {
             return el2.type;
           })
           .includes(el.id);
       });
+      return types.sort(this.compareTypes);
     },
   },
   methods: {
@@ -52,6 +53,12 @@ export default {
       return this.serviceList.filter((el) => {
         return el.type == type.id;
       });
+    },
+    compareTypes(a, b) {
+      if (a.order < b.order) {
+        return -1;
+      }
+      return 1;
     },
   },
 };

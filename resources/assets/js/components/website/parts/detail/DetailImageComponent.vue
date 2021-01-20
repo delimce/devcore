@@ -2,7 +2,7 @@
   <div>
     <pre-loader v-show="loading"> </pre-loader>
     <carousel
-      v-if="files && !loading"
+      v-if="hasMedia && !loading"
       class="story-carousel story-carousel--colors"
     >
       <slide v-for="f in files" :key="f.path" class="story-carousel__slide">
@@ -34,6 +34,11 @@ export default {
     },
     loadData() {
       this.files = this.media;
+    },
+  },
+  computed: {
+    hasMedia() {
+      return _.isUndefined(this.media);
     },
   },
   mounted() {
