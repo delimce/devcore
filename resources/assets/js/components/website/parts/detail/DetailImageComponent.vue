@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     hasMedia() {
-      return _.isUndefined(this.media);
+      return this.media.length>0;
     },
   },
   mounted() {
