@@ -12,7 +12,7 @@
     </div>
 
     <div class="column is-10" id="page-content">
-       <header-component></header-component>
+       <header-admin-component></header-admin-component>
        <router-view></router-view>
     </div>
 </div>

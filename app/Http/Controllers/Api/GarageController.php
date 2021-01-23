@@ -44,7 +44,7 @@ class GarageController extends ApiController
             'country_id' => 'required|integer',
             'state_id' => 'required|integer',
             'province_id' => 'required|integer',
-            'zipcode' => 'required|integer|min:3',
+            'zipcode' => 'required|min:4',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);

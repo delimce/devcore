@@ -28,7 +28,8 @@ class GarageServiceController extends ApiController
 
     /**
      * getServicesTypes
-     * @return void
+     * @param GarageServiceDecorator $decorator
+     * @return JsonResponse
      */
     public function getServicesTypes(GarageServiceDecorator $decorator)
     {
@@ -38,7 +39,8 @@ class GarageServiceController extends ApiController
 
     /**
      * getServicesCategories
-     * @return void
+     * @param GarageServiceDecorator $decorator
+     * @return JsonResponse
      */
     public function getServicesCategories(GarageServiceDecorator $decorator)
     {
@@ -50,7 +52,7 @@ class GarageServiceController extends ApiController
      * getServiceCatalog
      *
      * @param  Request $req
-     * @return void
+     * @return JsonResponse
      */
     public function getServiceCatalog(Request $req)
     {
@@ -99,7 +101,7 @@ class GarageServiceController extends ApiController
      * @param  int $garageId
      * @param  Request $req
      * @param  GarageServiceDecorator $decorator
-     * @return void
+     * @return JsonResponse
      */
     public function getServices(int $garageId, Request $req, GarageServiceDecorator $decorator)
     {
@@ -125,7 +127,7 @@ class GarageServiceController extends ApiController
      * getServiceById
      *
      * @param  int $serviceId
-     * @return void
+     * @return JsonResponse
      */
     public function getServiceById($serviceId)
     {
@@ -145,7 +147,7 @@ class GarageServiceController extends ApiController
     /**
      * saveService
      * @param  Request $req
-     * @return void
+     * @return JsonResponse
      */
     public function saveService(Request $req)
     {
@@ -186,7 +188,7 @@ class GarageServiceController extends ApiController
     /**
      * deleteService
      * @param  mixed $req
-     * @return void
+     * @return JsonResponse
      */
     public function removeService(Request $req)
     {
@@ -209,7 +211,7 @@ class GarageServiceController extends ApiController
      *
      * @param  int $garageId
      * @param  string $segment
-     * @return void
+     * @return JsonResponse
      */
     public function getPoolBySegment(int $garageId, String $segment)
     {
@@ -217,12 +219,12 @@ class GarageServiceController extends ApiController
         return $this->okResponse($result);
     }
 
-    
+
     /**
      * savePoolBySegment
      *
      * @param  mixed $req
-     * @return void
+     * @return JsonResponse
      */
     public function savePoolBySegment(Request $req)
     {

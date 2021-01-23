@@ -2,6 +2,7 @@
 
 namespace App\Models\Localization;
 
+use App\Services\StringsHandlerService;
 use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
@@ -12,6 +13,7 @@ class Province extends Model
      * @var string
      */
     protected $table = 'local_province';
+    protected $appends = ['url'];
 
     public function state()
     {
@@ -21,6 +23,11 @@ class Province extends Model
     public function municipalities()
     {
         return $this->hasMany('App\Models\Localization\Municipality','province_id');
+    }
+
+    public function getUrlAttribute()
+    {
+        return StringsHandlerService::slugify($this->name);
     }
 
 }

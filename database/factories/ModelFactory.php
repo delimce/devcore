@@ -11,6 +11,7 @@
 |
 */
 
+use App\Services\StringsHandlerService;
 use Illuminate\Support\Facades\Hash;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
@@ -45,12 +46,14 @@ $factory->define(App\Models\Manager\Garage::class, function ($faker) use ($facto
     return [
         'manager_id' => $factory->create(App\Models\Manager\Manager::class)->id,
         'name' => $faker->company,
+        'url' => StringsHandlerService::slugify($faker->company),
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'desc' => $faker->paragraph,
+        'enable' => 1,
         'country_id' => 204, //spain
-        'state_id' => 0,
-        'province_id' => 0,
+        'state_id' => 13, # Madrid, Comunidad de
+        'province_id' => 28, # Madrid
         'zipcode' => 28027
     ];
 });

@@ -12,6 +12,8 @@ use App\Models\Manager\Segment;
 use App\Models\Manager\Service;
 use App\Models\Manager\ServiceCategory;
 use App\Models\Manager\ServiceType;
+use App\Services\StringsHandlerService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon as Carbon;
@@ -21,20 +23,55 @@ use Illuminate\Support\Facades\DB;
 
 class GarageRepository
 {
-    const TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC"];
+    const SERVICES_TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC"];
 
 
-        
+
     /**
      * getById
      *
      * @param  int $garageId
-     * @return Collection
+     * @return Model
      */
-    public function getById(int $garageId)
+    public function getById(int $garageId): Model
     {
         $garage = Garage::find($garageId);
         return $garage;
+    }
+
+
+    /**
+     * getByUrl
+     *
+     * @param string $url
+     * @return mixed
+     */
+    public function getByUrl(string $url)
+    {
+        return Garage::where([
+            "url" => $url,
+            "enable" => 1
+        ])->first();
+    }
+
+
+    /**
+     * getDetailsById
+     *
+     * @param  int $garageId
+     * @return Garage|Model
+     */
+    public function getDetailsById(int $garageId)
+    {
+        return Garage::with([
+            "province:id,name",
+            "state:id,name",
+            "network:id,desc",
+            "schedules",
+            "services:id,garage_id,segment,category,price,service_id",
+            "services.service:id,type,name",
+            "media:garage_id,mime,path"
+        ])->find($garageId);
     }
 
     /**
@@ -42,8 +79,7 @@ class GarageRepository
      */
     public function getNetworks()
     {
-        $networks = Network::whereStatus(1)->get();
-        return $networks;
+        return Network::whereStatus(1)->get();
     }
 
 
@@ -60,9 +96,9 @@ class GarageRepository
     /**
      * save garage information
      * @param array $garage
-     * @return bool
+     * @return int|bool
      */
-    public function saveGarage(array $garage)
+    public function saveGarage(array $garage): bool
     {
         try {
             $result = Garage::firstOrNew(
@@ -71,6 +107,7 @@ class GarageRepository
                 ]
             );
             $result->name = $garage['name'];
+            $result->url = StringsHandlerService::slugify($garage['name']);
             $result->phone = $garage['phone'];
             $result->address = $garage['address'];
             $result->network_id = (!empty($garage['network_id'])) ? $garage['network_id'] : null;
@@ -80,6 +117,7 @@ class GarageRepository
             $result->state_id = $garage['state_id'];
             $result->province_id = $garage['province_id'];
             $result->zipcode = $garage['zipcode'];
+            $result->enable = 1; # @todo: temporaly to make garage be able to search
             $result->save();
             return $result->id;
         } catch (QueryException $ex) {
@@ -92,9 +130,9 @@ class GarageRepository
     /**
      * retrieves schedule
      * @param int $garageId
-     * @return mixed
+     * @return string[]
      */
-    public function getScheduleById($garageId)
+    public function getScheduleById($garageId): array
     {
         $response = [];
         $garageSchedule = Schedule::whereGarageId($garageId)->orderBy("day")->get();
@@ -109,7 +147,7 @@ class GarageRepository
      * @param array $schedule
      * @return array
      */
-    public function garageScheduleValidation($schedule)
+    public function garageScheduleValidation($schedule): array
     {
         $result = ["ok" => true, "message" => ""];
         // 7 days of week
@@ -204,9 +242,9 @@ class GarageRepository
 
     /**
      * getServiceTypes
-     * @return array
+     * @return Collection
      */
-    public function getServiceTypes()
+    public function getServiceTypes(): Collection
     {
         return ServiceType::all();
     }
@@ -214,9 +252,9 @@ class GarageRepository
 
     /**
      * getServiceCategories
-     * @return array
+     * @return Collection
      */
-    public function getServiceCategories()
+    public function getServiceCategories(): Collection
     {
         return ServiceCategory::all();
     }
@@ -229,13 +267,13 @@ class GarageRepository
      * @param  string $type
      * @return Collection
      */
-    public function getServicesCatalogByQuery($segment, $type)
+    public function getServicesCatalogByQuery($segment, $type): Collection
     {
         $query = Service::query();
         if ($segment && !$type) {
             $query->where('segment', $segment)->orWhereNull('segment');
         } else {
-            $query->where('type', $type)->where('status',1)->where(function ($query) use ($segment) {
+            $query->where('type', $type)->where('status', 1)->where(function ($query) use ($segment) {
                 $query->where('segment', $segment)->orWhereNull('segment');
             });
         }
@@ -249,7 +287,7 @@ class GarageRepository
      * @param  string $category
      * @return Collection
      */
-    public function getServiceBrandsByQuery($type, $category)
+    public function getServiceBrandsByQuery($type, $category): Collection
     {
         $query = Brand::query();
 
@@ -273,7 +311,7 @@ class GarageRepository
      * @param  array $params
      * @return Collection
      */
-    public function getServiceList($garageId, $params = null)
+    public function getServiceList($garageId, $params = null): Collection
     {
         return Garage::find($garageId)->services()->with('service')->with('brand')
             ->when(isset($params['segment']), function ($q) use ($params) {
@@ -357,9 +395,9 @@ class GarageRepository
      *
      * @param  mixed $garageId
      * @param  mixed $segment
-     * @return void
+     * @return array
      */
-    public function getGaragePoolBySegment($garageId, $segment)
+    public function getGaragePoolBySegment($garageId, $segment): array
     {
         $selected = GarageService::whereGarageId($garageId)
             ->whereSegment($segment)
@@ -370,7 +408,7 @@ class GarageRepository
             ->select("id", "name", "type", "segment")->get();
 
         $pool = [];
-        foreach (static::TYPES as $type) {
+        foreach (static::SERVICES_TYPES as $type) {
             $index = strtolower($type);
             $pool[$index] = $this->getItemsByType($services, $selected, $type);
         }
@@ -396,7 +434,7 @@ class GarageRepository
             // getting new selection
             $services = [];
             $service = ["garage_id" => $garageId, "segment" => $segment];
-            foreach (static::TYPES as $type) {
+            foreach (static::SERVICES_TYPES as $type) {
                 $index = strtolower($type);
 
                 if (!isset($pool[$index])) {
@@ -417,7 +455,7 @@ class GarageRepository
                     }
                 }
             }
-            // saving selected services 
+            // saving selected services
             GarageService::insert($services);
         });
     }
@@ -428,9 +466,9 @@ class GarageRepository
      * @param  mixed $list
      * @param  mixed $selected
      * @param  mixed $type
-     * @return []
+     * @return string[]
      */
-    private function getItemsByType($list, $selected, $type)
+    private function getItemsByType($list, $selected, $type): array
     {
         $data = $this->setSelectedServices($selected, $type);
         $serviceList = Collect($list);
@@ -500,7 +538,7 @@ class GarageRepository
      * @param  int|null $brand
      * @param  int|null $category
      * @param  double|null $price
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     private function setPoolItem($select, $id, $name, $segment, $brand = null, $category = null, $price = 0.0)
     {
@@ -513,5 +551,37 @@ class GarageRepository
             'category' => "$category",
             'price' => $price,
         ]);
+    }
+
+
+    /**
+     * search
+     *
+     * @param mixed[] $filters
+     * @return Collection
+     */
+    public function search(array $filters):Collection
+    {
+        return Garage::where("enable", 1)
+            ->when($filters['city'], function ($q) use ($filters) {
+                return $q->where('province_id', $filters['city']);
+            })
+            ->when($filters['zip'], function ($q) use ($filters) {
+                return $q->where('zipcode', $filters['zip']);
+            })
+            ->when($filters['text'], function ($q) use ($filters) {
+                $q->where(function ($query) use ($filters) {
+                    return
+                        $query->where('name', "LIKE", "%{$filters['text']}%")
+                        ->orWhere('desc', "LIKE", "%{$filters['text']}%");
+                });
+            })
+            ->with([
+                "province:id,name:url",
+                "state:id,name",
+                "services:garage_id,segment,type",
+                "media:garage_id,mime,path"
+            ])
+            ->get();
     }
 }

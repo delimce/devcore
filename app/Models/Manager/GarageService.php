@@ -29,16 +29,16 @@ class GarageService extends Model
 
     public function garage()
     {
-        return $this->belongsTo('App\Models\Manager\Garage', 'garage_id');
+        return $this->belongsTo(Garage::class, 'garage_id');
     }
 
     public function service()
     {
-        return $this->belongsTo('App\Models\Manager\Service', 'service_id');
+        return $this->belongsTo(Service::class, 'service_id');
     }
 
     public function brand()
     {
-        return $this->belongsTo('App\Models\Manager\Brand', 'brand_id');
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 }

@@ -10,8 +10,13 @@
 // Import Extensions
 @import "ext/bulma-pricingtable.sass";
 
+// Import v-select
+@import "vue-select/src/scss/vue-select.scss";
+
 
 //my styles
 @import "main.css";
+//website styles
+@import "site.css";
 //manager styles
 @import "manager.css";

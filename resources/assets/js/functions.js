@@ -19,7 +19,7 @@ export const saveUserToken = function (token) {
     sessionStorage.updated = new Date().getTime();
 }
 
-export const deleteUserData = function(){
+export const deleteUserData = function () {
     sessionStorage.clear();
 }
 
@@ -31,4 +31,10 @@ export const redirectToAdmin = function () {
 export const redirectToManager = function () {
     let url = api_url + "/manager";
     window.open(url, "_self");
+}
+
+export const gotoSection = function (sectionId) {
+    let url = location.href;
+    location.href = "#" + sectionId;
+    history.replaceState(null, null, url);
 }

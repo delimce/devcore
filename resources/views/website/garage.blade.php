@@ -1,0 +1,8 @@
+@extends('layout.default')
+@section('title',  $name)
+
+@section('content')
+<search-header-component></search-header-component>
+<garage-detail-component :id="{{$id}}"></garage-detail-component>
+
+@endsection

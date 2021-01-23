@@ -3,7 +3,7 @@
 namespace App\Decorators;
 
 use App\Repositories\GarageRepository;
-use App\Utils\Utilities;
+use App\Services\StringsHandlerService;
 use Illuminate\Database\Eloquent\Collection;
 
 class GarageServiceDecorator
@@ -48,6 +48,13 @@ class GarageServiceDecorator
         return $this->useTermsToCodes($categories);
     }
 
+
+
+    /**
+     * @param $garageId
+     * @param $params
+     * @return Collection|\Illuminate\Support\Collection
+     */
     public function getServiceList($garageId, $params)
     {
         $list = $this->garageService->getServiceList($garageId, $params);
@@ -55,9 +62,9 @@ class GarageServiceDecorator
         return $list->map(function ($item) {
             return [
                 "id" => $item->id,
-                "segment" => Utilities::getTermTranslated($item->segment),
-                "type" => Utilities::getTermTranslated($item->type),
-                "category" => Utilities::getTermTranslated($item->category),
+                "segment" => StringsHandlerService::getTermTranslated($item->segment),
+                "type" => StringsHandlerService::getTermTranslated($item->type),
+                "category" => StringsHandlerService::getTermTranslated($item->category),
                 "service" => $item->service->desc,
                 "brand" => ($item->brand) ? $item->brand->name : "",
                 "price" => $item->price . "€",
@@ -69,15 +76,15 @@ class GarageServiceDecorator
     /**
      * useTermsToCodes
      * get array of terms translated
-     * @param  Collection $result
-     * @return array
+     * @param Collection $result
+     * @return array|Collection
      */
-    protected function useTermsToCodes($result)
+    protected function useTermsToCodes(Collection $result)
     {
         return $result->map(function ($item) {
             return [
                 "id" => $item->code,
-                "desc" => Utilities::getTermTranslated($item->code)
+                "desc" => StringsHandlerService::getTermTranslated($item->code)
             ];
         });
     }

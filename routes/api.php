@@ -73,10 +73,20 @@ $router->group(
             );
         });
 
+        //website garage routes
+        $router->group(
+            ['prefix' => 'garage'],
+            function () use ($router) {
+                $router->get('/search', ['uses' =>  'GarageFrontController@mainSearch']);
+                $router->get('/details/{id}', ['uses' =>  'GarageFrontController@getById']);
+            }
+        );
+
         //localization
         $router->group(
             ['prefix' => 'local'],
             function () use ($router) {
+                $router->get('/cities/country[/{countryId}]', ['uses' =>  'LocalizationController@getCitiesByCountryId']);
                 $router->get('/states[/{countryId}]', ['uses' =>  'LocalizationController@getStates']);
                 $router->get('/provinces[/{stateId}]', ['uses' =>  'LocalizationController@getProvinces']);
                 $router->get('/municipalities[/{provinceId}]', ['uses' =>  'LocalizationController@getMunicipalities']);

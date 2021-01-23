@@ -28,8 +28,4 @@ export default {};
 .welcome {
   margin: 5px 10px 20px 10px;
 }
-.garafy {
-  color: lawngreen;
-  font-weight: bolder;
-}
 </style>

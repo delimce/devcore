@@ -117,9 +117,19 @@
     background-image: none;
   }
 
+  .g-logo {
+    padding: 12px 0 0 45px;
+    max-width: 300px;
+  }
+
   .logo-mini{
     margin-left: 22px;
       width: 94px;
+  }
+
+  .garafy {
+    color: rgb(80, 122, 38);
+    font-weight: bolder;
   }
 
   .mini {
