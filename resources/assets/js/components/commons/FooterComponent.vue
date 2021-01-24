@@ -46,7 +46,7 @@ export default {
     return {
       currentYear: "",
       home: api_url,
-      servicesUrl: api_url + "/#services",
+      servicesUrl: api_url + "/manager/#opinions",
       managerUrl: api_url + "/manager"
     };
   },

@@ -24,8 +24,8 @@
             </div>
             <div class="navbar-menu" id="navbarTopMain">
               <div class="navbar-end">
-                <a href="#services" class="navbar-item has-text-weight-semibold">
-                  <span>Servicios</span>
+                <a href="#opinions" class="navbar-item has-text-weight-semibold">
+                  <span>Testimonios</span>
                 </a>
                 <a href="#manager" class="navbar-item has-text-weight-semibold">
                   <span>Manager</span>
@@ -72,7 +72,7 @@
     <!--navbar -->
 
     <!--content1 -->
-    <section id="services" class="hero is-medium has-text-centered">
+    <section id="opinions" class="hero is-medium has-text-centered">
       <div class="hero-body back-green">
         <div class="container">
           <h2 class="subtitle">Bienvenido a Garafy Manager</h2>
