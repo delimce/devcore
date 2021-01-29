@@ -14,6 +14,10 @@
           <user-register-component
             v-show="action == 'register'"
           ></user-register-component>
+          <user-account-component
+            v-show="action == 'account'"
+            :user="user"
+          ></user-account-component>
         </div>
       </div>
 
@@ -31,12 +35,14 @@ export default {
     return {
       label_title: "Usuarios Garafy",
       action: "login",
+      user: {},
     };
   },
   mounted: function () {
     let quickviews = bulmaQuickview.attach();
     EventBus.$on("users-mode-change", (change) => {
       this.action = change.action;
+      this.user = change.user ? change.user : {};
     });
   },
 };
@@ -45,6 +51,14 @@ export default {
 .quickview-header {
   background-color: #555;
   min-height: 100px !important;
+}
+
+.quickview-body {
+  background: url("../../../img/landing/account_back.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+  height: 550px;
+  background-color: rgba(white, white, white, 0.9);
 }
 
 .quickview-header p {

@@ -1,8 +1,10 @@
+import EventBus from "@/bus";
 const WebsiteMixin = {
     data() {
         return {
             label_info: "Información",
             label_services: "Servicios",
+            label_close: "Cerrar sesión",
             label_welcome: "¿Buscas un taller de confianza?",
             mediaPath: api_url + "/storage/media/",
             baseDetailPath: "garages/",
@@ -47,7 +49,12 @@ const WebsiteMixin = {
         },
         setAltImg(event) {
             event.target.src = this.nofoundImage
-        }
+        },
+        sessionClose() {
+            EventBus.$emit("users-mode-change", {
+                action: "login",
+            });
+        },
     }
 }
 export default WebsiteMixin

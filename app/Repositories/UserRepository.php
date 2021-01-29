@@ -53,6 +53,7 @@ class UserRepository
         }
 
         $result["ok"] = true;
+        $result["data"] = $user;
         return $result;
     }
 

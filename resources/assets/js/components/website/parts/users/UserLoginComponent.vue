@@ -67,11 +67,19 @@ export default {
         action: "register",
       });
     },
+    goToAccount(user) {
+      EventBus.$emit("users-mode-change", {
+        action: "account",
+        user: user,
+      });
+    },
     doLogin() {
       axios
         .post("/users/login", this.credentials)
         .then((response) => {
           this.loading = false;
+          let user = response.data.info.data;
+          this.goToAccount(user);
         })
         .catch((error) => {
           this.loginError = true;
@@ -91,4 +99,11 @@ export default {
 };
 </script>
 <style scoped>
+input,
+button {
+  border: 1px solid green;
+}
+small {
+  font-weight: bold;
+}
 </style>

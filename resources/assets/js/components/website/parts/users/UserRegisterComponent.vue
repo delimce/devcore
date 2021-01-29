@@ -136,4 +136,11 @@ export default {
 };
 </script>
 <style scoped>
+input, button{
+  border:1px solid green;
+}
+
+small {
+  font-weight: bold;
+}
 </style>
