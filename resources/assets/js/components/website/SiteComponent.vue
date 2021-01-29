@@ -49,7 +49,6 @@
         </div>
       </div>
     </section>
-    <users-component></users-component>
   </div>
 </template>
 <script>

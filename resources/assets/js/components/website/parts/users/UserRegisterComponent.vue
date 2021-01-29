@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="column has-text-centered">
+    <div v-if="!accountCreated" class="column has-text-centered">
       <p class="title is-5">{{ label_title }}</p>
       <div class="field">
         <div class="control">
@@ -81,6 +81,14 @@
         <a class="change" @click="goToLogin()"> {{ label_login }}</a>
       </small>
     </div>
+    <div v-else class="column has-text-centered">
+      <p class="to-login">
+        Gracias {{ username }}, por registrarte como usuario en nuestra
+        plataforma, ya podrás realizar citas con sólo hacer login con tu nueva
+        cuenta a continuación:<br />
+        <a class="to-login" @click="goToLogin()"> {{ label_login }}</a>
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -94,6 +102,8 @@ export default {
       label_register: "Registrarme",
       label_login: "Hacer login",
       registerError: false,
+      accountCreated: false,
+      username: "",
       user: {
         name: "",
         lastname: "",
@@ -114,7 +124,8 @@ export default {
         .post("/users/create", this.user)
         .then((response) => {
           this.loading = false;
-          this.user = {};
+          this.accountCreated = true;
+          this.username = this.user.name;
         })
         .catch((error) => {
           this.registerError = true;
@@ -136,11 +147,13 @@ export default {
 };
 </script>
 <style scoped>
-input, button{
-  border:1px solid green;
+input,
+button {
+  border: 1px solid green;
 }
 
-small {
+small,
+.to-login {
   font-weight: bold;
 }
 </style>

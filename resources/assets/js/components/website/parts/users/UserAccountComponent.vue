@@ -34,7 +34,6 @@ export default {
   props:["user"],
   data() {
     return {
-      user: {},
     };
   },
   methods: {},

@@ -53,7 +53,10 @@
           <span><i class="fas fa-phone"></i> {{ garage.phone }}</span>
           <span v-html="address"></span>
           <span class="booking">
-            <button class="button is-primary is-medium is-fullwidth">
+            <button 
+            data-show="quickview" 
+            data-target="quickviewDefault"
+            class="button is-primary is-medium is-fullwidth">
               {{ label_booking }}
             </button>
           </span>
