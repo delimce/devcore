@@ -54,10 +54,9 @@ export default {
 }
 
 .quickview-body {
-  background: url("../../../img/landing/account_back.jpg") no-repeat center
-    center fixed;
+  background: url("../../../img/landing/account_back.jpg") no-repeat center;
   background-size: cover;
-  height: 550px;
+  height: 950px;
   background-color: rgba(white, white, white, 0.9);
 }
 
