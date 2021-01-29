@@ -14,10 +14,13 @@
 use App\Services\StringsHandlerService;
 use Illuminate\Support\Facades\Hash;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Users\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
+        'lastname' => $faker->lastname,
         'email' => $faker->email,
+        'password' => Hash::make("customPassword"),
+        'verified' => 0
     ];
 });
 

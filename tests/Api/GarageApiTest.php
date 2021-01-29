@@ -191,7 +191,8 @@ class GarageApiTest extends TestCase
      */
     public function testGetGarageById()
     {
-        $this->call("GET", static::API_URI_GARAGE . "/details/1", [], [], []);
+        $garageId = $this->garage->id;
+        $this->call("GET", static::API_URI_GARAGE . "/details/$garageId", [], [], []);
         $this->seeStatusCode(200);
         
     }

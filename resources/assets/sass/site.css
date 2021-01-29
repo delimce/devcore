@@ -5,3 +5,9 @@ html {
 p {
     line-height: 30px;
 }
+
+.my-error {
+    margin: auto;
+    display: block;
+    color: red;
+  }

@@ -58,6 +58,7 @@ class ApiController extends BaseController
             'confirmed' => __('errors.validate.confirmed'),
             'email' => __('errors.validate.email'),
             'exists' => __('errors.validate.notexist'),
+            'unique' => __('errors.validate.unique'),
         ];
     }
 }

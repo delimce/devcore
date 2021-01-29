@@ -11,6 +11,7 @@ return [
     'validate.schedule.day' => 'Error en horarios del día :day',
     'validate.email' => 'Error el email no es válido',
     'validate.notexist' => 'Error el :attribute no existe',
+    'validate.unique' => 'Error :attribute ya se encuentra registrado',
     'signup' => 'Error en registro de usuario',
     'save' => 'Error guardando los datos',
     'login.email' => 'Email desconocido',

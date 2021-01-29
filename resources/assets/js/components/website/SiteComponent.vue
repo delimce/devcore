@@ -49,11 +49,14 @@
         </div>
       </div>
     </section>
+    <users-component></users-component>
   </div>
 </template>
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
+import UsersComponent from './UsersComponent.vue';
 export default {
+  components: { UsersComponent },
   name: "SiteComponent",
   mixins: [WebsiteMixin],
 };

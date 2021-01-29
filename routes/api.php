@@ -92,6 +92,15 @@ $router->group(
                 $router->get('/municipalities[/{provinceId}]', ['uses' =>  'LocalizationController@getMunicipalities']);
             }
         );
+
+        //users
+        $router->group(
+            ['prefix' => 'users'],
+            function () use ($router) {
+                $router->post('login', ['uses' =>  'UserController@login']);
+                $router->post('create', ['uses' =>  'UserController@createNew']);
+            }
+        );
     }
 
 );

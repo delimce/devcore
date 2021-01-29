@@ -22,7 +22,9 @@
               <a href="/manager" class="navbar-item has-text-weight-semibold">
                 <span>Garafy Manager</span>
               </a>
-              <a class="navbar-item has-text-weight-semibold">
+              <a
+               data-show="quickview" data-target="quickviewDefault"
+               class="navbar-item has-text-weight-semibold">
                 <span>Inicia sesión</span>
               </a>
             </div>

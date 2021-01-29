@@ -8,6 +8,7 @@ const WebsiteMixin = {
             baseDetailPath: "garages/",
             nofoundImage: "https://bulma.io/images/placeholders/640x320.png",
             loading: true,
+            messageError: "",
             days: ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
             segments: [
                 { id: "CAR", label: "turismo" },
@@ -25,7 +26,6 @@ const WebsiteMixin = {
                 { id: "BATTERY", label: "Baterias", order: 6 },
                 { id: "CHECK", label: "Mantenimiento", order: 7 },
                 { id: "AC", label: "A/C", order: 8 },
-
             ]
         }
     },
