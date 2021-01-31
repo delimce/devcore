@@ -62,4 +62,23 @@ class GarageFrontController extends ApiController
         }
         return $this->okResponse($garage);
     }
+
+     /**
+     * searchService
+     *
+     * @param  mixed $req
+     * @return JsonResponse
+     */
+    public function searchServices(Request $req)
+    {
+        $criteria = [];
+        if ($req->has("type")) {
+            $criteria["type"] = $req->type;
+        }
+        if ($req->has("segment")) {
+            $criteria["segment"] = $req->segment;
+        }
+        $services = $this->garage->findService($criteria);
+        return $this->okResponse(["list" => $services]);
+    }
 }

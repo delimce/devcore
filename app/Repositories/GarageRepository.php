@@ -555,12 +555,34 @@ class GarageRepository
 
 
     /**
+     * serviceSearch
+     *
+     * @param  array $criteria
+     * @return Collection
+     */
+    public function findService(array $criteria)
+    {
+        return Service::where(["status" => 1])
+            ->when(isset($criteria['type']), function ($q) use ($criteria) {
+                return $q->where('type', $criteria['type']);
+            })->when(isset($criteria['segment']), function ($q) use ($criteria) {
+                return
+                    $q->where(function ($query) use ($criteria) {
+                        return
+                            $query->where('segment', $criteria['segment'])
+                            ->orWhere('segment', null);
+                    });
+            })->get();
+    }
+
+
+    /**
      * search
      *
      * @param mixed[] $filters
      * @return Collection
      */
-    public function search(array $filters):Collection
+    public function search(array $filters): Collection
     {
         return Garage::where("enable", 1)
             ->when($filters['city'], function ($q) use ($filters) {

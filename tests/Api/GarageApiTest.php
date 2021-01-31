@@ -181,6 +181,16 @@ class GarageApiTest extends TestCase
         $this->seeStatusCode(200);
     }
 
+    public function testSearchService()
+    {
+        $filters["type"] = "FILTER";
+        $filters["segment"] = "CAR";
+
+        $this->call("GET", static::API_URI_GARAGE . "/search/services?", $filters, [], [], []);
+        $this->seeStatusCode(200);
+        
+    }
+
 
     
     /**

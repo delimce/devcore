@@ -71,7 +71,7 @@ class GarageRepositoryTest extends TestCase
     {
         $url = $this->garage->url;
         $garage = $this->garageRepository->getByUrl($url);
-        $this->assertEquals($url,$garage->url);
+        $this->assertEquals($url, $garage->url);
 
         $garage = $this->garageRepository->getByUrl('not-exist');
         $this->assertNull($garage);
@@ -99,8 +99,7 @@ class GarageRepositoryTest extends TestCase
         $newGarage["zipcode"] = $this->garage->zipcode;
 
         $garageId = $this->garageRepository->saveGarage($newGarage);
-        $this->assertTrue($garageId>0);
-
+        $this->assertTrue($garageId > 0);
     }
 
 
@@ -161,6 +160,30 @@ class GarageRepositoryTest extends TestCase
 
     /**
      * @test
+     * testFindService
+     *
+     * @return void
+     */
+    public function testFindService()
+    {
+        $criteria = [];
+
+        # all active service
+        $services = $this->garageRepository->findService($criteria);
+        $this->assertTrue($services->count() > 10);
+        # find by type
+        $criteria["type"] = "FILTER";
+        $services = $this->garageRepository->findService($criteria);
+        $this->assertTrue($services->count() > 2);
+        # find by segment
+        $criteria["segment"] = "CAR";
+        $services = $this->garageRepository->findService($criteria);
+        $this->assertTrue($services->count() > 0);
+    }
+
+
+    /**
+     * @test
      * testGarageMainSearch
      *
      * @return void
@@ -185,11 +208,10 @@ class GarageRepositoryTest extends TestCase
         #name
         $filters["text"] = $nameSearch;
         $result2 =  $this->garageRepository->search($filters);
-        $this->assertStringContainsString($nameSearch,$result2->first()->name);
+        $this->assertStringContainsString($nameSearch, $result2->first()->name);
         #desc
         $filters["text"] = $descSearch;
         $result3 =  $this->garageRepository->search($filters);
-        $this->assertStringContainsString($descSearch,$result3->first()->desc);
-
+        $this->assertStringContainsString($descSearch, $result3->first()->desc);
     }
 }
