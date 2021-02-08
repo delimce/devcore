@@ -572,7 +572,7 @@ class GarageRepository
                             $query->where('segment', $criteria['segment'])
                             ->orWhere('segment', null);
                     });
-            })->get();
+            })->orderBy("name")->get();
     }
 
 
@@ -584,7 +584,7 @@ class GarageRepository
      */
     public function search(array $filters): Collection
     {
-        return Garage::where("enable", 1)
+        $results = Garage::where("enable", 1)->distinct()
             ->when($filters['city'], function ($q) use ($filters) {
                 return $q->where('province_id', $filters['city']);
             })
@@ -597,13 +597,26 @@ class GarageRepository
                         $query->where('name', "LIKE", "%{$filters['text']}%")
                         ->orWhere('desc', "LIKE", "%{$filters['text']}%");
                 });
-            })
+            }) # advanced search
+            ->when(($filters['type'] || $filters['segment'] || $filters['service']),
+                function ($q) use ($filters) {
+                    return $q->join('garage_service', 'garage.id', '=', 'garage_service.garage_id')
+                        ->when($filters['type'], function ($q) use ($filters) {
+                            return $q->where('type', $filters['type']);
+                        })->when($filters['segment'], function ($q) use ($filters) {
+                            return $q->where('segment', $filters['segment']);
+                        })->when($filters['service'], function ($q) use ($filters) {
+                            return $q->where('service_id', $filters['service']);
+                        });
+                }
+            )
             ->with([
                 "province:id,name:url",
                 "state:id,name",
                 "services:garage_id,segment,type",
                 "media:garage_id,mime,path"
             ])
-            ->get();
+            ->get(["garage.*"]);
+        return $results;
     }
 }

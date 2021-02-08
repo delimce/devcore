@@ -57,6 +57,9 @@ export default {
         text: this.filters.text,
         city: this.filters.city ? this.filters.city.code : "",
         zip: this.filters.zip,
+        type: this.filters.type,
+        segment: this.filters.segment,
+        service: this.filters.service,
       };
 
       axios

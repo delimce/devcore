@@ -53,7 +53,7 @@
 </template>
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
-import UsersComponent from './UsersComponent.vue';
+import UsersComponent from "./UsersComponent.vue";
 export default {
   components: { UsersComponent },
   name: "SiteComponent",
@@ -65,8 +65,8 @@ export default {
   background: url("../../../img/landing/back06.jpg") no-repeat center center
     fixed;
   background-size: cover;
-  height: 750px;
-  background-color: rgba(187, 187, 187, 0.7);
+  height: 800px;
+  background-color: rgba(39, 39, 39, 0.9);
 }
 
 .search-title {

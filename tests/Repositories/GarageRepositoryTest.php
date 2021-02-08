@@ -9,6 +9,7 @@ class GarageRepositoryTest extends TestCase
     protected $manager;
     protected $garage;
     protected $garageRepository;
+    protected $searchFilters;
 
     public function setUp(): void
     {
@@ -17,6 +18,14 @@ class GarageRepositoryTest extends TestCase
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
+        $this->searchFilters = [
+            "text" => "",
+            "city" => 28,
+            "zip" => "",
+            "type" => "",
+            "segment" => "",
+            "service" => null,
+        ];
     }
 
 
@@ -190,8 +199,7 @@ class GarageRepositoryTest extends TestCase
      */
     public function testGarageMainSearch()
     {
-        $filters["text"] = "";
-        $filters["city"] = 28;
+        $filters = $this->searchFilters;
         $filters["zip"] = 28027;
         $result =  $this->garageRepository->search($filters);
         $this->assertTrue($result->count() > 0);
@@ -213,5 +221,31 @@ class GarageRepositoryTest extends TestCase
         $filters["text"] = $descSearch;
         $result3 =  $this->garageRepository->search($filters);
         $this->assertStringContainsString($descSearch, $result3->first()->desc);
+    }
+
+    /**
+     * @test
+     * testAdvancedSearch
+     *
+     * @return void
+     */
+    public function testAdvancedSearch()
+    {
+        $filters = $this->searchFilters;
+        $filters["type"] = "OIL";
+        $filters["segment"] = "CAR";
+        $filters["service"] = 1;
+        $fakePool["oil"][] =
+        [
+            "id" => 1,
+            "type" => "OIL",
+            "category" => "PREMIUM",
+            "brand" => 1,
+            "price" => 10,
+            "select" => true
+        ];
+        $this->garageRepository->saveGaragePool($this->garage->id, "CAR", $fakePool);
+        $result =  $this->garageRepository->search($filters);
+        $this->assertTrue($result->count()>0);
     }
 }

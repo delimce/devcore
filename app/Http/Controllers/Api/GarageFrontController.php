@@ -29,6 +29,9 @@ class GarageFrontController extends ApiController
             "text" => $req->text ?? "",
             "city" => $req->city ?? "",
             "zip" => $req->zip ?? "",
+            "segment" => $req->segment ?? "",
+            "type" => $req->type ?? "",
+            "service" => $req->service ?? "",
         ];
 
         # if no filters    
@@ -63,7 +66,7 @@ class GarageFrontController extends ApiController
         return $this->okResponse($garage);
     }
 
-     /**
+    /**
      * searchService
      *
      * @param  mixed $req
