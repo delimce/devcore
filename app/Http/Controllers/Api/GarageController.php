@@ -39,7 +39,7 @@ class GarageController extends ApiController
     {
         $validator = Validator::make($req->all(), [
             'name' => 'required|max:140',
-            'phone' => 'required|integer',
+            'phone' => 'required|integer|min:3',
             'address' => 'required|min:9',
             'country_id' => 'required|integer',
             'state_id' => 'required|integer',
@@ -52,7 +52,7 @@ class GarageController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $garage = [
+        $new = [
             "manager" => $this->manager->getIdFromToken($this->token),
             "name" => $req->name,
             "phone" => $req->phone,
@@ -64,18 +64,18 @@ class GarageController extends ApiController
         ];
 
         if ($req->has('address2')) {
-            $garage["address2"] = $req->address2;
+            $new["address2"] = $req->address2;
         }
 
         if ($req->has('network_id')) {
-            $garage["network_id"] = $req->network_id;
+            $new["network_id"] = $req->network_id;
         }
 
         if ($req->has('desc')) {
-            $garage["desc"] = $req->desc;
+            $new["desc"] = $req->desc;
         }
 
-        $result = $this->garage->saveGarage($garage);
+        $result = $this->garage->saveGarage($new);
         if (!$result) {
             $data = ["message" => "error"];
             return $this->errorResponse($data, 403);

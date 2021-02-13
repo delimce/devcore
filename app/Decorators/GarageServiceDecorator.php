@@ -3,17 +3,22 @@
 namespace App\Decorators;
 
 use App\Repositories\GarageRepository;
+use App\Repositories\GarageServiceRepository;
 use App\Services\StringsHandlerService;
 use Illuminate\Database\Eloquent\Collection;
 
 class GarageServiceDecorator
 {
     protected $garageService;
+    protected $garage;
 
 
-    public function __construct(GarageRepository $garage)
+    public function __construct(
+        GarageRepository $garage,
+        GarageServiceRepository $garageService)
     {
-        $this->garageService = $garage;
+        $this->garage = $garage;
+        $this->garageService = $garageService;
     }
 
 
@@ -23,7 +28,7 @@ class GarageServiceDecorator
      */
     public function getCarSegments()
     {
-        $segments = $this->garageService->getCarSegments();
+        $segments = $this->garage->getCarSegments();
         return $this->useTermsToCodes($segments);
     }
 
@@ -33,7 +38,7 @@ class GarageServiceDecorator
      */
     public function getServiceTypes()
     {
-        $types = $this->garageService->getServiceTypes();
+        $types = $this->garage->getServiceTypes();
         return $this->useTermsToCodes($types);
     }
 
@@ -44,7 +49,7 @@ class GarageServiceDecorator
      */
     public function getServiceCategories()
     {
-        $categories = $this->garageService->getServiceCategories();
+        $categories = $this->garage->getServiceCategories();
         return $this->useTermsToCodes($categories);
     }
 

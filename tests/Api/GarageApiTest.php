@@ -12,7 +12,6 @@ class GarageApiTest extends TestCase
     /** @var manager fake  */
     protected $manager;
     protected $garage;
-    protected $garageRepository;
     protected $mediaRepository;
 
     public function setUp(): void
@@ -20,7 +19,6 @@ class GarageApiTest extends TestCase
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
-        $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
         $this->mediaRepository = $this->app->make('App\Repositories\MediaRepository');
     }
 
@@ -90,7 +88,9 @@ class GarageApiTest extends TestCase
             ["garage_id" => $garageId, "am1" => "08:00", "am2" => "12:30", "pm1" => "14:00", "pm2" => "16:00"],
         ];
 
-        $this->post(static::API_URI . "/schedule", ["garage" => $garageId, "schedule" => $schedule], ["Authorization" => $this->manager->token]);
+        $endpoint = "/schedule";
+
+        $this->post(static::API_URI . $endpoint, ["garage" => $garageId, "schedule" => $schedule], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(400);
 
         $schedule2 = array_merge($schedule, [
@@ -98,10 +98,10 @@ class GarageApiTest extends TestCase
             ["garage_id" => $garageId, "am1" => "", "am2" => "", "pm1" => "", "pm2" => ""],
         ]);
 
-        $this->post(static::API_URI . "/schedule", ["garage" => $garageId, "schedule" => $schedule2], ["Authorization" => $this->manager->token]);
+        $this->post(static::API_URI . $endpoint, ["garage" => $garageId, "schedule" => $schedule2], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(200);
 
-        $this->get(static::API_URI . "/schedule", ["Authorization" => $this->manager->token]);
+        $this->get(static::API_URI . $endpoint, ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(200);
     }
 
@@ -123,7 +123,9 @@ class GarageApiTest extends TestCase
             true // for $test
         );
 
-        $this->call("POST", static::API_URI . "/media", ["garage" => $garageId], [], ["file" => $file], [
+        $endpoint = "/media";
+
+        $this->call("POST", static::API_URI . $endpoint, ["garage" => $garageId], [], ["file" => $file], [
             "HTTP_Authorization" => $this->manager->token,
         ]);
         $this->seeStatusCode(200);
@@ -140,13 +142,12 @@ class GarageApiTest extends TestCase
         $response = $this->call('GET', 'storage/media/' . $media->path);
         $this->assertEquals(200, $response->status());
 
-
-        $this->call("DELETE", static::API_URI . "/media", ["garage" => $garageId, "path" => $media->original], [], [], [
+        $this->call("DELETE", static::API_URI . $endpoint, ["garage" => $garageId, "path" => $media->original], [], [], [
             "HTTP_Authorization" => $this->manager->token,
         ]);
         $this->seeStatusCode(200);
 
-        $this->call("DELETE", static::API_URI . "/media", ["garage" => $garageId, "path" => "notExists"], [], [], [
+        $this->call("DELETE", static::API_URI . $endpoint, ["garage" => $garageId, "path" => "notExists"], [], [], [
             "HTTP_Authorization" => $this->manager->token,
         ]);
         $this->seeStatusCode(403);
@@ -156,7 +157,7 @@ class GarageApiTest extends TestCase
     /**
      * GARAGE FRONT METHODS
      */
-    
+
     /**
      * @test
      * testGarageSearch
@@ -171,13 +172,22 @@ class GarageApiTest extends TestCase
             "zip" => "",
         ];
 
-        $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
+        $endpoint = "/search?";
+
+        $this->call("GET", static::API_URI_GARAGE . $endpoint, $filters, [], [], []);
         $this->seeStatusCode(403);
 
         $filters["text"] = "testing";
         $filters["city"] = 28;
 
-        $this->call("GET", static::API_URI_GARAGE . "/search?", $filters, [], [], []);
+        $this->call("GET", static::API_URI_GARAGE . $endpoint, $filters, [], [], []);
+        $this->seeStatusCode(200);
+
+        $filters["segment"] = "CAR";
+        $filters["type"] = "TYRE";
+        $filters["service"] = 1;
+
+        $this->call("GET", static::API_URI_GARAGE . $endpoint, $filters, [], [], []);
         $this->seeStatusCode(200);
     }
 
@@ -188,11 +198,10 @@ class GarageApiTest extends TestCase
 
         $this->call("GET", static::API_URI_GARAGE . "/search/services?", $filters, [], [], []);
         $this->seeStatusCode(200);
-        
     }
 
 
-    
+
     /**
      * @test
      * testGetGarageById
@@ -204,6 +213,5 @@ class GarageApiTest extends TestCase
         $garageId = $this->garage->id;
         $this->call("GET", static::API_URI_GARAGE . "/details/$garageId", [], [], []);
         $this->seeStatusCode(200);
-        
     }
 }

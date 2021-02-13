@@ -3,12 +3,14 @@
 use App\Models\Manager\Garage;
 use App\Models\Manager\Manager;
 use App\Repositories\GarageRepository;
+use App\Repositories\GarageServiceRepository;
 
 class GarageRepositoryTest extends TestCase
 {
     protected $manager;
     protected $garage;
     protected $garageRepository;
+    protected $garageServiceRepository;
     protected $searchFilters;
 
     public function setUp(): void
@@ -18,6 +20,7 @@ class GarageRepositoryTest extends TestCase
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
+        $this->garageServiceRepository = $this->app->make('App\Repositories\GarageServiceRepository');
         $this->searchFilters = [
             "text" => "",
             "city" => 28,
@@ -51,8 +54,8 @@ class GarageRepositoryTest extends TestCase
     public function testGetGarageById()
     {
         $id = $this->garage->id;
-        $garage = $this->garageRepository->getById($id);
-        $this->assertNotNull($garage);
+        $item = $this->garageRepository->getById($id);
+        $this->assertNotNull($item);
     }
 
 
@@ -65,8 +68,8 @@ class GarageRepositoryTest extends TestCase
     public function testGetGarageDetailsById()
     {
         $id = $this->garage->id;
-        $garage = $this->garageRepository->getDetailsById($id);
-        $this->assertNotNull($garage);
+        $item = $this->garageRepository->getDetailsById($id);
+        $this->assertNotNull($item);
     }
 
 
@@ -79,11 +82,11 @@ class GarageRepositoryTest extends TestCase
     public function testGetGarageByUrl()
     {
         $url = $this->garage->url;
-        $garage = $this->garageRepository->getByUrl($url);
-        $this->assertEquals($url, $garage->url);
+        $item = $this->garageRepository->getByUrl($url);
+        $this->assertEquals($url, $item->url);
 
-        $garage = $this->garageRepository->getByUrl('not-exist');
-        $this->assertNull($garage);
+        $item = $this->garageRepository->getByUrl('not-exist');
+        $this->assertNull($item);
     }
 
 
@@ -123,9 +126,9 @@ class GarageRepositoryTest extends TestCase
     {
         $garageId = $this->garage->id;
         $segment = "CAR";
-        $result = $this->garageRepository->getGaragePoolBySegment($garageId, $segment);
+        $result = $this->garageServiceRepository->getGaragePoolBySegment($garageId, $segment);
 
-        foreach (GarageRepository::SERVICES_TYPES as $type) {
+        foreach (GarageServiceRepository::SERVICES_TYPES as $type) {
             $index = strtolower($type);
             $this->assertArrayHasKey($index, $result);
         }
@@ -161,8 +164,8 @@ class GarageRepositoryTest extends TestCase
                 "price" => 80,
                 "select" => true
             ];
-        $this->garageRepository->saveGaragePool($garageId, $segment, $fakePool);
-        $services = $this->garageRepository->getServiceList($garageId);
+        $this->garageServiceRepository->saveGaragePool($garageId, $segment, $fakePool);
+        $services = $this->garageServiceRepository->getServiceList($garageId);
         $this->assertCount(2, $services);
     }
 
@@ -178,15 +181,15 @@ class GarageRepositoryTest extends TestCase
         $criteria = [];
 
         # all active service
-        $services = $this->garageRepository->findService($criteria);
+        $services = $this->garageServiceRepository->findService($criteria);
         $this->assertTrue($services->count() > 10);
         # find by type
         $criteria["type"] = "FILTER";
-        $services = $this->garageRepository->findService($criteria);
+        $services = $this->garageServiceRepository->findService($criteria);
         $this->assertTrue($services->count() > 2);
         # find by segment
         $criteria["segment"] = "CAR";
-        $services = $this->garageRepository->findService($criteria);
+        $services = $this->garageServiceRepository->findService($criteria);
         $this->assertTrue($services->count() > 0);
     }
 
@@ -210,9 +213,9 @@ class GarageRepositoryTest extends TestCase
         }
 
         # search by name or desc
-        $garage = $result->find($this->garage->id);
-        $nameSearch  = substr($garage->name, 1, 5);
-        $descSearch  = substr($garage->desc, 2, 10);
+        $item = $result->find($this->garage->id);
+        $nameSearch  = substr($item->name, 1, 5);
+        $descSearch  = substr($item->desc, 2, 10);
         #name
         $filters["text"] = $nameSearch;
         $result2 =  $this->garageRepository->search($filters);
@@ -244,7 +247,7 @@ class GarageRepositoryTest extends TestCase
             "price" => 10,
             "select" => true
         ];
-        $this->garageRepository->saveGaragePool($this->garage->id, "CAR", $fakePool);
+        $this->garageServiceRepository->saveGaragePool($this->garage->id, "CAR", $fakePool);
         $result =  $this->garageRepository->search($filters);
         $this->assertTrue($result->count()>0);
     }

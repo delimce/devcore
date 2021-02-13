@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\GarageRepository;
 use App\Repositories\ManagerRepository;
 use App\Decorators\GarageServiceDecorator;
+use App\Repositories\GarageServiceRepository;
 
 class GarageServiceController extends ApiController
 {
@@ -16,7 +16,7 @@ class GarageServiceController extends ApiController
     protected $token;
 
     public function __construct(
-        GarageRepository $garage,
+        GarageServiceRepository $garage,
         ManagerRepository $manager,
         Request $req
     ) {

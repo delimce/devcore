@@ -3,10 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Users\User;
-use Carbon\Carbon as Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -22,8 +19,7 @@ class UserRepository
     public function createUser(array $data)
     {
         $data["password"] = Hash::make($data["password"]);
-        $result = User::create($data);
-        return $result;
+        return User::create($data);
     }
 
 

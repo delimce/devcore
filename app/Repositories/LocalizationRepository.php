@@ -67,10 +67,9 @@ class LocalizationRepository
      */
     public function getCitiesByCountry($countryId)
     {
-        $cities = Province::join('local_state', 'local_state.id', '=', 'local_province.state_id')
+        return Province::join('local_state', 'local_state.id', '=', 'local_province.state_id')
             ->select("local_province.id", "local_province.name")
             ->where("local_state.country_id", $countryId)
             ->where("local_province.status", 1)->orderBy("local_province.name")->get();
-        return $cities;
     }
 }

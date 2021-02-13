@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\GarageRepository;
+use App\Repositories\GarageServiceRepository;
 use Illuminate\Http\Request;
 
 class GarageFrontController extends ApiController
@@ -10,9 +11,11 @@ class GarageFrontController extends ApiController
     protected $garage;
 
     public function __construct(
-        GarageRepository $garage
+        GarageRepository $garage,
+        GarageServiceRepository $services
     ) {
         $this->garage = $garage;
+        $this->services = $services;
     }
 
 
@@ -57,13 +60,13 @@ class GarageFrontController extends ApiController
      */
     public function getById($id)
     {
-        $garage = $this->garage->getDetailsById($id);
-        if (!$garage) {
+        $detail = $this->garage->getDetailsById($id);
+        if (!$detail) {
             return  $this->errorResponse([
                 "message" => __('errors.404')
             ], 404);
         }
-        return $this->okResponse($garage);
+        return $this->okResponse($detail);
     }
 
     /**
@@ -81,7 +84,7 @@ class GarageFrontController extends ApiController
         if ($req->has("segment")) {
             $criteria["segment"] = $req->segment;
         }
-        $services = $this->garage->findService($criteria);
+        $services = $this->services->findService($criteria);
         return $this->okResponse(["list" => $services]);
     }
 }

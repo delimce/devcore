@@ -51,7 +51,7 @@ class MediaRepository
     public function getGarageFilesFromMedia(int $garageId)
     {
         $mediaFiles = GarageMedia::whereGarageId($garageId)->get();
-        $data = $mediaFiles->map(function ($item, $key) {
+        return $mediaFiles->map(function ($item) {
             return [
                 "path" => $item->path,
                 "name" => $item->original,
@@ -60,7 +60,6 @@ class MediaRepository
                 "url" => Storage::disk('media')->url($item->path)
             ];
         });
-        return $data;
     }
 
 

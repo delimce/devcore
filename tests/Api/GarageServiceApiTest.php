@@ -10,14 +10,12 @@ class GarageServiceApiTest extends TestCase
     /** @var manager fake  */
     protected $manager;
     protected $garage;
-    protected $garageRepository;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
-        $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
     }
 
     /**
@@ -137,7 +135,7 @@ class GarageServiceApiTest extends TestCase
         ]);
 
         $items = $this->getArrayByResponse($response2);
-        // dd($items);
+
         $this->assertCount(1, $items['workforce']);
         $this->assertCount(4, $items['check']);
     }
