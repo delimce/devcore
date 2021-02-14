@@ -83,14 +83,14 @@ export default {
   components: { vSelect },
   data() {
     return {
-      label_search_placeholder: "Tipo de servicio, nombre del taller, etc.",
-      label_cities: "Ciudades en España",
+      label_search_placeholder: "Nombre del taller, especialidad, etc.",
+      label_cities: "Seleccione su provincia",
       label_button: "Buscar talleres",
       label_zip: "Cod. postal",
-      label_type: "tipo servicio",
-      label_segment: "Segmento",
+      label_type: "Tipo de servicios",
+      label_segment: "Vehículo",
       label_advanced: "Búsqueda avanzada",
-      label_service: "Producto / Servicio",
+      label_service: "Tipo de producto, descripción, etc.",
       countryId: 204,
       filters: {
         text: "",

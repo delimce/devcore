@@ -15,19 +15,19 @@ const WebsiteMixin = {
             segments: [
                 { id: "CAR", label: "turismo" },
                 { id: "VAN", label: "Furgoneta" },
-                { id: "TRUCK", label: "Camión" },
                 { id: "SUV", label: "4X4" },
-                { id: "MOTORCYCLE", label: "Moto" }
+                { id: "MOTORCYCLE", label: "Moto" },
+                { id: "TRUCK", label: "Camión" }
             ],
             types: [
-                { id: "WORKFORCE", label: "Mano/Obra", order: 1 },
+                { id: "WORKFORCE", label: "Mano de obra", order: 1 },
                 { id: "TYRE", label: "Neumáticos", order: 2 },
                 { id: "OIL", label: "Lubricantes", order: 4 },
                 { id: "FILTER", label: "Filtros", order: 3 },
                 { id: "BRAKES", label: "Frenos", order: 5 },
                 { id: "BATTERY", label: "Baterias", order: 6 },
                 { id: "CHECK", label: "Mantenimiento", order: 7 },
-                { id: "AC", label: "A/C", order: 8 },
+                { id: "AC", label: "Aire acondicionado", order: 8 },
             ]
         }
     },
