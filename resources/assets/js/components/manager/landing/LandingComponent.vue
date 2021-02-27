@@ -3,11 +3,17 @@
     <!--navbar -->
     <section id="home" class="hero is-info is-fullheight is-light">
       <div class="hero-head">
-        <nav class="navbar is-transparent is-spaced" role="navigation" aria-label="main navigation">
+        <nav
+          class="navbar is-transparent is-spaced"
+          role="navigation"
+          aria-label="main navigation"
+        >
           <div class="container">
             <div class="navbar-brand">
               <figure class="image g-logo">
-                <img :src="this.$imagePath + 'common/logo01.png'" />
+                <a href="../">
+                  <img :src="this.$imagePath + 'common/logo01.png'" alt="" />
+                </a>
               </figure>
 
               <a
@@ -24,13 +30,19 @@
             </div>
             <div class="navbar-menu" id="navbarTopMain">
               <div class="navbar-end">
-                <a href="#opinions" class="navbar-item has-text-weight-semibold">
+                <a
+                  href="#opinions"
+                  class="navbar-item has-text-weight-semibold"
+                >
                   <span>Testimonios</span>
                 </a>
                 <a href="#manager" class="navbar-item has-text-weight-semibold">
                   <span>Manager</span>
                 </a>
-                <a  @click="showLogin()" class="navbar-item has-text-weight-semibold">
+                <a
+                  @click="showLogin()"
+                  class="navbar-item has-text-weight-semibold"
+                >
                   <span>Login</span>
                 </a>
                 <modals-container />
@@ -45,23 +57,29 @@
           <div class="columns">
             <div class="column">
               <div class="left-container">
-                <span class="left-container-item">{{wellcomeText}}</span>
+                <span class="left-container-item">{{ wellcomeText }}</span>
                 <span class="left-container-item"></span>
                 <br />
-                <a :href="registerUrl" class="button is-rounded button-signup">{{registerText}}</a>
+                <a
+                  :href="registerUrl"
+                  class="button is-rounded button-signup"
+                  >{{ registerText }}</a
+                >
               </div>
             </div>
             <div class="column is-two-thirds">
               <h2 class="has-text-white">
-                <span
-                  class="has-text-centered is-size-4 is-block"
-                >Digitaliza tu taller y multiplica tu rentabilidad</span>
+                <span class="has-text-centered is-size-4 is-block"
+                  >Digitaliza tu taller y multiplica tu rentabilidad</span
+                >
               </h2>
               <h1 class="title">
                 <div class="is-size-4 has-text-centered is-block">
                   <vue-typer
                     text="¿Qué esperas para anunciar gratis tu taller en internet?"
-                    :pre-type-delay=1600 :repeat="0"></vue-typer>
+                    :pre-type-delay="1600"
+                    :repeat="0"
+                  ></vue-typer>
                 </div>
               </h1>
             </div>
@@ -76,7 +94,9 @@
       <div class="hero-body back-green">
         <div class="container">
           <h2 class="subtitle">Bienvenido a Garafy Manager</h2>
-          <h1 class="title">Algunos gerentes como tu ya estan utilizando esta herramienta.</h1>
+          <h1 class="title">
+            Algunos gerentes como tu ya estan utilizando esta herramienta.
+          </h1>
           <br />
           <div class="columns is-centered">
             <div class="column is-10">
@@ -86,7 +106,10 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="this.$imagePath + 'testimonial/fake001.jpg'" />
+                          <img
+                            alt=""
+                            :src="this.$imagePath + 'testimonial/fake001.jpg'"
+                          />
                         </figure>
                       </div>
                     </div>
@@ -94,9 +117,12 @@
                       <h3 class="title is-size-6">
                         <a class="has-text-dark" href="#">Andrés García</a>
                       </h3>
-                      <h4
-                        class="subtitle is-size-6"
-                      >"Si los talleres con más éxito se anuncian por internet, ¿por qué yo no? Necesitaba un portal en el que mostrarnos al mercado online y Garafy es la mejor solución."</h4>
+                      <h4 class="subtitle is-size-6">
+                        "Si los talleres con más éxito se anuncian por internet,
+                        ¿por qué yo no? Necesitaba un portal en el que
+                        mostrarnos al mercado online y Garafy es la mejor
+                        solución."
+                      </h4>
                     </div>
                   </div>
                 </div>
@@ -105,7 +131,10 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="this.$imagePath + 'testimonial/fake002.jpg'" />
+                          <img
+                            alt=""
+                            :src="this.$imagePath + 'testimonial/fake002.jpg'"
+                          />
                         </figure>
                       </div>
                     </div>
@@ -113,9 +142,12 @@
                       <h3 class="title is-size-6">
                         <a class="has-text-dark" href="#">María Montes</a>
                       </h3>
-                      <h4
-                        class="subtitle is-size-6"
-                      >"Garafy nos facilita muchísimo la tarea diaria con lo que respecta a la gestión de citas y a la administración del cliente. Ha sido un cambio radical. Lo usamos permanentemente durante todo el día."</h4>
+                      <h4 class="subtitle is-size-6">
+                        "Garafy nos facilita muchísimo la tarea diaria con lo
+                        que respecta a la gestión de citas y a la administración
+                        del cliente. Ha sido un cambio radical. Lo usamos
+                        permanentemente durante todo el día."
+                      </h4>
                     </div>
                   </div>
                 </div>
@@ -124,7 +156,10 @@
                     <div class="card-image">
                       <div class="card-image">
                         <figure class="image is-16by9">
-                          <img :src="this.$imagePath + 'testimonial/fake003.jpg'" />
+                          <img
+                            alt=""
+                            :src="this.$imagePath + 'testimonial/fake003.jpg'"
+                          />
                         </figure>
                       </div>
                     </div>
@@ -132,9 +167,11 @@
                       <h3 class="title is-size-6">
                         <a class="has-text-dark" href="#">Carlos Ramirez</a>
                       </h3>
-                      <h4
-                        class="subtitle is-size-6"
-                      >"Lo utilizo para todo, tanto para gestionar las citas que me entran a través de la web como las que me reservan directamente o por teléfono."</h4>
+                      <h4 class="subtitle is-size-6">
+                        "Lo utilizo para todo, tanto para gestionar las citas
+                        que me entran a través de la web como las que me
+                        reservan directamente o por teléfono."
+                      </h4>
                     </div>
                   </div>
                 </div>
@@ -151,7 +188,9 @@
       <div class="hero-body has-text-centered">
         <h1 class="subtitle-landing">Garafy Manager</h1>
         <div>
-          <h1 class="title has-text-white">Nos ocupamos de las necesidades reales de tu taller</h1>
+          <h1 class="title has-text-white">
+            Nos ocupamos de las necesidades reales de tu taller
+          </h1>
         </div>
 
         <div class="hero-body">
@@ -159,30 +198,38 @@
             <div class="columns is-centered">
               <div class="column is-narrow">
                 <div class="package">
-                  <i class="fas fa-user-friends fa-3x"></i>
+                  <em class="fas fa-user-friends fa-3x"></em>
                   <div>Atrae nuevos clientes</div>
                   <hr />
-                  <div
-                    class="has-text-left"
-                  >Te damos las herramientas para aumentar tu visibilidad en internet y captar nuevos clientes que, de otra forma, seguramente no podrían llegar a conocerte.</div>
+                  <div class="has-text-left">
+                    Te damos las herramientas para aumentar tu visibilidad en
+                    internet y captar nuevos clientes que, de otra forma,
+                    seguramente no podrían llegar a conocerte.
+                  </div>
                 </div>
 
                 <div class="package">
-                  <i class="fas fa-calendar-alt fa-3x"></i>
+                  <em class="fas fa-calendar-alt fa-3x"></em>
                   <div>Gestiona tus citas previas fácilmente</div>
                   <hr />
-                  <div
-                    class="has-text-left"
-                  >Tendrás disponible Garafy Manager en cualquier momento y lugar, ya no tienes que esperar a llegar a tu taller para ver tu programa de gestión, ya que, podras estar siempre conectado.</div>
+                  <div class="has-text-left">
+                    Tendrás disponible Garafy Manager en cualquier momento y
+                    lugar, ya no tienes que esperar a llegar a tu taller para
+                    ver tu programa de gestión, ya que, podras estar siempre
+                    conectado.
+                  </div>
                 </div>
 
                 <div class="package">
-                  <i class="fas fa-car fa-3x"></i>
+                  <em class="fas fa-car fa-3x"></em>
                   <div>Fideliza a tus clientes</div>
                   <hr />
-                  <div
-                    class="has-text-left"
-                  >Gracias a la base de datos de Garafy Manager, podrás guardar el historial de tus clientes y sus vehículos prediciendo posibles visitas. Además, tu personal de taller podrá ofrecer un trato personalizado a cada cliente.</div>
+                  <div class="has-text-left">
+                    Gracias a la base de datos de Garafy Manager, podrás guardar
+                    el historial de tus clientes y sus vehículos prediciendo
+                    posibles visitas. Además, tu personal de taller podrá
+                    ofrecer un trato personalizado a cada cliente.
+                  </div>
                 </div>
               </div>
             </div>
@@ -190,12 +237,16 @@
             <div class="columns is-centered">
               <div class="column is-narrow">
                 <div class="package">
-                  <i class="fas fa-wrench fa-3x"></i>
+                  <em class="fas fa-wrench fa-3x"></em>
                   <div>Información técnica de vehículos</div>
                   <hr />
-                  <div
-                    class="has-text-left"
-                  >Consciente de la importancia que tiene el despiece de vehículos y la información técnica a la hora de realizar reparaciones o pedidos a proveedores, ponemos a tu disposición toda la información posible para facilitar tu operativa al máximo posible.</div>
+                  <div class="has-text-left">
+                    Consciente de la importancia que tiene el despiece de
+                    vehículos y la información técnica a la hora de realizar
+                    reparaciones o pedidos a proveedores, ponemos a tu
+                    disposición toda la información posible para facilitar tu
+                    operativa al máximo posible.
+                  </div>
                 </div>
               </div>
             </div>
@@ -221,7 +272,7 @@ export default {
     // Check if there are any navbar burgers
     if ($navbarBurgers.length > 0) {
       // Add a click event on each of them
-      $navbarBurgers.forEach(el => {
+      $navbarBurgers.forEach((el) => {
         el.addEventListener("click", () => {
           // Get the target from the "data-target" attribute
           const target = el.dataset.target;
@@ -239,7 +290,7 @@ export default {
       registerUrl: api_url + "/manager/signUp",
       registerText: "Regístrese gratis",
       wellcomeText:
-        "Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta."
+        "Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta.",
     };
   },
 
@@ -248,14 +299,14 @@ export default {
       this.$modal.show(
         Login,
         {},
-        { scrollable: false, height: "auto", width: "30%", minWidth:300 }
+        { scrollable: false, height: "auto", width: "30%", minWidth: 300 }
       );
-    }
+    },
   },
 
   components: {
-    VueTyper
-  }
+    VueTyper,
+  },
 };
 </script>
 
@@ -268,7 +319,6 @@ export default {
   -o-background-size: cover;
   background-size: cover;
 }
-
 
 .back-green {
   background-color: gainsboro;

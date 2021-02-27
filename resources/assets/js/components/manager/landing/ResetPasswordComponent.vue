@@ -7,7 +7,7 @@
           <label class="label">{{label_password}}</label>
           <div class="control has-icons-left">
             <span class="icon is-small is-left">
-              <i class="fa fa-key"></i>
+              <em class="fa fa-key"></em>
             </span>
             <input
               class="input is-primary"
@@ -22,7 +22,7 @@
           <label class="label">{{label_password2}}</label>
           <div class="control has-icons-left">
             <span class="icon is-small is-left">
-              <i class="fa fa-key"></i>
+              <em class="fa fa-key"></em>
             </span>
             <input
               class="input is-primary"

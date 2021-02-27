@@ -6,6 +6,7 @@
           <div class="notification is-light">
             <div class="image-container">
               <img
+                alt=""
                 :src="this.$imagePath + 'common/logo01.png'"
                 class="logo-mini"
               />
@@ -22,7 +23,7 @@
                   v-model="credentials.email"
                 />
                 <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
+                  <em class="fas fa-envelope"></em>
                 </span>
               </p>
             </div>
@@ -37,7 +38,7 @@
                   v-model="credentials.password"
                 />
                 <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
+                  <em class="fas fa-lock"></em>
                 </span>
               </p>
             </div>
@@ -71,7 +72,6 @@
 
 <script>
 import landingMixin from "@/components/manager/mixins/LandingMixin";
-import { mapMutations } from "vuex";
 export default {
   name: "LoginManager",
   mixins: [landingMixin],
