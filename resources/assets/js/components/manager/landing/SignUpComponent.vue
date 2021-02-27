@@ -5,7 +5,7 @@
         <div class="columns is-8 is-variable is-centered">
           <div class="column is-half has-text-left">
             <a href="../">
-              <img :src="this.$imagePath + 'common/logo01.png'" class="info-img" />
+              <img :src="this.$imagePath + 'common/logo01.png'" alt="" class="info-img" />
             </a>
             <h1 class="title is-1">{{title}}</h1>
             <p class="is-size-4">{{description}}</p>

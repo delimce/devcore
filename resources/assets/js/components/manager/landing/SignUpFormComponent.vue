@@ -13,7 +13,7 @@
           placeholder="nombre"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
+          <em class="fas fa-user"></em>
         </span>
       </div>
       <p
@@ -35,7 +35,7 @@
           placeholder="apellidos"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
+          <em class="fas fa-user"></em>
         </span>
       </div>
       <p
@@ -57,7 +57,7 @@
           placeholder="Email"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
+          <em class="fas fa-envelope"></em>
         </span>
       </div>
       <p
@@ -79,7 +79,7 @@
           placeholder="telefono"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-phone"></i>
+          <em class="fas fa-phone"></em>
         </span>
       </div>
       <p
@@ -105,7 +105,7 @@
           placeholder="contraseña"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-key"></i>
+          <em class="fas fa-key"></em>
         </span>
       </div>
       <p
@@ -115,7 +115,7 @@
       <p
         v-if="$v.user.password.$dirty && !$v.user.password.minLength"
         class="help is-danger"
-      >el passord debe ser mayor a 5 caracteres</p>
+      >el password debe ser igual o mayor a 8 caracteres</p>
     </div>
 
     <div class="field">
@@ -130,7 +130,7 @@
           placeholder="contraseña"
         />
         <span class="icon is-small is-left">
-          <i class="fas fa-key"></i>
+          <em class="fas fa-key"></em>
         </span>
       </div>
       <p
@@ -197,7 +197,7 @@ export default {
       label_email: "Email",
       label_phone: "Teléfono",
       label_password: "Password",
-      label_submit: "Reg]istrarme",
+      label_submit: "Registrarme",
       label_repassword: "Repetir password",
       label_terms1: "Estoy deacuerdo con los",
       label_terms2: "Terminos y condiciones",
