@@ -1,13 +1,18 @@
 <template>
   <div class="hero results-container is-fluid" v-show="isOnSearch">
     <pre-loader v-show="loading"> </pre-loader>
-    <div class="columns is-multiline" v-if="hadResults">
-      <div v-for="item in results" :key="item.id" class="column is-one-third">
-        <div class="box result">
+
+    <div class="columns" v-if="hadResults">
+      <div class="column is-three-fouth">
+        <div v-for="item in results" :key="item.id" class="row is-full box">
           <article @click="goToDetail(item)" class="media">
             <div class="media-left">
               <figure class="image is-128x128">
-                <img :src="getMainImage(item.media)" @error="setAltImg" />
+                <img
+                  :src="getMainImage(item.media)"
+                  @error="setAltImg"
+                  alt=""
+                />
               </figure>
             </div>
             <div class="media-content">
@@ -16,21 +21,25 @@
                   <span class="title">{{ item.name }}</span>
                   <br />
                   <span class="desc">{{ item.desc }}</span>
-                </p>
-              </div>
-              <nav class="level is-mobile">
-                <div class="level-left">
-                  <span class="level-item location">
-                    <i class="fas fa-map-marker-alt"></i>&nbsp;
+                  <br />
+                  <span class="location">
+                    <em class="fas fa-map-marker-alt"></em>&nbsp;
                     {{ item.province.name || "" }}, {{ item.state.name || "" }}
                   </span>
-                </div>
-              </nav>
+                </p>
+              </div>
             </div>
           </article>
         </div>
       </div>
+      <div class="column is-narrow">
+        <div class="box" style="width: 200px">
+          <p class="title is-5">Narrow column</p>
+          <p class="subtitle">This column is only 200px wide.</p>
+        </div>
+      </div>
     </div>
+
     <div v-else>
       <span class="no-results">{{ message }}</span>
     </div>
@@ -141,16 +150,21 @@ export default {
 
 .location {
   font-size: 15px !important;
-  text-align: right;
+  text-align: left;
 }
 
 .desc {
+  font-size: 15px !important;
   display: block;
-  min-height: 70px;
 }
 
 .no-results {
   padding: 20px;
   font-weight: bold;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
 }
 </style>
