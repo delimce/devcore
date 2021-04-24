@@ -21,27 +21,25 @@
           <div class="columns">
             <div class="column">
               <div class="box">
-                <img :src="this.$imagePath + 'other/girl_castilla.jpg'" />
+                <img :src="this.$imagePath + 'other/girl_castilla.jpg'" alt="" />
               </div>
             </div>
             <div class="column is-two-thirds info">
               <div class="block">
                 <h2 class="garafy">¿Que es Garafy?</h2>
                 <p>
-                  Conectamos conductores con talleres, suministrando a estos las
-                  mejores soluciones para incrementar la rentabilidad de sus
-                  negocios. Pretendemos ser el primer marketplace de referencia
-                  en España en conectar conductores con talleres previamente
-                  validados.
+                  En Garafy ponemos a tú disposición los principales talleres, validados previamente por
+                  nosotros y valorados por conductores como tú. Encuentra los mejores profesionales cerca de
+                  casa, de la oficina, etc. y compara de forma sencilla cual es el que mejor se adapta al servicio
+                  que deseas realizar.
                 </p>
-
+                <br>
                 <p>
-                  Todo ello a través de nuestra web y app, de forma sencilla,
-                  visual y ágil. Esta web-app también aporta valor a los
-                  talleres generándoles trafico, fidelizando clientes y
-                  optimizando su gestión y procesos.
+                  ¿Tienes que realizar la preITV al coche y no sabes a que taller cercano llevarlo? 
+                  ¿Tienes que cambiar los neumáticos a la moto cerca del trabajo y no sabes donde ir? 
+                  En Garafy tenemos la respuesta, reserva de forma segura y gratuita a través de nuestra web.
                 </p>
-                <p class="subtitle">Nuestro objetivo es Europa.</p>
+               
               </div>
               <div class="block"></div>
             </div>
@@ -52,7 +50,7 @@
     <section id="pros">
       <div class="hero is-white">
         <div class="hero-body">
-          <p class="garafy">¿Cómo funciona?</p>
+          <p class="garafy to-center">¿Cómo funciona?</p>
           <div class="columns pros">
             <div class="column">
               <img :src="this.$imagePath + 'landing/site-star.png'" alt="" />
@@ -116,6 +114,12 @@ export default {
 
 .pros img{
   width: 60px;
+}
+
+.to-center{
+  margin: auto;
+  text-align: center;
+  font-size: 20px;
 }
 
 .search-title {
