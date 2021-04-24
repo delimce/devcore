@@ -20,26 +20,30 @@
         <div class="hero-body">
           <div class="columns">
             <div class="column">
-              <div class="box">
-                <img :src="this.$imagePath + 'other/girl_castilla.jpg'" alt="" />
-              </div>
+                <img
+                  style="width:285px"
+                  :src="this.$imagePath + 'other/girl_castilla.jpg'"
+                  alt=""
+                />
             </div>
             <div class="column is-two-thirds info">
               <div class="block">
-                <h2 class="garafy">¿Que es Garafy?</h2>
+                <h2 class="garafy">¿Que es Garafy?</h2><br>
                 <p>
-                  En Garafy ponemos a tú disposición los principales talleres, validados previamente por
-                  nosotros y valorados por conductores como tú. Encuentra los mejores profesionales cerca de
-                  casa, de la oficina, etc. y compara de forma sencilla cual es el que mejor se adapta al servicio
-                  que deseas realizar.
+                  En Garafy ponemos a tú disposición los principales talleres,
+                  validados previamente por nosotros y valorados por conductores
+                  como tú. Encuentra los mejores talleres cerca de casa, de
+                  la oficina, etc. y compara de forma sencilla cual es el que
+                  mejor se adapta al servicio que deseas realizar.
                 </p>
-                <br>
+                <br />
                 <p>
-                  ¿Tienes que realizar la preITV al coche y no sabes a que taller cercano llevarlo? 
-                  ¿Tienes que cambiar los neumáticos a la moto cerca del trabajo y no sabes donde ir? 
-                  En Garafy tenemos la respuesta, reserva de forma segura y gratuita a través de nuestra web.
+                  ¿Tienes que realizar la preITV al coche y no sabes a que
+                  taller cercano llevarlo? ¿Tienes que cambiar los neumáticos a
+                  la moto cerca del trabajo y no sabes donde ir? En Garafy
+                  tenemos la respuesta, reserva de forma segura y gratuita a
+                  través de nuestra web.
                 </p>
-               
               </div>
               <div class="block"></div>
             </div>
@@ -54,28 +58,51 @@
           <div class="columns pros">
             <div class="column">
               <img :src="this.$imagePath + 'landing/site-star.png'" alt="" />
-              <span>La mejor selección de talleres para cualquier servicio que necesite tu vehículo.</span>
+              <span
+                >La mejor selección de talleres para cualquier servicio que
+                necesite tu vehículo.</span
+              >
             </div>
             <div class="column">
-               <img :src="this.$imagePath + 'landing/site-stars.png'" style="width:208px" alt="" />
-              <span>Opiniones y valoraciones de usuarios que han tenido la misma necesidad que tú.</span>
+              <img
+                :src="this.$imagePath + 'landing/site-stars.png'"
+                style="width: 208px"
+                alt=""
+              />
+              <span
+                >Opiniones y valoraciones de usuarios que han tenido la misma
+                necesidad que tú.</span
+              >
+            </div>
+
+            <div class="column">
+              <img :src="this.$imagePath + 'landing/site-plant.png'" alt="" />
+              <span
+                >Talleres comprometidos con el entorno que cumplen todas las
+                normativas de la UE.</span
+              >
             </div>
           </div>
           <div class="columns pros">
             <div class="column">
-               <img :src="this.$imagePath + 'landing/site-percent.png'" alt="" />
-              <span>Ventajas exclusivas por formar parte de nuestra comunidad.</span>
+              <img :src="this.$imagePath + 'landing/site-percent.png'" alt="" />
+              <span
+                >Ventajas exclusivas por formar parte de nuestra
+                comunidad.</span
+              >
             </div>
-            <div class="column">
-              <img :src="this.$imagePath + 'landing/site-plant.png'" alt="" />
-               <span>Talleres comprometidos con el entorno que cumplen todas las normativas de la UE.</span>
-            </div>
-          </div>
-          <div class="row pros">
-            <img :src="this.$imagePath + 'landing/site-calendar.png'" alt="" />
-              <span>Posibilidad de reservar de manera sencilla desde cualquier lugar y a cualquier hora.</span>
-          </div>
 
+            <div class="column">
+              <img
+                :src="this.$imagePath + 'landing/site-calendar.png'"
+                alt=""
+              />
+              <span
+                >Posibilidad de reservar de manera sencilla desde cualquier
+                lugar y en cualquier momento.</span
+              >
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -105,18 +132,18 @@ export default {
   text-align: center;
 }
 
-.pros span{
+.pros span {
   margin: auto;
   display: block;
   max-width: 340px;
-  min-height: 150px;
+  min-height: 120px;
 }
 
-.pros img{
+.pros img {
   width: 60px;
 }
 
-.to-center{
+.to-center {
   margin: auto;
   text-align: center;
   font-size: 20px;

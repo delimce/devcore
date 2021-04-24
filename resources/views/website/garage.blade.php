@@ -1,4 +1,4 @@
-@extends('layout.defaultm')
+@extends('layout.default')
 @section('title',  $name)
 
 @section('content')
