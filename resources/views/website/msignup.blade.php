@@ -1,4 +1,4 @@
-@extends('layout.default')
+@extends('layout.defaultm')
 @section('title',  __('manager.signUp'))
 
 @section('content')

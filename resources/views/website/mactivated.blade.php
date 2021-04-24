@@ -1,4 +1,4 @@
-@extends('layout.default')
+@extends('layout.defaultm')
 @section('title',  __('commons.activate'))
 
 @section('content')

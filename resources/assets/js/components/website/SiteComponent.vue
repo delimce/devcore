@@ -49,6 +49,38 @@
         </div>
       </div>
     </section>
+    <section id="pros">
+      <div class="hero is-white">
+        <div class="hero-body">
+          <p class="garafy">¿Cómo funciona?</p>
+          <div class="columns pros">
+            <div class="column">
+              <img :src="this.$imagePath + 'landing/site-star.png'" alt="" />
+              <span>La mejor selección de talleres para cualquier servicio que necesite tu vehículo.</span>
+            </div>
+            <div class="column">
+               <img :src="this.$imagePath + 'landing/site-stars.png'" style="width:208px" alt="" />
+              <span>Opiniones y valoraciones de usuarios que han tenido la misma necesidad que tú.</span>
+            </div>
+          </div>
+          <div class="columns pros">
+            <div class="column">
+               <img :src="this.$imagePath + 'landing/site-percent.png'" alt="" />
+              <span>Ventajas exclusivas por formar parte de nuestra comunidad.</span>
+            </div>
+            <div class="column">
+              <img :src="this.$imagePath + 'landing/site-plant.png'" alt="" />
+               <span>Talleres comprometidos con el entorno que cumplen todas las normativas de la UE.</span>
+            </div>
+          </div>
+          <div class="row pros">
+            <img :src="this.$imagePath + 'landing/site-calendar.png'" alt="" />
+              <span>Posibilidad de reservar de manera sencilla desde cualquier lugar y a cualquier hora.</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
@@ -67,6 +99,23 @@ export default {
   background-size: cover;
   height: 800px;
   background-color: rgba(39, 39, 39, 0.9);
+}
+
+.pros {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+}
+
+.pros span{
+  margin: auto;
+  display: block;
+  max-width: 340px;
+  min-height: 150px;
+}
+
+.pros img{
+  width: 60px;
 }
 
 .search-title {

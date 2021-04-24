@@ -5,33 +5,37 @@
         <div class="columns m-t-10">
           <div class="column">
             <nav class="has-text-grey-light text-black">
-              <a :href="home" class="black">Home</a> &bullet;
-              <a :href="servicesUrl" class="black">Testimonios</a> &bullet;
-              <a :href="managerUrl" class="black">Garafy Manager</a> &bullet;
-              <a href="#" class="black">Contáctenos</a>
+              <a :href="home" class="black">Home</a>  
+              <span v-show="isManager">&bullet; <a :href="servicesUrl" class="black">Testimonios</a> </span>
+              <span v-show="!isManager">&bullet; <a :href="proUrl" class="black">Ventajas</a> </span>
+              <span>&bullet;<a :href="managerUrl" class="black">Garafy Manager</a></span>
+              <span>&bullet;<a href="#" class="black">Contáctenos</a></span>
             </nav>
           </div>
         </div>
         <div class="center-text">
           <button class="facebook-button button is-medium">
-            <i class="fab fa-facebook-f"></i>
+            <em class="fab fa-facebook-f"></em>
           </button>
           <button class="twitter-button button is-medium">
-            <i class="fab fa-twitter"></i>
+            <em class="fab fa-twitter"></em>
           </button>
           <button class="instagram-button button is-medium">
             <a href="https://www.instagram.com/garafy_es/" target="blank">
-              <i class="fab fa-instagram"></i>
+              <em class="fab fa-instagram"></em>
             </a>
           </button>
           <button class="linkedin-button button is-medium">
-            <a href="https://www.linkedin.com/company/garafy/about/" target="blank">
-              <i class="fab fa-linkedin-in"></i>
+            <a
+              href="https://www.linkedin.com/company/garafy/about/"
+              target="blank"
+            >
+              <em class="fab fa-linkedin-in"></em>
             </a>
           </button>
         </div>
         <div class="b-t m-t-30 p-t-30 has-text-grey-light is-size-9">
-          Garafy.es {{currentYear}} &copy; all rights reserved
+          Garafy.es {{ currentYear }} &copy; all rights reserved
           <p></p>
         </div>
       </div>
@@ -41,28 +45,40 @@
 
 <script>
 export default {
-  mounted() {},
+   props: {
+     site: {
+      type: String,
+      default: "manager"
+    },
+  },
   data() {
     return {
       currentYear: "",
       home: api_url,
       servicesUrl: api_url + "/manager/#opinions",
-      managerUrl: api_url + "/manager"
+      managerUrl: api_url + "/manager",
+      proUrl:api_url + "/#pros"
     };
+  },
+  computed:{
+    isManager(){
+      return (this.site==="manager")
+    }
   },
   methods: {
     getCurrentYear() {
       this.currentYear = new Date().getFullYear();
-    }
+    },
   },
   beforeMount() {
     this.getCurrentYear();
   },
-  watch:{
-    api_url(){
-      this.api_url
-    }
-  }
+  watch: {
+    api_url() {
+      return this.api_url;
+    },
+  },
+  mounted() {},
 };
 </script>
 
@@ -100,12 +116,12 @@ export default {
   color: #ffffff;
 }
 
-a{
+a {
   text-decoration: none;
   color: #fff;
 }
 
-.black{
+.black {
   color: #000 !important;
 }
 

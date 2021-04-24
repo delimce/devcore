@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="column is-narrow">
-        <div class="box" style="width: 200px">
+        <div class="box" style="width: 500px">
           <p class="title is-5">Narrow column</p>
           <p class="subtitle">This column is only 200px wide.</p>
         </div>

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Language" content="en,es">
-    <meta name="description" content="Garafy.es Encuentra tu taller en línea las 24 horas del dia">
-    <meta name="keywords" content="taller,cita,españa,repuestos,motor,coches,reparación">
+    <meta name="description" content="Garafy Manager, Forme parte de la comunidad de talleres más importante de España con tan sólo darte de alta.">
+    <meta name="keywords" content="taller,cita,españa,repuestos,motor,coches,reparación,manager">
     <meta name="language" content="es-ES">
     <meta name="author" content="garafy">
     <link rel="shortcut icon" href="{!! url('assets/img/favicon.png') !!}">
@@ -19,7 +19,7 @@
 
 <div id="app">
     @yield('content')
-    <footer-component site="website"></footer-component>
+    <footer-component></footer-component>
 </div>
 
 <script src="{{ mix('assets/js/app.js') }}"></script>
