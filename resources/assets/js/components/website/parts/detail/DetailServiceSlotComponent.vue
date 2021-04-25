@@ -12,7 +12,7 @@
       >
         <div class="column">{{ ser.name }}</div>
         <div class="column">{{ ser.category }}</div>
-        <div class="column has-text-right">{{ currencyOf(ser.price) }}</div>
+        <div v-show="ser.price>0" class="column has-text-right">{{ currencyOf(ser.price) }}</div>
       </div>
     </span>
   </div>

@@ -133,6 +133,13 @@
             </div>
             <div v-else slot="content">{{ label_disable }}</div>
           </BulmaAccordionItem>
+           <BulmaAccordionItem class="zone1">
+            <h4 slot="title">Otros servicios</h4>
+            <div v-if="isEnable()" slot="content">
+              <pool-other-component :pool="pool.other"> </pool-other-component>
+            </div>
+            <div v-else slot="content">{{ label_disable }}</div>
+          </BulmaAccordionItem>
         </BulmaAccordion>
         <pool-save-component
           :segments="segments"

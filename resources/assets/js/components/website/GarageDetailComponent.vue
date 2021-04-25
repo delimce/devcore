@@ -50,7 +50,7 @@
           <span v-if="garage.network" class="network">{{
             garage.network.desc
           }}</span>
-          <span><i class="fas fa-phone"></i> {{ garage.phone }}</span>
+          <span><em class="fas fa-phone"></em> {{ garage.phone }}</span>
           <span v-html="address"></span>
           <span class="booking">
             <button 

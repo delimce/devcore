@@ -16,6 +16,7 @@ return [
     "AC" => "Aire Acondicionado",
     "CHECK" => "Reparaciones",
     "WORKFORCE" => "Mano de obra",
+    "OTHER" => "Otros servicios",
     # categories
     "PREMIUM" => "Premium",
     "MEDIUM" => "Medium",

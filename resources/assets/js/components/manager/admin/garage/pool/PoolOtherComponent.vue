@@ -13,15 +13,13 @@
           v-model="service.select"
         />
       </div>
-      <div class="column is-4">
-        {{ service.name }}
-      </div>
+      <div class="column is-5">{{ service.name }}</div>
       <div class="column is-2">
         <money
           :disabled="!service.select"
           v-model="service.price"
           v-bind="money"
-          style="width: 65%"
+          style="width: 60%"
           class="input is-primary price-mini"
         ></money>
       </div>
@@ -35,17 +33,15 @@
 import GarageMixin from "@/components/manager/mixins/GarageMixin.js";
 import money from "v-money";
 export default {
-  name: "poolAcComponent",
+  name: "poolCheckComponent",
   props: ["pool"],
   mixins: [GarageMixin],
   data() {
     return {};
   },
   methods: {},
-  mounted: function () {},
 };
 </script>
-
 <style scoped>
 .header {
   font-weight: bold;

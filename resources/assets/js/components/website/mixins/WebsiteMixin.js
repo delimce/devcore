@@ -28,6 +28,7 @@ const WebsiteMixin = {
                 { id: "BATTERY", label: "Baterias", order: 6 },
                 { id: "CHECK", label: "Mantenimiento", order: 7 },
                 { id: "AC", label: "Aire acondicionado", order: 8 },
+                { id: "OTHER", label: "Otros servicios", order: 8 },
             ]
         }
     },

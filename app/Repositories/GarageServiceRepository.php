@@ -17,7 +17,7 @@ use Exception;
 class GarageServiceRepository
 {
 
-    const SERVICES_TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC"];
+    const SERVICES_TYPES = ["TYRE", "FILTER", "BATTERY", "CHECK", "OIL", "WORKFORCE", "BRAKE", "AC", "OTHER"];
 
     /**
      * getServicesCatalogByQuery
@@ -157,8 +157,7 @@ class GarageServiceRepository
         $services = Service::where('segment', $segment)
             ->where('status', 1)
             ->orWhereNull('segment')
-            ->select("id", "name", "type", "segment")->get();
-
+            ->select("id", "name", "desc", "type", "segment")->get();
         $pool = [];
         foreach (static::SERVICES_TYPES as $type) {
             $index = strtolower($type);
@@ -225,7 +224,7 @@ class GarageServiceRepository
         $data = $this->setSelectedServices($selected, $type);
         $serviceList = Collect($list);
         $list = $serviceList->filter(function ($item) use ($type) {
-            return $item->type == $type;
+            return $item->type === $type;
         })->SortByDesc('select');
 
         $result = [];
@@ -235,9 +234,7 @@ class GarageServiceRepository
                 foreach ($filtered as $new) {
                     $result[] = $this->setPoolItem(
                         true,
-                        $item->id,
-                        $item->name,
-                        $item->segment,
+                        $item,
                         $new["brand"],
                         $new["category"],
                         $new["price"]
@@ -246,9 +243,7 @@ class GarageServiceRepository
             } else {
                 $result[] = $this->setPoolItem(
                     false,
-                    $item->id,
-                    $item->name,
-                    $item->segment
+                    $item,
                 );
             }
         }
@@ -266,39 +261,38 @@ class GarageServiceRepository
     private function setSelectedServices($selected, $type)
     {
         $selectedList = Collect($selected);
-        $data = $selectedList->filter(function ($item) use ($type) {
-            return $item->type == $type;
+        return $selectedList->filter(function ($item) use ($type) {
+            return $item->type === $type;
         })->map(function ($item) {
             return collect([
                 'service' => $item->service_id,
                 'category' => $item->category,
                 'brand' => $item->brand_id,
+                'desc' => $item->desc,
                 'price' => $item->price,
                 'segment' => $item->segment,
             ]);
         });
-        return $data;
     }
 
     /**
      * setPoolItem
      *
      * @param  bool $select
-     * @param  int $id
-     * @param  string $name
-     * @param  string $segment
+     * @param  Colection $item,
      * @param  int|null $brand
      * @param  int|null $category
      * @param  double|null $price
      * @return \Illuminate\Support\Collection
      */
-    private function setPoolItem($select, $id, $name, $segment, $brand = null, $category = null, $price = 0.0)
+    private function setPoolItem($select, $item, $brand = null, $category = null, $price = 0.0)
     {
         return collect([
             'select' => $select,
-            'id' => $id,
-            'name' => $name,
-            'segment' => $segment,
+            'id' => $item->id,
+            'name' => $item->name,
+            'desc' => $item->desc,
+            'segment' => $item->segment,
             'brand' => "$brand",
             'category' => "$category",
             'price' => $price,
@@ -326,5 +320,4 @@ class GarageServiceRepository
                     });
             })->orderBy("name")->get();
     }
-
 }

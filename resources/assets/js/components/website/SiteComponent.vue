@@ -54,7 +54,7 @@
     <section id="pros">
       <div class="hero is-white">
         <div class="hero-body">
-          <p class="garafy to-center">¿Cómo funciona?</p>
+          <p class="garafy to-center">¿Cómo funciona?</p><br>
           <div class="columns pros">
             <div class="column">
               <img :src="this.$imagePath + 'landing/site-star.png'" alt="" />
