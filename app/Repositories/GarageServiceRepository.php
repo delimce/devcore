@@ -243,7 +243,7 @@ class GarageServiceRepository
             } else {
                 $result[] = $this->setPoolItem(
                     false,
-                    $item,
+                    $item
                 );
             }
         }
