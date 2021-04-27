@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="title">{{ label_services }}</div>
-      <v-select
-        v-model="segmentSelected"
-        :placeholder="label_filter_segment"
-        :options="currentSegments"
-      ></v-select>
-    <hr>
+    <v-select
+      class="capi"
+      v-model="segmentSelected"
+      :placeholder="label_filter_segment"
+      :options="currentSegments"
+    ></v-select>
+    <hr />
     <span v-for="seg in segmentsFiltered" :key="seg.id">
       <detail-service-slot-component
         :segment="seg.id"
         :services="serviceList"
       ></detail-service-slot-component>
-      <hr>
+      <hr />
     </span>
   </div>
 </template>

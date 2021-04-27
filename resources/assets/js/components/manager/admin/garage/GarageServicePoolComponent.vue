@@ -141,6 +141,7 @@
             <div v-else slot="content">{{ label_disable }}</div>
           </BulmaAccordionItem>
         </BulmaAccordion>
+        <br>
         <pool-save-component
           :segments="segments"
           :code="segment"

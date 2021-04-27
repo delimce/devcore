@@ -45,16 +45,16 @@ export default {
           })
           .includes(el.id);
       });
-      return types.sort(this.compareTypes);
+      return types.sort(this.sortByOrder);
     },
   },
   methods: {
     filterByType(type) {
       return this.serviceList.filter((el) => {
-        return el.type == type.id;
-      });
+        return el.type === type.id;
+      })
     },
-    compareTypes(a, b) {
+    sortByOrder(a, b) {
       if (a.order < b.order) {
         return -1;
       }

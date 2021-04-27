@@ -157,7 +157,8 @@ class GarageServiceRepository
         $services = Service::where('segment', $segment)
             ->where('status', 1)
             ->orWhereNull('segment')
-            ->select("id", "name", "desc", "type", "segment")->get();
+            ->select("id", "name", "desc", "type", "segment")
+            ->orderBy("order")->get();
         $pool = [];
         foreach (static::SERVICES_TYPES as $type) {
             $index = strtolower($type);

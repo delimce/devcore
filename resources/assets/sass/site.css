@@ -6,6 +6,10 @@ p {
     line-height: 30px;
 }
 
+.capi {
+    text-transform: capitalize;
+  }
+
 .my-error {
     margin: auto;
     display: block;

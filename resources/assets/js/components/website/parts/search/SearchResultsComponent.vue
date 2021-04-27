@@ -5,7 +5,7 @@
     <div class="columns" v-if="hadResults">
       <div class="column is-three-fouth">
         <div v-for="item in results" :key="item.id" class="row is-full box">
-          <article @click="goToDetail(item)" class="media">
+          <article @click="goToDetail(item)" class="media res-item">
             <div class="media-left">
               <figure class="image is-128x128">
                 <img
@@ -140,6 +140,10 @@ export default {
   min-height: 200px;
   border: 1px solid green;
   display: block;
+  cursor: pointer;
+}
+
+.res-item {
   cursor: pointer;
 }
 
