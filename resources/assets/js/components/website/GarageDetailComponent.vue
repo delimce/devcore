@@ -23,7 +23,7 @@
               >
                 <a>
                   <span class="icon is-small">
-                    <i class="fas fa-tools"></i>
+                    <em class="fas fa-tools"></em>
                   </span>
                   <span>{{ label_services }}</span>
                 </a>

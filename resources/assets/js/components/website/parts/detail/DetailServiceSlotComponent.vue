@@ -35,7 +35,7 @@ export default {
     serviceList() {
       return this.services.filter((el) => {
         return el.segment == this.segment;
-      });
+      }).sort(this.sortByOrder);
     },
     currentTypes() {
       let types = this.types.filter((el) => {

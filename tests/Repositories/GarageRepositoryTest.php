@@ -191,6 +191,11 @@ class GarageRepositoryTest extends TestCase
         $criteria["segment"] = "CAR";
         $services = $this->garageServiceRepository->findService($criteria);
         $this->assertTrue($services->count() > 0);
+        # find by segment with except
+        $criteria["segment"] = "MOTORCYCLE";
+        $criteria["type"] = "OTHER";
+        $services = $this->garageServiceRepository->findService($criteria);
+        $this->assertTrue($services->count() === 6); # without except segment 
     }
 
 
@@ -239,16 +244,16 @@ class GarageRepositoryTest extends TestCase
         $filters["segment"] = "CAR";
         $filters["service"] = 1;
         $fakePool["oil"][] =
-        [
-            "id" => 1,
-            "type" => "OIL",
-            "category" => "PREMIUM",
-            "brand" => 1,
-            "price" => 10,
-            "select" => true
-        ];
+            [
+                "id" => 1,
+                "type" => "OIL",
+                "category" => "PREMIUM",
+                "brand" => 1,
+                "price" => 10,
+                "select" => true
+            ];
         $this->garageServiceRepository->saveGaragePool($this->garage->id, "CAR", $fakePool);
         $result =  $this->garageRepository->search($filters);
-        $this->assertTrue($result->count()>0);
+        $this->assertTrue($result->count() > 0);
     }
 }

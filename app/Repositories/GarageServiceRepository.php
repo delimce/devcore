@@ -30,13 +30,19 @@ class GarageServiceRepository
     {
         $query = Service::query();
         if ($segment && !$type) {
-            $query->where('segment', $segment)->orWhereNull('segment');
+            $query->where('segment', $segment)
+                ->orWhere(function ($q) use ($segment) {
+                    $q->whereNull('segment')->whereRaw("(`except` != '$segment' OR `except` IS NULL) ");
+                });
         } else {
             $query->where('type', $type)->where('status', 1)->where(function ($query) use ($segment) {
-                $query->where('segment', $segment)->orWhereNull('segment');
+                $query->where('segment', $segment)
+                    ->orWhere(function ($q) use ($segment) {
+                        $q->whereNull('segment')->whereRaw("(`except` != '$segment' OR `except` IS NULL) ");
+                    });
             });
         }
-        return $query->whereStatus(1)->get();
+        return $query->whereStatus(1)->orderBy("order")->get();
     }
 
 
@@ -154,9 +160,13 @@ class GarageServiceRepository
         $selected = GarageService::whereGarageId($garageId)
             ->whereSegment($segment)
             ->get();
-        $services = Service::where('segment', $segment)
-            ->where('status', 1)
-            ->orWhereNull('segment')
+        $services = Service::where('status', 1)
+            ->where(function ($q) use ($segment) {
+                $q->where('segment', $segment)
+                    ->orWhere(function ($q) use ($segment) {
+                        $q->whereNull('segment')->whereRaw("(`except` != '$segment' OR `except` IS NULL) ");
+                    });
+            })
             ->select("id", "name", "desc", "type", "segment")
             ->orderBy("order")->get();
         $pool = [];
@@ -317,7 +327,9 @@ class GarageServiceRepository
                     $q->where(function ($query) use ($criteria) {
                         return
                             $query->where('segment', $criteria['segment'])
-                            ->orWhere('segment', null);
+                            ->orWhere(function ($q) use ($criteria) {
+                                $q->whereNull('segment')->whereRaw("(`except` != '{$criteria['segment']}' OR `except` IS NULL) ");
+                            });
                     });
             })->orderBy("name")->get();
     }

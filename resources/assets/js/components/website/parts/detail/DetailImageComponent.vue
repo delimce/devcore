@@ -6,7 +6,7 @@
       class="story-carousel story-carousel--colors"
     >
       <slide v-for="f in files" :key="f.path" class="story-carousel__slide">
-        <img :src="geImageUrl(f.path)" @error="setAltImg" />
+        <img :src="geImageUrl(f.path)" @error="setAltImg" alt="" />
       </slide>
     </carousel>
   </div>
@@ -38,7 +38,14 @@ export default {
   },
   computed: {
     hasMedia() {
-      return this.media.length>0;
+      let myMedia = 0;
+      try {
+        myMedia = this.media.length || 0;
+      } catch (err) {
+        myMedia = 0;
+      } finally {
+        return myMedia > 0;
+      }
     },
   },
   mounted() {

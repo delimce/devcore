@@ -57,6 +57,7 @@ export default {
           price: el.price,
           category: el.category,
           segment: el.segment,
+          order: el.order
         };
       });
     },

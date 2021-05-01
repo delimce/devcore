@@ -22,8 +22,8 @@ const WebsiteMixin = {
             types: [
                 { id: "WORKFORCE", label: "Mano de obra", order: 1 },
                 { id: "TYRE", label: "Neumáticos", order: 2 },
-                { id: "OIL", label: "Lubricantes", order: 4 },
                 { id: "FILTER", label: "Filtros", order: 3 },
+                { id: "OIL", label: "Lubricantes", order: 4 },
                 { id: "BRAKES", label: "Frenos", order: 5 },
                 { id: "BATTERY", label: "Baterias", order: 6 },
                 { id: "CHECK", label: "Mantenimiento", order: 7 },
