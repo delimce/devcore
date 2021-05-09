@@ -14,6 +14,7 @@
     @stack('head')
     <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env("GOOGLE_MAPS_KEY")}}"></script>
 </head>
 <body>
 

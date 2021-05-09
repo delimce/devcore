@@ -33,9 +33,10 @@
         </div>
       </div>
       <div class="column is-narrow">
-        <div class="box" style="width: 500px">
-          <p class="title is-5">Narrow column</p>
-          <p class="subtitle">This column is only 200px wide.</p>
+        <div class="box map">
+          <map-results-component
+            :points="mapInformation"
+          ></map-results-component>
         </div>
       </div>
     </div>
@@ -48,7 +49,9 @@
 <script>
 import EventBus from "@/bus";
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
+import MapResultComponent from "./MapResultsComponent.vue";
 export default {
+  components: { MapResultComponent },
   name: "SearchResultsComponent",
   mixins: [WebsiteMixin],
   data() {
@@ -112,6 +115,15 @@ export default {
     hadResults() {
       return this.results.length > 0;
     },
+    mapInformation() {
+      return this.results.map((el) => {
+        return {
+          id: el.id,
+          title: el.name,
+          position: JSON.parse(el.position),
+        };
+      });
+    },
   },
   mounted: function () {
     EventBus.$on("user-garage-search", (filters) => {
@@ -165,6 +177,14 @@ export default {
 .no-results {
   padding: 20px;
   font-weight: bold;
+}
+
+.map {
+  overflow: hidden;
+  position: relative;
+  width: 500px;
+  height: 100%;
+  min-height: 300px;
 }
 
 .rows {

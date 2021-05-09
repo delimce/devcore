@@ -12,29 +12,31 @@
     </section>
     <!-- search results -->
     <section id="results">
-      <search-results-component></search-results-component>
+        <search-results-component></search-results-component>
     </section>
+    <p>&nbsp;</p>
     <!-- what is garafy -->
     <section id="garafy">
       <div class="hero is-light">
         <div class="hero-body">
           <div class="columns">
             <div class="column">
-                <img
-                  style="width:285px"
-                  :src="this.$imagePath + 'other/girl_castilla.jpg'"
-                  alt=""
-                />
+              <img
+                style="width: 285px"
+                :src="this.$imagePath + 'other/girl_castilla.jpg'"
+                alt=""
+              />
             </div>
             <div class="column is-two-thirds info">
               <div class="block">
-                <h2 class="garafy">¿Que es Garafy?</h2><br>
+                <h2 class="garafy">¿Que es Garafy?</h2>
+                <br />
                 <p>
                   En Garafy ponemos a tú disposición los principales talleres,
                   validados previamente por nosotros y valorados por conductores
-                  como tú. Encuentra los mejores talleres cerca de casa, de
-                  la oficina, etc. y compara de forma sencilla cual es el que
-                  mejor se adapta al servicio que deseas realizar.
+                  como tú. Encuentra los mejores talleres cerca de casa, de la
+                  oficina, etc. y compara de forma sencilla cual es el que mejor
+                  se adapta al servicio que deseas realizar.
                 </p>
                 <br />
                 <p>
@@ -54,7 +56,8 @@
     <section id="pros">
       <div class="hero is-white">
         <div class="hero-body">
-          <p class="garafy to-center">¿Cómo funciona?</p><br>
+          <p class="garafy to-center">¿Cómo funciona?</p>
+          <br />
           <div class="columns pros">
             <div class="column">
               <img :src="this.$imagePath + 'landing/site-star.png'" alt="" />
