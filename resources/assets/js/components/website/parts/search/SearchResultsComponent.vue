@@ -24,6 +24,7 @@
                   <br />
                   <span class="location">
                     <em class="fas fa-map-marker-alt"></em>&nbsp;
+                    {{ item.address || "" }}, {{ item.zipcode|| "" }}
                     {{ item.province.name || "" }}, {{ item.state.name || "" }}
                   </span>
                 </p>
@@ -155,7 +156,7 @@ export default {
   cursor: pointer;
 }
 
-.res-item {
+.res-item p, figure {
   cursor: pointer;
 }
 
@@ -184,7 +185,9 @@ export default {
   position: relative;
   width: 500px;
   height: 100%;
-  min-height: 300px;
+  min-height: 450px;
+  max-height: 650px;
+  border: 1px lightgray solid;
 }
 
 .rows {

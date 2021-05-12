@@ -12,11 +12,11 @@ export default {
   data() {
     return {
       map: null,
+      mapmarkers: [],
       mapOptions: {
-        center: { lat: 41.294856, lng: -4.055685 },
         zoom: 10,
-        maxZoom: 20,
-        minZoom: 5,
+        maxZoom: 30,
+        minZoom: 10,
         zoomControl: true,
         mapTypeControl: false,
         streetViewControl: false,
@@ -33,8 +33,9 @@ export default {
     setMarker(point) {
       let marker = new google.maps.Marker({
         position: point.position,
-        title: point.title,
+        label: point.title,
       });
+      this.mapmarkers.push(marker);
       marker.setMap(this.map);
     },
     setMarkers() {
@@ -44,10 +45,21 @@ export default {
         });
       }
     },
+    setCenter() {
+      //fit points to map
+      let mapbounds = new google.maps.LatLngBounds();
+      this.mapmarkers.forEach((el) => {
+        mapbounds.extend(el.position);
+      });
+      //get center of extended points and set it on the map
+      this.map.setCenter(mapbounds.getCenter());
+    },
   },
+  computed: {},
   async mounted() {
     this.initMap();
     this.setMarkers();
+    this.setCenter();
   },
 };
 </script>

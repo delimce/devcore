@@ -136,7 +136,6 @@ export default {
         this.selectService = null;
       }
     },
-
     doSearch() {
       EventBus.$emit("user-garage-search", this.filters);
       gotoSection("results");
@@ -156,7 +155,11 @@ export default {
       this.selectService = null;
     },
     selectService() {
-      this.filters.service = this.selectService.id;
+      try {
+        this.filters.service = this.selectService.id;
+      } catch (err) {
+        this.filters.service = null;
+      }
     },
   },
   computed: {
