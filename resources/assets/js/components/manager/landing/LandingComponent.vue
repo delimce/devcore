@@ -11,9 +11,7 @@
           <div class="container">
             <div class="navbar-brand">
               <figure class="image g-logo">
-                <a href="../">
-                  <img :src="this.$imagePath + 'common/logo01.png'" alt="" />
-                </a>
+                <img :src="this.$imagePath + 'common/logo01.png'" alt="" />
               </figure>
 
               <a
@@ -30,20 +28,17 @@
             </div>
             <div class="navbar-menu" id="navbarTopMain">
               <div class="navbar-end">
-                <a
-                  href="#opinions"
-                  class="navbar-item has-text-weight-semibold"
-                >
-                  <span>Testimonios</span>
-                </a>
                 <a href="#manager" class="navbar-item has-text-weight-semibold">
-                  <span>Manager</span>
+                  <span>¿Qué es Garafy Manager?</span>
+                </a>
+                <a href="../" class="navbar-item has-text-weight-semibold">
+                  <span>Garafy</span>
                 </a>
                 <a
                   @click="showLogin()"
                   class="navbar-item has-text-weight-semibold"
                 >
-                  <span>Login</span>
+                  <span>Inicia sesión</span>
                 </a>
                 <modals-container />
               </div>

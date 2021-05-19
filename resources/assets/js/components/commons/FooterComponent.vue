@@ -5,9 +5,9 @@
         <div class="columns m-t-10">
           <div class="column">
             <nav class="has-text-grey-light text-black">
-              <a :href="home" class="black">Home</a>  
+              <a :href="home" class="black">Garafy</a>  
               <span v-show="isManager">&bullet; <a :href="servicesUrl" class="black">Testimonios</a> </span>
-              <span v-show="!isManager">&bullet; <a :href="proUrl" class="black">Ventajas</a> </span>
+              <span v-show="!isManager">&bullet; <a :href="proUrl" class="black">¿Cómo funciona?</a> </span>
               <span>&bullet;<a :href="managerUrl" class="black">Garafy Manager</a></span>
               <span>&bullet;<a href="#" class="black">Contáctenos</a></span>
             </nav>

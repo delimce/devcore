@@ -13,7 +13,7 @@ const WebsiteMixin = {
             messageError: "",
             days: ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
             segments: [
-                { id: "CAR", label: "turismo" },
+                { id: "CAR", label: "Turismo" },
                 { id: "VAN", label: "Furgoneta" },
                 { id: "SUV", label: "4X4" },
                 { id: "MOTORCYCLE", label: "Moto" },
