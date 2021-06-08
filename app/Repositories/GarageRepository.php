@@ -288,6 +288,7 @@ class GarageRepository
             ->with([
                 "province:id,name:url",
                 "state:id,name",
+                "network:desc",
                 "services:garage_id,segment,type",
                 "media:garage_id,mime,path"
             ])
