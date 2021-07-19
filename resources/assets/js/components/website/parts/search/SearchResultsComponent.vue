@@ -7,7 +7,7 @@
         <div v-for="item in results" :key="item.id" class="row is-full box">
           <article @click="goToDetail(item)" class="media res-item">
             <div class="media-left">
-              <figure class="image is-128x128">
+              <figure class="image">
                 <img
                   :src="getMainImage(item.media)"
                   @error="setAltImg"
@@ -18,15 +18,21 @@
             <div class="media-content">
               <div class="content">
                 <p>
-                  <span class="title">{{ item.name }}</span>
+                  <span class="title">{{ item.name }}</span>&nbsp;
+                  <span v-if="item.network" class="network">{{item.network.desc}}</span>
                   <br />
                   <span class="desc">{{ item.desc }}</span>
                   <br />
+                  
                   <span class="location">
                     <em class="fas fa-map-marker-alt"></em>&nbsp;
                     {{ item.address || "" }}, {{ item.zipcode|| "" }}
                     {{ item.province.name || "" }}, {{ item.state.name || "" }}
                   </span>
+                  <div class="feedback">
+                      <span><em class="fa fa-star"></em>&nbsp;Valoraciones: 1/5</span>
+                      <span><em class="fa fa-comments"></em>&nbsp;comentarios: 0</span>
+                  </div>
                 </p>
               </div>
             </div>
@@ -156,7 +162,8 @@ export default {
   cursor: pointer;
 }
 
-.res-item p, figure {
+.res-item p,
+figure {
   cursor: pointer;
 }
 
@@ -193,5 +200,15 @@ export default {
 .rows {
   display: flex;
   flex-direction: column;
+}
+
+.image {
+  max-width: 300px;
+}
+.network {
+  font-size: 11px;
+}
+.feedback span {
+  padding-right: 20px;
 }
 </style>

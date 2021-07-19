@@ -6,6 +6,7 @@
           v-model="filters.text"
           class="input search-input"
           type="text"
+          autocomplete="off"
           :placeholder="label_search_placeholder"
         />
       </div>
@@ -14,6 +15,7 @@
         <div class="column is-two-thirds">
           <v-select
             v-model="filters.city"
+            autocomplete="off"
             class="search-input"
             :placeholder="label_cities"
             :options="states"

@@ -97,7 +97,7 @@ class GarageController extends ApiController
     }
 
     /**
-     * retrives garage networks
+     * retrieves garage networks
      */
     public function getNetworks()
     {
