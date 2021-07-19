@@ -1,77 +1,79 @@
 <template>
   <div class="box is-centered is-light">
-    <div class="rows">
-      <div class="control">
-        <input
-          v-model="filters.text"
-          class="input search-input"
-          type="text"
-          autocomplete="off"
-          :placeholder="label_search_placeholder"
-        />
-      </div>
-      <br />
-      <div class="columns">
-        <div class="column is-two-thirds">
-          <v-select
-            v-model="filters.city"
+    <form autocomplete="off" v-on:submit.prevent="onSubmit">
+      <div class="rows">
+        <div class="control">
+          <input
+            v-model="filters.text"
+            class="input search-input"
+            type="text"
             autocomplete="off"
-            class="search-input"
-            :placeholder="label_cities"
-            :options="states"
-          ></v-select>
-        </div>
-        <div class="column advanced">
-          <a @click="showAdvancedSearch()">{{ label_advanced }}</a>
-        </div>
-      </div>
-      <div>
-        <div v-show="advanced">
-          <div class="columns">
-            <div class="column">
-              <simple-select-component
-                :list="searchTypes"
-                :select="label_type"
-                v-model="filters.type"
-              ></simple-select-component>
-            </div>
-            <div class="column">
-              <simple-select-component
-                :list="searchSegments"
-                :select="label_segment"
-                v-model="filters.segment"
-              ></simple-select-component>
-            </div>
-            <div class="column">
-              <input
-                v-model="filters.zip"
-                class="input search-input"
-                type="text"
-                :placeholder="label_zip"
-              />
-            </div>
-          </div>
-          <div>
-            <v-select
-              v-model="selectService"
-              class="search-input"
-              :placeholder="label_service"
-              :options="currentServices"
-            ></v-select>
-          </div>
+            :placeholder="label_search_placeholder"
+          />
         </div>
         <br />
+        <div class="columns">
+          <div class="column is-two-thirds">
+            <v-select
+              v-model="filters.city"
+              autocomplete="off"
+              class="search-input"
+              :placeholder="label_cities"
+              :options="states"
+            ></v-select>
+          </div>
+          <div class="column advanced">
+            <a @click="showAdvancedSearch()">{{ label_advanced }}</a>
+          </div>
+        </div>
+        <div>
+          <div v-show="advanced">
+            <div class="columns">
+              <div class="column">
+                <simple-select-component
+                  :list="searchTypes"
+                  :select="label_type"
+                  v-model="filters.type"
+                ></simple-select-component>
+              </div>
+              <div class="column">
+                <simple-select-component
+                  :list="searchSegments"
+                  :select="label_segment"
+                  v-model="filters.segment"
+                ></simple-select-component>
+              </div>
+              <div class="column">
+                <input
+                  v-model="filters.zip"
+                  class="input search-input"
+                  type="text"
+                  :placeholder="label_zip"
+                />
+              </div>
+            </div>
+            <div>
+              <v-select
+                v-model="selectService"
+                class="search-input"
+                :placeholder="label_service"
+                :options="currentServices"
+              ></v-select>
+            </div>
+          </div>
+          <br />
+        </div>
+        <div class="control">
+          <button
+            :disabled="!buttonEnable"
+            @click="doSearch()"
+            class="button is-rounded button-signup"
+          >
+            {{ label_button }}
+          </button>
+        </div>
       </div>
-      <div class="control">
-        <button
-          :disabled="!buttonEnable"
-          @click="doSearch()"
-          class="button is-rounded button-signup"
-        >
-          {{ label_button }}
-        </button>
-      </div>
-    </div>
+    </form>
   </div>
 </template>
 <script>
