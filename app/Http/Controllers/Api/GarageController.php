@@ -85,9 +85,8 @@ class GarageController extends ApiController
         return $this->okResponse($data);
     }
 
-
     /**
-     * retrives garage information
+     * retrieves garage information
      * @return
      */
     public function getGarageInfo()
@@ -106,7 +105,7 @@ class GarageController extends ApiController
     }
 
     /**
-     * retrives garage schedule (monday - sunday)
+     * retrieves garage schedule (monday - sunday)
      */
     public function getSchedule()
     {

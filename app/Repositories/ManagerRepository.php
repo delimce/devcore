@@ -31,8 +31,7 @@ class ManagerRepository
      */
     public function getById(int $managerId)
     {
-        $manager = Manager::find($managerId);
-        return $manager;
+        return Manager::findOrFail($managerId);
     }
 
     /**
@@ -91,8 +90,7 @@ class ManagerRepository
 
 
     /**
-     * do login
-     * @param array
+     * @param array $credentials
      * @return array
      */
     public function login(array $credentials)
@@ -251,12 +249,8 @@ class ManagerRepository
         return false;
     }
 
-
-
     /**
-     * saveUserInfo
-     *
-     * @param  mixed $info
+     * @param Manager $info
      * @return bool
      */
     public function saveUserInfo(Manager $info)
@@ -270,16 +264,14 @@ class ManagerRepository
         }
     }
 
-
     /**
-     * changePassword
-     *
-     * @param  string $token
-     * @param  string $old
-     * @param  string $new
-     * @return void
+     * @param string $token
+     * @param string $old
+     * @param string $new
+     * 
+     * @return array
      */
-    public function changePassword($token, $old, $new)
+    public function changePassword($token, string $old, string $new)
     {
         $result = ["ok" => false, "message" => ""];
         $data = DB::table('manager')->whereToken($token)->first();
