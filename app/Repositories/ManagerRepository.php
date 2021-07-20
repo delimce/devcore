@@ -170,7 +170,7 @@ class ManagerRepository
      * @param  mixed $token
      * @return void
      */
-    public static function isTokenvalid($token)
+    public static function isTokenValid($token)
     {
         $user = Manager::whereToken($token)->whereVerified(1)->first();
         return !is_null($user);

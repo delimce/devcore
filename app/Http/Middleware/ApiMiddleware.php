@@ -20,8 +20,9 @@ class ApiMiddleware
         if (!$token) {
             return response()->json(['status' => 'error', 'message' => __('errors.401')], 401);
         } else {
-            if (!manager::isTokenvalid($token))
+            if (!manager::isTokenValid($token)) {
                 return response()->json(['status' => 'error', 'message' => __('errors.401')], 401);
+            }
         }
         return $next($request);
     }
