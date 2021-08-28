@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\TestCase;
 class LocalizationApiTest extends TestCase
 {
     const API_URI = "api/local/";

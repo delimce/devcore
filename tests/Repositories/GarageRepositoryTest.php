@@ -1,17 +1,16 @@
 <?php
+namespace Tests\Repositories;
 
+use Tests\TestCase;
 use App\Models\Manager\Garage;
 use App\Models\Manager\Manager;
-use App\Repositories\GarageRepository;
-use App\Repositories\GarageServiceRepository;
+use Tests\Objects\SearchObjects;
 
 class GarageRepositoryTest extends TestCase
 {
     protected $manager;
     protected $garage;
     protected $garageRepository;
-    protected $garageServiceRepository;
-    protected $searchFilters;
 
     public function setUp(): void
     {
@@ -20,15 +19,6 @@ class GarageRepositoryTest extends TestCase
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
-        $this->garageServiceRepository = $this->app->make('App\Repositories\GarageServiceRepository');
-        $this->searchFilters = [
-            "text" => "",
-            "city" => 28,
-            "zip" => "",
-            "type" => "",
-            "segment" => "",
-            "service" => null,
-        ];
     }
 
 
@@ -115,90 +105,6 @@ class GarageRepositoryTest extends TestCase
     }
 
 
-
-    /**
-     * @test
-     * testGetGaragePoolBySegment
-     *
-     * @return void
-     */
-    public function testGetGaragePoolBySegment()
-    {
-        $garageId = $this->garage->id;
-        $segment = "CAR";
-        $result = $this->garageServiceRepository->getGaragePoolBySegment($garageId, $segment);
-
-        foreach (GarageServiceRepository::SERVICES_TYPES as $type) {
-            $index = strtolower($type);
-            $this->assertArrayHasKey($index, $result);
-        }
-    }
-
-
-    /**
-     * @test
-     * testSaveGaragePoolBySegment
-     *
-     * @return void
-     */
-    public function testSaveGaragePoolBySegment()
-    {
-        $garageId = $this->garage->id;
-        $segment = "CAR";
-        $fakePool["oil"][] =
-            [
-                "id" => 1,
-                "type" => "OIL",
-                "category" => "PREMIUM",
-                "brand" => 1,
-                "price" => 10,
-                "select" => true
-            ];
-
-        $fakePool["tyre"][] =
-            [
-                "id" => 28,
-                "type" => "TYRE",
-                "category" => "PREMIUM",
-                "brand" => 29,
-                "price" => 80,
-                "select" => true
-            ];
-        $this->garageServiceRepository->saveGaragePool($garageId, $segment, $fakePool);
-        $services = $this->garageServiceRepository->getServiceList($garageId);
-        $this->assertCount(2, $services);
-    }
-
-
-    /**
-     * @test
-     * testFindService
-     *
-     * @return void
-     */
-    public function testFindService()
-    {
-        $criteria = [];
-
-        # all active service
-        $services = $this->garageServiceRepository->findService($criteria);
-        $this->assertTrue($services->count() > 10);
-        # find by type
-        $criteria["type"] = "FILTER";
-        $services = $this->garageServiceRepository->findService($criteria);
-        $this->assertTrue($services->count() > 2);
-        # find by segment
-        $criteria["segment"] = "CAR";
-        $services = $this->garageServiceRepository->findService($criteria);
-        $this->assertTrue($services->count() > 0);
-        # find by segment with except
-        $criteria["segment"] = "MOTORCYCLE";
-        $criteria["type"] = "OTHER";
-        $services = $this->garageServiceRepository->findService($criteria);
-        $this->assertTrue($services->count() === 6); # without except segment 
-    }
-
-
     /**
      * @test
      * testGarageMainSearch
@@ -207,7 +113,8 @@ class GarageRepositoryTest extends TestCase
      */
     public function testGarageMainSearch()
     {
-        $filters = $this->searchFilters;
+        $trait =  $this->getObjectForTrait(SearchObjects::class);
+        $filters = $trait->searchFilters;
         $filters["zip"] = 28027;
         $result =  $this->garageRepository->search($filters);
         $this->assertTrue($result->count() > 0);
@@ -231,29 +138,4 @@ class GarageRepositoryTest extends TestCase
         $this->assertStringContainsString($descSearch, $result3->first()->desc);
     }
 
-    /**
-     * @test
-     * testAdvancedSearch
-     *
-     * @return void
-     */
-    public function testAdvancedSearch()
-    {
-        $filters = $this->searchFilters;
-        $filters["type"] = "OIL";
-        $filters["segment"] = "CAR";
-        $filters["service"] = 1;
-        $fakePool["oil"][] =
-            [
-                "id" => 1,
-                "type" => "OIL",
-                "category" => "PREMIUM",
-                "brand" => 1,
-                "price" => 10,
-                "select" => true
-            ];
-        $this->garageServiceRepository->saveGaragePool($this->garage->id, "CAR", $fakePool);
-        $result =  $this->garageRepository->search($filters);
-        $this->assertTrue($result->count() > 0);
-    }
 }

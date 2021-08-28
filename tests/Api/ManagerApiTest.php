@@ -1,8 +1,9 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\TestCase;
 use App\Models\Manager\Manager;
-
-
 
 class ManagerApiTest extends TestCase
 {
