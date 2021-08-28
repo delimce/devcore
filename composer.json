@@ -1,7 +1,11 @@
 {
     "name": "develemento/devcore",
     "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "keywords": [
+        "framework",
+        "laravel",
+        "lumen"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -31,8 +35,11 @@
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        },
         "classmap": [
-            "tests/"
+            "tests/TestCase.php"
         ]
     },
     "config": {

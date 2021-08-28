@@ -1,5 +1,7 @@
 <?php
+namespace Tests\Repositories;
 
+use Tests\TestCase;
 use App\Models\Manager\Manager;
 
 class ManagerRepositoryTest extends TestCase

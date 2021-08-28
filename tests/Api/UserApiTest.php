@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\TestCase;
 use App\Models\Users\User;
 
 class UserApiTest extends TestCase

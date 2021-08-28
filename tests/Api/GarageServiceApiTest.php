@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Api;
+
+use Tests\TestCase;
 use App\Models\Manager\Manager;
 use App\Models\Manager\Garage;
 
