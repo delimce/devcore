@@ -5,10 +5,9 @@
     <h2>
       {{ garage.desc }}
     </h2>
-    <hr />
-    <detail-schedules-component
-      :schedules="garage.schedules"
-    ></detail-schedules-component>
+    <div class="rating-info">
+      <em class="fa fa-star"></em>&nbsp;Valoraciones: 1/5
+    </div>
   </div>
 </template>
 <script>
@@ -29,4 +28,8 @@ export default {
 };
 </script>
 <style scoped>
+.rating-info{
+  padding: 1.5em;
+  text-align: right;
+}
 </style>

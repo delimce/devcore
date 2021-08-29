@@ -4,42 +4,13 @@
       <div class="column is-three-fifths">
         <div class="box">
           <div class="gallery"></div>
-          <section class="tabs is-boxed">
-            <ul>
-              <li
-                v-bind:class="{ 'is-active': activeTab == 'info' }"
-                @click="activeTab = 'info'"
-              >
-                <a>
-                  <span class="icon is-small">
-                    <i class="fas fa-file-invoice" aria-hidden="true"></i>
-                  </span>
-                  <span>{{ label_info }}</span>
-                </a>
-              </li>
-              <li
-                v-bind:class="{ 'is-active': activeTab == 'services' }"
-                @click="activeTab = 'services'"
-              >
-                <a>
-                  <span class="icon is-small">
-                    <em class="fas fa-tools"></em>
-                  </span>
-                  <span>{{ label_services }}</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+
           <section class="container">
-            <div v-show="activeTab == 'info'">
-              <detail-info-component
-                :garage="garage"
-              ></detail-info-component>
-            </div>
-            <div v-show="activeTab == 'services'">
-              <detail-services-component
-                :garage="garage"
-              ></detail-services-component>
+            <div>
+              <detail-info-component :garage="garage"></detail-info-component>
+              <hr />
+              <detail-services-component :garage="garage"></detail-services-component>
+              <detail-comments-component :comments="garage.comments"></detail-comments-component>
             </div>
           </section>
         </div>
@@ -52,11 +23,17 @@
           }}</span>
           <span><em class="fas fa-phone"></em> {{ garage.phone }}</span>
           <span v-html="address"></span>
+          <hr />
+          <detail-schedules-component
+            :schedules="garage.schedules"
+          ></detail-schedules-component>
+          <hr />
           <span class="booking">
-            <button 
-            data-show="quickview" 
-            data-target="quickviewDefault"
-            class="button is-primary is-medium is-fullwidth">
+            <button
+              data-show="quickview"
+              data-target="quickviewDefault"
+              class="button is-primary is-medium is-fullwidth"
+            >
               {{ label_booking }}
             </button>
           </span>
@@ -67,7 +44,9 @@
 </template>
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
+import DetailCommentsComponent from "./parts/detail/DetailCommentsComponent.vue";
 export default {
+  components: { DetailCommentsComponent },
   name: "GarageDetailComponent",
   mixins: [WebsiteMixin],
   props: ["id"],

@@ -46,6 +46,11 @@ class Garage extends Model
         return $this->hasMany(Support::class, 'garage_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'garage_id');
+    }
+
     public function state()
     {
         return $this->belongsTo(State::class, 'state_id');
