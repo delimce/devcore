@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">{{ segmentName }}</div>
+    <div class="subtitle">{{ segmentName }}</div>
 
     <span class="service-panel" v-for="type in currentTypes" :key="type.id">
       <div class="type-label">{{ type.label }}</div>

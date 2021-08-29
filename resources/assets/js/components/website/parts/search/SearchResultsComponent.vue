@@ -17,7 +17,7 @@
             </div>
             <div class="media-content">
               <div class="content">
-                <p>
+                <div>
                   <span class="title">{{ item.name }}</span>&nbsp;
                   <span v-if="item.network" class="network">{{item.network.desc}}</span>
                   <br />
@@ -33,7 +33,7 @@
                       <span><em class="fa fa-star"></em>&nbsp;Valoraciones: 1/5</span>
                       <span><em class="fa fa-comments"></em>&nbsp;comentarios: 0</span>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           </article>
@@ -162,7 +162,7 @@ export default {
   cursor: pointer;
 }
 
-.res-item p,
+.res-item div,
 figure {
   cursor: pointer;
 }

@@ -4,6 +4,7 @@ const WebsiteMixin = {
         return {
             label_info: "Información",
             label_services: "Servicios",
+            label_comments: "Comentarios",
             label_close: "Cerrar sesión",
             label_welcome: "¿Buscas un taller de confianza?",
             mediaPath: api_url + "/storage/media/",

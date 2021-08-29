@@ -8,6 +8,7 @@ use App\Models\Manager\Schedule;
 use App\Models\Manager\Segment;
 use App\Models\Manager\ServiceCategory;
 use App\Models\Manager\ServiceType;
+use App\Models\Manager\Comment;
 use App\Services\StringsHandlerService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
@@ -248,6 +249,18 @@ class GarageRepository
     public function getServiceCategories(): Collection
     {
         return ServiceCategory::all();
+    }
+
+    
+
+    /**
+     * @param int $garageId
+     * 
+     * @return Collection
+     */
+    public function getCommentsById(int $garageId):Collection
+    {
+        return Comment::whereGarageId($garageId)->get();
     }
 
 

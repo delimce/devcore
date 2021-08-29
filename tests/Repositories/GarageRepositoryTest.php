@@ -138,4 +138,13 @@ class GarageRepositoryTest extends TestCase
         $this->assertStringContainsString($descSearch, $result3->first()->desc);
     }
 
+    
+    public function testGetGarageComments()
+    {
+        $garageId = $this->garage->id;
+        $comments = $this->garageRepository->getCommentsById($garageId);
+        $this->assertIsArray($comments);
+
+    }
+
 }
