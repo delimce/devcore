@@ -9,8 +9,12 @@
             <div>
               <detail-info-component :garage="garage"></detail-info-component>
               <hr />
-              <detail-services-component :garage="garage"></detail-services-component>
-              <detail-comments-component :comments="garage.comments"></detail-comments-component>
+              <detail-services-component
+                :garage="garage"
+              ></detail-services-component>
+              <detail-comments-component
+                :comments="garage.comments"
+              ></detail-comments-component>
             </div>
           </section>
         </div>
@@ -23,6 +27,8 @@
           }}</span>
           <span><em class="fas fa-phone"></em> {{ garage.phone }}</span>
           <span v-html="address"></span>
+          <hr />
+           <detail-toolbox-component></detail-toolbox-component>
           <hr />
           <detail-schedules-component
             :schedules="garage.schedules"
@@ -45,8 +51,9 @@
 <script>
 import WebsiteMixin from "@/components/website/mixins/WebsiteMixin";
 import DetailCommentsComponent from "./parts/detail/DetailCommentsComponent.vue";
+import DetailToolboxComponent from "./parts/detail/DetailToolboxComponent.vue";
 export default {
-  components: { DetailCommentsComponent },
+  components: { DetailCommentsComponent, DetailToolboxComponent },
   name: "GarageDetailComponent",
   mixins: [WebsiteMixin],
   props: ["id"],
