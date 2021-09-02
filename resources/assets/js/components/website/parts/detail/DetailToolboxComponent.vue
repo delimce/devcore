@@ -46,8 +46,8 @@ export default {
 };
 </script>
 
-<style>
-.button.is-rounded {
+<style scoped>
+.toolbox .button.is-rounded {
   border-radius: 55px;
   max-width: 55px;
 }
