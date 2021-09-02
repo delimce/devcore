@@ -1,5 +1,5 @@
 <template>
-  <div class="box columns toolbox">
+  <div class="columns toolbox is-multiline">
     <div class="column">
       <a class="button is-rounded is-large">
         <span class="icon is-medium">
@@ -48,8 +48,15 @@ export default {
 
 <style>
 .button.is-rounded {
-  border-radius: 290486px;
-  margin-left: 9px;
+  border-radius: 55px;
+  max-width: 55px;
+}
+
+.toolbox .column{
+  max-width: 100px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .toolbox span {

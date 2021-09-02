@@ -95,7 +95,7 @@ export default {
 <style scoped>
 .container {
   display: block;
-  max-width: 80%;
+  max-width: 89%;
   padding: 20px 15px 20px 15px;
 }
 
