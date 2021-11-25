@@ -1,0 +1,26 @@
+# docker-compose.yaml
+version: '3.5'
+
+services:
+
+  webserver:
+    image: nginx:latest
+    container_name: 'nginx-garafy'
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www/html
+    depends_on:
+      - 'php'
+
+  php:
+    build: ./docker/php/
+    container_name: 'php-fpm-garafy'
+    expose:
+      - 9000
+    volumes:
+      - .:/var/www/html
+      - ./docker/php/php-dev.ini:/usr/local/etc/php/conf.d/php-dev.ini
+      - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - /tmp/garafy/php-fpm:/var/log/xdebug

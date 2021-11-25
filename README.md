@@ -6,7 +6,7 @@ Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 * PHP >= 7.2
 * Mysql/Mariadb >= 5.7
 * Composer >= 1.0
-* nodejs >=12 & npm >= 6.0
+* Nodejs >=14 & npm >= 6.0
 
 ## Components:
 ### Frontend:
@@ -19,3 +19,7 @@ Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 * Laravel/Lumen 6.0 LTS
 * PHPUNIT 8.5
 * SQLITE 3 (testing)
+
+### Install with Docker:
+* Requeriments Docker Engine >= 20.xx
+* execute: docker-compose up --build
