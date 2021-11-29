@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Manager\Company;
 use App\Models\Manager\Manager;
-use App\Services\EmailNotificationService;
+use App\Services\Commons\EmailNotificationService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;

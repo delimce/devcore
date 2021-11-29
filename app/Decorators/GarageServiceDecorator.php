@@ -4,7 +4,7 @@ namespace App\Decorators;
 
 use App\Repositories\GarageRepository;
 use App\Repositories\GarageServiceRepository;
-use App\Services\StringsHandlerService;
+use App\Services\Commons\StringsHandlerService;
 use Illuminate\Database\Eloquent\Collection;
 
 class GarageServiceDecorator

@@ -11,7 +11,7 @@
 |
 */
 
-use App\Services\StringsHandlerService;
+use App\Services\Commons\StringsHandlerService;
 use Illuminate\Support\Facades\Hash;
 
 $factory->define(App\Models\Users\User::class, function (Faker\Generator $faker) {

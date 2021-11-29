@@ -9,7 +9,7 @@ use App\Models\Manager\Segment;
 use App\Models\Manager\ServiceCategory;
 use App\Models\Manager\ServiceType;
 use App\Models\Manager\Comment;
-use App\Services\StringsHandlerService;
+use App\Services\Commons\StringsHandlerService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;

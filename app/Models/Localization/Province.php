@@ -2,7 +2,7 @@
 
 namespace App\Models\Localization;
 
-use App\Services\StringsHandlerService;
+use App\Services\Commons\StringsHandlerService;
 use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model

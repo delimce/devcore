@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\UserRepository;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -72,7 +71,7 @@ class UserController extends ApiController
             "lastname" => $req->lastname,
             "email" => $req->email,
             "password" => $req->password,
-            "active" => 1, #temporaly
+            "active" => 1, # @todo: temp
         ];
 
         $user = $this->userRepository->createUser($data);
