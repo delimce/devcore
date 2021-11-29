@@ -3,75 +3,34 @@
 namespace App\Repositories;
 
 use App\Models\Users\User;
-use Exception;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class UserRepository
 {
 
     /**
-     * createUser
-     *
-     * @param  array $data
+     * @param array $data
      * @return User
      */
-    public function createUser(array $data)
+    public function create(array $data): User
     {
-        $data["password"] = Hash::make($data["password"]);
         return User::create($data);
     }
 
-
     /**
-     * doLogin
-     *
-     * @param  array $credentials
-     * @return array
+     * @param string $email
+     * @return User
      */
-    public function doLogin(array $credentials)
+    public function getByEmail(string $email): User
     {
-        $result = ["ok" => false, "message" => ""];
-        $user = User::whereEmail($credentials['email'])->first();
-        if (is_null($user)) {
-            $result["message"] = __('errors.login.email');
-            return $result;
-        }
-
-        if (!$user->active) {
-            $result["message"] = __('errors.login.disable');
-            return $result;
-        }
-
-        if (!Hash::check($credentials['password'], $user->password)) {
-            $result["message"] = __('errors.login.password');
-            return $result;
-        }
-
-        $result["ok"] = true;
-        $result["data"] = $user;
-        return $result;
+        return User::whereEmail($email)->first();
     }
 
-
-
     /**
-     * activateUser
-     *
-     * @param  int $userId
-     * @return bool
+     * @param int $userId
+     * @return User
      */
-    public function activateUser($userId)
+    public function findById(int $userId): User
     {
-        try {
-            $user = User::findOrFail($userId);
-            $user->active = 1;
-            $user->verified = 1;
-            $user->save();
-            return true;
-        } catch (Exception $ex) {
-            Log::error($ex);
-            return false;
-        }
+        return User::findOrFail($userId);
     }
 }

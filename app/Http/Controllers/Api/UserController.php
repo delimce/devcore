@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Repositories\UserRepository;
+use App\Services\User\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends ApiController
 {
 
-    protected $userRepository;
-    public function __construct(UserRepository $userRepository)
+    protected $userService;
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
 
@@ -35,7 +35,7 @@ class UserController extends ApiController
         }
 
         $credentials = ["email" => $req->email, "password" => $req->password];
-        $logged = $this->userRepository->doLogin($credentials);
+        $logged = $this->userService->doLogin($credentials);
 
         if (!$logged["ok"]) {
             $data = ["message" => $logged["message"]];
@@ -74,7 +74,7 @@ class UserController extends ApiController
             "active" => 1, # @todo: temp
         ];
 
-        $user = $this->userRepository->createUser($data);
+        $user = $this->userService->createUser($data);
         return $this->okResponse($user);
     }
 }

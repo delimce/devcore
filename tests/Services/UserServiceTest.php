@@ -1,23 +1,24 @@
 <?php
-namespace Tests\Repositories;
+
+namespace Tests\Services;
 
 use Tests\TestCase;
 use App\Models\Users\User;
 
-class UserRepositoryTest extends TestCase
+class UserServiceTest extends TestCase
 {
+
     protected $user;
-    protected $userRepository;
+    protected $userService;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-        $this->userRepository = $this->app->make('App\Repositories\UserRepository');
+        $this->userService = $this->app->make('App\Services\User\UserService');
     }
 
-
-    /**
+     /**
      * testCreateUser
      *
      * @return void
@@ -30,12 +31,11 @@ class UserRepositoryTest extends TestCase
             "email" => $this->user->email,
             "password" => $this->user->password
         ];
-        $result = $this->userRepository->createUser($data);
+        $result = $this->userService->createUser($data);
         $this->assertTrue($result->id > 0);
     }
 
-
-    /**
+     /**
      * testUserLogin
      *
      * @return void
@@ -47,13 +47,17 @@ class UserRepositoryTest extends TestCase
             "password" => "customPassword",
         ];
 
-        $result = $this->userRepository->doLogin($credentials);
+        $result = $this->userService->doLogin($credentials);
         $this->assertFalse($result["ok"]);
 
-        $activate = $this->userRepository->activateUser($this->user->id);
+        $activate = $this->userService->activateUser($this->user->id);
         if ($activate) {
-            $result = $this->userRepository->doLogin($credentials);
+            $result = $this->userService->doLogin($credentials);
             $this->assertTrue($result["ok"]);
         }
     }
+
+
+
+
 }

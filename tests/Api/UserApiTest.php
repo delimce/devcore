@@ -13,14 +13,14 @@ class UserApiTest extends TestCase
 
     /** @var user fake  */
     protected $user;
-    protected $userRepository;
+    protected $userService;
     protected $faker;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-        $this->userRepository = $this->app->make('App\Repositories\UserRepository');
+        $this->userService = $this->app->make('App\Services\User\UserService');
         $this->faker = \Faker\Factory::create();
     }
 
@@ -84,7 +84,7 @@ class UserApiTest extends TestCase
         $this->seeStatusCode(401);
 
         # right credentials, and verified
-        $this->userRepository->activateUser($this->user->id);
+        $this->userService->activateUser($this->user->id);
         $this->call("POST", static::API_URI . "/login", $credentials, [], [], []);
         $this->seeStatusCode(200);
     }
