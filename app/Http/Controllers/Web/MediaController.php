@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Repositories\MediaRepository;
+use App\Services\Commons\MediaFileService;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class MediaController extends BaseController
@@ -10,7 +10,7 @@ class MediaController extends BaseController
 
     protected $media;
 
-    public function __construct(MediaRepository $media)
+    public function __construct(MediaFileService $media)
     {
         $this->media = $media;
     }

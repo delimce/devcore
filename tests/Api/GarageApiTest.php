@@ -15,14 +15,14 @@ class GarageApiTest extends TestCase
     /** @var manager fake  */
     protected $manager;
     protected $garage;
-    protected $mediaRepository;
+    protected $mediaService;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
         $this->garage = factory(Garage::class)->create();
-        $this->mediaRepository = $this->app->make('App\Repositories\MediaRepository');
+        $this->mediaService = $this->app->make('App\Services\Commons\MediaFileService');
     }
 
     /** @test
@@ -140,7 +140,7 @@ class GarageApiTest extends TestCase
         $result = json_decode($response->getContent(), true);
         $this->assertCount(1, $result["info"]);
 
-        $media = $this->mediaRepository->getFirstMediaFileByGarageId($garageId);
+        $media = $this->mediaService->getFirstMediaFileByGarageId($garageId);
 
         $response = $this->call('GET', 'storage/media/' . $media->path);
         $this->assertEquals(200, $response->status());
