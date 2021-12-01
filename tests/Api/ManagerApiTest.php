@@ -11,13 +11,13 @@ class ManagerApiTest extends TestCase
 
     /** @var manager fake  */
     protected $manager;
-    protected $managerRepository;
+    protected $managerService;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->manager = factory(Manager::class)->create();
-        $this->managerRepository = $this->app->make('App\Repositories\ManagerRepository');
+        $this->managerService = $this->app->make('App\Services\Manager\ManagerService');
     }
 
 
@@ -67,7 +67,7 @@ class ManagerApiTest extends TestCase
     {
 
         // token gen validation
-        $newToken = $this->managerRepository->newUserToken();
+        $newToken = $this->managerService->newUserToken();
         $UUIDv4 = '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
         $this->assertTrue(preg_match($UUIDv4, $newToken)===1);
 
@@ -127,7 +127,7 @@ class ManagerApiTest extends TestCase
         ], ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(400);
 
-        $myManager = $this->managerRepository->getUserByToken($this->manager->token);
+        $myManager = $this->managerService->getUserByToken($this->manager->token);
         $this->put(static::API_URI . "auth/company/save", [
             "manager_id" => $myManager->get("id"),
             "name" => "New Company",

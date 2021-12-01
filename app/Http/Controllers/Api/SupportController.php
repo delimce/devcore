@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Repositories\SupportRepository;
-use App\Repositories\ManagerRepository;
+use App\Services\Manager\ManagerService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class SupportController extends ApiController
 
     public function __construct(
         SupportRepository $support,
-        ManagerRepository $manager,
+        ManagerService $manager,
         Request $req
     ) {
         $this->support = $support;

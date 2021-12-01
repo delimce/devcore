@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Decorators\GarageServiceDecorator;
 use App\Repositories\GarageRepository;
-use App\Repositories\ManagerRepository;
 use App\Services\Commons\MediaFileService;
+use App\Services\Manager\ManagerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +19,7 @@ class GarageController extends ApiController
 
     public function __construct(
         GarageRepository $garage,
-        ManagerRepository $manager,
+        ManagerService $manager,
         MediaFileService $media,
         Request $req
     ) {

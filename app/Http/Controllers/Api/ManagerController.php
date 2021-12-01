@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Manager\Manager;
-use App\Repositories\ManagerRepository;
+use App\Services\Manager\ManagerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +11,7 @@ class ManagerController extends ApiController
 {
     protected $manager;
 
-    public function __construct(ManagerRepository $user)
+    public function __construct(ManagerService $user)
     {
         $this->manager = $user;
     }
@@ -191,14 +190,13 @@ class ManagerController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $user = Manager::find($req->id);
-        $user->name = $req->name;
-        $user->lastname = $req->lastname;
-        $user->dni = $req->dni;
-        $user->birthdate = $req->birthdate;
-        $user->phone = $req->phone;
+        $info["id"] = $req->id;
+        $info["name"] = $req->name;
+        $info["lastname"] = $req->lastname;
+        $info["birthdate"] = $req->birthdate;
+        $info["phone"] = $req->phone;
 
-        if (!$this->manager->saveUserInfo($user)) {
+        if (!$this->manager->saveManager($info)) {
             $data = ['message' => __('errors.save')];
             return $this->errorResponse($data);
         }

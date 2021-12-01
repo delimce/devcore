@@ -2,11 +2,19 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\ManagerRepository as manager;
+use App\Services\Manager\ManagerService;
 use Closure;
 
 class ApiMiddleware
 {
+
+    protected $manager;
+
+    public function __construct(ManagerService $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -20,7 +28,7 @@ class ApiMiddleware
         if (!$token) {
             return response()->json(['status' => 'error', 'message' => __('errors.401')], 401);
         } else {
-            if (!manager::isTokenValid($token)) {
+            if (!$this->manager->isTokenValid($token)) {
                 return response()->json(['status' => 'error', 'message' => __('errors.401')], 401);
             }
         }
