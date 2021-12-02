@@ -37,10 +37,11 @@ $factory->define(App\Models\Manager\Manager::class, function (Faker\Generator $f
     ];
 });
 
-$factory->define(App\Models\Manager\Company::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Manager\Company::class, function (Faker\Generator $faker) use ($factory) {
     return [
+        'manager_id' => $factory->create(App\Models\Manager\Manager::class)->id,
         'name' => $faker->name,
-        'rif' => $faker->randomAscii,
+        'nif' => $faker->randomAscii,
         'phone' => $faker->phoneNumber,
     ];
 });
