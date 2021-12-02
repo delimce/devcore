@@ -12,34 +12,28 @@ use App\Models\Manager\Comment;
 use App\Services\Commons\StringsHandlerService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
-use Carbon\Carbon as Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GarageRepository
 {
-    const SCHEDULE_ERROR = 'errors.validate.schedule.day';
-
     /**
      * getById
      *
      * @param  int $garageId
-     * @return Model
+     * @return Garage
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function getById(int $garageId): Model
+    public function getById(int $garageId): Garage
     {
-        return Garage::find($garageId);
+        return Garage::findOrFail($garageId);
     }
 
-
     /**
-     * getByUrl
-     *
      * @param string $url
-     * @return mixed
+     * @return Garage|null
      */
-    public function getByUrl(string $url)
+    public function getByUrl(string $url): ?Garage
     {
         return Garage::where([
             "url" => $url,
@@ -89,126 +83,51 @@ class GarageRepository
 
 
     /**
-     * save garage information
      * @param array $garage
-     * @return int|bool
+     * @return Garage
+     * @throws QueryException
      */
-    public function saveGarage(array $garage): bool
+    public function create(array $garage): Garage
     {
-        try {
-            $result = Garage::firstOrNew(
-                [
-                    'manager_id' => $garage['manager'],
-                ]
-            );
-            $result->name = $garage['name'];
-            $result->url = StringsHandlerService::slugify($garage['name']);
-            $result->phone = $garage['phone'];
-            $result->address = $garage['address'];
-            $result->network_id = (!empty($garage['network_id'])) ? $garage['network_id'] : null;
-            $result->address2 = (isset($garage['address2'])) ? $garage['address2'] : "";
-            $result->desc = (isset($garage['desc'])) ? $garage['desc'] : "";
-            $result->country_id = $garage['country_id'];
-            $result->state_id = $garage['state_id'];
-            $result->province_id = $garage['province_id'];
-            $result->zipcode = $garage['zipcode'];
-            $result->enable = 1; # @todo: temporaly to make garage be able to search
-            $result->save();
-            return $result->id;
-        } catch (QueryException $ex) {
-            Log::error($ex);
-            return false;
-        }
-    }
-
-
-    /**
-     * retrieves schedule
-     * @param int $garageId
-     * @return string[]
-     */
-    public function getScheduleById($garageId): array
-    {
-        $response = [];
-        $garageSchedule = Schedule::whereGarageId($garageId)->orderBy("day")->get();
-        $response["garage"] = $garageId;
-        $response["schedule"] = $garageSchedule->toArray();
-        return $response;
-    }
-
-
-    /**
-     * check garage schedule to saving
-     * @param array $schedule
-     * @return array
-     */
-    public function garageScheduleValidation($schedule): array
-    {
-        $result = ["ok" => true, "message" => ""];
-        // 7 days of week
-        if (count($schedule) < 7) {
-            $result["message"] = __('errors.validate.schedule.ndays');
-            $result["ok"] = false;
-            return $result;
-        }
-
-        array_walk($schedule, function ($day, $index) use (&$result) {
-            $m1 = Carbon::parse($day["am1"]);
-            $m2 = Carbon::parse($day["am2"]);
-            $n1 = Carbon::parse($day["pm1"]);
-            $n2 = Carbon::parse($day["pm2"]);
-
-            //only morning
-            if (
-                (!is_null($day["am1"]) && !is_null($day["am2"]) && is_null($day["pm1"]) && is_null($day["pm2"])) &&
-                ($m1->greaterThan($m2))
-            ) {
-                $result["message"] = __(static::SCHEDULE_ERROR, ["day" => $index + 1]);
-                $result["ok"] = false;
-                return $result;
-            }
-
-
-            //only afternoon
-            if (
-                (is_null($day["am1"]) && is_null($day["am2"]) && !is_null($day["pm1"]) && !is_null($day["pm2"])) &&
-                ($n1->greaterThan($n2))
-            ) {
-                $result["message"] = __(static::SCHEDULE_ERROR, ["day" => $index + 1]);
-                $result["ok"] = false;
-                return $result;
-            }
-
-            //all day
-            if (
-                (!is_null($day["am1"]) && is_null($day["am2"]) && is_null($day["pm1"]) && !is_null($day["pm2"])) &&
-                ($m1->greaterThan($n2))
-            ) {
-                $result["message"] = __(static::SCHEDULE_ERROR, ["day" => $index + 1]);
-                $result["ok"] = false;
-                return $result;
-            }
-
-            // all times filled
-            if (
-                (!is_null($day["am1"]) && !is_null($day["am2"]) && !is_null($day["pm1"]) && !is_null($day["pm2"])) &&
-                ($m1->greaterThan($m2) || $m2->greaterThan($n1) || $n1->greaterThan($n2))
-            ) {
-                $result["message"] = __(static::SCHEDULE_ERROR, ["day" => $index + 1]);
-                $result["ok"] = false;
-                return $result;
-            }
-        });
-
+        $result = Garage::firstOrNew(
+            [
+                'manager_id' => $garage['manager'],
+            ]
+        );
+        $result->name        = $garage['name'];
+        $result->url         = StringsHandlerService::slugify($garage['name']);
+        $result->phone       = $garage['phone'];
+        $result->address     = $garage['address'];
+        $result->network_id  = (!empty($garage['network_id'])) ? $garage['network_id'] : null;
+        $result->address2    = (isset($garage['address2'])) ? $garage['address2'] : "";
+        $result->desc        = (isset($garage['desc'])) ? $garage['desc'] : "";
+        $result->country_id  = $garage['country_id'];
+        $result->state_id    = $garage['state_id'];
+        $result->province_id = $garage['province_id'];
+        $result->zipcode     = $garage['zipcode'];
+        $result->enable      = 1; # @todo: temporaly to make garage be able to search
+        $result->save();
         return $result;
     }
 
+
     /**
-     * saving schedule
+     * @param int $garageId
+     * @return Collection
+     */
+    public function getGarageSchedule(int $garageId): Collection
+    {
+        return Schedule::whereGarageId($garageId)->orderBy("day")->get();
+    }
+
+
+    /**
      * @param int $garageId
      * @param array $schedule
+     * @return void
+     * @throws QueryException
      */
-    public function saveGarageSchedule($garageId, $schedule)
+    public function saveSchedule(int $garageId, array $schedule)
     {
         DB::transaction(function () use ($garageId, $schedule) {
             Schedule::wheregarageId($garageId)->delete();
@@ -225,11 +144,11 @@ class GarageRepository
         });
     }
 
+
     /**
-     * retrieve car segments
-     * @param array
+     * @return Collection
      */
-    public function getCarSegments()
+    public function getCarSegments(): Collection
     {
         return Segment::whereStatus(1)->get();
     }
@@ -243,7 +162,6 @@ class GarageRepository
         return ServiceType::all();
     }
 
-
     /**
      * getServiceCategories
      * @return Collection
@@ -253,18 +171,14 @@ class GarageRepository
         return ServiceCategory::all();
     }
 
-    
-
     /**
      * @param int $garageId
-     * 
      * @return Collection
      */
-    public function getCommentsById(int $garageId):Collection
+    public function getCommentsById(int $garageId): Collection
     {
         return Comment::whereGarageId($garageId)->get();
     }
-
 
     /**
      * search

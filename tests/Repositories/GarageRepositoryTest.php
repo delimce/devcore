@@ -21,20 +21,6 @@ class GarageRepositoryTest extends TestCase
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
     }
 
-
-    /**
-     * @test
-     * getGarageScheduleTest
-     */
-    public function testGetGarageScheduleTest()
-    {
-        $garageId = $this->garage->id;
-        $result = $this->garageRepository->getScheduleById($garageId);
-        $this->assertArrayHasKey("garage", $result);
-        $this->assertArrayHasKey("schedule", $result);
-    }
-
-
     /**
      * @test
      * testGetGarageById
@@ -77,31 +63,6 @@ class GarageRepositoryTest extends TestCase
 
         $item = $this->garageRepository->getByUrl('not-exist');
         $this->assertNull($item);
-    }
-
-
-
-    /**
-     * @test
-     * testGarageSave
-     *
-     * @return void
-     */
-    public function testGarageSave()
-    {
-        $newGarage = [];
-        $newGarage["manager"] = $this->manager->id;
-        $newGarage["name"] = $this->garage->name;
-        $newGarage["phone"] = $this->garage->phone;
-        $newGarage["address"] = $this->garage->address;
-        $newGarage["desc"] = $this->garage->desc;
-        $newGarage["country_id"] = $this->garage->country_id;
-        $newGarage["state_id"] = $this->garage->state_id;
-        $newGarage["province_id"] = $this->garage->province_id;
-        $newGarage["zipcode"] = $this->garage->zipcode;
-
-        $garageId = $this->garageRepository->saveGarage($newGarage);
-        $this->assertTrue($garageId > 0);
     }
 
 

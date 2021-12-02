@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Decorators\GarageServiceDecorator;
 use App\Repositories\GarageRepository;
 use App\Services\Commons\MediaFileService;
+use App\Services\Garage\GarageOperationService as GarageService;
 use App\Services\Manager\ManagerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,20 +14,23 @@ use Illuminate\Support\Facades\Validator;
 class GarageController extends ApiController
 {
     protected $garage;
+    protected $garageService;
     protected $manager;
     protected $media;
     protected $token;
 
     public function __construct(
         GarageRepository $garage,
-        ManagerService $manager,
+        GarageService    $garageService,
+        ManagerService   $manager,
         MediaFileService $media,
-        Request $req
+        Request          $req
     ) {
-        $this->token = $req->header('Authorization');
-        $this->garage = $garage;
-        $this->manager = $manager;
-        $this->media = $media;
+        $this->token         = $req->header('Authorization');
+        $this->garage        = $garage;
+        $this->garageService = $garageService;
+        $this->manager       = $manager;
+        $this->media         = $media;
     }
 
 
@@ -38,13 +42,13 @@ class GarageController extends ApiController
     public function saveGarage(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'name' => 'required|max:140',
-            'phone' => 'required|integer|min:3',
-            'address' => 'required|min:9',
-            'country_id' => 'required|integer',
-            'state_id' => 'required|integer',
+            'name'        => 'required|max:140',
+            'phone'       => 'required|integer|min:3',
+            'address'     => 'required|min:9',
+            'country_id'  => 'required|integer',
+            'state_id'    => 'required|integer',
             'province_id' => 'required|integer',
-            'zipcode' => 'required|min:4',
+            'zipcode'     => 'required|min:4',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
@@ -53,14 +57,14 @@ class GarageController extends ApiController
         }
 
         $new = [
-            "manager" => $this->manager->getIdFromToken($this->token),
-            "name" => $req->name,
-            "phone" => $req->phone,
-            "country_id" => $req->country_id,
-            "state_id" => $req->state_id,
+            "manager"     => $this->manager->getIdFromToken($this->token),
+            "name"        => $req->name,
+            "phone"       => $req->phone,
+            "country_id"  => $req->country_id,
+            "state_id"    => $req->state_id,
             "province_id" => $req->province_id,
-            "address" => $req->address,
-            "zipcode" => $req->zipcode,
+            "address"     => $req->address,
+            "zipcode"     => $req->zipcode,
         ];
 
         if ($req->has('address2')) {
@@ -75,7 +79,7 @@ class GarageController extends ApiController
             $new["desc"] = $req->desc;
         }
 
-        $result = $this->garage->saveGarage($new);
+        $result = $this->garageService->saveGarage($new);
         if (!$result) {
             $data = ["message" => "error"];
             return $this->errorResponse($data, 403);
@@ -109,11 +113,11 @@ class GarageController extends ApiController
      */
     public function getSchedule()
     {
-        $userId = $this->manager->getIdFromToken($this->token);
-        $info = $this->garage->getGarageByManagerId($userId);
+        $userId   = $this->manager->getIdFromToken($this->token);
+        $info     = $this->garage->getGarageByManagerId($userId);
         $schedule = [];
         if ($info) {
-            $schedule = $this->garage->getScheduleById($info->id);
+            $schedule = $this->garageService->getScheduleById($info->id);
         }
         return $this->okResponse($schedule);
     }
@@ -126,7 +130,7 @@ class GarageController extends ApiController
     public function saveSchedule(Request $req)
     {
         $validator = Validator::make($req->all(), [
-            'garage' => 'required|integer',
+            'garage'   => 'required|integer',
             'schedule' => 'required',
         ], $this->getDefaultMessages());
 
@@ -135,12 +139,12 @@ class GarageController extends ApiController
             return $this->errorResponse($validate);
         }
 
-        $validSchedule = $this->garage->garageScheduleValidation($req->schedule);
+        $validSchedule = $this->garageService->garageScheduleValidation($req->schedule);
         if (!$validSchedule["ok"]) {
             return $this->errorResponse($validSchedule);
         }
 
-        $this->garage->saveGarageSchedule($req->garage, $req->schedule);
+        $this->garageService->saveGarageSchedule($req->garage, $req->schedule);
         $data = ["message" => __('commons.save.success')];
         return $this->okResponse($data);
     }
@@ -155,7 +159,7 @@ class GarageController extends ApiController
     {
         $validator = Validator::make($req->all(), [
             'garage' => 'required|integer',
-            'file' => 'required|file',
+            'file'   => 'required|file',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
@@ -168,11 +172,11 @@ class GarageController extends ApiController
             $file = $req->file('file');
             $metadata =
                 [
-                    "garage_id" => $req->garage,
-                    "original" => $file->getClientOriginalName(),
-                    "mime" => $file->getMimeType(),
-                    "size" => $file->getSize(),
-                    "extension" =>  $file->getClientOriginalExtension()
+                "garage_id" => $req->garage,
+                "original"  => $file->getClientOriginalName(),
+                "mime"      => $file->getMimeType(),
+                "size"      => $file->getSize(),
+                "extension" => $file->getClientOriginalExtension()
                 ];
 
             $result = $this->media->saveGarageMedia($file, $metadata);
@@ -210,7 +214,7 @@ class GarageController extends ApiController
     {
         $validator = Validator::make($req->all(), [
             'garage' => 'required|integer',
-            'path' => 'required',
+            'path'   => 'required',
         ], $this->getDefaultMessages());
 
         $validate = $this->hasValidationErrors($validator);
@@ -220,7 +224,7 @@ class GarageController extends ApiController
 
         $result =   $this->media->removeGarageMediaFile([
             "garage_id" => $req->garage,
-            "path" => $req->path,
+            "path"      => $req->path,
         ]);
 
         if (!$result) {

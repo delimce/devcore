@@ -5,24 +5,20 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\ManagerRepository;
 use App\Decorators\GarageServiceDecorator;
 use App\Repositories\GarageServiceRepository;
 
 class GarageServiceController extends ApiController
 {
     protected $garage;
-    protected $manager;
     protected $token;
 
     public function __construct(
         GarageServiceRepository $garage,
-        ManagerRepository $manager,
         Request $req
     ) {
         $this->token = $req->header('Authorization');
         $this->garage = $garage;
-        $this->manager = $manager;
     }
 
 
