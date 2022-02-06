@@ -7,12 +7,8 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class MediaController extends BaseController
 {
-
-    protected $media;
-
-    public function __construct(MediaFileService $media)
+    public function __construct(private MediaFileService $media)
     {
-        $this->media = $media;
     }
 
     public function serve($folder, $file)

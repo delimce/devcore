@@ -20,8 +20,8 @@ class GarageApiTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->manager = factory(Manager::class)->create();
-        $this->garage = factory(Garage::class)->create();
+        $this->manager = Manager::factory()->create();
+        $this->garage = Garage::factory()->create();
         $this->mediaService = $this->app->make('App\Services\Commons\MediaFileService');
     }
 
@@ -31,22 +31,21 @@ class GarageApiTest extends TestCase
     public function testGarageSaveInfo()
     {
         $dummy = [
-            "name" => "my Garage",
-            "phone" => "8561323",
+            "name"       => "my Garage",
+            "phone"      => "8561323",
             "manager_id" => $this->manager->id,
-            "address" => "madrid, calle 123",
-            "desc" => "some description",
-
+            "address"    => "madrid, calle 123",
+            "desc"       => "some description",
         ];
 
         $this->post(static::API_URI . "/", $dummy, ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(400);
 
         $required = [
-            "country_id" => 204, //spain
-            "state_id" => 0,
+            "country_id"  => 204, //spain
+            "state_id"    => 0,
             "province_id" => 0,
-            "zipcode" => 28027,
+            "zipcode"     => 28027,
         ];
         $dummy2 = array_merge($dummy, $required);
 
@@ -66,7 +65,7 @@ class GarageApiTest extends TestCase
      */
     public function testGarageGetInfo()
     {
-        $response = $this->get(static::API_URI . "/info", ["Authorization" => $this->manager->token]);
+        $this->get(static::API_URI . "/info", ["Authorization" => $this->manager->token]);
         $this->seeStatusCode(200);
     }
 
@@ -118,12 +117,10 @@ class GarageApiTest extends TestCase
         $garageId =  $this->garage->id;
 
         $file = new \Illuminate\Http\UploadedFile(
-            resource_path('assets/img/common/logo01.png'),
-            'image.jpg',
-            'image/jpeg',
-            filesize(resource_path('assets/img/common/logo01.png')),
-            null,
-            true // for $test
+            path: resource_path('assets/img/common/logo01.png'),
+            originalName: 'image.jpg',
+            mimeType: 'image/jpeg',
+            test: true
         );
 
         $endpoint = "/media";
@@ -172,7 +169,7 @@ class GarageApiTest extends TestCase
         $filters = [
             "text" => "",
             "city" => "",
-            "zip" => "",
+            "zip"  => "",
         ];
 
         $endpoint = "/search?";

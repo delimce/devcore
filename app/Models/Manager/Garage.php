@@ -2,13 +2,15 @@
 
 namespace App\Models\Manager;
 
-use App\Models\Localization\Province;
-use App\Models\Localization\State;
 use App\Models\Media\GarageMedia;
+use App\Models\Localization\State;
+use App\Models\Localization\Province;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Garage extends Model
 {
+    use HasFactory;
 
     /**
      * The table associated with the model.

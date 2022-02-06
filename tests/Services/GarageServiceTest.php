@@ -17,8 +17,8 @@ class GarageServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->manager          = factory(Manager::class)->create();
-        $this->garage           = factory(Garage::class)->create();
+        $this->manager          = Manager::factory()->create();
+        $this->garage           = Garage::factory()->create();
         $this->garageService    = $this->app->make('App\Services\Garage\GarageOperationService');
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
     }
@@ -34,7 +34,7 @@ class GarageServiceTest extends TestCase
         $this->assertArrayHasKey("schedule", $result);
     }
 
-     /**
+    /**
      * @test
      * testGarageSave
      *
@@ -56,7 +56,4 @@ class GarageServiceTest extends TestCase
         $garageId = $this->garageService->saveGarage($newGarage);
         $this->assertTrue($garageId > 0);
     }
-
-
-
 }

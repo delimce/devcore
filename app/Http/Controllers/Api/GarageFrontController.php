@@ -8,14 +8,10 @@ use Illuminate\Http\Request;
 
 class GarageFrontController extends ApiController
 {
-    protected $garage;
-
     public function __construct(
-        GarageRepository $garage,
-        GarageServiceRepository $services
+        private GarageRepository $garage,
+        private GarageServiceRepository $services
     ) {
-        $this->garage = $garage;
-        $this->services = $services;
     }
 
 

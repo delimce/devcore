@@ -16,11 +16,12 @@ class UserRepository
         return User::create($data);
     }
 
+   
     /**
      * @param string $email
-     * @return User
+     * @return User|null
      */
-    public function getByEmail(string $email): User
+    public function getByEmail(string $email): ?User
     {
         return User::whereEmail($email)->first();
     }

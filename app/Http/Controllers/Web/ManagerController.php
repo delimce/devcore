@@ -8,13 +8,8 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class ManagerController extends BaseController
 {
-    protected $manager;
-    protected $garage;
-
-    public function __construct(ManagerRepository $manager, GarageRepository $garage)
+    public function __construct(private ManagerRepository $manager, private GarageRepository $garage)
     {
-        $this->manager = $manager;
-        $this->garage = $garage;
     }
 
     public function index()

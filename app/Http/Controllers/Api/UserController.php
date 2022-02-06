@@ -9,12 +9,9 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends ApiController
 {
 
-    protected $userService;
-    public function __construct(UserService $userService)
+    public function __construct(private UserService $userService)
     {
-        $this->userService = $userService;
     }
-
 
     /**
      * login

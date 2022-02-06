@@ -3,6 +3,7 @@
 namespace Tests\Api;
 
 use Tests\TestCase;
+
 class LocalizationApiTest extends TestCase
 {
     const API_URI = "api/local/";
@@ -24,7 +25,9 @@ class LocalizationApiTest extends TestCase
             "status" => 1
         ];
         $content = $this->getArrayByResponse($response);
-        $this->assertContains($madrid, $content);
+
+        $this->assertEquals($madrid, $content[12]);
+        $this->assertEquals(count($content), 19);
     }
 
     /**
@@ -45,7 +48,7 @@ class LocalizationApiTest extends TestCase
             "status" => 1
         ];
         $content = $this->getArrayByResponse($response);
-        $this->assertContains($madrid, $content);
+        $this->assertTrue(in_array($madrid, $content));
     }
 
     /**

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Web;
 
 use App\Repositories\GarageRepository;
-use App\Repositories\ManagerRepository;
+use App\Services\Manager\ManagerService;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class LandingController extends BaseController
 {
-    protected $manager;
 
-    public function __construct(ManagerRepository $user)
+    public function __construct(
+        private ManagerService $manager)
     {
-        $this->manager = $user;
+
     }
 
     public function index()

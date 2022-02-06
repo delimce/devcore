@@ -3,9 +3,11 @@
 namespace App\Models\Manager;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model
 {
+    use hasFactory;
 
     /**
      * The table associated with the model.

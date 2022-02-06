@@ -18,7 +18,7 @@ class GarageServiceRepositoryTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->garage = factory(Garage::class)->create();
+        $this->garage = Garage::factory()->create();
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
         $this->garageServiceRepository = $this->app->make('App\Repositories\GarageServiceRepository');
     }

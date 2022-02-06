@@ -13,24 +13,16 @@ use Illuminate\Support\Facades\Validator;
 
 class GarageController extends ApiController
 {
-    protected $garage;
-    protected $garageService;
-    protected $manager;
-    protected $media;
     protected $token;
 
     public function __construct(
-        GarageRepository $garage,
-        GarageService    $garageService,
-        ManagerService   $manager,
-        MediaFileService $media,
-        Request          $req
+        Request          $req,
+        private GarageRepository $garage,
+        private GarageService    $garageService,
+        private ManagerService   $manager,
+        private MediaFileService $media,
     ) {
-        $this->token         = $req->header('Authorization');
-        $this->garage        = $garage;
-        $this->garageService = $garageService;
-        $this->manager       = $manager;
-        $this->media         = $media;
+        $this->token = $req->header('Authorization');
     }
 
 
@@ -172,11 +164,11 @@ class GarageController extends ApiController
             $file = $req->file('file');
             $metadata =
                 [
-                "garage_id" => $req->garage,
-                "original"  => $file->getClientOriginalName(),
-                "mime"      => $file->getMimeType(),
-                "size"      => $file->getSize(),
-                "extension" => $file->getClientOriginalExtension()
+                    "garage_id" => $req->garage,
+                    "original"  => $file->getClientOriginalName(),
+                    "mime"      => $file->getMimeType(),
+                    "size"      => $file->getSize(),
+                    "extension" => $file->getClientOriginalExtension()
                 ];
 
             $result = $this->media->saveGarageMedia($file, $metadata);

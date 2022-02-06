@@ -15,8 +15,8 @@ class CompanyRepositoryTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->manager = factory(Manager::class)->create();
-        $this->company = factory(Company::class)->create();
+        $this->manager = Manager::factory()->create();
+        $this->company = Company::factory()->create();
         $this->companyRepository = $this->app->make('App\Repositories\CompanyRepository');
     }
 

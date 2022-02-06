@@ -17,8 +17,8 @@ class GarageServiceApiTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->manager = factory(Manager::class)->create();
-        $this->garage = factory(Garage::class)->create();
+        $this->manager = Manager::factory()->create();
+        $this->garage = Garage::factory()->create();
     }
 
     /**

@@ -2,21 +2,17 @@
 
 namespace App\Services\User;
 
+use Exception;
+use App\Models\Users\User;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
-use Exception;
-use Illuminate\Support\Facades\Log;
 
 class UserService
 {
-
-    /** @var UserRepository $userRepository*/
-    protected $userRepository;
-
     function __construct(
-        UserRepository $userRepository
+        private UserRepository $userRepository
     ) {
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -77,5 +73,14 @@ class UserService
             Log::error($ex);
             return false;
         }
+    }
+
+    /**
+     * @param string $email
+     * @return User|null
+     */
+    public function getUserDataByEmail(string $email): ?User
+    {
+        return $this->userRepository->getByEmail($email);
     }
 }

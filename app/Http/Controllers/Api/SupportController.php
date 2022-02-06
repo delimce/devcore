@@ -11,17 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class SupportController extends ApiController
 {
-    protected $support;
     protected $token;
-    protected $manager;
 
     public function __construct(
-        SupportRepository $support,
-        ManagerService $manager,
-        Request $req
+        Request $req,
+        private SupportRepository $support,
+        private ManagerService $manager,
     ) {
-        $this->support = $support;
-        $this->manager = $manager;
         $this->token = $req->header('Authorization');
     }
 

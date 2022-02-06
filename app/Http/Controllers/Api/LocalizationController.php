@@ -8,10 +8,8 @@ use Illuminate\Http\JsonResponse;
 
 class LocalizationController extends ApiController
 {
-    protected $local;
-    public function __construct(LocalizationRepository $local)
+    public function __construct(private LocalizationRepository $local)
     {
-        $this->local = $local;
     }
 
     /**

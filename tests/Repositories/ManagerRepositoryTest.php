@@ -12,7 +12,7 @@ class ManagerRepositoryTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->manager = factory(Manager::class)->create();
+        $this->manager = Manager::factory()->create();
         $this->managerRepository = $this->app->make('App\Repositories\ManagerRepository');
     }
 

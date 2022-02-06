@@ -2,16 +2,14 @@
 
 namespace Tests\Api;
 
-use Tests\TestCase;
 use App\Models\Users\User;
+use Tests\TestCase;
 
 class UserApiTest extends TestCase
 {
 
     const API_URI = "api/users";
 
-
-    /** @var user fake  */
     protected $user;
     protected $userService;
     protected $faker;
@@ -19,11 +17,11 @@ class UserApiTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+
+        $this->user =  User::factory()->make();
         $this->userService = $this->app->make('App\Services\User\UserService');
         $this->faker = \Faker\Factory::create();
     }
-
 
 
     /**
@@ -69,7 +67,15 @@ class UserApiTest extends TestCase
      */
     public function testUserLoginApi()
     {
-        $credentials = ["email" => $this->user->email, "password" => ""];
+
+        $data = [
+            "name" => $this->user->name,
+            "lastname" => $this->user->lastname,
+            "email" => $this->user->email,
+            "password" => $this->faker->password()
+        ];
+
+        $credentials = ["email" => $data['email'], "password" => ""];
         $this->call("POST", static::API_URI . "/login", $credentials, [], [], []);
         $this->seeStatusCode(400);
 
@@ -84,7 +90,12 @@ class UserApiTest extends TestCase
         $this->seeStatusCode(401);
 
         # right credentials, and verified
-        $this->userService->activateUser($this->user->id);
+
+        /** @var User $currentUser */
+        $currentUser = $this->userService->createUser($data);
+        $this->userService->activateUser($currentUser->id);
+
+        $credentials["password"] = $data['password'];
         $this->call("POST", static::API_URI . "/login", $credentials, [], [], []);
         $this->seeStatusCode(200);
     }

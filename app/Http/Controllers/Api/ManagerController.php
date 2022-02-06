@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ManagerController extends ApiController
 {
-    protected $manager;
 
-    public function __construct(ManagerService $user)
+    public function __construct(private ManagerService $manager)
     {
-        $this->manager = $user;
     }
 
 

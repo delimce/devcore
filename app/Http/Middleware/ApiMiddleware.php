@@ -7,12 +7,9 @@ use Closure;
 
 class ApiMiddleware
 {
-
-    protected $manager;
-
-    public function __construct(ManagerService $manager)
-    {
-        $this->manager = $manager;
+    public function __construct(
+        private ManagerService $manager
+    ) {
     }
 
     /**

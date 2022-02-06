@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Repositories;
 
 use Tests\TestCase;
@@ -16,8 +17,8 @@ class GarageRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->manager = factory(Manager::class)->create();
-        $this->garage = factory(Garage::class)->create();
+        $this->manager          = Manager::factory()->create();
+        $this->garage           = Garage::factory()->create();
         $this->garageRepository = $this->app->make('App\Repositories\GarageRepository');
     }
 
@@ -99,14 +100,12 @@ class GarageRepositoryTest extends TestCase
         $this->assertStringContainsString($descSearch, $result3->first()->desc);
     }
 
-    
+
     public function testGetGarageComments()
     {
         $garageId = $this->garage->id;
         $result = $this->garageRepository->getCommentsById($garageId);
         $comments = Collect($result);
         $this->assertIsArray($comments->toArray());
-
     }
-
 }

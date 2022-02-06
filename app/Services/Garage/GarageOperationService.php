@@ -12,12 +12,9 @@ class GarageOperationService
 
     const SCHEDULE_ERROR = 'errors.validate.schedule.day';
 
-    /** @var GarageRepository $garageRepository */
-    protected $garageRepository;
-
-    public function __construct(GarageRepository $garageRepository)
-    {
-        $this->garageRepository = $garageRepository;
+    public function __construct(
+        private GarageRepository $garageRepository
+    ) {
     }
 
     /**

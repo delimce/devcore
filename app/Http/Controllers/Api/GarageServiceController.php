@@ -10,15 +10,13 @@ use App\Repositories\GarageServiceRepository;
 
 class GarageServiceController extends ApiController
 {
-    protected $garage;
     protected $token;
 
     public function __construct(
-        GarageServiceRepository $garage,
+        private GarageServiceRepository $garage,
         Request $req
     ) {
         $this->token = $req->header('Authorization');
-        $this->garage = $garage;
     }
 
 
