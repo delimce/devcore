@@ -16,7 +16,7 @@ jobs:
           key:  ${{secrets.DEVSERVER_SECRET}}
           port: 22
           script: |
-            cd /var/www/html/devcore/
+            cd /var/www/html/garafy/
             git checkout .
             git pull origin master
             composer install
