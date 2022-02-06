@@ -16,7 +16,7 @@ Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 * Jest js TDD
 
 ### Backend:
-* Laravel/Lumen 6.0 LTS
+* Laravel/Lumen 8.3.1
 * PHPUNIT 9.5
 * SQLITE 3 (testing)
 
