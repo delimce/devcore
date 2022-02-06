@@ -3,9 +3,9 @@
 Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 
 ## Server requirements:
-* PHP >= 7.2
+* PHP >= 8.0
 * Mysql/Mariadb >= 5.7
-* Composer >= 1.0
+* Composer >= 2.0
 * Nodejs >=14 & npm >= 6.0
 
 ## Components:
@@ -17,7 +17,7 @@ Lumen+vue+bulma core to support full stack PHP &amp; Javascript development
 
 ### Backend:
 * Laravel/Lumen 6.0 LTS
-* PHPUNIT 8.5
+* PHPUNIT 9.5
 * SQLITE 3 (testing)
 
 ### Install with Docker:
