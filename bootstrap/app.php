@@ -29,6 +29,7 @@ $app->configure('mail');
 $app->configure('session');
 $app->configure('filesystems');
 $app->configure('services');
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -71,9 +72,10 @@ $app->singleton(
 
 //$app->register(Illuminate\Notifications\NotificationServiceProvider::class);
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+     # App\Http\Middleware\ExampleMiddleware::class,
+     Fruitcake\Cors\HandleCors::class,
+ ]);
 
  $app->routeMiddleware([
      'api' => App\Http\Middleware\ApiMiddleware::class,
@@ -92,6 +94,7 @@ $app->singleton(
 
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
